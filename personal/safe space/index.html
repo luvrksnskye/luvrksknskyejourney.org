@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skye Journey</title>
+<link rel="icon" type="image/x-icon" href="../assets/buttons-icons/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="music-player.css">
+<link rel="stylesheet" href="safe.css">
+</head>
+<body>
+
+    <!--content-->
+    <div class="fixed-background"></div>
+    <div id="top-left-container">
+        <a href="../../home/index.html" id="top-left-gif">
+          <img src="assets/biscuithouse2.gif" alt="Biscuit House" />
+          <span class="hover-text">Go back?</span>
+        </a>
+      </div>
+      
+      
+<div class="content">
+    <main>
+
+		<h1>Skye's Safe Space <img src="assets/strawberry.gif"></h1>
+<center>
+		<p class="intro"><img src= "assets/me and my sis.png" class="me and my sis-img" align="left" style="margin-right:5px;" alt="">  <img src="assets/my sis.png" class="my sis-img" align="right" style="margin-left:5px;" style="width: 20%" alt="">My sister has been the greatest person in my entire life, we grew up together and I don't know anyone with a heart as pure as her. She is my safe space and I am happy to be by her side, Sun and I have always been close, and we have been through so much together. I love my sis so much, she is special. She was always a talented artist since she was little, and she was my biggest support during childhood. We are best friends.</p>
+    </center>
+
+
+		<h2>ABOUT <img src="assets/dango.gif"></h2>
+<center>
+<p>Surviving psychosis and a traumatic event can be very hard and difficult to deal with. Usually, victims of accidents and abuse who survive carry enormous feelings of guilt, and I am one of them. I am grateful to my psychiatrist and my therapist for helping me deal with all this, they have helped me through these years of recovery. I am also grateful to the mental hospital that treated me during my moments of crisis.</p>
+		<li class="f1"><a href="https://www.helpguide.org/mental-health/ptsd-trauma" target="_blank">how to cope with traumatic events</a>: the next couple of links are articles that helped me a lot to deal with everything I feel! </li>
+		<li class="f1"> <a href="https://www.helpguide.org/articles/suicide-prevention/healing-after-a-suicide-attempt.htm" target="_blank">healing after an attempt</a></li>
+		<li class="f1"> <a href="https://www.helpguide.org/mental-health/grief/coping-with-losing-a-pet" target="_blank">coping with losing a pet</a></li>
+		<li class="f1"> <a href="https://www.helpguide.org/mental-health/schizophrenia/schizophrenia-treatment-and-self-help" target="_blank">schizophrenia self-help</a></li>
+        <li class="f1"> <a href="https://www.helpguide.org/mental-health/grief/coping-with-grief-and-loss" target="_blank">coping with grief and loss</a></li>
+        <li class="f1"> <a href="https://www.helpguide.org/mental-health/suicide-self-harm/cutting-and-self-harm" target="_blank">self-injury</a></li>
+    </center>
+    <center>
+<p>Please keep in mind that if this worked for me, it doesn’t mean it should work for you. Everyone is different and that’s okay! I’ve been in recovery for over three years and still have a long way to go. If you’re feeling suicidal and need help right now, call the <a>National Suicide Prevention Lifeline in the U.S. at 1-800-273-8255.</a></p>
+</center>
+		<h3> MY MENTAL HEALTH </h3>
+
+<p><p class="intro"><img src= "assets/my sis yay.png" class="me and my sis-img" align="left" style="margin-right:5px;" alt="">I am currently diagnosed with PTSD, schizoaffective disorder, and major depression. I have had a rough life, but I am genuinely happy to still be here and still in recovery. And I am even happier to be with my sis creating things together. She has been the best thing that has ever happened to me in this world. Sun is someone sensitive and sweet! and she is talented. I watched her grow up and I am proud of that. There are days when even with my meds I still feel pretty sad and down, but she is always there to cheer me up.</p>
+		<center>
+            <p>And of course I have Midnight! She is my emotional support animal and she has helped me a lot these years, she has given me peace and calm and she has also brought me happiness. I always recommend everyone to have an emotional support animal, if you can get one, definitely don't miss that opportunity! I'm sure that a puppy or a kitten will help you improve your mental health. They are such beautiful and wonderful beings that the happiness they give you is priceless.</p>
+        </center>
+
+
+
+		<h3>  STUFF THAT CALMS ME</h3>
+        <li class="f2"> <a href="https://www.youtube.com/watch?v=b0IaM4_I_Nk" target="_blank">suis-moi - camille (le petit prince)</a>: It's one of my favorite songs! It's also my emotional comfort music. </li>
+		<li class="f2"> <a href="https://www.youtube.com/watch?v=CKHtgQzY3js" target="_blank">la foule - edith piaf</a>: I used to listen to a lot of Edith Piaf when I was a little kid, a friend of my grandmother who traveled to England and Paris taught me, and gave me little French lessons. Edith Piaf songs make me very happy! </li>
+		<li class="f2"> <a href="https://www.youtube.com/watch?v=WxjJsRm65Nw" target="_blank">anyone can cook - michael giacchino</a>: Literally one of my favorite tracks from the film and so meaningful to me.</li>
+        <li class="f2"> <a href="https://www.youtube.com/watch?v=-QuVe-hjMs0" target="_blank">le festin - camille (ratatouille)</a>: Nothing I can say... I miss my grandma's cooking. But hearing this makes me genuinely happy.</li>
+	</main>
+</div>
+
+    <!--Effects, stars and falling sakura-->
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+        </div>
+        <style>
+
+            /* Star Particles */
+            .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+            }
+            
+            .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: move-stars 10s linear infinite;
+            opacity: 0.8;
+            }
+            
+            @keyframes move-stars {
+            0% {
+            transform: translateY(100vh);
+            opacity: 0.2;
+            }
+            100% {
+            transform: translateY(-10vh);
+            opacity: 1;
+            }
+            }
+            </style>
+        
+            <div class="stars"></div>
+            
+            <script>
+            // Generate stars dynamically
+            const starsContainer = document.querySelector('.stars');
+            const starCount = 500; 
+            
+            for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            star.style.animationDuration = 5 + Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+            }
+            </script>
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+
+
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+    <canvas id="treeCanvas"></canvas>
+    <canvas id="leavesCanvas" width="500" height="300"></canvas>		
+
+    <button class="toggle-btn" id="toggleBtn">
+        <span class="material-icons">chevron_right</span>
+    </button>
+    
+    <div class="music-player" id="musicPlayer">
+        <div class="album-art">
+            <img src="assets/Felizvalentine_240214_101756.png" alt="Album Cover" id="albumCover">
+            <div class="music-icon">♪</div>
+        </div>
+        <div class="song-title">Home - Undertale OST</div>
+        <div class="progress-bar" id="progressBar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="time">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+        <div class="controls">
+            <button class="btn" id="prevBtn"><span class="material-icons">skip_previous</span></button>
+            <button class="btn play-pause" id="playPauseBtn"><span class="material-icons">play_arrow</span></button>
+            <button class="btn" id="nextBtn"><span class="material-icons">skip_next</span></button>
+        </div>
+        <div class="volume-container">
+            <span class="volume-icon" id="volumeIcon"><span class="material-icons">volume_up</span></span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+        </div>
+    </div>
+
+    <audio id="audio" src="music player/home.mp3"></audio>
+    <audio id="audio" src="music player/home music box.mp3"></audio>
+
+    <script type="text/javascript" src="music-player.js"></script>
+    <script type="text/javascript" src="chery-blossom.js"></script>
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+		<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    </body>
+    </html>

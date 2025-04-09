@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'departure-mono';
+  src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'genshin impact';
+  src: url('../../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+@font-face {
+  font-family: 'ZHFont';
+  src: url('../../assets/fonts/zhcn.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Base styles for all devices */
+body {
+  background-image: url('music-assets/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  font-family: 'ZHFont', sans-serif;
+  color: white;
+  margin: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #7cc6ffcc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7cc6ffcc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7db8ff;
+}
+
+/* Typewriter Text */
+.intro-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.mid {
+  pointer-events: none;
+  position: relative;
+  filter: drop-shadow(0 0 1rem white);
+  z-index: 1;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-size: 15px;
+  line-height: 25px;
+  animation: fadeIn 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  max-width: 80%;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Body Styles */
+body ::selection {
+  background: #91ceff;
+}
+
+.click-indicator {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.click-indicator img {
+  margin-bottom: 8px;
+  width: 40px;
+  height: auto;
+  animation: float 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.click-indicator span {
+  font-size: 14px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.skip-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skip-button img {
+  width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skip-button:hover {
+  transform: scale(1.05);
+}
+
+.skip-button:hover img {
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+  transform: translateY(-5px);
+}

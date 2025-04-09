@@ -1,0 +1,197 @@
+ 
+@font-face {
+    font-family: 'departure-mono';
+    src: url('../assets/fonts/DepartureMono-Regular.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'genshin impact';
+    src: url('../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+  }
+  @font-face {
+    font-family: 'ZHFont';
+    src: url('../assets/fonts/zhcn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Background */
+
+  body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.fixed-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('background/erika-joie-santos-bg-practice-2-2.jpg'); /* Add your background image URL here */
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+#leavesCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+      /* scrollbar*/
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #ffc8f4cc;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #ffccf6cc;
+      
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ffbee4;
+      }
+      
+      .theme-toggle-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ffd1dc;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 100;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+    
+    .theme-toggle-btn:hover {
+        background: #ffb6c1;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+    
+    main {
+        background: rgb(255, 211, 236);
+        background: linear-gradient(146deg, rgba(255, 218, 231, 0.908) 0%, rgba(252, 196, 255, 0) 49%, rgba(205, 222, 255, 0) 100%);
+        position: relative;
+        top: 40px;
+        margin: auto;
+        margin-bottom: 80px;
+        max-width: 800px;
+        max-height: 100%;
+        backdrop-filter: blur(5px);
+        border: 1px dashed rgb(255, 255, 255);
+        padding: 10px;
+    }
+    
+    .content h1{
+        color: white;
+        font-family: 'departure-mono', monospace;
+        text-align: center;
+    }
+      
+    .content h2{
+        color: white;
+        font-family: 'departure-mono', monospace;
+        text-align: center;
+    }
+    .content h3{
+        color: white;
+        font-family: 'departure-mono', monospace;
+        text-align: center;
+    }
+      
+    .content p {
+        color: rgba(0, 0, 0, 0.332);
+        font-family: 'departure-mono', monospace;
+    }
+    .content a{
+        color:#ffffff;
+        background-color: #ffb6c1;
+    }
+    h1::before,
+h2::before,
+h3::before,
+h4::before{
+	content: url("assets/flowerpink.gif");
+	padding-right: 10px;
+}
+.content li {
+	list-style-position: inside;
+	padding-left: 2px;
+	padding-bottom: 5px;
+    color: rgba(0, 0, 0, 0.332);
+    font-family: 'departure-mono', monospace;
+}
+
+.content .f1 {
+	list-style-image: url("assets/bookwriting.gif");
+}
+.content .f2 {
+	list-style-image: url("assets/crescent.webp");
+}
+
+::selection {
+	color: white;
+	background-color: #ffc2ef;
+}
+
+#top-left-gif {
+    position: fixed;
+    top: 10px; 
+    left: 10px; 
+    z-index: 1000; 
+    background-color: transparent;
+  }
+  
+  #top-left-gif img {
+    width: 70px; 
+    height: auto; 
+    cursor: pointer;
+  }
+  
+  #top-left-gif .hover-text {
+    visibility: hidden;
+    position: absolute;
+    bottom: -25px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 198, 239, 0.7); 
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    white-space: nowrap;
+    font-family: 'departure-mono', monospace;
+    z-index: 1001;
+    transition: visibility 0.2s ease, opacity 0.2s ease;
+    opacity: 0;
+  }
+  
+  #top-left-gif:hover .hover-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  

@@ -1,0 +1,194 @@
+@font-face {
+    font-family: 'departure-mono';
+    src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+
+#digital-clock {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 20px;
+    font-family: 'departure-mono', monospace;
+    color: #ffffff;
+    background-color: rgba(109, 165, 255, 0.445);
+    padding: 5px 20px;
+    border-radius: 5px;
+  }
+  
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-splash-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.container {
+    background-image: url('../../assets/about-me/journal.png');
+    background-size: cover;
+    position: absolute;
+    width: 1270px;
+    height: 715px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.diary {
+    position: absolute;
+    width: 550px;
+    height: 460px; 
+    right: -18px; 
+    bottom: 90px;
+    top: 19%;
+    overflow: auto;
+}
+
+.diary iframe {
+    transition: opacity 0.3s ease;
+}
+
+.memo {
+    position: absolute;
+    width: 318px;
+    height: 275px;
+    left: 115px;
+    top: 40px;
+    padding: 10px;
+    overflow: auto;
+    border: none; 
+    background: transparent;
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 4px;
+}
+.memo::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+}
+
+.memo::-webkit-scrollbar-thumb {
+    background: rgba(93, 166, 255, 0.341);
+    border-radius: 4px;
+}
+
+
+.header {
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("../../assets/banners/06.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 93%;
+    height: 20px;
+    top: 0;
+    border: none;
+    padding: 8px;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    font-family: 'departure-mono', monospace;
+    z-index: 1; 
+}
+
+.memo a {
+    text-decoration: none;
+    font-family: 'departure-mono', monospace;
+    color: #87b5ff;
+    transition: opacity 0.2s ease;
+}
+
+.memo a:hover {
+    opacity: 0.7;
+}
+hr {
+    border: none;
+    height: 1px;
+    background-color: #7ea9ff; 
+    margin: 20px 0;  
+  }
+.corner-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.corner-icon:hover {
+    transform: scale(1.1);
+}
+.message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20000;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.message-overlay.visible {
+     opacity: 1 !important;
+}
+
+.transition-message {
+    font-size: 4rem; 
+    color: white;
+    text-shadow: 2px 2px 8px rgba(149, 211, 255, 0.7); 
+    font-weight: bold;
+    text-align: center;
+    font-family: 'departure-mono', monospace;
+    padding: 20px;
+    border-radius: 15px;
+    animation: fadeInOut 3s ease-in-out; 
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* Body Styles */
+body ::selection {
+    background: #91ceff;
+  }
+  

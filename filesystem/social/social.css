@@ -1,0 +1,453 @@
+@font-face {
+  font-family: 'departure-mono';
+  src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'genshin impact';
+  src: url('../../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+@font-face {
+  font-family: 'ZHFont';
+  src: url('../../assets/fonts/zhcn.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Background */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -2;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Header section */
+header {
+  position: relative;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+
+/* Page Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+  color: white;
+     font-family: 'ZHFont', sans-serif;
+  padding: 20px;
+}
+
+/* Three-column layout */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(420px, 1fr)); /* Ensures 3 columns */
+  gap: 20px;
+}
+
+
+
+.box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid rgba(150, 181, 215, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+}
+
+/* Box headers */
+.box-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 15px;
+}
+
+.box-title {
+  font-size: 1.2rem;
+  margin: 0;
+  color: white;
+  font-family: 'genshin impact', Arial, sans-serif;
+}
+
+/* Window buttons styling for box headers */
+.window-buttons {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.window-button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.window-button.minimize {
+  background-color: #a0deff;
+  border: 1px solid rgba(122, 215, 255, 0.137);
+}
+
+.window-button.maximize {
+  background-color: #ca9eff;
+  border: 1px solid rgba(231, 194, 255, 0.221);
+}
+
+.window-button.close {
+  background-color: #ffa2c0;
+  border: 1px solid rgba(255, 160, 183, 0.155);
+}
+
+.window-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Welcome Section */
+.welcome-to-social-page-panel {
+  text-align: left;
+  margin-bottom: 30px;
+  animation: float 3s ease-in-out infinite;
+  grid-column: 1 / -1;
+}
+
+.welcome-to-social-panel img {
+  max-width: 50%;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.133))
+          drop-shadow(0 0 50px rgba(255, 255, 255, 0.118))
+          drop-shadow(0 0 70px rgba(255, 255, 255, 0.111));
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Social Icons - Keeping original styling */
+.social-icons {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px;
+  z-index: 10;
+}
+
+.social-icon img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* Initially white */
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover img {
+  filter: none; /* Restore original color on hover */
+  transform: scale(1.2);
+}
+
+/* Weather Box Styling */
+.weather-box {
+  text-align: center;
+  padding: 10px;
+}
+
+.weather-box img {
+  width: 60%;
+  margin-top: 15px;
+}
+
+.weather-box .temperature {
+  position: relative;
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.weather-box .temperature span {
+  position: absolute;
+  top: 10px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.weather-box .description {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.weather-details .humidity,
+.weather-details .wind {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.weather-details i {
+  color: #ffffff;
+  font-size: 22px;
+  margin-right: 10px;
+  margin-top: 6px;
+}
+
+.weather-details span {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Status Cafe styling */
+#statuscafe {
+  padding: 0.5em;
+  color: white;
+  border-radius: 10px;
+     font-family: 'ZHFont', sans-serif;
+  background-color: rgba(97, 145, 255, 0.722);
+  border: 1px solid rgba(255, 255, 255, 0.638);
+}
+
+#statuscafe-username {
+  margin-bottom: .5em;
+  color: white;
+     font-family: 'ZHFont', sans-serif;
+  background-image: url(../../assets/banners/06.PNG);
+  background-size: cover;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#statuscafe-username a {
+  color: rgb(143, 204, 255);
+}
+
+#statuscafe-username::before {
+  content: url(../../assets/gifs/moon.gif) ' ';
+}
+
+#statuscafe-content {
+  margin: 0 1em 0.5em 1em;
+  color: white;
+}
+
+/* Text styling */
+p {
+  color: white;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+a {
+  color: #7db7ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-family: 'genshin impact', Arial, sans-serif;
+  margin-top: 0;
+}
+
+/* Highlight used in #current */
+.hl {
+  background: #7db7ff;
+  color: white;
+  font-weight: lighter;
+  border-radius: 3px;
+  padding: 1px;
+}
+
+
+/* Code block styling */
+.skye-code-container,
+.code-container {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  margin: 15px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.skye-code-block,
+.code-block {
+     font-family: 'ZHFont', sans-serif;
+  margin: 0;
+  padding: 5px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  cursor: text;
+  overflow-x: auto;
+  max-width: 100%;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}
+
+.skye-copy-button,
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+     font-family: 'ZHFont', sans-serif;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.skye-copy-button:hover,
+.copy-button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 900px) {
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .weather-box .temperature {
+    font-size: 2.5rem;
+  }
+  
+  .welcome-to-social-panel img {
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #acc6ff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7db8ff;
+}
+
+#statuscafe {
+  padding: .0em;
+  color: white;
+  border-radius: 10px;
+  font-family: 'departure-mono', monospace;
+  background-color: rgba(97, 145, 255, 0.722);
+  border: 1px solid rgba(255, 255, 255, 0.638);
+}
+#statuscafe-username {
+  margin-bottom: .5em;
+  color: white;
+  font-family: 'departure-mono', monospace;
+  background-image: url(../../assets/banners/06.PNG);
+  background-size: cover;
+  border-radius: 10px;
+ 
+}
+#statuscafe-username a{
+color: rgb(143, 204, 255);
+}
+#statuscafe-username::before {
+content: url(../../assets/gifs/moon.gif) ' ';
+}
+#statuscafe-content {
+  margin: 0 1em 0.5em 1em;
+  color: white;
+  
+}
+
+.box-content {
+  flex-grow: 1; 
+  display: flex;
+  width: 100%; 
+}
+
+iframe {
+  width: 100%;  
+  height: 100%;
+  flex-grow: 1;
+  border: none;
+}
+
+.chatbox {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid rgba(150, 181, 215, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  height: 500px; 
+}
+.center-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.center-box .box {
+  width: 50%; 
+  max-width: 800px; 
+}
+/* Body Styles */
+body ::selection {
+  background: #91ceff;
+}
