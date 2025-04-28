@@ -24,13 +24,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    # If you have a different build process, replace this with your own build steps
-    - name: Install deps and build
-      run: |
-        npm i
-        npm run build
-    # When the dist_dir is ready, deploy it to neocities
-    # Here we deploy the folder named `public`
+  
     - name: Deploy to neocities
       uses: bcomnes/deploy-to-neocities@v3.0.2
       with:
