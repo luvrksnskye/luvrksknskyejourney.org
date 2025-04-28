@@ -4,7 +4,7 @@ name: Deploy to neocities
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   FORCE_COLOR: 1
