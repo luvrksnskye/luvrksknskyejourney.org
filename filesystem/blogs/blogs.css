@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-
 :root {
     --white: #ffffff;
     --blue: #6e64c3;
 
 }
-    /* Font faces */
+
     @font-face {
       font-family: 'departure-mono';
       src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
@@ -22,9 +21,6 @@
       font-style: normal;
   }
 
-
-  
-  /* Reset and base styles */
   * {
     margin: 0;
     padding: 0;
@@ -38,7 +34,6 @@ body {
     overflow-y: auto;
 }
 
-/* Header */
 .header {
     width: 100%;
     margin-bottom: 40px;
@@ -48,8 +43,8 @@ body {
 }
 
 .blog-panel {
-    margin: 0 0 0 auto; /* Changed: Moves panel to the right */
-    padding-bottom: 0; /* Ensures no extra space at the bottom */
+    margin: 0 0 0 auto; 
+    padding-bottom: 0; 
     animation: float 3s ease-in-out infinite;
     display: flex;
     justify-content: center;
@@ -96,7 +91,6 @@ body {
     filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
 }
 
-  /* Background */
   .video-background {
       position: fixed;
       top: 0;
@@ -114,7 +108,6 @@ body {
       object-fit: cover;
   }
 
-  /* Main Layout */
   .page-container {
       display: flex;
       width: 100%;
@@ -123,7 +116,6 @@ body {
       padding: 20px;
   }
 
-  /* Sidebar (Filter Controls) */
   .sidebar {
       width: 300px;
       flex-shrink: 0;
@@ -277,7 +269,6 @@ body {
     width: clamp(42rem,42vw,44rem)
 }
 
-
   .item.muuri-item-dragging {
       z-index: 3;
   }
@@ -378,7 +369,6 @@ body {
       text-decoration: underline;
   }
 
-  /* Sort buttons */
   .sort-btn {
       display: flex;
       flex-direction: column;
@@ -408,44 +398,39 @@ body {
       box-shadow: 4px 4px 0 rgba(225, 246, 255, 0.5);
   }
 
-  /* scrollbar*/
   ::-webkit-scrollbar {
       width: 10px;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
       background: #7cc6ffcc;
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
       background: #7cc6ffcc;
   }
 
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
       background: #7db8ff;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 1200px) {
       .page-container {
           flex-direction: column;
       }
-      
+
       .sidebar {
           width: 100%;
           margin-right: 0;
           margin-bottom: 20px;
           position: static;
       }
-      
+
       .filter-group {
           flex-direction: row;
           flex-wrap: wrap;
       }
-      
+
       .sort-btn {
           flex-direction: row;
           flex-wrap: wrap;
@@ -456,17 +441,17 @@ body {
       .page-container {
           padding: 10px;
       }
-      
+
       .item {
           width: calc(50% - 20px);
       }
-      
+
       .window-muuri-header {
           padding: 10px;
           flex-wrap: wrap;
           gap: 5px;
       }
-      
+
       .window-muuri-content {
           padding: 15px;
       }
@@ -476,32 +461,31 @@ body {
       .item {
           width: 100%;
       }
-      
+
       .window-muuri {
           border-width: 1px;
       }
-      
+
       .window-muuri-header {
           padding: 8px;
       }
-      
+
       .material-icons {
           font-size: 18px;
       }
-      
+
       .filter-group,
       .sort-btn {
           flex-direction: column;
       }
   }
   #search-filter {
-    width: 200px; /* Adjust as needed */
+    width: 200px; 
   }
 
- /* Notification System */
 .notification-container {
     position: fixed;
-    top: -800px; /* Increased starting position to accommodate larger panel */
+    top: -800px; 
     left: 0;
     width: 100%;
     display: flex;
@@ -511,7 +495,7 @@ body {
 }
 
 .notification-container.show {
-    top: 20px; /* Slide in position */
+    top: 20px; 
 }
 
 .notification-panel {
@@ -519,12 +503,12 @@ body {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 2px solid #97deff;
-    border-radius: 12px; /* Slightly increased border radius */
+    border-radius: 12px; 
     box-shadow: 0 0 20px rgba(151, 222, 255, 0.4),
                 0 0 30px rgba(151, 222, 255, 0.2);
-    padding: 30px; /* Increased padding */
-    width: 95%; /* Increased width percentage */
-    max-width: 700px; /* Increased maximum width */
+    padding: 30px; 
+    width: 95%; 
+    max-width: 700px; 
     position: relative;
     overflow: hidden;
     animation: glow 3s ease-in-out infinite;
@@ -545,40 +529,40 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px; /* Increased margin */
+    margin-bottom: 20px; 
     border-bottom: 1px solid rgba(151, 222, 255, 0.3);
-    padding-bottom: 15px; /* Increased padding */
+    padding-bottom: 15px; 
 }
 
 .notification-title {
     font-family: 'Press Start 2P', cursive;
     color: #ffffff;
-    font-size: 18px; /* Increased font size */
+    font-size: 18px; 
     text-shadow: 2px 2px 0 rgba(128, 170, 255, 0.5);
     display: flex;
     align-items: center;
-    gap: 12px; /* Increased gap */
+    gap: 12px; 
 }
 
 .notification-icon {
-    width: 42px; /* Increased icon size */
+    width: 42px; 
     height: auto;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
 .notification-content {
     font-family: 'ZHFont', sans-serif;
-    font-size: 16px; /* Increased font size */
-    line-height: 1.8; /* Increased line height */
+    font-size: 16px; 
+    line-height: 1.8; 
     color: #ffffff;
-    margin-bottom: 20px; /* Increased margin */
+    margin-bottom: 20px; 
 }
 
 .notification-version {
     font-family: 'departure-mono', monospace;
     color: #89CFF0;
-    font-size: 14px; /* Increased font size */
-    margin-bottom: 15px; /* Increased margin */
+    font-size: 14px; 
+    margin-bottom: 15px; 
 }
 
 .notification-close {
@@ -589,7 +573,7 @@ body {
     border: none;
     color: #ffffff;
     cursor: pointer;
-    font-size: 22px; /* Increased font size */
+    font-size: 22px; 
     opacity: 0.7;
     transition: opacity 0.3s ease;
 }
@@ -600,7 +584,7 @@ body {
 
 .notification-stars {
     position: absolute;
-    width: 6px; /* Slightly increased star size */
+    width: 6px; 
     height: 6px;
     background-color: #ffffff;
     border-radius: 50%;
@@ -633,12 +617,12 @@ body {
     color: white;
     border: 1px solid #97deff;
     border-radius: 4px;
-    padding: 10px 20px; /* Increased padding */
+    padding: 10px 20px; 
     font-family: 'departure-mono', monospace;
-    font-size: 15px; /* Increased font size */
+    font-size: 15px; 
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-right: 15px; /* Increased margin */
+    margin-right: 15px; 
 }
 
 .notification-button:hover {
@@ -650,7 +634,7 @@ body {
 .notification-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 15px; /* Increased margin */
+    margin-top: 15px; 
 }
 
 .notification-icon-container {
@@ -660,20 +644,18 @@ body {
     z-index: 1000;
     cursor: pointer;
   }
-  
+
   .notification-open {
     width: 62px;
     height: auto;
     transition: all 0.3s ease;
   }
-  
+
   .notification-open:hover {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
     transform: scale(1.1);
   }
 
-
-/* Preloader */
 #preloader {
     background: var(--blue)
       url("https://samherbert.net/svg-loaders/svg-loaders/three-dots.svg")
@@ -688,8 +670,7 @@ body {
     top: 0;
     z-index: 9999999999;
   }
-  /* Body Styles */
+
 body ::selection {
     background: #91ceff;
   }
-  

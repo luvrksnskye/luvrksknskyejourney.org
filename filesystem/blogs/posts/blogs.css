@@ -1112,3 +1112,19 @@ span.author::before {
   margin-right: 10px;
   background-image: url(../blogs-images/icon-list.png);
 }
+
+
+#HCB_comment_box .comment .likes::after{
+  content: "";
+  display: inline-block;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  background-image: url(../../../assets/special-icons/heart-68-16.png);
+}
+#HCB_comment_box .comment .likes img{
+visibility: hidden;
+}

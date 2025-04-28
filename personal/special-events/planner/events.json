@@ -1,0 +1,267 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Spooky Season",
+      "startDate": "2025-10-31",
+      "endDate": "2025-10-31",
+      "description": "Time for pumpkins, ghosts, and all things spooky! Grab your costume and get ready for a night of tricks, treats, and mischief under the moonlight. Don't forget to carve a grinning jack-o'-lantern to ward off any real spirits!",
+      "category": "holiday",
+      "color": "#ffb366",
+      "icon": "stickers/halloween.webp",
+      "stickers": ["stickers/halloween.webp", "stickers/ghost.webp", "stickers/spooky.webp"]
+    },
+    {
+      "id": 2,
+      "title": "Christmas",
+      "startDate": "2025-12-24",
+      "endDate": "2025-12-24",
+      "description": "The most magical time of the year is here! Twinkling lights, cozy sweaters, and the sweet scent of cookies baking. Time to gather with loved ones, exchange thoughtful gifts, and make memories that will warm your heart all year long. Don't forget to leave milk and cookies out!",
+      "category": "holiday",
+      "color": "#ffb3b3",
+      "icon": "stickers/Christmas.webp",
+      "stickers": ["stickers/arbolito.webp", "stickers/gift.webp", "stickers/x-mas.webp"]
+    },
+    {
+      "id": 3,
+      "title": "Boyfriend's Birthday",
+      "startDate": "2025-04-21",
+      "endDate": "2025-04-21",
+      "description": "Time to celebrate that special someone who makes my heart skip a beat! A day filled with surprises, laughter, cake, and creating memories together. My boyfriend is growing every day, and I'm so proud of him. I love him so much, and he makes me happy. I can't wait to spend more years by his side and watch him become the person he wants to be in the future.",
+      "category": "personal",
+      "color": "#e0b3ff",
+      "icon": "stickers/planet.webp",
+      "stickers": ["stickers/128px-Sticker_015.webp", "stickers/128px-Sticker_084.webp"]
+    },
+    {
+      "id": 4,
+      "title": "Website Anniversary",
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-01",
+      "description": "Happy birthday to my digital home! Another year of growth, creativity, and connecting with wonderful visitors.",
+      "category": "personal",
+      "color": "#b3e0e0",
+      "icon": "stickers/celebrate.webp",
+      "stickers": ["stickers/estrellitas.webp"]
+    },
+    {
+      "id": 5,
+      "title": "Skye's Birthday",
+      "startDate": "2025-06-28",
+      "endDate": "2025-06-28",
+      "description": "My special day is here! Time for cake, presents, hugs, and making wishes that come true.",
+      "category": "personal",
+      "color": "#ffb3d9",
+      "icon": "stickers/Sticker_113.webp"
+    },
+    {
+      "id": 6,
+      "title": "Capricorn Season",
+      "startDate": "2025-01-01",
+      "endDate": "2025-01-19",
+      "description": "Time for determined Capricorns to shine! Embrace your inner mountain goat with ambition, practical planning, and steady steps toward your goals. A perfect time for organizing your life and setting intentions for the year ahead. Your perseverance will lead to beautiful achievements!",
+      "category": "zodiac",
+      "color": "#d4bca3",
+      "icon": "stickers/CAPRICORN.webp",
+      "stickers": ["stickers/stars.webp"]
+    },
+    {
+      "id": 7,
+      "title": "Aquarius Season",
+      "startDate": "2025-01-20",
+      "endDate": "2025-02-18",
+      "description": "Hello to the visionaries and innovators! Aquarius season brings a breath of fresh air and unique perspectives. Time to embrace your quirks, connect with community, and think outside the box. Your brilliant ideas and humanitarian spirit can change the world in wonderful ways!",
+      "category": "zodiac",
+      "color": "#b3d1ff",
+      "icon": "stickers/AQUARIUS.webp",
+      "stickers": ["stickers/double-check.webp"]
+    },
+    {
+      "id": 8,
+      "title": "Pisces Season",
+      "startDate": "2025-02-19",
+      "endDate": "2025-03-20",
+      "description": "Dive into the dreamy waters of Pisces season! A time for imagination, intuition, and swimming through emotions. Let your creativity flow like gentle waves and connect with your inner magic. Perfect for artistic projects, meditation, and listening to what your heart is telling you!",
+      "category": "zodiac",
+      "color": "#b3f0e6",
+      "icon": "stickers/PISCES.webp",
+      "stickers": ["stickers/double-check.webp"]
+    },
+    {
+      "id": 9,
+      "title": "Aries Season",
+      "startDate": "2025-03-21",
+      "endDate": "2025-04-19",
+      "description": "Ready, set, go! Aries season brings a burst of energy, courage, and excitement for new beginnings. Time to be bold, take initiative, and chase your passions with fiery determination. Your enthusiasm is contagious and will inspire everyone around you!",
+      "category": "zodiac",
+      "color": "#ffbcb3",
+      "icon": "stickers/ARIES.webp"
+    },
+    {
+      "id": 10,
+      "title": "Taurus Season",
+      "startDate": "2025-04-20",
+      "endDate": "2025-05-20",
+      "description": "Welcome to the season of comfort and beauty! Taurus energy invites you to slow down, enjoy life's simple pleasures, and appreciate the world through all your senses. Perfect time for creating cozy spaces, enjoying delicious treats, and surrounding yourself with pretty things that make your heart happy!",
+      "category": "zodiac",
+      "color": "#c6e2ba",
+      "icon": "stickers/TAURUS.webp",
+      "stickers": ["stickers/star.webp"]
+    },
+    {
+      "id": 11,
+      "title": "Gemini Season",
+      "startDate": "2025-05-21",
+      "endDate": "2025-06-20",
+      "description": "Curiosity and conversations bloom during Gemini season! Time for learning new things, connecting with friends, and exploring different perspectives. Your mind is extra sparkly now - perfect for reading books, sharing ideas, and finding the humor in everyday situations!",
+      "category": "zodiac",
+      "color": "#fff1b3",
+      "icon": "stickers/GEMINI.webp"
+    },
+    {
+      "id": 12,
+      "title": "Cancer Season",
+      "startDate": "2025-06-21",
+      "endDate": "2025-07-22",
+      "description": "Home is where the heart is during nurturing Cancer season! Time to create cozy nests, connect with family, and honor your feelings. Your intuition and empathy are superpowers now - perfect for creating meaningful memories and taking care of yourself and loved ones!",
+      "category": "zodiac",
+      "color": "#b3d9ff",
+      "icon": "stickers/CANCER.webp"
+    },
+    {
+      "id": 13,
+      "title": "Leo Season",
+      "startDate": "2025-07-23",
+      "endDate": "2025-08-22",
+      "description": "Time to shine bright like the sun! Leo season brings playfulness, creativity, and a sprinkle of dramatic flair. Express yourself boldly, celebrate your unique gifts, and spread warmth and joy to everyone you meet. Your confidence is absolutely radiant now!",
+      "category": "zodiac",
+      "color": "#ffd9b3",
+      "icon": "stickers/LEO.webp"
+    },
+    {
+      "id": 14,
+      "title": "Virgo Season",
+      "startDate": "2025-08-23",
+      "endDate": "2025-09-22",
+      "description": "Organization and care bloom during practical Virgo season! Time to tidy up your spaces, refine your routines, and pay attention to the helpful details. Your ability to improve and perfect things is magical now - perfect for health goals, productivity projects, and acts of service!",
+      "category": "zodiac",
+      "color": "#d9b3d9",
+      "icon": "stickers/VIRGO.webp"
+    },
+    {
+      "id": 15,
+      "title": "Libra Season",
+      "startDate": "2025-09-23",
+      "endDate": "2025-10-22",
+      "description": "Balance and beauty are in the air! Libra season brings harmony, appreciation for aesthetics, and sweet social connections. Perfect time for decorating spaces, strengthening relationships, and finding the middle ground in any situation. Your charm and diplomacy create peace wherever you go!",
+      "category": "zodiac",
+      "color": "#ffb3d1",
+      "icon": "stickers/LIBRA.webp",
+      "stickers": ["stickers/check.webp"]
+    },
+    {
+      "id": 16,
+      "title": "Scorpio Season",
+      "startDate": "2025-10-23",
+      "endDate": "2025-11-21",
+      "description": "Mysteries and transformations await in intense Scorpio season! Time to dive beneath the surface, embrace your passionate nature, and discover hidden truths. Your emotional depth and perceptiveness are super-charged now - perfect for meaningful changes and powerful connections!",
+      "category": "zodiac",
+      "color": "#e6b3b3",
+      "icon": "stickers/SCORPIO.webp",
+      "stickers": ["stickers/check.webp"]
+    },
+    {
+      "id": 17,
+      "title": "Sagittarius Season",
+      "startDate": "2025-11-22",
+      "endDate": "2025-12-21",
+      "description": "Adventure calls during optimistic Sagittarius season! Time to expand your horizons, embrace new experiences, and see the bigger picture. Your enthusiasm and love of freedom are contagious now - perfect for travel plans, learning opportunities, and spreading joy and laughter!",
+      "category": "zodiac",
+      "color": "#d4b3e6",
+      "icon": "stickers/SAGITTARIUS.webp",
+      "stickers": ["stickers/SAGITTARIUS.webp"]
+    },
+    {
+      "id": 18,
+      "title": "My sister's birthday!",
+      "startDate": "2025-09-19",
+      "endDate": "2025-09-19",
+      "description": "Time to celebrate my amazing sister! A day filled with sweet moments, sharing memories, and showing her how much she means to me. Whether near or far, I want to make sure she feels the love and appreciation she deserves on her special day!",
+      "category": "personal",
+      "color": "#d4b3e6",
+      "icon": "stickers/sakura.webp"
+    },
+    {
+      "id": 19,
+      "title": "My mom's birthday",
+      "startDate": "2025-07-03",
+      "endDate": "2025-07-03",
+      "description": "Happy birthday to my wonderful mom! Today we celebrate the woman who gives the best hugs, shares the wisest advice, and loves you unconditionally. I want to make her day extra special with thoughtful gestures, quality time, and lots of appreciation for everything she does!",
+      "category": "personal",
+      "color": "#d1b3e6",
+      "icon": "stickers/flowers.webp"
+    },
+    {
+      "id": 21,
+      "title": "Valentine's Day",
+      "startDate": "2025-02-14",
+      "endDate": "2025-02-14",
+      "description": "Hearts, flowers, and sweet surprises everywhere! A day dedicated to celebrating love in all its forms - romantic, friendship, family, and self-love too! Share kind words, exchange thoughtful gifts, and create moments that make your heart flutter with joy!",
+      "category": "holiday",
+      "color": "#ffb3c6",
+      "icon": "stickers/Sticker_114.webp",
+      "stickers": ["stickers/flower.webp"]
+    },
+    {
+      "id": 22,
+      "title": "Easter",
+      "startDate": "2025-04-20",
+      "endDate": "2025-04-20",
+      "description": "Hop into spring with colorful eggs, fluffy bunnies, and sweet treats! A day for egg hunts, family gatherings, and celebrating new beginnings. The perfect time to wear your prettiest pastels and enjoy the beauty of nature awakening all around you!",
+      "category": "holiday",
+      "color": "#d4f0c0",
+      "icon": "stickers/easter.png"
+    },
+    {
+      "id": 23,
+      "title": "Thanksgiving",
+      "startDate": "2025-11-27",
+      "endDate": "2025-11-27",
+      "description": "Gather around for gratitude, delicious food, and warm hugs! A special day to count your blessings, appreciate loved ones, and enjoy cozy traditions together. Don't forget the pumpkin pie, comfy clothes with stretch waistbands, and after-dinner naps!",
+      "category": "holiday",
+      "color": "#ffcc99",
+      "icon": "stickers/thanksgiving.gif",
+      "stickers": ["stickers/fall.gif", "stickers/rain.webp"]
+    },
+    {
+      "id": 24,
+      "title": "Winter",
+      "startDate": "2025-12-21",
+      "endDate": "2026-03-19",
+      "description": "Magical snowflakes, cozy blankets, and twinkling lights fill the chilly air! Time for hot cocoa by the fireplace, snuggly sweaters, and frost-kissed adventures. The world transforms into a sparkling wonderland where every breath creates tiny clouds of magic!",
+      "category": "season",
+      "color": "#cce6ff",
+      "icon": "stickers/snow.webp"
+    },
+    {
+      "id": 25,
+      "title": "Summer",
+      "startDate": "2025-06-21",
+      "endDate": "2025-09-22",
+      "description": "Sunshine, beach days, and sweet ice cream treats! Summer brings longer days filled with adventures, water splashes, and golden tans. Time for picnics in the park, stargazing on warm nights, and making memories that will keep you warm all year long!",
+      "category": "season",
+      "color": "#ffe680",
+      "icon": "stickers/sunny.webp"
+    },
+    {
+      "id": 26,
+      "title": "Spring",
+      "startDate": "2025-03-20",
+      "endDate": "2025-06-20",
+      "description": "Blossoming flowers, baby animals, and gentle rain showers! Spring brings renewal and fresh beginnings as the world awakens in pastel colors. Time for nature walks, puddle jumping, and watching the world transform from sleepy to vibrant right before your eyes!",
+      "category": "season",
+      "color": "#d9f2d9",
+      "icon": "stickers/spring.webp"
+    }
+  ]
+}

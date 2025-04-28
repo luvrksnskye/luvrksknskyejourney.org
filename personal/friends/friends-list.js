@@ -584,6 +584,36 @@ const specialParticles = [
         constellation: "friends-constellation/red.png" 
     },
     {
+        name: "ne0nbandit",
+        description: "Jay is a digital artist from Portugal who loves character design and storytelling! Being honest? I'm fascinated by their work and think they're quite talented artists and wonderful content creators. I like the design of their website and think they're a very nice person. If you have a chance to visit their website, do it! It's beautiful and colorful, quite creative. It inspires me so much. I couldn't pass up the opportunity to add them to my friends list on my site!! OH! And they're also the creator of Deltacable Au, so go check that out too, their design is very nice, I admire it so much.",
+        attributes: `✦Living paradox
+✦ Non-Euclidian entity in the shape of a Raccoon
+✦ Jack of All Trades, Master of Heck all
+✦ Loves helping people with their code
+✦ Wants you to ask them about their OCs  `,
+        inventory: [
+            {
+                img: "friends-items/Hypercube.webp",
+                name:  "hypercube"
+            },
+            {
+                img: "friends-items/Pink-and blue gradient.gif",
+                name:  "pink and blue gradient (??? how do they have this?)"
+            },
+            {
+                img: "friends-items/monster.webp",
+                name:  "monster can"
+            },
+            {
+                img: "friends-items/spritzee.gif",
+                name:  "spritzee"
+            }
+        ],
+        website: "Go check out ne0nbandit site and learn about their art!",
+        websiteUrl: "https://ne0nbandit.art/",
+        constellation: "friends-constellation/ne0nbandit.png" 
+    },
+    {
         name: "Morita",
         description: "Morita is an Argentine artist with a sweet tooth and a taste for drawing that's quite beautiful. She and her colors, as soft as pastels, are simply enchanting. If you're looking for an artist with a talent for handling soft colors, then she's the one! I made a small website for her as a gift, so feel free to visit it whenever you like. I love and appreciate Morita very much, she is a very nice and friendly girl!",
         attributes: `✦ Her creative approach covers various disciplines, from digital illustration to traditional art, always seeking to capture the unique essence of each drawing she makes. She is an enthusiastic, passionate person, always looking for new experiences that expand her creative paths! You can currently check out her art gallery and more details on her website! She's definitely very talented, so go check her out! <3`,

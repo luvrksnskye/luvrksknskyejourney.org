@@ -36,11 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="skye-panel-close">&times;</div>
         <div class="panel-content">
             <div class="header-container" style="display: flex; justify-content: center; align-items: center;">
-                <h2 style="color: white; text-align: center;">Update 2.1 Constellation</h2>
+                <h2 style="color: white; text-align: center;">Update 2.2 Constellation</h2>
             </div>
             <div class="update-list">
                 <h3 style="color: white; text-align: center; margin-bottom: 15px;">New Stars Added</h3>
                 <ul style="color: white; list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 10px; text-align: center;">
+                        <b>ne0nbandit</b> -  Digital Artist from Portugal with an affinity for Character Design and Storytelling!
+                    </li>
                     <li style="margin-bottom: 10px; text-align: center;">
                         <b>Chissuuu</b> - A very talented traditional artist and close friend of mine!
                     </li>

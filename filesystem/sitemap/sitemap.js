@@ -76,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'gallery', description: 'drawings and photos' },
         { name: 'safe space', description: 'page dedicated to my sister!' },
         { name: 'kitty', description: 'shrine for my cats!' },
-        { name: 'boyfriend diary', description: 'shrine for my cute bf' }
+        { name: 'boyfriend diary', description: 'shrine for my cute bf' },
+        { name: 'special events', description: 'calendar of the site' }
     ];
 
     const stellarHunterPages = [
