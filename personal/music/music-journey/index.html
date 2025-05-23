@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="music-journey.css">
+    <link rel="stylesheet" href="../../../nav bar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+  <!-- Music stats icon -->
+  <img src="../music-assets/music-icon.png" alt="Music Stats" class="music-stats-icon" id="music-stats-icon">
+    
+  <!-- Stats modal -->
+  <div class="stats-modal" id="stats-modal">
+      <div class="stats-content">
+          <div class="stats-header">
+              <h2 class="stats-title">Your Music Experience</h2>
+              <span class="stats-close" id="stats-close">&times;</span>
+          </div>
+          <div class="stats-body">
+              <div class="stats-message" id="stats-message">
+                  You have excellent taste in music! Here's a summary of your musical journey so far.
+              </div>
+              
+              <div class="stats-grid">
+                  <div class="stats-card">
+                      <p class="stats-number" id="liked-count">0</p>
+                      <p class="stats-label">Tracks Liked</p>
+                  </div>
+                  <div class="stats-card">
+                      <p class="stats-number" id="first-liked">—</p>
+                      <p class="stats-label">Days Since First Like</p>
+                  </div>
+              </div>
+              
+              <div class="liked-list">
+                  <h3 class="liked-list-title">Your Liked Music</h3>
+                  <div id="liked-items-container" class="liked-items-container">
+                      <!-- Liked items will be inserted here -->
+                  </div>
+              </div>
+          </div>
+          <div class="stats-footer">
+              Keep discovering amazing music!</span>
+          </div>
+      </div>
+  </div>
+   <!----MAIN-->
+   <div class="main-container">
+    <div class="header">
+      <img src="../music-assets/music panel.png" alt="Music Title" class="title-img" id="title-image">
+    </div>
+    
+    <div class="panels-container">
+      <div class="panel">
+        <div class="panel-image">
+          <img src="../../../assets/banners/08.png" alt="Rock">
+        </div>
+        <div class="panel-name">Rock</div>
+      </div>
+      <div class="panel">
+        <div class="panel-image">
+          <img src="../../../assets/banners/06.PNG" alt="Pop">
+        </div>
+        <div class="panel-name">Pop</div>
+      </div>
+      <div class="panel">
+        <div class="panel-image">
+          <img src="../../../assets/banners/04.PNG" alt="Soundtracks">
+        </div>
+        <div class="panel-name">Soundtracks</div>
+      </div>
+      <div class="panel">
+        <div class="panel-image">
+          <img src="../../../assets/banners/03.PNG" alt="Classical">
+        </div>
+        <div class="panel-name">Classical</div>
+      </div>
+    </div>
+    
+    <div class="bottom-container">
+      <div class="favorites-panel">
+        <div class="favorites-title">favorite artists</div>
+        <div class="favorite-item">
+          <img src="../music-assets/Grimes.jpeg" alt="Artist 1" class="favorite-item-img">
+          <div class="favorite-item-content">
+            <div class="favorite-item-name">Grimes</div>
+            <div class="favorite-item-desc">I discovered Grimes' music in mid-2020, after the release of Cyberpunk 2077 and her voice acting as Lizzy Wizzy. I was blown away by Delicate Weapon and 4AM. After that, I fell in love even more when I saw the Visions album. One of the best albums of the decade and quintessential example of the exciting flourishing of electronic and experimental pop music in the late 00s/early 10s! The first time I heard Genesis, I was blown away I hadn't heard anything quite like it. If you're here listening to my playlist, her songs are probably the first thing you hear lol</div>
+          </div>
+        </div>
+        <div class="favorite-item">
+          <img src="../music-assets/Aurora-pfp.jpg" alt="Artist 2" class="favorite-item-img">
+          <div class="favorite-item-content">
+            <div class="favorite-item-name">Aurora</div>
+            <div class="favorite-item-desc">Aurora is one of my other favorite artists. I know there are only three artists on this list, but the truth is, if it were up to me, I'd write a whole bible about a bunch of artists I've been listening to for years. Her voice reminds me so much of another artist, you know? And her music is simply beautiful. She, along with fellow artist Sophie Woodhouse, are my favorites. I can't decide which album is my favorite, but if I could, I'd go with "All My Demons Greeting Me as a Friend." You should also check out her song "Running with the Wolves"! The release was first teased on April 17 on Facebook. On April 20, 2015, the song was officially released worldwide, and a different version was recorded in 2020 and featured in the animated film, Wolfwalkers.</div>
+          </div>
+        </div>
+        <div class="favorite-item">
+          <img src="../music-assets/Lana.jpg" alt="Artist 3" class="favorite-item-img">
+          <div class="favorite-item-content">
+            <div class="favorite-item-name">Lana del Rey</div>
+            <div class="favorite-item-desc">I've been listening to Lana del Rey since high school. I don't have much to say, but I really love her music. Her voice relaxes me and gives me a friendly feeling. My favorite album by this artist is none other than 2012's Born to Die! Aside from the controversial topics, I really enjoy her music.</div>
+          </div>
+        </div>
+      </div>
+      <img src="../music-assets/music-skye.png" alt="skye Image" class="skye-image" id="skye-image">
+      <img src="../music-assets/skye.png" alt="Top Disc Image" class="disc-top-image" id="disc-top-image">
+      
+      
+      <div class="player-column">
+        <div class="player-panel">
+          <div class="turntable-container">
+            <div class="disc">
+              <img src="../music-assets/disco.png" alt="Vinyl Record">
+            </div>
+            <div class="arm"></div>
+          </div>
+          <div class="title-bar"></div>
+          <div class="controls">
+            <button class="control-btn" id="prev">
+              <i class="fas fa-backward"></i>
+            </button>
+            <button class="control-btn" id="play">
+              <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="next">
+              <i class="fas fa-forward"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="visualizer-panel">
+         <div class="visualizer-title">Welcome!!</div>
+        <img src="../music-assets/bars.svg" class="visualizer">
+        </div>
+      </div>
+    </div>
+
+    <!--music info -->
+    <div class="music-info-container">
+      <div class="music-info-panel">
+        <h2 class="music-info-title">Why I Love Music</h2>
+        <div class="music-info-content">
+          <p>Music has always been my escape from reality, allowing me to explore emotions and worlds beyond my everyday experience. It creates a soundtrack to my life, enhancing both joyful moments and providing comfort during difficult times.</p>
+          <p>I love how music can transport me to different places and times, evoking memories with just a few notes. The way a melody can perfectly capture feelings I couldn't express with words is pure magic.</p>
+          <p>There's something about music that brings me happiness, you know? I'm a pretty passionate and hyperactive person, and music plays an important role in my life. It moves me, fills me with energy, and makes a feeling of energizing happiness run through my body! I love, love, love music with all my being. I feel it's something special about human beings and can't be replaced by anything. We humans create wonderful things, and I feel lucky to be able to live to witness all of that.</p>
+
+          <p>In case you didn't know, I love music and sounds so much that my main character, my blue dragon you see on screen, is actually a whale dragon! They're inspired by a humpback whale in their design and lore. Humpback whale songs are long, complex, and structured, with repeating patterns of low-frequency sounds that vary in amplitude and frequency! These songs consist of units, the shortest audible sound, a series of units making up a phrase, a series of phrases making up a theme, and a series of themes making up a song. An individual song can last up to 30 minutes and be repeated up to 24 hours. Isn't that beautiful?</p>
+        </div>
+      </div>
+      <div class="music-info-panel">
+        <h2 class="music-info-title">My Musical Journey</h2>
+        <div class="music-info-content">
+          <p>My love for music began during childhood when I would listen to my parents' favorite songs. As I grew older, I started exploring different genres, from classical pieces that told stories without words to modern pop that defined my generation.</p>
+          <p>Over the years, my taste has evolved and expanded, but the feeling of discovering a new favorite song or artist remains just as thrilling as ever. Music continues to be the constant companion through all of life's adventures.</p>
+          <h2 class="music-info-title">Share Your Music</h2>
+    <div class="music-info-content recommendation-content">
+      <img src="../../../assets/skye/skye-cafe.png" alt="Skye at Cafe" class="recommendation-image">
+      <a href="https://forms.gle/kkJPqDfH9AZW8EHF9" target="_blank" class="recommendation-button">
+        Recommend Me Music!
+      </a>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!--Background-->
+    <div class="video-background" id="mainBackground">
+      <video id="mainVideo" autoplay muted loop playsinline>
+          <source src="../../../assets/background/Intro-background.webm" type="video/webm">
+      </video>
+  </div>
+    
+<!-- Overlay-->
+
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+</head>
+<body>
+<div class="starfall-container">
+<div class="starfield" id="starfield"></div>
+</div>
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+
+ 
+<!--Mouse effect-->
+<script>
+
+  var b = document.body;
+  var imgurl = "../../../assets/mouse/cursor.ico";
+  var size = [10, 20];
+  function rand(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  function getSize()
+  {
+  return rand(size[0], size[1]);
+  }
+  function lerp(a,b,f)
+  {
+  return (b-a)*f+a;
+  }
+  function heart(x,y)
+  {
+  var s = getSize();
+  x -= s/2;
+  y -= s/2;
+  x = Math.floor(x) + rand(-5, 5);
+  y = Math.floor(y) + rand(-5, 5);
+  var fx = x + rand(-40, 40);
+  var fy = y + rand(-40, 40);
+  var i = document.createElement("img");
+  i.src = imgurl;
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  b.appendChild(i);
+  var f = 0;
+  var interval;
+  interval = setInterval(function() {
+  var _x = Math.floor(lerp(x, fx, f));
+  var _y = Math.floor(lerp(y, fy, f));
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  i.style.opacity = 1-f;
+  f += 0.01;
+  if (f > 1)
+  {
+  clearInterval(interval);
+  b.removeChild(i);
+  }
+  }, 10);
+  }
+  function bro(x,y)
+  {
+  for (var i = 0; i < 5; i++)
+  {
+  heart(x,y);
+  }
+  }
+  b.addEventListener("click", function(event){
+  var x = event.clientX;
+  var y = event.clientY;
+  bro(x,y);
+  });
+  
+  </script>
+  
+  <div id="nav2-wrapper">
+    <div id="nav2-custom-sidebar" class="hidden">
+      <h2>Personal</h2>
+      <ul>
+      <li><a href="../../../home/index.html"><img src="../../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/more.png" alt="about Icon">About me</a></li>
+      <li><a href="../../../personal/journal/index.html"><img src="../../../assets/nav-bar/my-journey.png" alt="diary Icon">Journal</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/music.png" alt="music Icon">Music <img src="../../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/games.png" alt="games Icon">Video games</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/friends.png" alt="friends Icon">Friends</a></li>
+      <li><a href="../../../personal/guestbook/index.html"><img src="../../../assets/nav-bar/guestbook.png" alt="guestbook Icon">Guestbook</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/FAQ.png" alt="faq Icon">FAQ</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/hobby.png" alt="Chat Icon">Hobbies</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/archives.png" alt="archives Icon">Gallery</a></li>
+      <li><a href="#"><img src="../../../assets/nav-bar/cat.png" alt="kitty Icon">Kitty</a></li>
+      <li><a href="../../../personal/boyfriend/index.html"><img src="../../../assets/nav-bar/more.png">Boyfriend diary</a></li>
+      <li><a href="../../special-events/index.html"><img src="../../../assets/nav-bar/boyfriend.png">Special events</a></li>
+    </ul>
+      </div>
+      <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+      <button id="nav2-sidebar-toggle"></button>
+    </div>
+
+<!-- js :3 -->
+<script src="music-player.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script type="text/javascript" src="../../../nav bar.js"></script>
+
+<script>
+const musicIcon = document.getElementById('music-stats-icon');
+const statsModal = document.getElementById('stats-modal');
+const statsClose = document.getElementById('stats-close');
+const selectSound = new Audio('../select.mp3');
+
+const musicDatabase = {
+  song1: "Danse Macabre",
+  song2: "1812 Overture",
+  song3: "La Foule",
+  song4: "Lily pads",
+  song5: "My City",
+  song6: "Inkoming!, Blitz It!, Entropical (Live)",
+  song7: "Anarchy Rainbow (Splatfest)",
+  song8: "The Seed",
+  song9: "Warrior",
+  song10: "Portal 2 OST Volume 1: Science is Fun",
+  song11: "Phantom Liberty",
+  song12: "Come Play (Arcane)",
+  album1: "Minecraft: volume alpha",
+  album2: "Subnautica Below Zero",
+  album3: "Honkai Star Rail - Out of Control",
+  album4: "The Deepsea Oddities",
+  album5: "Splatune 2",
+  album6: "Splatoon Live in Makuhari",
+  album7: "TRON: Legacy",
+  album8: "Minecraft: volume beta"
+};
+
+musicIcon.addEventListener('mouseenter', () => {
+  musicIcon.src = '../music-assets/music-icon-hover.png';
+});
+
+musicIcon.addEventListener('mouseleave', () => {
+  musicIcon.src = '../music-assets/music-icon.png';
+});
+
+musicIcon.addEventListener('click', () => {
+  selectSound.play();
+  updateStatsModal();
+  statsModal.style.display = 'flex';
+  setTimeout(() => {
+    statsModal.classList.add('show');
+  }, 10);
+});
+
+statsClose.addEventListener('click', closeStatsModal);
+
+statsModal.addEventListener('click', (e) => {
+  if (e.target === statsModal) {
+    closeStatsModal();
+  }
+});
+
+function closeStatsModal() {
+  statsModal.classList.remove('show');
+  setTimeout(() => {
+    statsModal.style.display = 'none';
+  }, 600);
+}
+
+function updateStatsModal() {
+  const likedMedia = JSON.parse(localStorage.getItem('likedMedia')) || {};
+  const likedCount = Object.keys(likedMedia).length;
+  const likedCountElement = document.getElementById('liked-count');
+  const firstLikedElement = document.getElementById('first-liked');
+  const likedItemsContainer = document.getElementById('liked-items-container');
+  const statsMessage = document.getElementById('stats-message');
+
+  likedCountElement.textContent = likedCount;
+
+  let firstLikedDate = null;
+  let firstLikedDays = '—';
+  
+  if (likedCount > 0) {
+    firstLikedDate = Math.min(...Object.values(likedMedia).map(item => item.timestamp));
+    const daysSince = Math.floor((Date.now() - firstLikedDate) / (1000 * 60 * 60 * 24));
+    firstLikedDays = daysSince;
+  }
+  
+  firstLikedElement.textContent = firstLikedDays;
+
+  likedItemsContainer.innerHTML = '';
+
+  if (likedCount === 0) {
+    likedItemsContainer.innerHTML = `
+      <div class="no-liked-message">
+        You haven't liked any music yet. Click the heart button on songs or albums you enjoy!
+      </div>
+    `;
+    
+    statsMessage.textContent = "You haven't liked any music yet. Explore and find something that moves you!";
+  } else {
+    const sortedLiked = Object.entries(likedMedia)
+      .sort((a, b) => b[1].timestamp - a[1].timestamp);
+
+    const getTitleFromId = (id) => {
+      const match = id.match(/^(album|song)(\d+)$/);
+      if (match) {
+        const [, type, number] = match;
+        const dbKey = `${type}${number}`;
+        return musicDatabase[dbKey] || `${type.charAt(0).toUpperCase() + type.slice(1)} ${number}`;
+      }
+      return id; 
+    };
+    
+    sortedLiked.forEach(([id, info]) => {
+      const isAlbum = info.type === 'album';
+      const mediaType = isAlbum ? 'Album' : 'Song';
+      const likeDate = new Date(info.timestamp);
+      const formattedDate = likeDate.toLocaleDateString();
+      const title = getTitleFromId(id);
+      
+      const likedItem = document.createElement('div');
+      likedItem.className = 'liked-item';
+      likedItem.innerHTML = `
+        <div class="liked-icon">
+          <i class="fas fa-${isAlbum ? 'compact-disc' : 'music'}"></i>
+        </div>
+        <div class="liked-details">
+          <h4 class="liked-title">${title}</h4>
+          <span class="liked-type">${mediaType}</span>
+        </div>
+        <div class="liked-date">${formattedDate}</div>
+      `;
+      
+      likedItemsContainer.appendChild(likedItem);
+    });
+
+    if (likedCount === 1) {
+      statsMessage.textContent = "You've liked your first piece of music! Keep exploring to find more gems.";
+    } else if (likedCount < 5) {
+      statsMessage.textContent = "You're building a nice collection of favorites. Your musical journey is just beginning!";
+    } else if (likedCount < 10) {
+      statsMessage.textContent = "You have a great selection of music! Your taste is quite refined.";
+    } else {
+      statsMessage.textContent = "You're a true music enthusiast with an impressive collection of favorites!";
+    }
+  }
+}
+</script>
+</body>
+
+</html>
+

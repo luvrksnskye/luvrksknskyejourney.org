@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+
+@font-face {
+    font-family: 'departure-mono';
+    src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'genshin impact';
+    src: url('../../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+
+/* Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.welcome-to-tos-page-panel {
+    text-align: left;
+    margin-bottom: 30px;
+    animation: float 3s ease-in-out infinite; 
+    transition: transform 0.3s ease;
+  }
+  
+  .welcome-to-tos-panel img {
+    max-width: 50%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.133))
+            drop-shadow(0 0 50px rgba(255, 255, 255, 0.118))
+            drop-shadow(0 0 70px rgba(255, 255, 255, 0.111));
+  }
+  
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0); 
+    }
+    50% {
+      transform: translateY(-10px); 
+    }
+  }
+
+  .welcome-to-tos-panel img:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.27))
+            drop-shadow(0 0 50px rgba(255, 255, 255, 0.23))
+            drop-shadow(0 0 70px rgba(255, 255, 255, 0.35));
+}
+  
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'departure-mono', monospace;
+        }
+
+        .header {
+            background-color: #ffffff1d;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            margin-top: 0;
+            color: white;
+        }
+
+        .title {
+            font-family: 'genshin impact', Arial, sans-serif;
+            font-size: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .date {
+            font-family: "Cinzel", serif;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .header b {
+            color: #a9d2ff;
+            text-decoration: none;
+            font-family: 'departure-mono', monospace;
+        }
+
+        .header b:hover {
+            text-decoration: underline;
+        }
+
+        header p{
+          text-align:left;
+        }
+
+        .header a {
+          color: #a9d2ff;
+          text-decoration: none;
+          font-family: 'departure-mono', monospace;
+      }
+
+      .header a:hover {
+          text-decoration: underline;
+      }
+
+        /* Column styling */
+        .columns {
+            display: flex;
+            gap: 30px;
+        }
+
+        .EXPERIMENTAL{
+          font-family: "Cinzel", serif;
+          color: white;
+          font-size: 30px;
+          font-weight: bold;
+          text-align: center;
+        }
+        .column {
+            flex: 1;
+            background-color: #ffffff1d;
+            backdrop-filter: blur(5px);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .column h2 {
+          font-family: "Cinzel", serif;
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .column p {
+            font-family: 'departure-mono', monospace;
+            color: white;
+            line-height: 1.6;
+        }
+      /* scrollbar*/
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #7cc6ffcc;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #7cc6ffcc;
+      
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7db8ff;
+      }
+      
+      .social-icons {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 15px;
+      }
+      
+      .social-icon img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1); /* Initially white */
+        transition: filter 0.3s ease, transform 0.3s ease;
+      }
+      
+      .social-icon:hover img {
+        filter: none; /* Restore original color on hover */
+        transform: scale(1.2); /* Optional: Add scale effect on hover */
+      }
+.material-symbols-outlined {
+color: white;
+}
+
+::selection {
+	color: white;
+	background-color: #7b9eff;
+}
+/* Body Styles */
+body ::selection {
+  background: #91ceff;
+}

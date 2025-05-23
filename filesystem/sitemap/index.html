@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye's Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="sitemap.css">
+    <link rel="stylesheet" href="../../nav bar.css">
+    <link rel="stylesheet" href="../../main-music-player/music-player.css">
+</head>
+<body>
+  <canvas id="orbital-bg-canvas"></canvas>
+  <div class="blur-layer"></div>
+
+  <!--MAIN-->
+
+  <div class="background-stars" id="background-stars"></div>
+
+  <div class="constellations-wrapper">
+      <div class="constellation-container" id="filesystem-container">
+          <div id="filesystem" class="constellation active"></div>
+      </div>
+      <div class="constellation-container" id="personal-container">
+          <div id="personal" class="constellation inactive"></div>
+      </div>
+      <div class="constellation-container" id="stellar-hunter-container">
+          <div id="stellar-hunter" class="constellation inactive"></div>
+      </div>
+  </div>
+
+  <div class="compass-container">
+      <img src="visuals/center.png" class="center-img" id="center-img" alt="Center">
+      <img src="visuals/compass.png" class="compass-img" id="compass-img" alt="Compass">
+  </div>
+
+  <div class="category-buttons">
+      <button id="filesystem-btn" class="category-button active" onclick="toggleConstellation('filesystem')">Filesystem</button>
+      <button id="personal-btn" class="category-button" onclick="toggleConstellation('personal')">Personal</button>
+      <button id="stellar-hunter-btn" class="category-button" onclick="toggleConstellation('stellar-hunter')">Stellar Hunter</button>
+  </div>
+
+  <div class="title-container">
+      <img src="visuals/sitemap.png" alt="STELLAR SITE MAP" class="title-img">
+  </div>
+
+  <div class="legend">
+      <img src="visuals/sitemap-skye.png" alt="Site Map Legend" class="legend-img">
+  </div>
+
+  <div class="view-controls">
+      <div class="current-location" id="current-location">
+          Current constellation: Filesystem
+      </div>
+      <button id="toggle-tree-view" class="tree-view-button">
+          Show File Tree View
+      </button>
+  </div>
+
+  <div class="info-panel" id="info-panel">
+      <button class="close-button" onclick="closeInfoPanel()">×</button>
+      <h3 id="panel-title">Page Name</h3>
+      <p id="panel-description">Page description goes here</p>
+  </div>
+
+  <div id="tree-view-overlay" class="tree-view-overlay">
+      <div class="tree-view-panel">
+          <button class="close-button" onclick="closeTreeView()">×</button>
+          <h3>Directory Structure</h3>
+          <div class="file-tree">
+              <span style="color: white;font-family: 'ZHFont', sans-serif;">
+                  <b style="font-weight: 600;">C:\site_map</b>
+                  │
+                  ├──<b style="font-weight: 600;">intro</b> _log-in and updates
+                  ├──<b style="font-weight: 600;">filesystem</b> _first root of the site
+                  │ ├── <b style="font-weight: 600;">home</b> _the homepage
+                  │ ├── <b style="font-weight: 600;">about</b> _infos about the site
+                  │ ├── <b style="font-weight: 600;">social</b> _all my social medias and chat
+                  │ ├── <b style="font-weight: 600;">support</b> _support and contact
+                  │ ├── <b style="font-weight: 600;">tos</b> _terms of service
+                  │ ├── <b style="font-weight: 600;">tools</b> _my digital tools
+                  │ ├── <b style="font-weight: 600;">blog</b> _personal blog
+                  │ ├── <b style="font-weight: 600;">resources</b> _useful tools and data
+                  │ ├── <b style="font-weight: 600;">software</b> _my operating system!
+                  │ ├── <b style="font-weight: 600;">credits</b> _end credits of the site
+                  │ ├── <b style="font-weight: 600;">workstation</b> _my waiting queue
+                  │ └── <b style="font-weight: 600;">sitemap</b> _map of all pages (you are here!)
+                  │ 
+                  ├──<b style="font-weight: 600;">Personal</b> _personal stuff
+                  │ 　 ├── <b style="font-weight: 600;">about me</b> _infos about me
+                  │ 　 ├── <b style="font-weight: 600;">journal</b> _my digital diary
+                  │ 　 ├── <b style="font-weight: 600;">music</b> _my fav music
+                  │ 　 ├── <b style="font-weight: 600;">video games</b> _my fav games!!
+                  │ 　 ├── <b style="font-weight: 600;">guestbook</b> _my guestbook
+                  │ 　 ├── <b style="font-weight: 600;">hobbies</b> _hobbies and extras
+                  │ 　 ├── <b style="font-weight: 600;">friends</b> _my internet neighbors
+                  │ 　 ├── <b style="font-weight: 600;">faq</b> _frequently asked questions
+                  │ 　 ├── <b style="font-weight: 600;">gallery</b> _drawings and photos
+                  │ 　 ├── <b style="font-weight: 600;">safe space</b> _page dedicated to my sister!
+                  │ 　 ├── <b style="font-weight: 600;">kitty</b> _shrine for my cats!
+                  │ 　 ├── <b style="font-weight: 600;">boyfriend diary</b> _shrine for my cute bf
+                  │ 　 └── <b style="font-weight: 600;">special events</b> _calendar of the site!
+                  │
+                  ├──<b style="font-weight: 600;">Stellar Hunter</b> _lore of Stellar Hunter
+                  │ ├── <b style="font-weight: 600;">allscan</b> _album of drawings and stories
+                  │ ├── <b style="font-weight: 600;">encyclopedia</b> _infos about the stars
+                  │ └── <b style="font-weight: 600;">end</b> _thanks for being here!
+                  └──
+              </span>
+          </div>
+      </div>
+  </div>
+
+
+<!---OTHERS-->
+
+<!--Mouse effect-->
+<script>
+
+  var b = document.body;
+  var imgurl = "../../assets/mouse/cursor.ico";
+  var size = [10, 20];
+  function rand(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  function getSize()
+  {
+  return rand(size[0], size[1]);
+  }
+  function lerp(a,b,f)
+  {
+  return (b-a)*f+a;
+  }
+  function heart(x,y)
+  {
+  var s = getSize();
+  x -= s/2;
+  y -= s/2;
+  x = Math.floor(x) + rand(-5, 5);
+  y = Math.floor(y) + rand(-5, 5);
+  var fx = x + rand(-40, 40);
+  var fy = y + rand(-40, 40);
+  var i = document.createElement("img");
+  i.src = imgurl;
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  b.appendChild(i);
+  var f = 0;
+  var interval;
+  interval = setInterval(function() {
+  var _x = Math.floor(lerp(x, fx, f));
+  var _y = Math.floor(lerp(y, fy, f));
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  i.style.opacity = 1-f;
+  f += 0.01;
+  if (f > 1)
+  {
+  clearInterval(interval);
+  b.removeChild(i);
+  }
+  }, 10);
+  }
+  function bro(x,y)
+  {
+  for (var i = 0; i < 5; i++)
+  {
+  heart(x,y);
+  }
+  }
+  b.addEventListener("click", function(event){
+  var x = event.clientX;
+  var y = event.clientY;
+  bro(x,y);
+  });
+  
+  </script>
+    <!--Nav bar-->
+    <div id="nav2-wrapper">
+      <div id="nav2-custom-sidebar" class="hidden">
+        <h2>Filesystem</h2>
+        <ul>
+          <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+          <li><a href="#"><img src="../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+          <li><a href="../../filesystem/social/index.html"><img src="../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+          <li><a href="../../filesystem/support/index.html"><img src="../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+          <li><a href="../tos/index.html"><img src="../../assets/nav-bar/rules.png" alt="games Icon">Tos</a></li>
+          <li><a href="#"><img src="../../assets/nav-bar/tools.png" alt="friends Icon">Tools</a></li>
+          <li><a href="../../filesystem/blogs/index.html"><img src="../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
+          <li><a href="#"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+          <li><a href="#"><img src="../../assets/nav-bar/software.png" alt="Chat Icon">Software</a></li>
+          <li><a href="../../filesystem/credits/index.html"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+          <li><a href="https://trello.com/b/bosL3mrV/skye-workstation-queue"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+            <li><a href="#"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap  <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+        </ul>
+        </div>
+        <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+        <button id="nav2-sidebar-toggle"></button>
+      </div>
+    <!-- Overlay-->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -2;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+</head>
+<body>
+<div class="starfall-container">
+<div class="starfield" id="starfield"></div>
+</div>
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+<!-- Music player lol-->
+<div class="music-player">
+<div class="highlight top-right"></div>
+<div class="highlight bottom-left"></div>
+
+<button class="slide-toggle">
+<i class="fas fa-chevron-down"></i>
+</button>
+
+<div class="corner-tag">Now Playing</div>
+
+<div class="player-header">
+<div class="visualizer">
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+</div>
+</div>
+
+<div class="content">
+<div class="album-art">
+  <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+</div>
+
+<div class="song-info">
+  <h3 class="song-title">Current Song</h3>
+</div>
+
+<div class="progress-container">
+  <div class="current-time">0:00</div>
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+  <div class="duration">0:00</div>
+</div>
+
+<div class="controls">
+  <button class="control-btn" id="prev">
+    <i class="fas fa-backward"></i>
+  </button>
+  <button class="control-btn" id="play">
+    <i class="fas fa-play"></i>
+  </button>
+  <button class="control-btn" id="next">
+    <i class="fas fa-forward"></i>
+  </button>
+</div>
+</div>
+</div>
+
+ <!--Background-->
+ <div class="video-background">
+  <video autoplay muted loop>
+    <source src="../../assets/background/Intro-background.webm" type="video/webm">
+  </video>
+</div>
+
+    
+   </script>
+<script src="sitemap.js"></script>
+<script src="background.js"></script>
+<script type="text/javascript" src="../../nav bar.js"></script>
+<script type="text/javascript" src="../../main-music-player/music-player.js"></script>
+</body>
+</html>

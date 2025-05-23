@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Skye Journey</title>
+    <link rel="icon" type="image/x-icon" href="assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <!--Background-->
+    <div class="video-background">
+      <video autoplay muted loop onloadeddata="fadeInVideo(this)">
+          <source src="assets/background.mp4" type="video/mp4">
+      </video>
+  </div>
+    <div class="logo-panel">
+      <div class="logo-panel">
+        <img src="assets/Skye Journey logo.png" alt="Floating Panel">
+      </div>
+  </div>
+
+
+  <!-- content-->
+<div class="enter-container">
+  <img src="assets/special-icons/arrow-left.png" alt="Left Arrow" class="enter-arrow left-arrow">
+  <p class="enter">Press enter to continue</p>
+  <img src="assets/special-icons/arrow-right.png" alt="Right Arrow" class="enter-arrow right-arrow">
+</div>
+  <div class="menu-container">
+    <div class="menu-item vertical-layout" data-panel="notices" onclick="openPanel(this.dataset.panel)">
+        <img src="assets/buttons-icons/updates.png" alt="Notices">
+        <span>Notices</span>
+    </div>
+    <div class="menu-item vertical-layout" data-panel="events" onclick="openPanel(this.dataset.panel)">
+        <img src="assets/buttons-icons/Phone App_Version Info.png" alt="Event">
+        <span>Event</span>
+    </div>
+    <div class="menu-item vertical-layout" data-panel="updates" onclick="openPanel(this.dataset.panel)">
+      <div class="update-alert-container">
+          <img src="assets/special-icons/alert.png" alt="Alert" class="update-alert-icon">
+          <img src="assets/buttons-icons/Phone App_Data Bank.png" alt="Update">
+      </div>
+      <span>Update</span>
+  </div>
+    <div class="menu-item vertical-layout" data-panel="settings" onclick="openPanel(this.dataset.panel)">
+        <img src="assets/buttons-icons/Event Icon_Apocalyptic Shadow.png" alt="Settings">
+        <span>Settings</span>
+    </div>
+</div>
+
+
+<!-- Modal Overlay and Panels -->
+<div class="modal-overlay" id="modalOverlay" onclick="closePanel()">
+  <div class="modal-panel" id="noticesPanel" onclick="event.stopPropagation()">
+      <div class="close-button" onclick="closePanel()">×</div>
+      <p>NOTICES</p>
+      <div class="panel-content">
+        Hi! As you may know, the website is in the middle of a huge, huge update, a lot of things have changed. Therefore, I always recommend that you check the options on your right, read everything you need to know and adjust your browser settings! This site contains javascript, iframes, and autoplaying sound! Also, it was not made for mobile browsing, or at least it is no longer available for phones! So check out this website on your computer or laptop.
+      </div>
+  </div>
+  <div class="modal-panel" id="eventsPanel" onclick="event.stopPropagation()">
+      <div class="close-button" onclick="closePanel()">×</div>
+      <p>EVENTS</p>
+      <div class="panel-content">
+        Currently, there are no active special events. But you can check out the calendar of future events now!
+      </div>
+  </div>
+  <div class="modal-panel" id="updatesPanel" onclick="event.stopPropagation()">
+      <div class="close-button" onclick="closePanel()">×</div>
+      <p>UPDATE: VERSION 2.2</p>
+      <div class="panel-content">
+        If you want to go back, press CTRL + F5 before entering the page. I'm working on constant updates! So you'll need to do this every time you enter. This forces a hard reload, which means the browser retrieves the webpage from the server instead of loading it from the cache.
+      </div>
+  </div>
+  <div class="modal-panel" id="settingsPanel" onclick="event.stopPropagation()">
+      <div class="close-button" onclick="closePanel()">×</div>
+      <p>SETTINGS</p>
+      <div class="panel-content">
+        Remember to enable sound and javascript in allow in your site settings permissions!
+      </div>
+  </div>
+</div>
+
+<!--- SCRIPTS-->
+
+<script>
+
+  function navigateToHome() {
+      window.location.href = 'home/index.html';
+  }
+  
+
+  document.querySelector('.enter').addEventListener('click', navigateToHome);
+  
+  
+  document.querySelector('.enter').addEventListener('touchend', function(e) {
+      e.preventDefault(); // Prevents double-firing on some devices
+      navigateToHome();
+  });
+  
+
+  document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+          navigateToHome();
+      }
+  });
+  </script>
+
+<div class="music-control" id="musicControl">
+  <img src="assets/special-icons/music-icon.png" alt="Music Control" id="musicIcon" class="music-icon">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const musicControl = document.getElementById('musicControl');
+    const musicIcon = document.getElementById('musicIcon');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+
+
+    musicControl.addEventListener('click', function() {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            musicControl.classList.remove('muted');
+            musicIcon.src = 'assets/special-icons/music-icon.png';
+        } else {
+            backgroundMusic.pause();
+            musicControl.classList.add('muted');
+            musicIcon.src = 'assets/special-icons/music-icon-mute.png';
+        }
+    });
+});
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const updatesMenuItem = document.querySelector('.menu-item[data-panel="updates"]');
+    
+    updatesMenuItem.addEventListener('click', function() {
+        this.classList.add('updates-clicked');
+    });
+});
+</script>
+<audio id="backgroundMusic" autoplay loop>
+  <source src="assets/background music.mp3" type="audio/mp3">
+</audio>
+<script src="index.js"></script>
+<script src="settings.js"></script>
+
+  </body>
+</html>

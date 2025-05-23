@@ -1,0 +1,386 @@
+ /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+
+@font-face {
+    font-family: 'departure-mono';
+    src: url('assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'genshin impact';
+    src: url('assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+@font-face {
+    font-family: 'ZHFont';
+    src: url('../assets/fonts/zhcn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .body{
+    background-color: black;
+    z-index: -2;
+  }
+/* Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Logo Panel */
+.logo-panel {
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fade-in-black 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+    transition: 
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-panel img {
+    max-width: 50%;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1))
+            drop-shadow(0 0 40px rgba(255, 255, 255, 0.08))
+            drop-shadow(0 0 60px rgba(255, 255, 255, 0.06));
+    transition: 
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-panel img:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3))
+            drop-shadow(0 0 50px rgba(255, 255, 255, 0.25))
+            drop-shadow(0 0 70px rgba(255, 255, 255, 0.4));
+}
+
+@keyframes fade-in-black {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.music-icon {
+    width: 70px;
+    height: 70px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.music-control:hover .music-icon {
+    transform: scale(1.1);
+}
+
+.music-control .music-icon {
+    content: url('assets/special-icons/music-icon.png');
+}
+
+.music-control:hover .music-icon {
+    content: url('assets/special-icons/music-icon-hover.png');
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
+            drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))
+            drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+    animation: music-icon-glow 2s infinite alternate ease-in-out;
+}
+
+.music-control.muted .music-icon {
+    content: url('assets/special-icons/music-icon-mute.png');
+}
+
+@keyframes music-icon-glow {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))
+                drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))
+                drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+    }
+    100% {
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 25px rgba(255, 255, 255, 0.5))
+                drop-shadow(0 0 35px rgba(255, 255, 255, 0.4));
+    }
+}
+.enter {
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    margin-top: 30px !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    font-family: 'ZHFont', sans-serif;
+    cursor: pointer; 
+    user-select: none; 
+    -webkit-tap-highlight-color: transparent; 
+    animation: fade-in-text 3s ease forwards;
+}
+
+@keyframes fade-in-text {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles for enter text with arrows */
+.enter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 400px;
+}
+
+.enter-arrow {
+    width: 300px;
+    height: auto;
+    margin: 0 10px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.left-arrow {
+    transform: translateX(-20px) scaleX(-1);
+}
+
+.enter-arrow:hover {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7))
+            drop-shadow(0 0 25px rgba(255, 255, 255, 0.5))
+            drop-shadow(0 0 35px rgba(255, 255, 255, 0.4));
+    transform: translateX(0) scale(1.1);
+}
+
+.enter-container .enter {
+    margin-top: 0;
+}
+
+@keyframes fade-in-arrows {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.left-arrow {
+    animation: fade-in-arrows 3s ease 1s forwards;
+}
+
+.right-arrow {
+    animation: fade-in-arrows 3s ease 1s forwards;
+}
+.menu-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
+    opacity: 0;
+    animation: fade-in-menu 1s ease 1s forwards;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.27))
+            drop-shadow(0 0 50px rgba(255, 255, 255, 0.23))
+            drop-shadow(0 0 70px rgba(255, 255, 255, 0.35));
+}
+
+.menu-item img {
+    width: 34px;
+    height: 34px;
+}
+
+.menu-item span {
+    color: white;
+    font-family: 'ZHFont', sans-serif;
+    font-size: 14px;
+}
+
+.vertical-layout {
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Modal Panel Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.137);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: rgba(255, 255, 255, 0.199);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    min-width: 300px;
+    max-width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: white;
+    font-family: 'ZHFont', sans-serif;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal-panel.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.modal-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fade-in-menu {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Individual menu item animations */
+.menu-item:nth-child(1) { animation-delay: 1.2s; }
+.menu-item:nth-child(2) { animation-delay: 1.4s; }
+.menu-item:nth-child(3) { animation-delay: 1.6s; }
+.menu-item:nth-child(4) { animation-delay: 1.8s; }
+
+.settings-container {
+    padding: 20px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.setting-item label {
+    margin-right: 10px;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.update-alert-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.update-alert-icon {
+    position: absolute;
+    width: 60px !important;
+    height: 60px !important;
+    left: -70px;
+    top: 50px;
+    animation: breathing-pulse 2s infinite ease-in-out;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes breathing-pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.menu-item.updates-clicked .update-alert-icon {
+    opacity: 0;
+    animation: none;
+}
+
+/* Body Styles */
+body ::selection {
+    background: #91ceff;
+  }
+  

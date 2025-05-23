@@ -1,0 +1,383 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+
+@font-face {
+    font-family: 'departure-mono';
+    src: url('../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'genshin impact';
+    src: url('../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+
+/* Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    gap: 20px;
+    min-height: 80vh;
+    color: white;
+    font-family: 'departure-mono', monospace;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.218);
+    border-radius: 10px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+#nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+div {
+    color: rgb(255, 255, 255);
+}
+
+div b {
+    color: #8bcbff;
+}
+/* Scrollbar styles - applied to both nav and updates */
+#nav::-webkit-scrollbar,
+.updates::-webkit-scrollbar,
+.intro::-webkit-scrollbar {
+    width: 8px;
+}
+
+#nav::-webkit-scrollbar-track,
+.updates::-webkit-scrollbar-track,
+.intro::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+#nav::-webkit-scrollbar-thumb,
+.updates::-webkit-scrollbar-thumb,
+.intro::-webkit-scrollbar-thumb {
+    background: #acc6ff;
+    border-radius: 10px;
+}
+
+#nav::-webkit-scrollbar-thumb:hover,
+.updates::-webkit-scrollbar-thumb:hover,
+.intro::-webkit-scrollbar-thumb:hover {
+    background: #aec8ff;
+}
+
+#nav h3 {
+    margin: 15px 0 5px 0;
+    color: #74bbf6;
+    font-size: 1em;
+}
+
+#nav h3:first-child {
+    margin-top: 0;
+}
+
+#nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 2px 0;
+    font-size: 0.9em;
+    font-family: 'departure-mono', monospace;
+    transition: transform 0.2s;
+}
+
+#nav a:hover {
+    transform: scale(1.05);
+    color: #8bcbff;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.webring-box {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.intro{
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.updates {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.update-entry {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 0;
+}
+
+.update-entry:last-child {
+    border-bottom: none;
+}
+
+.update-title {
+    color: #9ad3ff;
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-family: 'departure-mono', monospace;
+}
+
+.update-date {
+    font-size: 0.8em;
+    opacity: 0.7;
+    font-family: 'departure-mono', monospace;
+}
+
+.updates p {
+    margin: 5px 0 0 0;
+}
+
+.advice {
+    margin-top: 20px;
+}
+
+.title {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    font-family: 'genshin impact', Arial, sans-serif;
+}
+   
+.enter-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.enter-button img {
+    max-width: 450px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.enter-button img:hover {
+    transform: scale(1.05);
+}
+/* Icons size*/
+.personal img {
+    width: 16px; 
+    height: 16px;
+    vertical-align: left; 
+    margin-right: 5px; 
+}
+.widget-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    }
+    /* Music player */
+    .music-player {
+        height: 118px;
+        width: 350px;
+        padding: 20px;
+        background: linear-gradient(145deg, #ffffff2e, #4646b444);
+        border-radius: 35px;
+        box-shadow: 0px 10px 15px rgba(255, 255, 255, 0.5);
+        text-align: center;
+        position: fixed; 
+        bottom: 20px;   
+        right: 20px;   
+        overflow: hidden;
+        z-index: 1000; 
+        backdrop-filter: blur(10px);
+        font-family: 'departure-mono', monospace;
+      }
+      
+      .corner-tag {
+        position: absolute;
+        top: 15px;
+        left: 18px;
+        background: #ffffff4f;
+        transform: rotate(45deg);
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        opacity: 0.85;
+        animation: pulseTag 1s infinite alternate ease-in-out;
+        font-family: 'departure-mono', monospace;
+        z-index: 10; 
+      }
+      
+      @keyframes pulseTag {
+        0% {
+          transform: scale(1);
+          opacity: 0.85;
+        }
+        100% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+      
+      .corner-tag.hide {
+        display: none;
+      }
+      
+      @keyframes visualizer {
+        0%, 100% { transform: scaleY(0.4); }
+        50%      { transform: scaleY(1); }
+      }
+      .visualizer-bar {
+        display: inline-block;
+        width: 4px;
+        height: 20px;
+        margin: 2px;
+        background: #71b3ff;
+        animation: visualizer 0.5s infinite ease-in-out;
+        animation-play-state: paused;
+      }
+      .visualizer-bar:nth-child(2) { animation-delay: 0.1s; }
+      .visualizer-bar:nth-child(3) { animation-delay: 0.2s; }
+      .visualizer-bar:nth-child(4) { animation-delay: 0.3s; }
+      
+      .highlight {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.6;
+      }
+      .top-right {
+        width: 200px;
+        height: 200px;
+        top: -50px;
+        right: -50px;
+        background: radial-gradient(circle, rgba(122, 184, 255, 0.8), transparent);
+      }
+      
+      .bottom-left {
+        width: 150px;
+        height: 150px;
+        bottom: -50px;
+        left: -45px;
+        background: radial-gradient(circle, rgba(114, 180, 255, 0.8), transparent);
+      }
+      
+      .progress-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0;
+      }
+      .progress-bar {
+        flex: 1;
+        height: 5px;
+        background: #ffffff4c;
+        border-radius: 5px;
+        margin: 0 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .progress {
+        height: 100%;
+        width: 0;
+        background: #1933a772;
+        border-radius: 5px;
+      }
+      .current-time,
+      .duration {
+        font-size: 0.8rem;
+      }
+      
+      .controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+      }
+      .control-btn {
+        background: #ffffff23;
+        border: none;
+        border-radius: 50%;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.182), 0.3);
+        position: relative;
+        z-index: 2;
+        width: 50px; 
+        height: 50px; 
+      }
+      .control-btn i {
+        font-size: 1.2rem;
+        color: #ffffff9b;
+      }
+      .control-btn:hover {
+        transform: scale(1.1);
+        background: #dcdcff24;
+      }
+      .control-btn:active {
+        transform: none;
+      }
+      /* scrollbar*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #7cc6ffcc;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7cc6ffcc;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7db8ff;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Body Styles */
+body ::selection {
+  background: #91ceff;
+}

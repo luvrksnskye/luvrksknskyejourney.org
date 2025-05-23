@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skye Journey</title>
+<link rel="icon" type="image/x-icon" href="../../../assets/buttons-icons/favicon.png">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../..//blogs/posts/music-player-personal.css">
+<link rel="stylesheet" href="../../../nav bar.css">
+<link rel="stylesheet" href="blogs.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="preloader"></div>
+
+    <div class="container">
+        <aside class="blog-sidebar">
+            <h3>Index</h3>
+            <ul>
+
+              <li><a href="#startup">Install & Setup on Debian</a></li>
+              <li><a href="#art">Final Thoughts</a></li>
+          
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <div class="banner">
+                <img src="../blogs-images/my-first-digital-tablet.png" class="banner-image">
+                <center>
+                    <h1 class="banner-title">MY FIRST GRAPHIC TABLET</h1>
+                    </center>
+            </div>
+            
+            <h1>My first graphics tablet, finally! Now what?</h1>
+            
+            <p>Today, March 25th, I got my first graphics tablet! I'm super excited about it, though at first, I was worried it wouldn’t work on my Debian system because of the drivers. I got a GAOMON M10K, and honestly, I didn’t expect it to be this big! It even came with gloves and a few other nice extras.
+            </p>
+            <p>Yes, you can use a Gaomon M10K on Linux! While Gaomon doesn’t officially provide Linux drivers, you can get it working with the DIGImend project driver and tools like xsetwacom for setup and configuration. I was so excited that I didn’t even bother configuring it properly—I just installed the drivers, which was super easy!</p>
+            <div class="media-container">
+              <img src="../blogs-images/graphic-tablet.png">
+          </div>
+          
+            <h2 id="startup">Install & Setup on Debian</h2>
+            <div class="media-container">
+                <img src="../screenshots/linux-drivers.png">
+            </div>
+
+            <p>If your distribution doesn’t have a recent enough packaged DIGImend driver, you can grab a newer version on <a href ="https://github.com/DIGImend/digimend-kernel-drivers/releases" target="_blank">GitHub</a>. There’s a Debian package available, but if your OS isn’t Debian-based, you can compile the source code instead. It’s not too complicated and is well-documented!</p>
+           
+           <p>In my case, I just ran this line in my terminal before restarting my computer and starting to draw!</p>
+            <div class="code-block">
+                sudo apt-get install -y "linux-headers-$(uname -r)"
+            </div>
+
+            <p>Setting it up was even easier. First, I ran <b>lsusb</b> to get the tablet's ID. Mine showed up as <b>Bus 001 Device 013: ID 256c:006f GAOMON Gaomon Tablet</b>, and with that, I was able to configure it.
+
+                This number should stay the same if you're using the M10K 2018 model, but sometimes brands release updated versions of their hardware, so it might vary slightly.</p>
+
+                <p>After that, we navigate (cd) to the directory where Xorg stores device rules. In my case, it’s located at <b>/usr/share/X11/xorg.conf.d/</b>, but keep in mind that this may vary depending on your Linux distribution. The DIGImend project installs its own rules, which can be found in the 50-digimend.conf file in this directory. I'll be editing this file (note that this requires your system's root password since we’re modifying a system file using sudo).</p>
+        <p>I'm using the "nano" text editor, but you can use whichever one you prefer. "Nano" is usually pre-installed on most distributions, though its keyboard shortcuts and syntax highlighting aren't the most user-friendly by default.</p>
+        
+        <div class="code-block">
+            <pre>
+        Section "InputClass"
+        Identifier "Gaomon tablets with Wacom driver"
+        MatchUSBID "256c:006f"
+        MatchDevicePath "/dev/input/event*"
+        Driver "wacom"
+        EndSection
+</pre>
+        </div>
+        <p>Save and then reboot your system!</p>
+        <p>After that, I ran xsetwacom --list in the terminal. Now, we’ll create a script—a simple text file containing a series of commands that the computer will execute in order, with each line configuring a different aspect of your tablet. Lines starting with # are ignored by the computer, so I’ve added comments to guide you through customizing the script. Open a plain text editor (e.g., Micro, Kate, Geany, Gnome Text—also known as Nautilus) and copy/paste the script below.</p>
+        <div class="code-block">
+            <pre>
+                #! /bin/bash
+                # Setup xsetwacom script for Intuos 3 9x12
+                # License: CC-0/Public-Domain license
+                # author: deevad
+                
+                # Tablet definition
+                tabletstylus="GAOMON Gaomon Tablet stylus"
+                tabletpad="GAOMON Gaomon Tablet Pad pad"
+                touchpad="GAOMON Gaomon Tablet Touch Strip pad" #unsupported
+                dialpad="GAOMON Gaomon Tablet Dial pad" #unsupported
+                # Display all available option:
+                #xsetwacom get "$tabletstylus" all
+                #xsetwacom get "$tabletpad" all
+                #xsetwacom get "$touchpad" all
+                #xsetwacom get "$dialpad" all
+                
+                # Reset
+                xsetwacom --set "$tabletstylus" ResetArea
+                
+                # Map surface of the tablet to a monitor (in case of multiple)
+                # Note: get the name of the monitor with xrandr
+                xsetwacom --set "$tabletstylus" MapToOutput "DisplayPort-0"
+                
+                # Auto proportional Mapping:
+                # xsetwacom get "$tabletstylus" Area
+                # default: 0 0 50800 31750
+                # Enter under the resolution of your monitor:
+                screenX=2560
+                screenY=1440
+                Xtabletmaxarea=50800
+                Ytabletmaxarea=31750
+                areaY=$(( $screenY * $Xtabletmaxarea / $screenX ))
+                xsetwacom --set "$tabletstylus" Area 0 0 "$Xtabletmaxarea" "$areaY"
+                
+                # Stylus button:
+                #xsetwacom --set "$tabletstylus" Button 1 1 # default, to click and draw
+                #xsetwacom --set "$tabletstylus" Button 2 "key Control_L" # Ctrl = color picker
+                #xsetwacom --set "$tabletstylus" Button 3 3 # default (Right click)
+                
+                # Tweaks
+                # Pressure curve:
+                xsetwacom --set "$tabletstylus" PressureCurve 0 0 100 100
+                # Softer
+                #xsetwacom --set "$tabletstylus" PressureCurve 0 10 40 85
+                # Configuration data trimming and suppression
+                # The event of this device are good; if you have CPU better to not filter
+                # them at operating system level to not loose any sensitivity.
+                # Minimal trimming is also good.
+                xsetwacom --set "$tabletstylus" Suppress 0 # data pt.s filtered, default is 2, 0-100
+                xsetwacom --set "$tabletstylus" RawSample 1 # data pt.s trimmed, default is 4, 1-20
+                
+                # For left-handed mode (rotation):
+                #xsetwacom --set "$tabletstylus" Rotate half
+                
+                # Buttons
+                # Note: touchpad around 10 button is not supported
+                #     +-----+
+                #     |  1  |
+                #     +-----+
+                #     |  2  |
+                #     +-----+
+                #     |  3  |
+                #     +-----+
+                #     |  8  |
+                #     +-----+
+                #     |  9  |
+                #     +-----+
+                # +---+-----+---+
+                # |             |
+                # |   +-----+   |
+                # |   | 10  |   |
+                # |   |     |   |
+                # |   +-----+   |
+                # |             |
+                # +---+-----+---+
+                #     +-----+
+                #     | 11  |
+                #     +-----+
+                #     | 12  |
+                #     +-----+
+                #     | 13  |
+                #     +-----+
+                #     | 14  |
+                #     +-----+
+                #     | 15  |
+                #     +-----+
+                xsetwacom --set "$tabletpad" Button 1 "key Control_L" # Ctrl = color picker
+                xsetwacom --set "$tabletpad" Button 2 "key KP_Divide" # / = Switch to previous used brush preset
+                xsetwacom --set "$tabletpad" Button 3 "key Shift_L" # Shift = Resize brush
+                xsetwacom --set "$tabletpad" Button 8 "key v" # v = line
+                xsetwacom --set "$tabletpad" Button 9 "key m" # m = mirror
+                
+                xsetwacom --set "$tabletpad" Button 10 "key e" # e = eraser
+                
+                xsetwacom --set "$tabletpad" Button 11 "key r" # r = pick layer
+                xsetwacom --set "$tabletpad" Button 12 "key l" # l = select lighter color
+                xsetwacom --set "$tabletpad" Button 13 "key k" # k = select darker color
+                xsetwacom --set "$tabletpad" Button 14 "key o" # o = more opacity
+                xsetwacom --set "$tabletpad" Button 15 "key i" # i = less opacity
+            </pre>
+        </div>
+
+        <p>I found this script made by someone else. They commented the line for the buttons for the stylus (they start by "#" after "# Stylus button:"). Uncomment them to customize them.  Many keys can be called by their X11 name. To find the main list of keys; I found them here in <a href="https://pastebin.com/aXGDkJTU" target="_blank">pastebin</a>. After all of this, save it named Gaomon-M10K.sh (you can name it the way you want, and save it where you want on your disk; the only constrain is to finish with the extension .sh ). You can read it, and adjust it. To run it, after saving the file you need to give this text file execution permission. You can do so with many desktop environment by right clicking on the file, and add the "execute" permission. Another way to do it is with command line:</p>
+
+      
+        <div class="code-block">
+            <pre>
+chmod +x Gaomon-M10K.sh
+./Gaomon-M10K.sh
+</pre>
+        </div>
+
+<p>The script I gave you is simple made by Deevad, but there are some more complicated ones. user TwistyDev on Gitlab published a more advanced version based on xinput and a Python script. The script can switch profiles between blender and krita and has a systray icon! Here: <a href="https://gitlab.com/pwnsard/gaomon-m10k-2018-linux-configuration-script/-/blob/master/gaomon-manager" target="_blank"> GitLab of TwistyDev</a></p>
+ <p>Now, if all this seems difficult to you (and maybe you have a different tablet, and maybe you use the KDE Plasma Desktop Environment), well, in good time, I think there is a second method that is much easier, however, you would still have to install the drivers. The full featured module for the configuration of Graphic tablet isn't preinstalled by default. but you can quickly install it with:</p>   
+ <div class="code-block">
+    sudo apt install kde-config-tablet
+</div>
+<p>Once done, you'll find the options in your Settings, under Device. With this interface, you can create profile, switch between profile with your keyboard, assign complex shortcuts to your stylus buttons, or buttons of the tablet and map the tablet on the display of your choice and in the geometry of your choice. You can even change the pressure curve and calibrate your stylus.</p>
+<p>If your tablet is not supported, you can remove this module!</p>
+ <h2 id="art">Final Thoughts</h2>
+<p>Okay, enough about complicated Linux stuff! Now I want to show you how beautiful this thing is. The tablet is very fluid and handles pen pressure well. I thought it would be difficult for me to use, but it turned out to be easier than I thought! My boyfriend is currently uploading videos in Spanish to YouTube, and I decided to make an animated sprite for him and give it to him. It's still a work in progress, but I hope to finish it soon when I have time.</p>
+<div class="media-container">
+    <img src="../screenshots/procress.png">
+    <img src="../screenshots/color-procress.png">
+</div>
+<p>I'm feeling excited about this. I feel like I can finally let my imagination run wild, and now I'm going to go wild with it lol. Anyway, thanks for reading! If you have any recommendations for drawing techniques in the comments, I'd be happy to read them. My sister is teaching me some tricks for drawing and making my own assets ^^</p>
+    </main>
+    </div>
+    <div class="comments">
+    <main class="content">
+<!-- begin wwww.htmlcommentbox.com -->
+<div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+<script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%2476gBfZFjo3Ne22wg7kCrl1"+"&opts=16798&num=10&ts=1742846778569");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end www.htmlcommentbox.com -->
+    </main>
+  </div>
+
+	<!-- Music player lol-->
+  <div class="music-player">
+    <div class="highlight top-right"></div>
+    <div class="highlight bottom-left"></div>
+    
+    <button class="slide-toggle">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    
+    <div class="corner-tag">Now Playing</div>
+    
+    <div class="player-header">
+        <div class="visualizer">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="album-art">
+            <img src="../../../assets/sound-effects/rings.svg" alt="Album Art">
+        </div>
+        
+        <div class="song-info">
+            <h3 class="song-title">Current Song</h3>
+        </div>
+        
+        <div class="progress-container">
+            <div class="current-time">0:00</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="duration">0:00</div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="prev">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button class="control-btn" id="play">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="next">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!---End of the music player :D-->
+
+  			  <!--Nav bar-->
+                <div id="nav2-wrapper">
+                    <div id="nav2-custom-sidebar" class="hidden">
+                      <h2>Filesystem</h2>
+                      <ul>
+                      <li><a href="../../../home/index.html"><img src="../../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+                      <li><a href="../../../filesystem/social/index.html"><img src="../../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+                      <li><a href="../../../filesystem/support/index.html"><img src="../../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+                      <li><a href="../../../filesystem/tos/index.html"><img src="../../../assets/nav-bar/rules.png" alt="games Icon">Tos</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/tools.png" alt="friends Icon">Tools</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog <img src="../../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/software.png" alt="Chat Icon">Software</a></li>
+                      <li><a href="../../../filesystem/credits/index.html"><img src="../../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+                      <li><a href="https://trello.com/b/bosL3mrV/skye-workstation-queue"><img src="../../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+                        <li><a href="#"><img src="../../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+                      </ul>
+                      </div>
+                      <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+                      <button id="nav2-sidebar-toggle"></button>
+                    </div>
+
+    <!-- Overlay-->
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+        </div>
+        <style>
+
+            /* Star Particles */
+            .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+            }
+            
+            .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: move-stars 10s linear infinite;
+            opacity: 0.8;
+            }
+            
+            @keyframes move-stars {
+            0% {
+            transform: translateY(100vh);
+            opacity: 0.2;
+            }
+            100% {
+            transform: translateY(-10vh);
+            opacity: 1;
+            }
+            }
+            </style>
+        
+            <div class="stars"></div>
+            
+            <script>
+            // Generate stars dynamically
+            const starsContainer = document.querySelector('.stars');
+            const starCount = 500; 
+            
+            for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            star.style.animationDuration = 5 + Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+            }
+            </script>
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+
+
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+<!-- Mouse effect :) -->
+<script>
+
+    var b = document.body;
+    var imgurl = "../../../assets/mouse/cursor.ico";
+    var size = [10, 20];
+    function rand(min, max)
+    {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    function getSize()
+    {
+    return rand(size[0], size[1]);
+    }
+    function lerp(a,b,f)
+    {
+    return (b-a)*f+a;
+    }
+    function heart(x,y)
+    {
+    var s = getSize();
+    x -= s/2;
+    y -= s/2;
+    x = Math.floor(x) + rand(-5, 5);
+    y = Math.floor(y) + rand(-5, 5);
+    var fx = x + rand(-40, 40);
+    var fy = y + rand(-40, 40);
+    var i = document.createElement("img");
+    i.src = imgurl;
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    b.appendChild(i);
+    var f = 0;
+    var interval;
+    interval = setInterval(function() {
+    var _x = Math.floor(lerp(x, fx, f));
+    var _y = Math.floor(lerp(y, fy, f));
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    i.style.opacity = 1-f;
+    f += 0.01;
+    if (f > 1)
+    {
+    clearInterval(interval);
+    b.removeChild(i);
+    }
+    }, 10);
+    }
+    function bro(x,y)
+    {
+    for (var i = 0; i < 5; i++)
+    {
+    heart(x,y);
+    }
+    }
+    b.addEventListener("click", function(event){
+    var x = event.clientX;
+    var y = event.clientY;
+    bro(x,y);
+    });
+    
+    </script>
+
+<script>
+  // Smooth scroll for navigation with sound effect
+  document.querySelectorAll('.blog-sidebar a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Play sound effect
+          const soundEffect = new Audio('selection.mp3');
+          soundEffect.play();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          window.scrollTo({
+              top: targetElement.offsetTop - 20,
+              behavior: 'smooth'
+          });
+      });
+  });
+          </script>
+
+          <!--Background-->
+          <div class="video-background">
+            <video autoplay muted loop>
+                <source src="../../../assets/background/Intro-background.webm" type="video/webm">
+            </video>
+        </div>
+      
+
+
+
+  
+<!-- Scripts -->
+
+
+<script src="media.js"></script>
+<script src="preloader.js"></script>
+<script src="draw.js"></script>
+<script src="../../../main-music-player/music-player.js"></script>
+<script type="text/javascript" src="../../../nav bar.js"></script>
+
+</body>
+</html>

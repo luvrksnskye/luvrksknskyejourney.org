@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Skye's Journey</title>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+	<link rel="stylesheet" href="credits.css">
+	<link rel="stylesheet" href="../../main-music-player/music-player.css">
+	<link rel="stylesheet" href="../../nav bar.css">
+</head>
+
+<body>
+		 <!--Background-->
+		 <div class="video-background">
+			<video autoplay muted loop>
+				<source src="../../assets/background/Intro-background.webm" type="video/webm">
+			</video>
+		</div>
+        <p class="title">Special Credits</p>
+        <p class="description">  I want to thank my best friend, Selysun, for helping me make this website, she is the one who has drawn my character and designed assets for him, this site wouldn't be possible without her. I love her so much. Thanks for everything, Sely! We are currently working on more projects together, so stay tuned for future updates!</p> 
+        <p class="description">Also, a lot of stuff I used for my site can be found on my resources page! I have done my best to seek credit for all of the resources I use on this page besides the ones I obtained myself by purchasing them for my personal use, on top of that if I have used anything that is not free to use (pixels and game assets) please contact me and I will gladly remove it! If you know of credit for something that you don't see credited or can't find what you're looking for, you can always send a message in my chat box or email. Happy coding!</p> 
+
+        <!-- credits!! yay-->
+        <canvas id="canvas"></canvas>
+        <div class="wrapper">
+          <div class="website">Skye Journey</div>
+          <div class="resources">Coded with love by</div>
+          <div class="name">Skye</div>
+          <div class="resources">Drawings and characters illustrations made by</div>
+          <div class="name">Selysun</div>
+          <div class="resources">Background, overlays and panels from</div>
+          <div class="name">Sugar Streamfly</div>
+           <div class= "name">MookoStudio</div>
+           <div class= "name">StreamBliss</div>
+          <div class="resources">Character icon made by</div>
+          <div class="name">Luciferaza</div>
+          <div class="resources">Special tools</div>
+          <div class="name">Visual Studio Code</div>
+          <div class="name">Github & Codepen</div>
+          <div class="name">Photopea & Canva</div>
+          <div class="resources">Icons assets from</div>
+          <div class="name">AssetShop</div>
+          <div class="name">Genshin Impact</div>
+          <div class="name">Honkai Star Rail</div>
+          <div class="name">Animal Crossing</div>
+          <div class="resources">Sound effects and music from</div>
+          <div class="name">Sky: Children of the light</div>
+          <div class="name">Genshin Impact</div>
+          <div class="name">Honkai Star Rail</div>
+          <div class="name">Cookie Run</div>
+          <div class="name">Ratatouille</div>
+          <div class="name">Albert Behar</div>
+          <div class="name">Mario Galaxy</div>
+          <div class="name">Hans Zimmer</div>
+          <div class="name">Alexandre Desplat</div>
+          <div class="name">François Parisi</div>
+          <div class="resources">Inspirations</div>
+          <div class="name">Lilithdev</div>
+          <div class="name">Cloverbell</div>
+          <div class="name">Dokode</div>
+          <div class="name">Nonkiru</div>
+           <div class="resources">Frameworks</div>
+          <div class="name">Vue.js</div>
+          <div class="resources">Video transitions from</div>
+          <div class="name">BeardBoyDigital</div>
+          <div class="name">TraucmahrDesign</div>
+          <div class="resources">Chat and Guestbook from</div>
+          <div class="name">Cbox</div>
+          <div class="name">Ayano</div>
+          <div class="resources">Widgets and pixels</div>
+          <div class="name">FC2 Visitor Counter</div>
+          <div class="name">iMood</div>
+          <div class="name">Foollovers</div>
+          <div class="name">The Astral Express Archive</div>
+          <div class="name">Status Cafe</div>
+          <div class="resources">Library</div>
+          <div class="name">Muuri</div>
+           <div class="name">Moment.js</div>
+           <div class="resources">Stellar Hunter development and illustrations made by</div>
+          <div class="name">Skye</div>
+          <div class="name">Selysun</div>
+          <div class="name">RegreDanger</div>
+          <div class="resources">Fonts</div>
+          <div class="name">Departure mono</div>
+          <div class="name">Cinzel</div>
+          <div class="name">Genshin impact drip</div>
+          <div class="name">HYWenHei</div>
+          <div class="resources">Hosting</div>
+          <div class="name">Neocities</div>
+          <div class="resources">illustrations of the tale of the stars made and edited by</div>
+          <div class="name">Selysun</div>
+          <div class="name">Skye</div>
+          <div class="resources">Weather widget illustrations made by</div>
+          <div class="name">Selysun</div>
+          <div class="resources">Special thanks!</div>
+          <div class="name">Selysun</div>
+          <div class="name">RegreDanger</div>
+          <div class="name">And you!!</div> 
+        </div>
+      <!--heheh-->
+      <div class="achievements-panel-container"></div>
+
+<div class="starfall-container">
+  <div class="starfield" id="starfield"></div>
+</div>
+
+      <!-- Corner clock -->
+      <div id="digital-clock"></div>
+<!-- Corner clock js-->
+  <script>
+    function updateClock() {
+const clockElement = document.getElementById('digital-clock');
+const now = new Date();
+const hours = String(now.getHours()).padStart(2, '0');
+const minutes = String(now.getMinutes()).padStart(2, '0');
+const seconds = String(now.getSeconds()).padStart(2, '0');
+clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// Update the clock every second
+setInterval(updateClock, 1000);
+// Initialize the clock immediately
+updateClock();
+
+</script>
+<!-- Mouse effect :) -->
+<script>
+
+    var b = document.body;
+    var imgurl = "../../assets/mouse/cursor.ico";
+    var size = [10, 20];
+    function rand(min, max)
+    {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    function getSize()
+    {
+    return rand(size[0], size[1]);
+    }
+    function lerp(a,b,f)
+    {
+    return (b-a)*f+a;
+    }
+    function heart(x,y)
+    {
+    var s = getSize();
+    x -= s/2;
+    y -= s/2;
+    x = Math.floor(x) + rand(-5, 5);
+    y = Math.floor(y) + rand(-5, 5);
+    var fx = x + rand(-40, 40);
+    var fy = y + rand(-40, 40);
+    var i = document.createElement("img");
+    i.src = imgurl;
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    b.appendChild(i);
+    var f = 0;
+    var interval;
+    interval = setInterval(function() {
+    var _x = Math.floor(lerp(x, fx, f));
+    var _y = Math.floor(lerp(y, fy, f));
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    i.style.opacity = 1-f;
+    f += 0.01;
+    if (f > 1)
+    {
+    clearInterval(interval);
+    b.removeChild(i);
+    }
+    }, 10);
+    }
+    function bro(x,y)
+    {
+    for (var i = 0; i < 5; i++)
+    {
+    heart(x,y);
+    }
+    }
+    b.addEventListener("click", function(event){
+    var x = event.clientX;
+    var y = event.clientY;
+    bro(x,y);
+    });
+    
+    </script>
+
+
+	<!-- Music player lol-->
+  <div class="music-player">
+    <div class="highlight top-right"></div>
+    <div class="highlight bottom-left"></div>
+    
+    <button class="slide-toggle">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    
+    <div class="corner-tag">Now Playing</div>
+    
+    <div class="player-header">
+        <div class="visualizer">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="album-art">
+            <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+        </div>
+        
+        <div class="song-info">
+            <h3 class="song-title">Current Song</h3>
+        </div>
+        
+        <div class="progress-container">
+            <div class="current-time">0:00</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="duration">0:00</div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="prev">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button class="control-btn" id="play">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="next">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!---End of the music player :D-->
+
+  			  <!--Nav bar-->
+          <div id="nav2-wrapper">
+            <div id="nav2-custom-sidebar" class="hidden">
+              <h2>Filesystem</h2>
+              <ul>
+                <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+                <li><a href="../../filesystem/social/index.html"><img src="../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+                <li><a href="../../filesystem/support/index.html"><img src="../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+                <li><a href="../../filesystem/tos/index.html"><img src="../../assets/nav-bar/rules.png" alt="games Icon">Tos</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/tools.png" alt="friends Icon">Tools</a></li>
+                <li><a href="../../filesystem/blogs/index.html"><img src="../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/software.png" alt="Chat Icon">Software</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits  <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+                <li><a href="https://trello.com/b/bosL3mrV/skye-workstation-queue"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+                  <li><a href="../sitemap/index.html"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+              </ul>
+              </div>
+              <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+              <button id="nav2-sidebar-toggle"></button>
+            </div>
+	
+     <!-- Vue.js from a CDN -->
+   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- javascript lol-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script type="text/javascript" src="menu.js"></script>
+  <script type="text/javascript" src="stars.js"></script>
+<script src="../../main-music-player/music-player.js"></script>
+<script src="main.js"></script>
+<script type="text/javascript" src="../../nav bar.js"></script>

@@ -1,0 +1,436 @@
+:root {
+    --text-color: #ffffff;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+
+  @font-face {
+    font-family: 'ZHFont';
+    src: url('../../../assets/fonts/zhcn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  body {
+    overflow-x: hidden;
+    font-family: 'ZHFont', sans-serif;
+    font-weight: 200;
+    color: var(--text-color);
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  .rubik-wet-paint-regular {
+    font-family: "Rubik Wet Paint", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  /* Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#bouncy-text-1 {
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 500%;
+    font-family: "Rubik Wet Paint", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    text-shadow: 2px 2px 30px rgb(53, 0, 128);
+    margin-top: 10vh;
+    position: relative;
+    z-index: 3;
+}
+
+#bouncy-text-2 {
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 500%;
+    font-family: "Rubik Wet Paint", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    text-shadow: 2px 2px 30px rgb(75, 0, 128);
+    margin-top: 5vh;
+    position: relative;
+    z-index: 3;
+}
+
+.bouncy-letter {
+    position: relative;
+    animation: bounce .8s ease infinite alternate;
+}
+
+.bouncy-letter:nth-child(1) { animation-delay: .1s; }
+.bouncy-letter:nth-child(2) { animation-delay: .2s; }
+.bouncy-letter:nth-child(3) { animation-delay: .3s; }
+.bouncy-letter:nth-child(4) { animation-delay: .4s; }
+.bouncy-letter:nth-child(5) { animation-delay: .5s; }
+.bouncy-letter:nth-child(6) { animation-delay: .6s; }
+.bouncy-letter:nth-child(7) { animation-delay: .5s; }
+.bouncy-letter:nth-child(8) { animation-delay: .45s; }
+.bouncy-letter:nth-child(9) { animation-delay: .4s; }
+.bouncy-letter:nth-child(10) { animation-delay: .35s; }
+.bouncy-letter:nth-child(11) { animation-delay: .3s; }
+.bouncy-letter:nth-child(12) { animation-delay: .25s; }
+.bouncy-letter:nth-child(13) { animation-delay: .2s; }
+.bouncy-letter:nth-child(14) { animation-delay: .15s; }
+.bouncy-letter:nth-child(15) { animation-delay: .1s; }
+.bouncy-letter:nth-child(16) { animation-delay: .1s; }
+.bouncy-letter:nth-child(17) { animation-delay: .2s; }
+
+@keyframes bounce {
+    100% {
+        transform: translateY(-40px);
+    }
+}
+
+.stars {
+    position: absolute;
+    font-size: 2rem;
+    color: #ffffff; /* Amethyst */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.stars > * {
+    position: absolute;
+    animation: twinkle 3s linear infinite;
+}
+
+@keyframes twinkle {
+    50% {
+        transform: rotate(20deg) scale(0.5) translateY(0.25rem);
+    }
+}
+
+/* Individual star delay and positioning */
+#star-1 {
+    animation-delay: 1s;
+    top: 1rem;
+    left: calc(50% - 15rem);
+}
+
+#star-2 {
+    animation-delay: 2s;
+    top: 4rem;
+    left: calc(50% - 12rem);
+}
+
+#star-3 {
+    animation-delay: 3s;
+    top: 17rem;
+    left: calc(50% - 5rem);
+}
+
+#star-4 {
+    animation-delay: 4s;
+    top: 3rem;
+    left: calc(50% + 5rem);
+}
+
+#star-5 {
+    animation-delay: 5s;
+    top: 10rem;
+    left: calc(50% + 10rem);
+}
+
+#star-6 {
+    animation-delay: 6s;
+    top: 6rem;
+    left: calc(50% + 15rem);
+}
+
+/* Additional stars for more coverage */
+#star-7 {
+    animation-delay: 2.5s;
+    top: 12rem;
+    left: calc(50% - 10rem);
+}
+
+#star-8 {
+    animation-delay: 3.5s;
+    top: 20rem;
+    left: calc(50% + 12rem);
+}
+
+#star-9 {
+    animation-delay: 1.5s;
+    top: 5rem;
+    left: calc(50%);
+}
+
+#star-10 {
+    animation-delay: 4.5s;
+    top: 15rem;
+    left: calc(50% - 15rem);
+}
+
+/* Alternate style for even stars */
+.stars div:nth-child(even) {
+    color: #ffcfb0; /* Pumpkin */
+    font-size: 1.5rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #bb7cffcc;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #bb7cffcc;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b37dff;
+  }
+  
+  /* Body Styles */
+body ::selection {
+    background: #ded2ff;
+  }
+
+  .music-icon-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .music-icon {
+    width: 300px;
+    height: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: -1;
+    transition: transform 0.3s ease;
+  }
+
+  .splash-effect {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    z-index: 4;
+    transition: all 0.5s ease;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+  }
+
+  .splash-effect.active {
+    width: 620px;
+    height: auto;
+    opacity: 0.7;
+  }
+
+  .music-icon.playing {
+    animation: jump 0.5s ease infinite alternate;
+  }
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .music-icon.jump {
+    animation: bigJump 0.5s ease;
+  }
+
+  @keyframes bigJump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Halloween Countdown Styles */
+#halloween-countdown-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0;
+    position: relative;
+    z-index: 3;
+  }
+  
+  .countdown-title {
+    font-family: 'ZHFont', sans-serif;
+    font-size: 2.5rem;
+    color: #ff6200;
+    text-shadow: 0 0 15px rgba(255, 98, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
+    margin-bottom: 1.5rem;
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% {
+      text-shadow: 0 0 15px rgba(255, 98, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+    50% {
+      text-shadow: 0 0 25px rgba(255, 98, 0, 1), 0 0 35px rgba(255, 0, 0, 0.8);
+    }
+  }
+  
+  #halloween-countdown {
+    display: flex;
+    justify-content: center;
+    font-family: 'ZHFont', sans-serif;
+    gap: 1.5rem;
+  }
+  
+  .countdown-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 8rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #9b59b6;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.5), inset 0 0 10px rgba(155, 89, 182, 0.3);
+    transform: skew(-5deg);
+    transition: all 0.3s ease;
+    font-family: 'ZHFont', sans-serif;
+  }
+  
+  .countdown-box:hover {
+    transform: skew(-7deg) scale(1.05);
+    box-shadow: 0 0 30px rgba(155, 89, 182, 0.8), inset 0 0 15px rgba(155, 89, 182, 0.5);
+    border-color: #d35400;
+  }
+  
+  .countdown-value {
+    font-family: 'ZHFont', sans-serif;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px #9b59b6, 0 0 20px #9b59b6;
+  }
+  
+  .countdown-label {
+    font-family: 'ZHFont', sans-serif;
+    font-size: 1.2rem;
+    color: #ff6200;
+    margin-top: 0.5rem;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: skew(-5deg) translateX(0); }
+    25% { transform: skew(-7deg) translateX(-5px); }
+    75% { transform: skew(-3deg) translateX(5px); }
+  }
+  
+  /* Add this animation when the time gets closer */
+  .countdown-urgent .countdown-box {
+    animation: shake 0.5s ease infinite;
+  }
+
+          /* Mirror repositioning */
+          #mirror-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 180px;
+            height: auto;
+            z-index: 5;
+            cursor: pointer;
+            animation: floatAndMove 10s ease-in-out infinite;
+          }
+          
+          @keyframes floatAndMove {
+            0% {
+              transform: translateY(0) translateX(0) rotate(-2deg);
+            }
+            25% {
+              transform: translateY(-15px) translateX(10px) rotate(1deg);
+            }
+            50% {
+              transform: translateY(-5px) translateX(20px) rotate(-1deg);
+            }
+            75% {
+              transform: translateY(-10px) translateX(5px) rotate(2deg);
+            }
+            100% {
+              transform: translateY(0) translateX(0) rotate(-2deg);
+            }
+          }
+
+          /* New calendar styles */
+.calendar-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+}
+
+#calendar-guide {
+  width: 180px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+#calendar-guide:hover {
+  transform: scale(1.05);
+}
+
+#alert-icon {
+  width: 60px;
+  height: auto;
+  position: absolute;
+  left: -40px;
+  top: 40px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+      transform: scale(1);
+      opacity: 0.7;
+  }
+  50% {
+      transform: scale(1.2);
+      opacity: 1;
+  }
+}

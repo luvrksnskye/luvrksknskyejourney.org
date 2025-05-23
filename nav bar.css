@@ -1,0 +1,190 @@
+@font-face {
+    font-family: 'departure-mono';
+    src: url('assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+
+#nav2-wrapper .nav2-blur-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    display: none;
+    pointer-events: none;
+}
+    
+#nav2-wrapper .nav2-blur-overlay.active {
+    display: block;
+    pointer-events: auto;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar {
+    position: fixed;
+    top: 50%;
+    left: -200px;
+    transform: translateY(-50%);
+    width: 200px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.23);
+    border: 1px solid rgba(255, 255, 255, 0.19);
+    border-left: none;
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 0 10px rgba(255, 255, 255, 0.258);
+    transition: left 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar.hidden {
+    display: none;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar.active {
+    left: 0;
+    pointer-events: auto;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar h2 {
+    font-family: 'departure-mono', monospace;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: white;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar ul li {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar ul li:hover {
+    transform: translateX(5px);
+}
+    
+#nav2-wrapper #nav2-custom-sidebar ul li img {
+    width: 20px;
+    margin-right: 12px;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar ul li a {
+    font-family: 'departure-mono', monospace;
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    font-size: 16px;
+    word-break: break-word;
+}
+    
+#nav2-wrapper #nav2-custom-sidebar ul li:hover a {
+    color: #a6daff;
+}
+    
+#nav2-wrapper #nav2-sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    left: -630px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-image: url('assets/special-icons/nav-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 700px;
+    height: 700px;
+    z-index: 99;
+}
+    
+#nav2-wrapper #nav2-sidebar-toggle.active {
+    left: -200px;
+}
+    
+#nav2-wrapper #nav2-sidebar-toggle.active::after {
+    transform: rotate(180deg);
+}
+    
+/* Improved Responsive Media Queries */
+@media screen and (max-width: 768px) {
+    #nav2-wrapper #nav2-custom-sidebar {
+        width: 80%;
+        max-width: 250px;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        transform: none;
+        border-radius: 0 10px 10px 0;
+        overflow-y: auto;
+        padding: 15px;
+    }
+    
+    #nav2-wrapper #nav2-custom-sidebar.active {
+        left: 0;
+    }
+    
+    #nav2-wrapper #nav2-sidebar-toggle {
+        top: -300px;
+        left: -630px;
+        transform: none;
+        width: 700px;
+        height: 700px;
+    }
+    
+    #nav2-wrapper #nav2-sidebar-toggle.active {
+        left: 80%;
+        max-left: 250px;
+    }
+    
+    #nav2-wrapper #nav2-custom-sidebar h2 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    #nav2-wrapper #nav2-custom-sidebar ul li {
+        margin: 12px 0;
+    }
+    
+    #nav2-wrapper #nav2-custom-sidebar ul li a {
+        font-size: 14px;
+    }
+}
+
+/* Additional breakpoint for very small screens */
+@media screen and (max-width: 320px) {
+    #nav2-wrapper #nav2-custom-sidebar {
+        width: 85%;
+        padding: 12px;
+    }
+    
+    #nav2-wrapper #nav2-sidebar-toggle {
+        width: 50px;
+        height: 50px;
+    }
+    
+    #nav2-wrapper #nav2-custom-sidebar h2 {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+    
+    #nav2-wrapper #nav2-custom-sidebar ul li img {
+        width: 16px;
+        margin-right: 8px;
+    }
+}

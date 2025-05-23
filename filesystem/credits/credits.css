@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+
+@font-face {
+    font-family: 'ZHFont';
+    src: url('../../assets/fonts/zhcn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'genshin impact';
+    src: url('../../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+
+#digital-clock {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 20px;
+    font-family: 'ZHFont', sans-serif;
+    color: #ffffff;
+    background-color: rgba(109, 165, 255, 0.445);
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+/* Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.title {
+    text-align: left;
+    color: #fff;
+    font-size: 50px;
+    margin-bottom: 30px;
+    margin-left: 80px; 
+    margin-top: 80px;  
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    font-family: 'genshin impact', Arial, sans-serif;
+}
+.title:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.227))
+           drop-shadow(0 0 50px rgba(255, 255, 255, 0.188))
+           drop-shadow(0 0 70px rgba(255, 255, 255, 0.274));
+           transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+  }
+  
+  .description {
+    text-align: left;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 30px;
+    margin-left: 80px;
+    max-width: 500px;
+    line-height: 1.5;
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    font-family: 'ZHFont', sans-serif;
+    opacity: 0.9;
+}
+
+.description:hover {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2))
+           drop-shadow(0 0 25px rgba(255, 255, 255, 0.15));
+    transition: filter 0.5s ease-in-out;
+}
+html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+/* stars */
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  opacity: 1;
+}
+
+.wrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 50%;
+  margin-left: 25%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Cinzel", serif;
+  color: #fff;
+  /* Increased duration significantly due to content length */
+  animation: credits 180s linear infinite;
+}
+
+.website {
+  margin-bottom: 50px;
+  font-size: 50px;
+  font-family: 'genshin impact', Arial, sans-serif;
+}
+
+.resources {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-family: "Cinzel", serif;
+  font-weight: bold;
+}
+
+.name {
+  margin-bottom: 50px;
+  font-size: 35px;
+  font-family: "Cinzel", serif;
+  font-weight: bold;
+}
+
+@keyframes credits {
+  0% {
+      top: 100%;
+  }
+  100% {
+
+      top: -1000%;
+  }
+}
+
+  .starfall-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    font-family: 'Anton', sans-serif;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    z-index: 1;
+  }
+
+  .starfall-container .starfield {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotateZ(45deg);
+  }
+
+  .starfall-container .falling-star {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    border-radius: 999px;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+    animation:
+      star-tail 3000ms ease-in-out infinite,
+      star-falling 3000ms ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  .starfall-container .falling-star::before,
+  .starfall-container .falling-star::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    border-radius: 100%;
+    animation: star-glow 3000ms ease-in-out infinite;
+  }
+
+  .starfall-container .falling-star::before {
+    transform: translateX(50%) rotateZ(45deg);
+  }
+
+  .starfall-container .falling-star::after {
+    transform: translateX(50%) rotateZ(-45deg);
+  }
+
+  @keyframes star-tail {
+    0% { width: 0; }
+    30% { width: 100px; }
+    100% { width: 0; }
+  }
+
+  @keyframes star-glow {
+    0% { width: 0; }
+    50% { width: 30px; }
+    100% { width: 0; }
+  }
+
+  @keyframes star-falling {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(300px); }
+  }
+#app *,
+.dialogue,
+.dialogue *,
+.dialogue-blobs,
+.dialogue-blob-top,
+.dialogue-blob-bottom,
+.dialogue-character-wrap,
+.dialogue-character,
+.dialogue-text {
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body ::selection {
+  background: #91ceff;
+}
