@@ -4,7 +4,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
-
 @font-face {
     font-family: 'trojan';
     src: url('fonts/TrajanPro-Regular.ttf') format('truetype');
@@ -13,6 +12,7 @@
     font-family: 'zhcn';
     src: url('fonts/zhcn.ttf') format('truetype');
 }
+
 .video-background {
     position: fixed;
     top: 0;
@@ -30,6 +30,7 @@
     height: 100%;
     object-fit: fill;
 }
+
 body {
     margin: 0;
     padding: 0;
@@ -40,10 +41,12 @@ body {
     overflow-y: hidden;
 }
 
+/* Desktop Styles */
 .macbook-pro {
   position: relative;
   width: 1728px;
   height: 1117px;
+  display: block;
 }
 
 .macbook-pro .resources-tutorials {
@@ -54,7 +57,6 @@ body {
   left: 16px;
 }
 
-/* New Game Development Resources Section */
 .macbook-pro .resources-gamedev {
   top: 685px;
   position: absolute;
@@ -145,7 +147,7 @@ body {
   width: 725px;
   top: 40px;
   left: 62px;
- font-family: 'trojan', sans-serif;
+  font-family: 'trojan', sans-serif;
   font-weight: 400;
   color: #ffffff;
   font-size: 32px;
@@ -273,7 +275,7 @@ body {
   width: 577px;
   top: 96px;
   left: 60px;
- font-family: 'trojan', sans-serif;
+  font-family: 'trojan', sans-serif;
   font-weight: 400;
   color: #ffffff;
   font-size: 32px;
@@ -292,4 +294,471 @@ body {
   font-size: 24px;
   letter-spacing: 0;
   line-height: normal;
+}
+
+/* Mobile Styles */
+.iphone {
+  background-color: transparent;
+  display: none;
+  justify-items: center;
+  align-items: start;
+  width: 100vw;
+}
+
+.iphone .div {
+  overflow: hidden;
+  width: 393px;
+  height: 852px;
+  position: relative;
+}
+
+.iphone .overlap {
+  position: absolute;
+  width: 363px;
+  height: 401px;
+  top: 15px;
+  left: 17px;
+}
+
+.iphone .content-data {
+  position: absolute;
+  width: 363px;
+  height: 401px;
+  top: 0;
+  left: 0;
+}
+
+.iphone .overlap-group {
+  position: relative;
+  height: 401px;
+}
+
+.iphone .content-div {
+  position: absolute;
+  width: 347px;
+  height: 371px;
+  top: 15px;
+  left: 8px;
+  backdrop-filter: blur(5px) brightness(100%);
+  -webkit-backdrop-filter: blur(5px) brightness(100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02) 5%,
+    rgba(255, 255, 255, 0.61) 45%,
+    rgba(255, 255, 255, 0.18) 65%,
+    rgba(255, 255, 255, 0.03) 84%
+  );
+  opacity: 0.6;
+}
+
+.iphone .bottom-part {
+  position: absolute;
+  width: 360px;
+  height: 30px;
+  top: 371px;
+  left: 3px;
+  aspect-ratio: 11.99;
+  object-fit: cover;
+}
+
+.iphone .top-part {
+  position: absolute;
+  width: 363px;
+  height: 30px;
+  top: 0;
+  left: 0;
+  aspect-ratio: 11.99;
+  object-fit: cover;
+}
+
+.iphone .welcome-text {
+  position: absolute;
+  width: 272px;
+  top: 45px;
+  left: 47px;
+  font-family: "trojan", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .text-wrapper {
+  position: absolute;
+  width: 300px;
+  top: 90px;
+  left: 47px;
+  font-family: "zhcn", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .p {
+  position: absolute;
+  width: 300px;
+  top: 90px;
+  left: 47px;
+  font-family: "zhcn", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .resources-tutorials {
+  width: 367px;
+  height: 43px;
+  top: 615px;
+  position: absolute;
+  left: 18px;
+}
+
+.iphone .overlap-2 {
+  position: relative;
+  width: 365px;
+  height: 43px;
+}
+
+.iphone .TUTORIALS-FOR-CODING {
+  position: absolute;
+  width: 325px;
+  top: 16px;
+  left: 40px;
+  font-family: "trojan", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .ARROW-LEFT {
+  left: 0;
+  position: absolute;
+  width: 23px;
+  height: 17px;
+  top: 14px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.iphone .ARROW-RIGHT {
+  left: 332px;
+  position: absolute;
+  width: 23px;
+  height: 17px;
+  top: 14px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.iphone .OPTION {
+  position: absolute;
+  width: 366px;
+  height: 33px;
+  top: 0;
+  left: 20px;
+  aspect-ratio: 9.68;
+  object-fit: cover;
+}
+
+.iphone .resources-gamedev {
+  width: 339px;
+  height: 36px;
+  top: 665px;
+  position: absolute;
+  left: 18px;
+}
+
+.iphone .overlap-3 {
+  position: relative;
+  width: 337px;
+  height: 36px;
+}
+
+.iphone .gamedev {
+  position: absolute;
+  width: 279px;
+  top: 16px;
+  left: 40px;
+  font-family: "trojan", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .img {
+  top: 14px;
+  left: 313px;
+  position: absolute;
+  width: 23px;
+  height: 17px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.iphone .resources-tools {
+  width: 339px;
+  height: 33px;
+  top: 563px;
+  position: absolute;
+  left: 18px;
+}
+
+.iphone .overlap-4 {
+  position: relative;
+  width: 337px;
+  height: 33px;
+}
+
+.iphone .text-wrapper-2 {
+  position: absolute;
+  width: 266px;
+  top: 17px;
+  left: 50px;
+  font-family: "trojan", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.iphone .ARROW-RIGHT-2 {
+  top: 14px;
+  left: 278px;
+  position: absolute;
+  width: 23px;
+  height: 17px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.iphone .resources-about {
+  position: absolute;
+  width: 368px;
+  height: 33px;
+  top: 511px;
+  left: 14px;
+}
+
+.iphone .overlap-5 {
+  position: absolute;
+  width: 341px;
+  height: 33px;
+  top: 0;
+  left: 25px;
+}
+
+.iphone .text-wrapper-3 {
+  position: absolute;
+  width: 325px;
+  top: 14px;
+  left: 16px;
+  font-family: "trojan", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .ARROW-RIGHT-3 {
+  top: 12px;
+  left: 304px;
+  position: absolute;
+  width: 23px;
+  height: 17px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.iphone .OPTION-2 {
+  position: absolute;
+  width: 316px;
+  height: 33px;
+  top: 0;
+  left: 1px;
+;
+  aspect-ratio: 9.68;
+  object-fit: cover;
+}
+
+.iphone .resources-about-2 {
+  position: absolute;
+  width: 392px;
+  height: 47px;
+  top: 459px;
+  left: 18px;
+}
+
+.iphone .overlap-6 {
+  position: absolute;
+  width: 365px;
+  height: 47px;
+  top: 0;
+  left: 25px;
+}
+
+.iphone .hover-effect {
+  position: absolute;
+  width: 331px;
+  height: 37px;
+  top: 1px;
+  left: 7px;
+  mix-blend-mode: luminosity;
+  background-blend-mode: overlay;
+}
+
+.iphone .text-wrapper-4 {
+  position: absolute;
+  width: 350px;
+  top: 17px;
+  left: 15px;
+  font-family: "trojan", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.iphone .ARROW-RIGHT-4 {
+  top: 11px;
+  left: 308px;
+  position: absolute;
+  width: 23px;
+  height: 17px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+  
+  .macbook-pro {
+    display: none;
+  }
+  
+  .iphone {
+    display: grid;
+  }
+  
+  /* Mobile-specific hover and scroll effects */
+  .iphone .resources-scroll-container {
+    position: absolute !important;
+    top: 50px !important;
+    left: 20px !important;
+    width: 300px !important;
+    height: 280px !important;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding-right: 10px;
+  }
+  
+  .iphone .resources-scroll-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .iphone .resources-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+  
+  .iphone .resources-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+  }
+  
+  .iphone .resources-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+    background-clip: content-box;
+  }
+}
+
+/* Additional responsive styles */
+.resources-about-2, .resources-about, .resources-tools, .resources-tutorials, .resources-gamedev {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.resources-about-2:hover, .resources-about:hover, .resources-tools:hover, .resources-tutorials:hover, .resources-gamedev:hover {
+    transform: translateX(5px);
+}
+
+@media screen and (max-width: 768px) {
+  .resources-about-2:hover, .resources-about:hover, .resources-tools:hover, .resources-tutorials:hover, .resources-gamedev:hover {
+    transform: scale(1.02);
+  }
+}
+
+.content-div {
+    transition: opacity 0.3s ease;
+}
+
+.content-div::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-div::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.content-div::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.content-div::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.resources-scroll-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.resources-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 6px;
+}
+
+.resources-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.resources-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+    background-clip: content-box;
+}
+
+.resources-scroll-container::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.8);
+    background-clip: content-box;
+}
+
+.p {
+    transition: opacity 0.3s ease;
+}
+
+.resource-item a:hover {
+    color: #ADD8E6 !important;
+    text-decoration: underline !important;
 }

@@ -3,6 +3,7 @@
 <head>
     <!-- Meta Tags -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skye Journey</title>
     <link rel="icon" type="image/x-icon" href="/assets/buttons-icons/favicon.png">
     
@@ -14,321 +15,8 @@
 </head>
 <body>
 
-
-     <!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Meta Tags -->
-    <meta charset="utf-8">
-    <title>Skye Journey</title>
-    <link rel="icon" type="image/x-icon" href="/assets/buttons-icons/favicon.png">
-    
-    <!-- External CSS -->
-    <link rel="stylesheet" href="resources.css">
-    <link rel="stylesheet" href="../../nav bar.css">
-    <link rel="stylesheet" href="../../main-music-player/music-player.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bookmark" />
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
-        /* Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-
-        @font-face {
-            font-family: 'trojan';
-            src: url('fonts/TrajanPro-Regular.ttf') format('truetype');
-        }
-        @font-face {
-            font-family: 'zhcn';
-            src: url('fonts/zhcn.ttf') format('truetype');
-        }
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -2;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'zhcn', sans-serif;
-            color: white;
-            position: relative;
-            min-height: 100vh;
-            overflow-y: hidden;
-        }
-
-        .macbook-pro {
-          position: relative;
-          width: 1728px;
-          height: 1117px;
-        }
-
-        .macbook-pro .resources-tutorials {
-          top: 550px;
-          position: absolute;
-          width: 905px;
-          height: 87px;
-          left: 16px;
-        }
-
-        /* New Game Development Resources Section */
-        .macbook-pro .resources-gamedev {
-          top: 685px;
-          position: absolute;
-          width: 905px;
-          height: 87px;
-          left: 16px;
-        }
-
-        .macbook-pro .overlap-group {
-          position: absolute;
-          width: 842px;
-          height: 87px;
-          top: 0;
-          left: 61px;
-        }
-
-        .macbook-pro .text-wrapper {
-          position: absolute;
-          width: 725px;
-          top: 44px;
-          left: 58px;
-          font-family: "trojan", Helvetica;
-          font-weight: 400;
-          color: #ffffff;
-          font-size: 32px;
-          letter-spacing: 0;
-          line-height: normal;
-        }
-
-        .macbook-pro .ARROW-RIGHT {
-          left: 739px;
-          position: absolute;
-          width: 61px;
-          height: 44px;
-          top: 35px;
-          aspect-ratio: 1.38;
-          object-fit: cover;
-        }
-
-        .macbook-pro .OPTION {
-          position: absolute;
-          width: 842px;
-          height: 87px;
-          top: 0;
-          left: 0;
-          aspect-ratio: 9.68;
-          object-fit: cover;
-        }
-
-        .macbook-pro .ARROW-LEFT {
-          left: 0;
-          position: absolute;
-          width: 61px;
-          height: 44px;
-          top: 35px;
-          aspect-ratio: 1.38;
-          object-fit: cover;
-        }
-
-        .macbook-pro .resources-tools {
-          top: 415px;
-          position: absolute;
-          width: 905px;
-          height: 87px;
-          left: 16px;
-        }
-
-        .macbook-pro .img {
-          top: 35px;
-          left: 572px;
-          position: absolute;
-          width: 61px;
-          height: 44px;
-          aspect-ratio: 1.38;
-          object-fit: cover;
-        }
-
-        .macbook-pro .resources-about {
-          position: absolute;
-          width: 905px;
-          height: 87px;
-          top: 280px;
-          left: 16px;
-        }
-
-        .macbook-pro .div {
-          position: absolute;
-          width: 725px;
-          top: 40px;
-          left: 62px;
-         font-family: 'trojan', sans-serif;
-          font-weight: 400;
-          color: #ffffff;
-          font-size: 32px;
-          letter-spacing: 0;
-          line-height: normal;
-        }
-
-        .macbook-pro .ARROW-RIGHT-2 {
-          top: 32px;
-          left: 725px;
-          position: absolute;
-          width: 61px;
-          height: 44px;
-          aspect-ratio: 1.38;
-          object-fit: cover;
-        }
-
-        .macbook-pro .ARROW-LEFT-2 {
-          position: absolute;
-          width: 61px;
-          height: 44px;
-          top: 36px;
-          left: 0;
-          aspect-ratio: 1.38;
-          object-fit: cover;
-        }
-
-        .macbook-pro .resources-about-2 {
-          position: absolute;
-          width: 965px;
-          height: 87px;
-          top: 145px;
-          left: 16px;
-        }
-
-        .macbook-pro .overlap {
-          position: absolute;
-          width: 906px;
-          height: 91px;
-          top: 0;
-          left: 61px;
-        }
-
-        .macbook-pro .hover-effect {
-          position: absolute;
-          width: 889px;
-          height: 83px;
-          top: 8px;
-          left: 17px;
-          mix-blend-mode: luminosity;
-          background-blend-mode: overlay;
-        }
-
-        .macbook-pro .ARROW-RIGHT-3 {
-          top: 28px;
-          left: 769px;
-          position: absolute;
-          width: 61px;
-          height: 44px;
-          aspect-ratio: 1.38;
-          object-fit: cover;
-        }
-
-        .macbook-pro .overlap-2 {
-          position: absolute;
-          width: 719px;
-          height: 1024px;
-          top: 75px;
-          left: 990px;
-        }
-
-        .macbook-pro .content-data {
-          width: 719px;
-          left: 0;
-          position: absolute;
-          height: 1024px;
-          top: 0;
-        }
-
-        .macbook-pro .overlap-3 {
-          position: relative;
-          height: 1024px;
-        }
-
-        .macbook-pro .content-div {
-          width: 686px;
-          left: 16px;
-          backdrop-filter: blur(5px) brightness(100%);
-          -webkit-backdrop-filter: blur(5px) brightness(100%);
-          background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.02) 5%,
-            rgba(255, 255, 255, 0.61) 45%,
-            rgba(255, 255, 255, 0.18) 65%,
-            rgba(255, 255, 255, 0.03) 84%
-          );
-          opacity: 0.6;
-          position: absolute;
-          height: 784px;
-          top: 0;
-        }
-
-        .macbook-pro .bottom-part {
-          position: absolute;
-          width: 719px;
-          height: 60px;
-          top: 704px;
-          left: 0;
-          aspect-ratio: 11.99;
-          object-fit: cover;
-        }
-
-        .macbook-pro .top-part {
-          position: absolute;
-          width: 719px;
-          height: 60px;
-          top: 0;
-          left: 0;
-          aspect-ratio: 11.99;
-          object-fit: cover;
-        }
-
-        .macbook-pro .welcome-text {
-          position: absolute;
-          width: 577px;
-          top: 96px;
-          left: 60px;
-         font-family: 'trojan', sans-serif;
-          font-weight: 400;
-          color: #ffffff;
-          font-size: 32px;
-          letter-spacing: 0;
-          line-height: normal;
-        }
-
-        .macbook-pro .p {
-          position: absolute;
-          width: 599px;
-          top: 201px;
-          left: 67px;
-          font-family: 'zhcn', sans-serif;
-          font-weight: 400;
-          color: #ffffff;
-          font-size: 24px;
-          letter-spacing: 0;
-          line-height: normal;
-        }
-    </style>
-</head>
-<body>
-
-     <div class="macbook-pro">
+    <!-- Desktop Layout -->
+    <div class="macbook-pro">
       <div class="resources-tutorials">
         <div class="overlap-group">
           <div class="text-wrapper">TUTORIALS FOR WEB DEVELOPMENT</div>
@@ -385,13 +73,78 @@
       </div>
     </div>
 
-<div class="video-background">
-        <video autoplay muted loop>
+    <!-- Mobile Layout -->
+    <div class="iphone">
+      <div class="div">
+        <div class="overlap">
+          <div class="content-data">
+            <div class="overlap-group">
+              <div class="content-div"></div>
+              <img class="bottom-part" src="assets/BOTTOM-PART.png" />
+              <img class="top-part" src="assets/TOP-PART.png" />
+            </div>
+          </div>
+          <p class="welcome-text"></p>
+          <p class="p"></p>
+        </div>
+        
+        <!-- Mobile Navigation Sections -->
+        <div class="resources-tutorials">
+          <div class="overlap-2">
+            <div class="TUTORIALS-FOR-CODING">TUTORIALS FOR WEB DEVELOPMENT</div>
+            <img class="ARROW-LEFT" src="assets/ARROW-LEFT.png" />
+            <img class="ARROW-RIGHT" src="assets/ARROW-RIGHT.png" />
+            <img class="OPTION" src="assets/OPTION.png" />
+          </div>
+        </div>
+        
+        <div class="resources-gamedev">
+          <div class="overlap-3">
+            <div class="gamedev">GAME DEVELOPMENT RESOURCES</div>
+            <img class="ARROW-LEFT" src="assets/ARROW-LEFT.png" />
+            <img class="img" src="assets/ARROW-RIGHT.png" />
+            <img class="OPTION" src="assets/OPTION.png" />
+          </div>
+        </div>
+        
+        <div class="resources-tools">
+          <div class="overlap-4">
+            <div class="text-wrapper-2">QUICK TOOLS FOR CODING</div>
+            <img class="ARROW-LEFT" src="assets/ARROW-LEFT.png" />
+            <img class="ARROW-RIGHT-2" src="assets/ARROW-RIGHT.png" />
+            <img class="OPTION" src="assets/OPTION.png" />
+          </div>
+        </div>
+        
+        <div class="resources-about">
+          <div class="overlap-5">
+            <div class="text-wrapper-3">GRAPHICS AND DESIGN RESOURCES</div>
+            <img class="ARROW-RIGHT-3" src="assets/ARROW-RIGHT.png" />
+            <img class="OPTION" style="left: -1px;" src="assets/OPTION.png" />
+          </div>
+          <img class="ARROW-LEFT" src="assets/ARROW-LEFT.png" />
+        </div>
+        
+        <div class="resources-about-2">
+          <div class="overlap-6">
+            <div class="hover-effect"></div>
+            <div class="text-wrapper-4">FRONTEND DEVELOPMENT RESOURCES</div>
+            <img class="ARROW-RIGHT-4" src="assets/ARROW-RIGHT.png" />
+            <img class="OPTION" style="left: -1px;" src="assets/OPTION.png" />
+          </div>
+          <img class="ARROW-LEFT" src="assets/ARROW-LEFT.png" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Background Video -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
             <source src="assets/bg-resources.mp4" type="video/mp4">
         </video>
     </div>
 
-      <!--Nav bar-->
+    <!-- Nav bar -->
     <div id="nav2-wrapper">
       <div id="nav2-custom-sidebar" class="hidden">
         <h2>Filesystem</h2>
@@ -405,45 +158,47 @@
           <li><a href="#"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
           <li><a href="../../filesystem/credits/index.html"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
           <li><a href="../../filesystem/workstation/index.html"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
-            <li><a href="../sitemap/index.html"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+          <li><a href="../sitemap/index.html"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
         </ul>
-        </div>
-        <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
-        <button id="nav2-sidebar-toggle"></button>
       </div>
+      <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+      <button id="nav2-sidebar-toggle"></button>
+    </div>
 
-      <audio id="background-music" autoplay loop>
+    <!-- Audio Elements -->
+    <audio id="background-music" autoplay loop playsinline>
         <source src="music/Reflection.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-      </audio>
+    </audio>
 
-      <audio id="ambience-sound" autoplay loop>
+    <audio id="ambience-sound" autoplay loop playsinline>
         <source src="music/Ambience.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-      </audio>
+    </audio>
 
-      <script>
-    const backgroundMusic = document.getElementById('background-music');
-    const ambienceSound = document.getElementById('ambience-sound');
-    backgroundMusic.volume = 0.3;
-    ambienceSound.volume = 0.2;
-      </script>
+    <script>
+        const backgroundMusic = document.getElementById('background-music');
+        const ambienceSound = document.getElementById('ambience-sound');
+        backgroundMusic.volume = 0.3;
+        ambienceSound.volume = 0.2;
+    </script>
 
+    <!-- Sound Effects -->
+    <audio id="confirm-sound">
+        <source src="sfx/ui_button_confirm.wav" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="select-sound">
+        <source src="sfx/ui_select-resources.wav" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="moving-sound">
+        <source src="sfx/ui_option_click.wav" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-<!-- SOUND EFFECTS -->
- <audio id="confirm-sound">
-    <source src="sfx/ui_button_confirm.wav" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <audio id="select-sound">
-    <source src="sfx/ui_select-resources.wav" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-   <audio id="moving-sound">
-    <source src="sfx/ui_option_click.wav" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-        <script src="../../main-music-player/music-player.js"></script>
+    <!-- Scripts -->
+    <script src="../../main-music-player/music-player.js"></script>
     <script src="../../nav bar.js"></script>
     <script src="index.js"></script>
 

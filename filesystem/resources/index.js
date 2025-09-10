@@ -1,45 +1,78 @@
 class ResourcesManager {
     constructor() {
         this.currentSelected = 0;
-        this.resources = document.querySelectorAll('.resources-about-2, .resources-about, .resources-tools, .resources-tutorials, .resources-gamedev');
-        this.contentDiv = document.querySelector('.content-div');
-        this.contentText = document.querySelector('.p');
+        this.isMobile = window.innerWidth <= 1024;
+        this.resources = [];
+        this.contentDiv = null;
+        this.contentText = null;
         this.hoverEffects = [];
         this.confirmSound = document.getElementById('confirm-sound');
         this.selectSound = document.getElementById('select-sound');
         this.movingSound = document.getElementById('moving-sound');
-
-        this.resourceMapping = this.createResourceMapping();
+        
+        this.resourceMapping = {};
         this.init();
+    }
+    
+    init() {
+        this.detectViewport();
+        this.setupElements();
+        this.createResourceMapping();
+        this.createHoverEffects();
+        this.addEventListeners();
+        this.updateSelection(0, false);
+        this.showWelcomeMessage();
+        
+        // Listen for viewport changes
+        window.addEventListener('resize', this.handleResize.bind(this));
+        window.addEventListener('orientationchange', this.handleOrientationChange.bind(this));
+    }
+    
+    detectViewport() {
+        this.isMobile = window.innerWidth <= 1024;
+    }
+    
+    setupElements() {
+        if (this.isMobile) {
+            this.resources = document.querySelectorAll('.iphone .resources-about-2, .iphone .resources-about, .iphone .resources-tools, .iphone .resources-tutorials, .iphone .resources-gamedev');
+            this.contentDiv = document.querySelector('.iphone .content-div');
+            this.contentText = document.querySelector('.iphone .p');
+        } else {
+            this.resources = document.querySelectorAll('.macbook-pro .resources-about-2, .macbook-pro .resources-about, .macbook-pro .resources-tools, .macbook-pro .resources-tutorials, .macbook-pro .resources-gamedev');
+            this.contentDiv = document.querySelector('.macbook-pro .content-div');
+            this.contentText = document.querySelector('.macbook-pro .p');
+        }
     }
     
     createResourceMapping() {
         const mapping = {};
         this.resources.forEach((resource, index) => {
             if (resource.classList.contains('resources-about-2')) {
-                mapping[index] = 0; // Frontend Development Resources (first in visual order)
+                mapping[index] = 0; // Frontend Development Resources
             } else if (resource.classList.contains('resources-about')) {
-                mapping[index] = 1; // Graphics and Design Resources (second in visual order)
+                mapping[index] = 1; // Graphics and Design Resources
             } else if (resource.classList.contains('resources-tools')) {
-                mapping[index] = 2; // Quick Tools for Coding (third in visual order)
+                mapping[index] = 2; // Quick Tools for Coding
             } else if (resource.classList.contains('resources-tutorials')) {
-                mapping[index] = 3; // Tutorials for Web Development (fourth in visual order)
+                mapping[index] = 3; // Tutorials for Web Development
             } else if (resource.classList.contains('resources-gamedev')) {
-                mapping[index] = 4; // Game Development Resources (fifth in visual order)
+                mapping[index] = 4; // Game Development Resources
             }
         });
-        return mapping;
-    }
-    
-    init() {
-        this.createHoverEffects();
-        this.addEventListeners();
-        this.updateSelection(0, false);
-        this.showWelcomeMessage();
+        this.resourceMapping = mapping;
     }
     
     showWelcomeMessage() {
-        const welcomeMessage = `
+        if (!this.contentText) return;
+        
+        const welcomeMessage = this.isMobile ? `
+            <div style="text-align: center; padding: 20px 10px; color: #eefaffff;">
+                <h2 style="margin-bottom: 15px; font-size: 20px; font-family: 'trojan', sans-serif">Welcome to Resources</h2>
+                <p style="font-size: 14px; line-height: 1.5; opacity: 0.9;">
+                    Tap a category below to explore curated resources for development.
+                </p>
+            </div>
+        ` : `
             <div style="text-align: center; padding: 40px 20px; color: #eefaffff;">
                 <h2 style="margin-bottom: 20px; font-size: 35px; font-family: 'trojan', sans-serif">Welcome to Resources Hub</h2>
                 <p style="font-size: 18px; line-height: 1.6; opacity: 0.9;">
@@ -49,13 +82,26 @@ class ResourcesManager {
                 </p>
             </div>
         `;
+        
         this.contentText.innerHTML = welcomeMessage;
-        this.contentDiv.style.opacity = '0.6';
+        if (this.contentDiv) {
+            this.contentDiv.style.opacity = '0.6';
+        }
         this.contentText.style.opacity = '1';
     }
     
     createHoverEffects() {
+        // Clear existing hover effects
+        this.hoverEffects = [];
+        
         this.resources.forEach((resource, index) => {
+            if (this.isMobile) {
+                // For mobile, we'll use different visual feedback
+                resource.style.transition = 'all 0.2s ease';
+                return;
+            }
+            
+            // Desktop hover effects (existing code)
             const hoverEffect = document.createElement('img');
             hoverEffect.className = 'hover-effect';
             hoverEffect.src = 'assets/hover-effect.png';
@@ -92,7 +138,7 @@ class ResourcesManager {
                 });
             }
             
-            const overlapContainer = resource.querySelector('.overlap-group, .overlap');
+            const overlapContainer = resource.querySelector('.overlap-group, .overlap, .overlap-2, .overlap-3, .overlap-4, .overlap-5, .overlap-6');
             if (overlapContainer) {
                 overlapContainer.style.position = 'relative';
                 overlapContainer.appendChild(hoverEffect);
@@ -103,24 +149,97 @@ class ResourcesManager {
     
     addEventListeners() {
         this.resources.forEach((resource, index) => {
-            resource.addEventListener('mouseenter', () => this.handleHover(index));
-            resource.addEventListener('click', () => this.handleSelect(index));
+            if (this.isMobile) {
+                // Touch events for mobile
+                resource.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleTouchStart(index);
+                }, { passive: false });
+                
+                resource.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    this.handleTouchEnd(index);
+                }, { passive: false });
+                
+                // Fallback click event
+                resource.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.handleSelect(index);
+                });
+            } else {
+                // Desktop events
+                resource.addEventListener('mouseenter', () => this.handleHover(index));
+                resource.addEventListener('click', () => this.handleSelect(index));
+            }
         });
-
+    }
+    
+    handleTouchStart(index) {
+        this.playSound(this.movingSound);
+        this.updateMobileSelection(index, false);
+    }
+    
+    handleTouchEnd(index) {
+        this.playSound(this.confirmSound);
+        this.updateMobileSelection(index, true);
+        setTimeout(() => this.loadContent(index), 150);
     }
     
     handleHover(index) {
-        this.playSound(this.movingSound);
-        this.updateSelection(index, false);
+        if (!this.isMobile) {
+            this.playSound(this.movingSound);
+            this.updateSelection(index, false);
+        }
     }
     
     handleSelect(index) {
         this.playSound(this.confirmSound);
-        this.updateSelection(index, true);
+        if (this.isMobile) {
+            this.updateMobileSelection(index, true);
+        } else {
+            this.updateSelection(index, true);
+        }
         this.loadContent(index);
     }
     
-
+    updateMobileSelection(index, isConfirm = false) {
+        this.currentSelected = index;
+        this.resources.forEach((resource, i) => {
+            if (i === index) {
+                resource.style.transform = isConfirm ? 'scale(0.95)' : 'scale(1.02)';
+                resource.style.backgroundColor = isConfirm ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.1)';
+                resource.style.borderRadius = '8px';
+            } else {
+                resource.style.transform = 'scale(1)';
+                resource.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            }
+        });
+        
+        if (!isConfirm) {
+            setTimeout(() => {
+                this.resources[index].style.transform = 'scale(1)';
+                this.resources[index].style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            }, 200);
+        }
+    }
+    
+    updateSelection(index, isConfirm = false) {
+        if (this.isMobile) {
+            this.updateMobileSelection(index, isConfirm);
+            return;
+        }
+        
+        this.currentSelected = index;
+        this.hoverEffects.forEach((effect, i) => {
+            if (effect && i === index) {
+                effect.style.opacity = isConfirm ? '0.8' : '0.6';
+                effect.style.transform = isConfirm ? 'scale(1.02)' : 'scale(1)';
+            } else if (effect) {
+                effect.style.opacity = '0';
+                effect.style.transform = 'scale(1)';
+            }
+        });
+    }
     
     playSound(sound) {
         if (sound) {
@@ -129,32 +248,26 @@ class ResourcesManager {
         }
     }
     
-    updateSelection(index, isConfirm = false) {
-        this.currentSelected = index;
-        this.hoverEffects.forEach((effect, i) => {
-            if (i === index) {
-                effect.style.opacity = isConfirm ? '0.8' : '0.6';
-                effect.style.transform = isConfirm ? 'scale(1.02)' : 'scale(1)';
-            } else {
-                effect.style.opacity = '0';
-                effect.style.transform = 'scale(1)';
-            }
-        });
-    }
-    
     loadContent(index) {
-        // Use the mapping to get the correct resource data index
         const dataIndex = this.resourceMapping[index];
         const resources = this.getResourcesData(dataIndex);
         const categoryTitle = this.getCategoryTitle(dataIndex);
         
-        this.contentDiv.style.opacity = '0';
-        this.contentText.style.opacity = '0';
+        if (this.contentDiv) {
+            this.contentDiv.style.opacity = '0';
+        }
+        if (this.contentText) {
+            this.contentText.style.opacity = '0';
+        }
         
         setTimeout(() => {
             this.createResourceList(resources, categoryTitle);
-            this.contentDiv.style.opacity = '0.6';
-            this.contentText.style.opacity = '1';
+            if (this.contentDiv) {
+                this.contentDiv.style.opacity = '0.6';
+            }
+            if (this.contentText) {
+                this.contentText.style.opacity = '1';
+            }
         }, 300);
     }
     
@@ -175,38 +288,64 @@ class ResourcesManager {
         
         const scrollContainer = document.createElement('div');
         scrollContainer.className = 'resources-scroll-container';
-        scrollContainer.style.cssText = `
+        
+        const containerStyles = this.isMobile ? `
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+            height: 220px;
+            max-height: 60vh;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 0 10px;
+            border-radius: 8px;
+        ` : `
             position: absolute;
             top: 100px;
             left: 67px;
             width: 599px;
             height: 600px;
             overflow-y: auto;
-            opacity: 0;
-            transition: opacity 0.5s ease;
             padding-right: 10px;
         `;
         
+        scrollContainer.style.cssText = containerStyles;
+        
         const listContainer = document.createElement('div');
         listContainer.className = 'resources-list';
-        listContainer.style.cssText = `
+        const listStyles = this.isMobile ? `
+            font-family: 'zhcn', sans-serif;
+            font-size: 14px;
+            color: #ffffff;
+            padding: 15px 5px;
+        ` : `
             font-family: 'zhcn', sans-serif;
             font-size: 20px;
             color: #ffffff;
             padding: 20px 0;
         `;
+        listContainer.style.cssText = listStyles;
         
-
         const titleElement = document.createElement('h3');
         titleElement.textContent = categoryTitle;
-        titleElement.style.cssText = `
+        const titleStyles = this.isMobile ? `
+            color: #ffffffff;
+            font-size: 16px;
+            font-family: "trojan", Helvetica;
+            text-align: center;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        ` : `
             color: #ffffffff;
             font-size: 28px;
-             font-family: "trojan", Helvetica;
+            font-family: "trojan", Helvetica;
             text-align: center;
-            border-bottom: 2px solid rgba(226, 247, 255, 0.3);
             padding-bottom: 10px;
         `;
+        titleElement.style.cssText = titleStyles;
         listContainer.appendChild(titleElement);
         
         resources.forEach((resource, index) => {
@@ -215,18 +354,35 @@ class ResourcesManager {
         });
         
         scrollContainer.appendChild(listContainer);
-        const overlapContainer = document.querySelector('.overlap-2');
-        if (overlapContainer) {
-            overlapContainer.appendChild(scrollContainer);
+        
+        const targetContainer = this.isMobile ? 
+            document.querySelector('.iphone .overlap') : 
+            document.querySelector('.macbook-pro .overlap-2');
+            
+        if (targetContainer) {
+            targetContainer.appendChild(scrollContainer);
         }
-        this.contentText.innerHTML = '';
+        
+        if (this.contentText) {
+            this.contentText.innerHTML = '';
+        }
+        
         setTimeout(() => scrollContainer.style.opacity = '1', 100);
     }
     
     createListItem(resource, index) {
         const listItem = document.createElement('div');
         listItem.className = 'resource-item';
-        listItem.style.cssText = `
+        
+        const itemStyles = this.isMobile ? `
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            padding: 8px;
+        ` : `
             display: flex;
             align-items: flex-start;
             margin-bottom: 15px;
@@ -234,22 +390,41 @@ class ResourcesManager {
             transform: translateY(20px);
             transition: all 0.3s ease;
         `;
+        listItem.style.cssText = itemStyles;
         
         const dot = document.createElement('img');
         dot.src = 'assets/list-dot.png';
-        dot.style.cssText = `
+        const dotStyles = this.isMobile ? `
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        ` : `
             width: 40px;
             height: 40px;
             margin-right: 15px;
             margin-top: 5px;
             flex-shrink: 0;
         `;
+        dot.style.cssText = dotStyles;
         
         const text = document.createElement('div');
         text.innerHTML = resource.link ? 
-            `<a href="${resource.link}" target="_blank" style="color: #87CEEB; text-decoration: none;">${resource.name}</a> - ${resource.description}` :
-            `<strong>${resource.name}</strong> - ${resource.description}`;
-        text.style.lineHeight = '1.4';
+            `<a href="${resource.link}" target="_blank" style="color: #87CEEB; text-decoration: none; font-size: inherit;">${resource.name}</a> - ${resource.description}` :
+            `<strong style="font-size: inherit;">${resource.name}</strong> - ${resource.description}`;
+        text.style.lineHeight = this.isMobile ? '1.3' : '1.4';
+        text.style.fontSize = 'inherit';
+        
+        // Add touch-friendly styles for mobile links
+        if (this.isMobile && resource.link) {
+            const link = text.querySelector('a');
+            if (link) {
+                link.style.padding = '2px 4px';
+                link.style.borderRadius = '3px';
+                link.style.display = 'inline-block';
+            }
+        }
         
         listItem.appendChild(dot);
         listItem.appendChild(text);
@@ -257,9 +432,29 @@ class ResourcesManager {
         setTimeout(() => {
             listItem.style.opacity = '1';
             listItem.style.transform = 'translateY(0)';
-        }, 200 + (index * 100));
+        }, 200 + (index * (this.isMobile ? 50 : 100)));
         
         return listItem;
+    }
+    
+    handleResize() {
+        const wasMobile = this.isMobile;
+        this.detectViewport();
+        
+        if (wasMobile !== this.isMobile) {
+            // Viewport changed from mobile to desktop or vice versa
+            this.setupElements();
+            this.createResourceMapping();
+            this.createHoverEffects();
+            this.addEventListeners();
+            this.showWelcomeMessage();
+        }
+    }
+    
+    handleOrientationChange() {
+        setTimeout(() => {
+            this.handleResize();
+        }, 100);
     }
     
     getResourcesData(index) {
@@ -305,7 +500,7 @@ class ResourcesManager {
                 { name: "Simple Icons SVG", description: "SVG icons for popular brands", link: "https://simpleicons.org/" },
                 { name: "New Masters Academy Art Course", description: "Comprehensive art courses covering various topics", link: "https://www.nma.art/v3/course-catalog/" },
                 {name: "Line of Action", description: "Figure drawing reference tool for art studies", link: "https://line-of-action.com/" },
-                {name: "How to Paint by Michał Sawtyruk", description: "6-steps tutorial on digital painting", link: "https://www.youtube.com/watch?v=dkUHSeB9VdY"},
+                {name: "How to Paint by Michaá Sawtyruk", description: "6-steps tutorial on digital painting", link: "https://www.youtube.com/watch?v=dkUHSeB9VdY"},
                 { name: "Pixel Principles", description: "YouTube channel focused on pixel art techniques and tutorials by an indie artist and dev", link: "https://www.youtube.com/@PixelPrinciples" },
                 { name: "Pixel Hoo", description: "YouTube channel dedicated to pixel art tutorials and resources", link: "https://www.youtube.com/@PixelHoo" },
                 { name: "How to Draw Pixel Art Trees by Pixel Overload", description: "Learn how to create pixel art trees in this step-by-step tutorial", link: "https://youtu.be/VLuKpgkOuKM?si=yH_wcw-Sue6vTOVL" },
@@ -386,7 +581,7 @@ class ResourcesManager {
                 { name: "The Book of Shaders", description: "Learn about shaders and graphics programming in Godot", link: "https://thebookofshaders.com/?lan=es" },
                 { name: "Webtyler", description: "Helpful tool to convert 15-piece tilesets to 47-piece sets", link: "https://wareya.github.io/webtyler/" },
                 { name: "Dual-Grid system explained by ThinMatrix", description: "Simple and clear explanation of the dual-grid system for game development", link: "https://youtu.be/buKQjkad2I0?si=x0a3d18lravkCYre" },
-                { name: "Dual-Grid system explained by Oskar Stålberg", description: "In-depth explanation of the dual-grid system for game development, made by Oskar Stålberg!", link: "https://www.youtube.com/watch?v=Uxeo9c-PX-w&t=308s" },
+                { name: "Dual-Grid system explained by Oskar StaÌŠlberg", description: "In-depth explanation of the dual-grid system for game development, made by Oskar StaÌŠlberg!", link: "https://www.youtube.com/watch?v=Uxeo9c-PX-w&t=308s" },
                 { name: "5 Godot Particles for 2D Games by Single-Minded Ryan", description: "Explore five unique particle effects for 2D games in Godot", link: "https://youtu.be/DBrTin3SODY?si=l-NkSJz3T7h_wSWy"},
                 { name: "Godot Docs in English", description: "Official documentation for Godot Engine, available in English", link: "https://docs.godotengine.org/en/stable/" },
                 { name: "Math for Game Developers?", description: "Learn about essential math concepts for game development", link: "https://www.youtube.com/watch?v=eRVRioN4GwA" },
@@ -399,74 +594,203 @@ class ResourcesManager {
     }
 }
 
+// Enhanced responsive styles
 const styles = `
+    /* Base styles for both desktop and mobile */
     .resources-about-2, .resources-about, .resources-tools, .resources-tutorials, .resources-gamedev {
         transition: all 0.3s ease;
         cursor: pointer;
     }
-    .resources-about-2:hover, .resources-about:hover, .resources-tools:hover, .resources-tutorials:hover, .resources-gamedev:hover {
-        transform: translateX(5px);
+    
+    /* Desktop hover effects */
+    @media screen and (min-width: 1025px) {
+        .resources-about-2:hover, .resources-about:hover, .resources-tools:hover, .resources-tutorials:hover, .resources-gamedev:hover {
+            transform: translateX(5px);
+        }
     }
+    
+    /* Mobile touch effects */
+    @media screen and (max-width: 1024px) {
+        .iphone .resources-about-2, .iphone .resources-about, .iphone .resources-tools, .iphone .resources-tutorials, .iphone .resources-gamedev {
+            padding: 8px;
+            margin: 2px 0;
+            min-height: 44px; /* Minimum touch target size */
+            display: flex;
+            align-items: center;
+        }
+        
+        .iphone .resources-about-2:active, .iphone .resources-about:active, .iphone .resources-tools:active, .iphone .resources-tutorials:active, .iphone .resources-gamedev:active {
+            transform: scale(0.98);
+        }
+        
+        /* Improve text readability on mobile */
+        .iphone .TUTORIALS-FOR-CODING,
+        .iphone .gamedev,
+        .iphone .text-wrapper-2,
+        .iphone .text-wrapper-3,
+        .iphone .text-wrapper-4 {
+            font-weight: 600;
+        }
+    }
+    
+    /* Content area styles */
     .content-div {
         transition: opacity 0.3s ease;
     }
-    .content-div::-webkit-scrollbar {
-        width: 8px;
+    
+    /* Desktop scrollbar styles */
+    @media screen and (min-width: 1025px) {
+        .content-div::-webkit-scrollbar,
+        .resources-scroll-container::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        .content-div::-webkit-scrollbar-track,
+        .resources-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+        }
+        
+        .content-div::-webkit-scrollbar-thumb,
+        .resources-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+        
+        .content-div::-webkit-scrollbar-thumb:hover,
+        .resources-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+            background-clip: content-box;
+        }
+        
+        .content-div::-webkit-scrollbar-thumb:active,
+        .resources-scroll-container::-webkit-scrollbar-thumb:active {
+            background: rgba(255, 255, 255, 0.8);
+            background-clip: content-box;
+        }
     }
-    .content-div::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
+    
+    /* Mobile scrollbar styles */
+    @media screen and (max-width: 1024px) {
+        .iphone .content-div::-webkit-scrollbar,
+        .iphone .resources-scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .iphone .content-div::-webkit-scrollbar-track,
+        .iphone .resources-scroll-container::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 4px;
+        }
+        
+        .iphone .content-div::-webkit-scrollbar-thumb,
+        .iphone .resources-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            border: 1px solid transparent;
+            background-clip: content-box;
+        }
+        
+        .iphone .content-div::-webkit-scrollbar-thumb:hover,
+        .iphone .resources-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+            background-clip: content-box;
+        }
     }
-    .content-div::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+    
+    /* Link styles */
+    .resource-item a {
+        transition: all 0.2s ease;
     }
-    .content-div::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.5);
-    }
-    .resources-scroll-container::-webkit-scrollbar {
-        width: 12px;
-    }
-    .resources-scroll-container::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 6px;
-    }
-    .resources-scroll-container::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 6px;
-        border: 2px solid transparent;
-        background-clip: content-box;
-    }
-    .resources-scroll-container::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.6);
-        background-clip: content-box;
-    }
-    .resources-scroll-container::-webkit-scrollbar-thumb:active {
-        background: rgba(255, 255, 255, 0.8);
-        background-clip: content-box;
-    }
-    .p {
-        transition: opacity 0.3s ease;
-    }
+    
     .resource-item a:hover {
         color: #ADD8E6 !important;
         text-decoration: underline !important;
     }
+    
+    /* Mobile link improvements */
+    @media screen and (max-width: 1024px) {
+        .resource-item a {
+            display: inline-block;
+            margin: -2px 0;
+        }
+        
+        .resource-item a:active {
+            transform: scale(0.98);
+        }
+    }
+    
+    /* Smooth transitions */
+    .p {
+        transition: opacity 0.3s ease;
+    }
+    
+    /* Loading states */
+    .resources-scroll-container {
+        transition: opacity 0.5s ease, transform 0.3s ease;
+    }
+    
+    .resource-item {
+        transition: all 0.3s ease;
+    }
+    
+    /* Focus states for accessibility */
+    @media screen and (min-width: 1025px) {
+        .resources-about-2:focus, .resources-about:focus, .resources-tools:focus, .resources-tutorials:focus, .resources-gamedev:focus {
+            outline: 2px solid rgba(135, 206, 235, 0.6);
+            outline-offset: 2px;
+        }
+    }
+    
+    @media screen and (max-width: 1024px) {
+        .iphone .resources-about-2:focus, .iphone .resources-about:focus, .iphone .resources-tools:focus, .iphone .resources-tutorials:focus, .iphone .resources-gamedev:focus {
+            outline: 2px solid rgba(135, 206, 235, 0.8);
+            outline-offset: 1px;
+        }
+    }
 `;
 
+// Initialize the ResourcesManager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const styleSheet = document.createElement('style');
     styleSheet.textContent = styles;
     document.head.appendChild(styleSheet);
+    
+    // Initialize the resources manager
     new ResourcesManager();
+    
+    // Initialize audio with reduced volumes
     const audioElements = [
         document.getElementById('background-music'),
         document.getElementById('ambience-sound')
     ];
+    
     audioElements.forEach(audio => {
         if (audio) {
             audio.loop = true;
-            audio.play().catch(() => {});
+            audio.play().catch(() => {
+                // Auto-play failed, which is expected on mobile
+                console.log('Audio auto-play prevented by browser');
+            });
         }
     });
+    
+    // Add mobile-specific optimizations
+    if (window.innerWidth <= 1024) {
+        // Prevent zoom on double tap for better UX
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Smooth scrolling for mobile
+        document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+    }
 });
