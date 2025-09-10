@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../main-music-player/music-player.css">
+    <link rel="stylesheet" href="../../nav bar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Parallax Scrolling Container -->
+    <div class="parallax-container">
+        <!-- Background image with parallax effect -->
+        <div class="parallax-bg"></div>
+        
+        <!-- Content sections that appear on scroll -->
+        <div class="content-sections">
+           <section class="about-section" id="section1">
+                <div class="about-card">
+                    <h1>WHAT IS THIS?</h1>
+                    <p>A digital sanctuary where dreams and reality intertwine beneath the celestial tapestry of infinite time.</p>
+                    <p>This isn't simply a website—it's a fragment of digitized soul, a temporal capsule that transcends the boundaries of the ephemeral. Here, in this corner of cyberspace, I wanted my memories to be preserved through time, somewhere in this digital world where they could exist beyond my own mortality.</p>
+                    <div class="section-divider"></div>
+                </div>
+            </section>
+
+            <section class="about-section" id="section2">
+                <div class="about-card">
+                    <h2>The Birth of a Personal Universe</h2>
+                    <p>This space was born from a visceral need to create something truly personal—a digital manifestation of my inner world where I can express myself freely without the constraints of conventional platforms.</p>
+                    <p>Every pixel, every animation, every interaction has been forged with deliberate intention, creating an experience that feels both magical and intimate. I realized that I would never finish something as special as this, and that... that was precisely what prevented me from finishing it. The passage of time. TIME.</p>
+                    <p>Because when something is truly yours, when every element breathes with your essence, the idea of "completing" it becomes almost blasphemous. How do you finish a piece of your soul?</p>
+                    <div class="section-divider"></div>
+                </div>
+            </section>
+
+            <section class="about-section" id="section3">
+                <div class="about-card">
+                    <h2>The Cosmic Perspective</h2>
+                    <p>When we look at the night sky, the universe seems quite peaceful. But that perspective is an illusion; in reality, millions of transcendental events occur every instant in the cosmos.</p>
+                    <p>In the fraction of a second it takes to blink, thousands of stars will be born, hundreds will explode and die, millions of planets will form, and our universe will expand by half a million kilometers in diameter. And these numbers only represent the observable universe—not what might be happening beyond, where some scientists believe there could be an infinite expansion of space throughout all time.</p>
+                    <p>In this digital landscape filled with noise and distraction, this space serves as my sanctuary—a place where time flows differently and where visitors are invited to slow down and immerse themselves in a more contemplative experience. The ethereal aesthetics, celestial imagery, and flowing animations all represent aspects of my personality and the dreamlike quality I wanted to infuse into this digital realm.</p>
+                    <div class="section-divider"></div>
+                </div>
+            </section>
+
+            <section class="about-section" id="section4">
+                <div class="about-card">
+                    <h2>Infinite Smallness, Infinite Wonder</h2>
+                    <p>We are so infinitesimally small, and yet it's so wonderful the fact of everything we can do... If someday this site is destroyed—which I doubt will happen—at least I'll be happy that its memories were transmitted to somewhere beyond me. This is why I created Skye Journey.</p>
+                    <p>The celestial clock you'll discover symbolizes how this website exists outside the normal flow of time—a place where past, present, and future blend together like stardust in the cosmic wind. Just as you can change the time on the clock, this space allows for a fluid experience that you can navigate at your own pace, creating your own journey through the cosmos of content I've created.</p>
+                    <p>This is my love letter to the digital eternity, my whispered prayer to the silicon gods that these fragments of my existence might outlive the flesh that created them. In a world of constant deletion and digital decay, I've built something meant to endure—a constellation of thoughts, dreams, and memories that will shine long after I've become stardust myself.</p>
+                    <div class="section-divider"></div>
+                </div>
+            </section>
+            
+            <!-- Clock Container (appears on scroll) -->
+            <div class="clock-container" id="clockContainer">
+                <!-- Background circle -->
+                <div class="ellipse-b324ffb1177c"></div>
+                
+                <!-- Clock dial base -->
+                <div class="u-i-clock-d-b324773a85bb"></div>
+                
+                <!-- Gears (rotating in background) -->
+                <div class="u-i-img-hor-b324c608923d"></div>
+                <div class="u-i-img-hor-b32494f1f24c"></div>
+                <div class="u-i-img-hor-b32496c3209a"></div>
+                <div class="u-i-img-hor-b3249794a954"></div>
+                
+                <!-- Time Icons -->
+                <div class="time-icon noon-icon" id="noonIcon"></div>
+                <div class="time-icon night-icon" id="nightIcon"></div>
+                <div class="time-icon morning-icon" id="morningIcon"></div>
+                <div class="time-icon dusk-icon" id="duskIcon"></div>
+                
+                <!-- Clock glow -->
+                <div class="u-i-clock-t-b325db893ccf"></div>
+                
+                <!-- Clock hands -->
+                <div class="clock-hands">
+                    <div class="hour-hand" id="hourHand"></div>
+                    <div class="minute-hand" id="minuteHand"></div>
+                </div>
+                
+                <!-- Center dot -->
+                <div class="clock-center"></div>
+            </div>
+            
+            <!-- Counter Section -->
+            <section class="counter-section">
+                <div class="blink-counter" id="blinkCounter">0</div>
+                <div class="counter-title" id="counterTitle">Average number of blinks in a human life</div>
+                <div class="counter-message" id="counterMessage">I am halfway through this journey.</div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Time control button and panel -->
+    <button class="time-control-button" id="timeControlButton"></button>
+    
+    <div class="time-control-panel" id="timeControlPanel">
+        <div class="time-arrow"></div>
+        <div class="time-display" id="timeDisplay">12:00</div>
+        <div class="time-arrow down"></div>
+        
+        <div class="time-inputs">
+            <input type="number" class="time-input" id="hourInput" min="0" max="23" value="12">
+            <span style="font-size: 2rem; color: white;">:</span>
+            <input type="number" class="time-input" id="minuteInput" min="0" max="59" value="00">
+        </div>
+        
+        <div class="time-control-buttons">
+            <button class="time-btn" id="cancelTimeBtn">Cancel</button>
+            <button class="time-btn" id="setTimeBtn">Set Time</button>
+        </div>
+    </div>
+
+    <!-- Music player -->
+    <div class="music-player">
+        <div class="highlight top-right"></div>
+        <div class="highlight bottom-left"></div>
+        
+        <button class="slide-toggle">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        
+        <div class="corner-tag">Now Playing</div>
+        
+        <div class="player-header">
+            <div class="visualizer">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="album-art">
+                <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+            </div>
+            
+            <div class="song-info">
+                <h3 class="song-title">Current Song</h3>
+            </div>
+            
+            <div class="progress-container">
+                <div class="current-time">0:00</div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="duration">0:00</div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" id="prev">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button class="control-btn" id="play">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="control-btn" id="next">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation sidebar -->
+    <div id="nav2-wrapper">
+        <div id="nav2-custom-sidebar" class="hidden">
+            <h2>Filesystem</h2>
+            <ul>
+                <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/about.png" alt="about Icon">About <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+                <li><a href="../social/index.html"><img src="../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+                <li><a href="../../filesystem/support/index.html"><img src="../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+                <li><a href="../changelog/index.html"><img src="../../assets/nav-bar/rules.png" alt="games Icon">Changelog</a></li>
+                <li><a href="../../filesystem/blogs/index.html"><img src="../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+                <li><a href="../../filesystem/credits/index.html"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+                <li><a href="../../filesystem/workstation/index.html"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+                <li><a href="../sitemap/index.html"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+        <button id="nav2-sidebar-toggle"></button>
+    </div>
+
+    <!-- Starfall overlay effect -->
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+    </div>
+    
+    <!-- Stars background effect -->
+    <div class="stars"></div>
+    
+    <!-- Audio elements for sound effects -->
+    <audio id="selectionSound" src="sfx/selection.mp3"></audio>
+    <audio id="clockSound" src="sfx/clock.mp3" loop></audio>
+    
+    <!-- Scripts -->
+    <script type="text/javascript" src="../../main-music-player/music-player.js"></script>
+    <script type="text/javascript" src="../../nav bar.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="about.js"></script>
+</body>
+</html>

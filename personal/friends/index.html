@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Skye Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="music-player-personal.css">
+    <link rel="stylesheet" href="friends.css">
+    <link rel="stylesheet" href="../../nav bar.css">
+  
+  </head>
+  <body>
+
+   <!-- Header with centered floating panel -->
+   <header class="header">
+    <div class="title-panel">
+        <img src="../../assets/panels/friends.png" alt="friends Panel">
+    </div>
+ </header>
+
+     		<!-- Music player lol-->
+         <div class="music-player">
+          <div class="highlight top-right"></div>
+          <div class="highlight bottom-left"></div>
+          
+          <button class="slide-toggle">
+              <i class="fas fa-chevron-down"></i>
+          </button>
+          
+          <div class="corner-tag">Now Playing</div>
+          
+          <div class="player-header">
+              <div class="visualizer">
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+              </div>
+          </div>
+          
+          <div class="content">
+              <div class="album-art">
+                  <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+              </div>
+              
+              <div class="song-info">
+                  <h3 class="song-title">Current Song</h3>
+              </div>
+              
+              <div class="progress-container">
+                  <div class="current-time">0:00</div>
+                  <div class="progress-bar">
+                      <div class="progress"></div>
+                  </div>
+                  <div class="duration">0:00</div>
+              </div>
+              
+              <div class="controls">
+                  <button class="control-btn" id="prev">
+                      <i class="fas fa-backward"></i>
+                  </button>
+                  <button class="control-btn" id="play">
+                      <i class="fas fa-play"></i>
+                  </button>
+                  <button class="control-btn" id="next">
+                      <i class="fas fa-forward"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+  
+<!---End of the music player :D-->
+<!--Background-->
+    <div class="video-background" id="mainBackground">
+      <video id="mainVideo" autoplay muted loop>
+          <source src="../../assets/background/Intro-background.webm" type="video/webm">
+      </video>
+  </div>
+      <!-- Corner clock -->
+      <div id="digital-clock"></div>
+
+
+<!--FRIENDSSSSS YAYYY-->
+ <audio id="background-sound" loop autoplay>
+    <source src="../skybgn-stars001.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+<canvas id="canvas"></canvas>
+<!-- Overlay-->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+</head>
+<body>
+<div class="starfall-container">
+<div class="starfield" id="starfield"></div>
+</div>
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+
+  <!-- Corner clock!!! -->
+  <script>
+    function updateClock() {
+const clockElement = document.getElementById('digital-clock');
+const now = new Date();
+const hours = String(now.getHours()).padStart(2, '0');
+const minutes = String(now.getMinutes()).padStart(2, '0');
+const seconds = String(now.getSeconds()).padStart(2, '0');
+clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// Update the clock every second
+setInterval(updateClock, 1000);
+// Initialize the clock immediately
+updateClock();
+
+</script>
+<!--Mouse effect-->
+<script>
+
+  var b = document.body;
+  var imgurl = "../../assets/mouse/cursor.ico";
+  var size = [10, 20];
+  function rand(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  function getSize()
+  {
+  return rand(size[0], size[1]);
+  }
+  function lerp(a,b,f)
+  {
+  return (b-a)*f+a;
+  }
+  function heart(x,y)
+  {
+  var s = getSize();
+  x -= s/2;
+  y -= s/2;
+  x = Math.floor(x) + rand(-5, 5);
+  y = Math.floor(y) + rand(-5, 5);
+  var fx = x + rand(-40, 40);
+  var fy = y + rand(-40, 40);
+  var i = document.createElement("img");
+  i.src = imgurl;
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  b.appendChild(i);
+  var f = 0;
+  var interval;
+  interval = setInterval(function() {
+  var _x = Math.floor(lerp(x, fx, f));
+  var _y = Math.floor(lerp(y, fy, f));
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  i.style.opacity = 1-f;
+  f += 0.01;
+  if (f > 1)
+  {
+  clearInterval(interval);
+  b.removeChild(i);
+  }
+  }, 10);
+  }
+  function bro(x,y)
+  {
+  for (var i = 0; i < 5; i++)
+  {
+  heart(x,y);
+  }
+  }
+  b.addEventListener("click", function(event){
+  var x = event.clientX;
+  var y = event.clientY;
+  bro(x,y);
+  });
+  
+  </script>
+  
+  <div id="nav2-wrapper">
+    <div id="nav2-custom-sidebar" class="hidden">
+      <h2>Personal</h2>
+      <ul>
+      <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+      <li><a href="../../personal/#"><img src="../../assets/nav-bar/more.png" alt="about Icon">About me</a></li>
+      <li><a href="../../personal/journal/index.html"><img src="../../assets/nav-bar/my-journey.png" alt="diary Icon">Journal</a></li>
+      <li><a href="#"><img src="../../assets/nav-bar/music.png" alt="music Icon">Music</a></li>
+      <li><a href="#"><img src="../../assets/nav-bar/games.png" alt="games Icon">Video games</a></li>
+      <li><a href="#"><img src="../../assets/nav-bar/friends.png" alt="friends Icon">Friends <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+      <li><a href="../../personal/guestbook/index.html"><img src="../../assets/nav-bar/guestbook.png" alt="guestbook Icon">Guestbook</a></li>
+      <li><a href="../../personal/faq/index.html"><img src="../../assets/nav-bar/FAQ.png" alt="faq Icon">FAQ</a></li>
+      <li><a href="#"><img src="../../assets/nav-bar/hobby.png" alt="Chat Icon">Hobbies</a></li>
+      <li><a href="#"><img src="../../assets/nav-bar/archives.png" alt="archives Icon">Gallery</a></li>
+      <li><a href="#"><img src="../../assets/nav-bar/cat.png" alt="kitty Icon">Kitty</a></li>
+      <li><a href="../../personal/boyfriend/index.html"><img src="../../assets/nav-bar/more.png">Boyfriend diary</a></li>
+      <li><a href="../special-events/index.html"><img src="../../assets/nav-bar/boyfriend.png">Special events</a></li>
+    </ul>
+      </div>
+      <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+      <button id="nav2-sidebar-toggle"></button>
+    </div>
+<script src="../../main-music-player/music-player.js"></script>
+
+ <!--sound effect i decided to add in the last moment lol-->
+  <script>
+ document.addEventListener("DOMContentLoaded", () => {
+
+    const observer = new MutationObserver((mutationsList, observer) => {
+        const imageElement = document.querySelector('img[src="friends-items/pien.PNG"]');
+        if (imageElement) {
+            
+            imageElement.addEventListener("click", () => {
+
+                const soundEffect = new Audio("../../assets/sound-effects/pien.mp3");
+
+  
+                soundEffect.play().catch(error => console.error("Error playing sound:", error));
+            });
+
+            observer.disconnect();
+        }
+    });
+
+
+    observer.observe(document.body, { childList: true, subtree: true });
+});
+
+  </script>
+<!-- js :3 -->
+ <script src="info.js"></script>
+<script type="text/javascript" src= "background-sound.js"></script>
+<script type="text/javascript" src="../../nav bar.js"></script>
+<script type="text/javascript" src="friends-list.js"></script>
+<script type="text/javascript" src="../personal-notification-system.js"></script>
+</body>
+
+</html>
+

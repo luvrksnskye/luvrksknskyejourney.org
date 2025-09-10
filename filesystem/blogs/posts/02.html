@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skye Journey</title>
+<link rel="icon" type="image/x-icon" href="../../../assets/buttons-icons/favicon.png">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../..//blogs/posts/music-player-personal.css">
+<link rel="stylesheet" href="../../../nav bar.css">
+<link rel="stylesheet" href="blogs.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="preloader"></div>
+
+    <div class="container">
+        <aside class="blog-sidebar">
+            <h3>Index</h3>
+            <ul>
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#conceptos">Conceptos Básicos</a></li>
+                <li><a href="#elementos">Ubicación y Alineación</a></li>
+                <li><a href="#responsivo">CSS Grid Responsivo</a></li>
+                <li><a href="#flexbox">CSS Grid con Flexbox</a></li>
+                <li><a href="#ejemplos">Ejemplos Prácticos de CSS Grid</a></li>
+                <li><a href="#apuntes">Apuntes Finales</a></li>
+                <li><a href="#conclusion">Conclusión :3</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <div class="banner">
+                <img src="../blogs-images/css-grid.png" class="banner-image">
+                <center>
+                <h1 class="banner-title"> CSS Grid Tutorial</h1>
+                </center>
+            </div>
+            
+            <h1>Una guía interactiva sobre CSS Grid.</h1>
+            
+            <p>CSS Grid es una de las partes más asombrosas del lenguaje CSS. Nos proporciona un montón de herramientas nuevas que podemos usar para crear diseños sofisticados y fluidos. También es sorprendentemente complejo. Me tomó bastante tiempo sentirme realmente cómodo con CSS Grid. En este tutorial, voy a compartir los momentos de mayor claridad que tuve en mi propio aprendizaje de CSS Grid. Aprenderás los fundamentos de este modelo de diseño y verás cómo hacer cosas realmente geniales con él.</p>  
+
+            <p>CSS Grid es la herramienta más moderna para construir diseños en CSS, pero no es exactamente “de última generación”. ¡Ha sido compatible con todos los navegadores principales desde 2017! Según caniuse, CSS Grid es compatible para <a href="https://caniuse.com/css-grid" target="_blank">97.8% de los usuarios</a>. Este es un soporte excelente para navegadores; Flexbox solo tiene alrededor de un 0.5% más de compatibilidad.</p>
+           
+            <h2 id="introduccion">Introducción y Modelado de CSS Grid</h2>
+           
+            <p>CSS se compone de varios algoritmos de diseño, cada uno diseñado para distintos tipos de interfaces de usuario. El algoritmo de diseño predeterminado, Flow, está diseñado para documentos digitales. Table, para datos tabulares. Flexbox, para distribuir elementos a lo largo de un solo eje.</p>
+           
+<p>CSS Grid es el algoritmo de diseño más reciente y avanzado. Es increíblemente potente: permite crear diseños complejos que se adaptan con fluidez a diversas restricciones.  A diferencia de otros métodos como Flexbox, que se enfoca en distribuir elementos en una sola dimensión (horizontal o vertical), CSS Grid trabaja con filas y columnas simultáneamente, facilitando la creación de diseños complejos y responsivos con menos código.</p>
+<p>Lo más inusual de CSS Grid, en mi opinión, es que la estructura de la cuadrícula (filas y columnas) se define exclusivamente en CSS:</p>
+            <br>
+            <div class="contenedor">
+                <div class="demo-container">
+                  <div class="grid-visualization">
+                    <div class="cuadro">
+                      <div class="cuadros">
+                        <div class="contenedor-principal g1nrkimi">
+                          <div class="g1opofcb l1o14vxu">
+                            <span>Grid Parent</span>
+                          </div>
+                          <!-- Horizontal grid lines -->
+                          <div class="giqfug7" style="grid-area: 1 / 1 / auto / -1; top: 33%;"></div>
+                          <div class="giqfug7" style="grid-area: 1 / 1 / auto / -1; top: 66%;"></div>
+                          <!-- Vertical grid lines -->
+                          <div class="gidtq17" style="grid-area: 1 / 1 / -1; left: 25%;"></div>
+                          <div class="gidtq17" style="grid-area: 1 / 1 / -1; left: 75%;"></div>
+                        </div>
+                      </div>
+                      <div class="cuadros">
+                        <div class="contenedores-hijos">
+                          <div class="cri4lio l1o14vxu">
+                            <span>Grid Children</span>
+                          </div>
+                          <div class="wg9umku" style="grid-area: 1 / 1 / auto / -1;">
+                            <div class="iizukyq">
+                              <span>&lt;Header&gt;</span>
+                            </div>
+                          </div>
+                          <div class="wg9umku" style="grid-area: 2 / 1;">
+                            <div class="iizukyq">
+                              <span>&lt;Nav&gt;</span>
+                            </div>
+                          </div>
+                          <div class="wg9umku" style="grid-area: 2 / 2;">
+                            <div class="iizukyq">
+                              <span>&lt;Main&gt;</span>
+                            </div>
+                          </div>
+                          <div class="wg9umku" style="grid-area: 3 / 1 / auto / -1;">
+                            <div class="iizukyq">
+                              <span>&lt;Footer&gt;</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="toggle-container">
+    <div id="toggle1" class="toggle-wrapper">
+                      <button class="toggle-button"></button>
+                      Mostrar
+                    </div>
+                  </div>
+                  </div>
+            <br>
+            <p>Este modelo de diseño introduce conceptos clave como grid container, grid items, grid tracks (filas y columnas), grid areas, y propiedades como grid-template-rows, grid-template-columns y grid-gap, que permiten un control preciso sobre la disposición de los elementos. Además, CSS Grid permite la alineación y distribución de contenido de forma sencilla con propiedades como justify-content, align-items y place-items.</p>
+            <p>Gracias a su versatilidad, CSS Grid se ha convertido en una herramienta esencial para diseñadores y desarrolladores web, permitiendo la creación de interfaces dinámicas y adaptables sin necesidad de recurrir a estructuras rígidas basadas en <code>float</code> o <code>display</code>: <code>inline-block</code>.</p>
+            <p>Con CSS Grid, un solo nodo DOM se subdivide en filas y columnas. En esta representación visual interactiva, resaltamos las filas/columnas con líneas discontinuas, pero en realidad son invisibles.</p>
+
+            <p>Bastante raro. En cualquier otro modo de diseño, la única forma de crear compartimentos como este es añadiendo más nodos DOM. En el diseño de tabla, por ejemplo, cada fila se crea con un <code>&lt;tr&gt;</code> y cada celda dentro de esa fila con <code>&lt;td&gt;</code> o <code>&lt;th&gt;</code>:</p>
+            
+            <div class="code-block">
+              <pre>
+            <span style="color: grey;">&lt;!-- First row --&gt;</span>
+            <span style="color: rgb(174, 52, 255);">&lt;table&gt;</span>
+              <span style="color: rgb(174, 52, 255)">&lt;tbody&gt;</span>
+                <span style="color: grey;">&lt;!-- First row --&gt;</span>
+                <span style="color: rgb(174, 52, 255)">&lt;tr&gt;</span>
+                  <span style="color: grey;">&lt;!-- Cells in the first row --&gt;</span>
+                  <span style="color: rgb(174, 52, 255)">&lt;td&gt;&lt;/td&gt;</span>
+                  <span style="color: rgb(174, 52, 255)">&lt;td&gt;&lt;/td&gt;</span>
+                  <span style="color: rgb(174, 52, 255)">&lt;td&gt;&lt;/td&gt;</span>
+                <span style="color: rgb(174, 52, 255)">&lt;/tr&gt;</span>
+            
+                <span style="color: grey;">&lt;!-- Second row --&gt;</span>
+                <span style="color: rgb(174, 52, 255)">&lt;tr&gt;</span>
+                  <span style="color: grey;">&lt;!-- Cells in the second row --&gt;</span>
+                  <span style="color: rgb(174, 52, 255)">&lt;td&gt;&lt;/td&gt;</span>
+                  <span style="color: rgb(174, 52, 255)">&lt;td&gt;&lt;/td&gt;</span>
+                  <span style="color: rgb(174, 52, 255)">&lt;td&gt;&lt;/td&gt;</span>
+                <span style="color: rgb(174, 52, 255)">&lt;/tr&gt;</span>
+              <span style="color: rgb(174, 52, 255)">&lt;/tbody&gt;</span>
+            <span style="color: rgb(174, 52, 255)">&lt;/table&gt;</span>
+              </pre>
+            </div>
+            
+
+
+            <h2 id="conceptos">Conceptos Básicos</h2>
+
+            <p>CSS Grid es un sistema de diseño avanzado introducido en CSS que permite a los desarrolladores web crear estructuras de diseño complejas de una manera mucho más eficiente que con métodos anteriores como el uso de flotantes o incluso Flexbox en algunos casos. CSS Grid se basa en un modelo bidimensional, lo que significa que permite manipular tanto filas como columnas simultáneamente, ofreciendo un control preciso sobre la ubicación y el tamaño de los elementos en la página web.</p>  
+
+<p>Para comenzar a utilizar CSS Grid, primero se debe definir un contenedor como una cuadrícula utilizando la propiedad <code>display: grid</code>. Una vez definido el contenedor, se pueden establecer las filas y columnas dentro de él mediante propiedades como <code>grid-template-columns</code> y <code>grid-template-rows</code>. Estas propiedades permiten especificar cuántas columnas o filas tendrá la cuadrícula y cuál será su tamaño.</p>  
+
+<p>Una de las ventajas principales de CSS Grid es su capacidad para asignar automáticamente el tamaño de los elementos utilizando valores como <code>fr</code> (fracción de espacio disponible), <code>auto</code> (ajustando al contenido) o unidades fijas como <code>px</code>, <code>%</code> o <code>em</code>. Esto permite que el diseño se adapte a diferentes resoluciones de pantalla sin la necesidad de ajustes manuales en cada punto de quiebre.</p>  
+
+<p>Otra característica destacada de CSS Grid es el uso de áreas de cuadrícula, donde se pueden asignar nombres a diferentes partes del diseño mediante la propiedad <code>grid-template-areas</code>. Esto facilita la organización de los elementos dentro de la página de manera semántica y legible.</p>  
+            
+
+<h2 id="elementos">Ubicación y Alineación</h2>
+<p>Una vez que se ha definido la cuadrícula, es posible colocar los elementos dentro de ella de manera precisa utilizando propiedades como <code>grid-column</code> y <code>grid-row</code>. Estas propiedades permiten especificar en qué columnas y filas deben ubicarse los elementos, asegurando un control total sobre su disposición.</p>  
+
+<p>Para una mayor personalización, CSS Grid ofrece diferentes propiedades que permiten alinear los elementos tanto horizontal como verticalmente:</p>  
+
+<ul>
+    <li><code>justify-items</code>: Define la alineación horizontal de los elementos dentro de las celdas de la cuadrícula. Puede tomar valores como <code>start</code> (alineado a la izquierda), <code>center</code> (centrado) y <code>end</code> (alineado a la derecha).</li>
+    <li><code>align-items</code>: Controla la alineación vertical de los elementos dentro de las celdas de la cuadrícula. Funciona de manera similar a <code>justify-items</code> pero en la dirección vertical.</li>
+    <li><code>justify-content</code>: Alinea toda la cuadrícula dentro de su contenedor en el eje horizontal. Es útil cuando la cuadrícula no ocupa todo el espacio disponible.</li>
+    <li><code>align-content</code>: Alinea toda la cuadrícula en el eje vertical dentro del contenedor.</li>
+</ul>  
+
+<p>Además de estos métodos de alineación, CSS Grid permite superponer elementos en la cuadrícula utilizando la propiedad <code>z-index</code>, lo que abre la posibilidad de crear diseños más dinámicos y visualmente atractivos.</p>  
+
+<h2 id="responsivo">CSS Grid Responsivo</h2>
+<p>Uno de los aspectos más poderosos de CSS Grid es su capacidad para crear diseños responsivos de manera sencilla. En lugar de definir tamaños fijos para columnas y filas, se pueden utilizar funciones como <code>minmax()</code> y valores dinámicos como <code>auto</code> y <code>fr</code> para permitir que los elementos se ajusten automáticamente según el tamaño de la pantalla.</p>  
+
+<p>Un ejemplo común de un diseño responsivo con CSS Grid es el uso de la función <code>repeat()</code> combinada con <code>auto-fit</code> o <code>auto-fill</code>. Estas funciones permiten que la cuadrícula se ajuste dinámicamente según el número de elementos y el espacio disponible. Por ejemplo:</p>  
+
+<div class="code-block">
+
+<pre>
+  .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+  }
+  </pre>  
+</div>
+<p>En este caso, la cuadrícula se expandirá o contraerá automáticamente dependiendo del ancho de la pantalla, asegurando que los elementos siempre ocupen un espacio óptimo.</p>  
+
+<p>CSS Grid también se puede combinar con <code>media queries</code> para crear diseños que se adapten a diferentes dispositivos. Por ejemplo, se puede definir una cuadrícula con múltiples columnas para pantallas grandes y una sola columna para pantallas pequeñas:</p>  
+<div class="code-block">
+<pre>
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+</pre>  
+</div>
+
+<p>Esto garantiza que el diseño sea completamente flexible y funcional en dispositivos móviles, tablets y computadoras de escritorio.</p>  
+
+<h2 id="flexbox">CSS Grid con Flexbox</h2>
+
+<p>CSS Grid y Flexbox son dos herramientas poderosas que pueden combinarse para mejorar aún más la estructura y flexibilidad de un diseño web. Mientras que CSS Grid es ideal para definir la estructura general de la página (dividiendo la interfaz en secciones principales como el encabezado, el contenido y el pie de página), Flexbox se puede utilizar dentro de cada una de estas secciones para distribuir elementos de manera eficiente.</p>  
+
+<p>Un uso común de esta combinación es definir la disposición general con CSS Grid y luego utilizar Flexbox dentro de cada sección para distribuir los elementos internos. Por ejemplo, se puede usar CSS Grid para dividir una página en un área de contenido principal y una barra lateral, y luego utilizar Flexbox dentro del área de contenido para organizar los elementos de manera más detallada.</p>  
+
+<div class="code-block">
+<pre>
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+</pre>  
+</div>
+
+<p>En este ejemplo, la propiedad <code>display: grid</code> se usa para definir la estructura general de la página, mientras que <code>display: flex</code> dentro de la clase <code>.content</code> permite organizar los elementos internos en una columna con espacio uniforme.</p>  
+
+<p>Esta combinación de Grid y Flexbox es especialmente útil cuando se trabaja con elementos que necesitan responder dinámicamente al tamaño de la pantalla y al contenido disponible. También permite mantener un código más limpio y organizado, separando la estructura principal de la distribución interna de los elementos.</p>  
+
+
+
+<h2 id="ejemplos">Ejemplos Prácticos de CSS Grid</h2>
+            <section id="exercise1" class="exercise-sidebarsidebarsidebarsidebar">
+              <h3 class="exercise-title">Ejercicio 1: Conceptos Básicos de CSS Grid</h3>  
+              <p class="exercise-description">Aprende los conceptos básicos de CSS Grid definiendo una estructura de cuadrícula simple. Modifica el CSS a continuación para crear diferentes diseños de cuadrícula.</p>
+              
+              
+              <div class="code-editor">
+                  <textarea id="code1">/* Modify the grid properties below */
+.grid-container {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr 1fr;
+gap: 10px;
+}
+
+/* These styles control the individual grid items */
+.grid-item {
+padding: 20px;
+font-size: 1.5em;
+}</textarea>
+              </div>
+              
+              <div class="buttons">
+                  <button class="btn btn-apply" onclick="applyCode(1)">Aplicar</button>
+                  <button class="btn btn-Reiniciar" onclick="ReiniciarCode(1)">Reiniciar</button>
+                  <button class="complete-btn" onclick="completeExercise(1)">Completo</button>
+              </div>
+              
+              <div class="hint">
+                <p>Pista: Intenta cambiar el número de columnas con <code>grid-template-columns</code> o ajusta el valor de <code>gap</code>.</p>
+
+              </div>
+              
+              <div class="preview-area" id="preview1">
+                  <div class="grid-container">
+                      <div class="grid-item">1</div>
+                      <div class="grid-item">2</div>
+                      <div class="grid-item">3</div>
+                      <div class="grid-item">4</div>
+                      <div class="grid-item">5</div>
+                      <div class="grid-item">6</div>
+                  </div>
+              </div>
+              
+              <div class="toggle-container">
+                <div id="toggle2" class="toggle-wrapper">
+                                  <button class="toggle-button"></button>
+                                  Mostrar
+                                </div>
+                              </div>
+          </section>
+
+          <section id="exercise2" class="exercise-container">
+            <h3 class="exercise-title">Ejercicio 2: Áreas de Plantilla en CSS Grid</h3>  
+            <p class="exercise-description">Crea un diseño utilizando las áreas de plantilla de CSS Grid. Esto es perfecto para crear diseños comunes de páginas web.</p>
+            
+              
+              <div class="code-editor">
+                  <textarea id="code2">/* Modify the grid layout using grid-template-areas */
+.grid-layout {
+display: grid;
+grid-template-columns: 1fr 3fr;
+grid-template-rows: auto 1fr auto;
+grid-template-areas: 
+  "header header"
+  "nav main"
+  "footer footer";
+gap: 10px;
+height: 100%;
+}
+
+.header {
+grid-area: header;
+background-color: rgba(231, 76, 60, 0.7);
+border-color: #c0392b;
+height: 50px;
+}
+
+.nav {
+grid-area: nav;
+background-color: rgba(46, 204, 113, 0.7);
+border-color: #27ae60;
+}
+
+.main {
+grid-area: main;
+background-color: rgba(52, 152, 219, 0.7);
+border-color: #2980b9;
+}
+
+.footer {
+grid-area: footer;
+background-color: rgba(155, 89, 182, 0.7);
+border-color: #8e44ad;
+height: 50px;
+}</textarea>
+              </div>
+              
+              <div class="buttons">
+                  <button class="btn btn-apply" onclick="applyCode(2)">Aplicar</button>
+                  <button class="btn btn-Reiniciar" onclick="ReiniciarCode(2)">Reiniciar</button>
+                  <button class="complete-btn" onclick="completeExercise(2)">Completo</button>
+              </div>
+              
+              <div class="hint">
+                <p>Pista: Intenta reorganizar el diseño cambiando la propiedad <code>grid-template-areas</code>. Puedes crear diseños como "header sidebar main footer" o "header header, sidebar main, footer footer".</p>
+
+              </div>
+              
+              <div class="preview-area" id="preview2">
+                  <div class="grid-layout">
+                      <div class="header">Header</div>
+                      <div class="nav">Nav</div>
+                      <div class="main">Main</div>
+                      <div class="footer">Footer</div>
+                  </div>
+              </div>
+              
+              <div class="toggle-container">
+                <div id="toggle3" class="toggle-wrapper">
+                                  <button class="toggle-button"></button>
+                                  Mostrar
+                                </div>
+                              </div>
+              </div>
+          </section>
+
+          <section id="exercise3" class="exercise-container">
+            <h3 class="exercise-title">Ejercicio 3: Diseño con Flexbox</h3>  
+            <p class="exercise-description">Aprende a usar Flexbox para crear diseños responsivos. Experimenta con diferentes propiedades de flexbox.</p>
+            
+              <div class="code-editor">
+                  <textarea id="code3">/* Modify the flexbox properties below */
+.flex-container {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 10px;
+}
+
+.flex-item {
+flex: 1;
+padding: 20px;
+min-width: 100px;
+height: 80px;
+}</textarea>
+              </div>
+              
+              <div class="buttons">
+                  <button class="btn btn-apply" onclick="applyCode(3)">Aplicar</button>
+                  <button class="btn btn-Reiniciar" onclick="ReiniciarCode(3)">Reiniciar</button>
+                  <button class="complete-btn" onclick="completeExercise(3)">Completo</button>
+              </div>
+              
+              <div class="hint">
+                <p>Pista: Intenta cambiar <code>flex-direction</code> a <code>column</code> o ajustar <code>justify-content</code> a valores como <code>center</code>, <code>flex-start</code> o <code>flex-end</code>.</p>
+
+              </div>
+              
+              <div class="preview-area" id="preview3">
+                  <div class="flex-container">
+                      <div class="flex-item">1</div>
+                      <div class="flex-item">2</div>
+                      <div class="flex-item">3</div>
+                      <div class="flex-item">4</div>
+                  </div>
+                </div>
+          </section>
+
+          <section id="exercise4" class="exercise-container">
+            <h3 class="exercise-title">Ejercicio 4: Posicionamiento Avanzado en CSS Grid</h3>  
+            <p class="exercise-description">Aprende a posicionar elementos en una cuadrícula utilizando las propiedades <code>grid-column</code> y <code>grid-row</code>. Crea diseños complejos con elementos superpuestos.</p>
+            
+              
+              <div class="code-editor">
+                  <textarea id="code4">/* Create an advanced grid layout */
+.grid-container {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: repeat(3, 100px);
+gap: 10px;
+}
+
+.grid-item:nth-child(1) {
+grid-column: 1 / 3;
+grid-row: 1 / 2;
+background-color: rgba(231, 76, 60, 0.7);
+border-color: #c0392b;
+}
+
+.grid-item:nth-child(2) {
+grid-column: 3 / 5;
+grid-row: 1 / 2;
+background-color: rgba(46, 204, 113, 0.7);
+border-color: #27ae60;
+}
+
+.grid-item:nth-child(3) {
+grid-column: 1 / 2;
+grid-row: 2 / 4;
+background-color: rgba(52, 152, 219, 0.7);
+border-color: #2980b9;
+}
+
+.grid-item:nth-child(4) {
+grid-column: 2 / 5;
+grid-row: 2 / 3;
+background-color: rgba(155, 89, 182, 0.7);
+border-color: #8e44ad;
+}
+
+.grid-item:nth-child(5) {
+grid-column: 2 / 4;
+grid-row: 3 / 4;
+background-color: rgba(241, 196, 15, 0.7);
+border-color: #f39c12;
+}
+
+.grid-item:nth-child(6) {
+grid-column: 4 / 5;
+grid-row: 3 / 4;
+background-color: rgba(52, 73, 94, 0.7);
+border-color: #2c3e50;
+}</textarea>
+              </div>
+              
+              <div class="buttons">
+                  <button class="btn btn-apply" onclick="applyCode(4)">Aplicar</button>
+                  <button class="btn btn-Reiniciar" onclick="ReiniciarCode(4)">Reiniciar</button>
+                  <button class="complete-btn" onclick="completeExercise(4)">Completo</button>
+              </div>
+              
+              <div class="hint">
+                <p>Pista: Intenta cambiar la posición de los elementos usando <code>grid-column</code> y <code>grid-row</code>. Usa el formato <code>inicio / fin</code> para especificar dónde deben comenzar y terminar los elementos.</p>
+
+              </div>
+              
+              <div class="preview-area" id="preview4">
+                  <div class="grid-container">
+                      <div class="grid-item">1</div>
+                      <div class="grid-item">2</div>
+                      <div class="grid-item">3</div>
+                      <div class="grid-item">4</div>
+                      <div class="grid-item">5</div>
+                      <div class="grid-item">6</div>
+                  </div>
+              </div>
+              
+              <div class="toggle-container">
+                <div id="toggle5" class="toggle-wrapper">
+                                  <button class="toggle-button"></button>
+                                  Mostrar
+                                </div>
+                              </div>
+          </section>
+
+          <section id="exercise5" class="exercise-container">
+            <h3 class="exercise-title">Ejercicio 5: Diseño Responsivo con Grid y Flexbox</h3>  
+            <p class="exercise-description">Crea un diseño responsivo que combine CSS Grid para la estructura general y Flexbox para la disposición de los componentes.</p>
+            
+              
+              <div class="code-editor">
+                  <textarea id="code5">/* Create a responsive layout using both Grid and Flexbox */
+.page-layout {
+display: grid;
+grid-template-columns: 1fr 3fr;
+grid-template-rows: auto 1fr auto;
+grid-template-areas: 
+  "header header"
+  "sidebar content"
+  "footer footer";
+gap: 10px;
+height: 100%;
+}
+
+.header {
+grid-area: header;
+background-color: rgba(231, 76, 60, 0.7);
+border-color: #c0392b;
+height: 50px;
+
+/* Flexbox for header items */
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 20px;
+}
+
+.sidebar {
+grid-area: sidebar;
+background-color: rgba(46, 204, 113, 0.7);
+border-color: #27ae60;
+
+/* Flexbox for sidebar items */
+display: flex;
+flex-direction: column;
+gap: 10px;
+padding: 10px;
+}
+
+.content-area {
+grid-area: content;
+background-color: rgba(52, 152, 219, 0.7);
+border-color: #2980b9;
+
+/* Flexbox for content items */
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+padding: 15px;
+align-content: flex-start;
+}
+
+.footer {
+grid-area: footer;
+background-color: rgba(155, 89, 182, 0.7);
+border-color: #8e44ad;
+height: 50px;
+
+/* Flexbox for footer items */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+.page-layout {
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "header"
+    "sidebar"
+    "content"
+    "footer";
+}
+}</textarea>
+              </div>
+              
+              <div class="buttons">
+                  <button class="btn btn-apply" onclick="applyCode(5)">Aplicar</button>
+                  <button class="btn btn-Reiniciar" onclick="ReiniciarCode(5)">Reiniciar</button>
+                  <button class="complete-btn" onclick="completeExercise(5)">Completo</button>
+              </div>
+              
+              <div class="hint">
+                <p>Pista: Intenta modificar la media query para ver cómo el diseño responde a diferentes tamaños de pantalla. También puedes ajustar las propiedades de flexbox en cada sección para diferentes disposiciones.</p>
+              </div>
+              
+              <div class="preview-area" id="preview5">
+                  <div class="page-layout">
+                      <div class="header">Header</div>
+                      <div class="sidebar">Sidebar</div>
+                      <div class="content-area">Content</div>
+                      <div class="footer">Footer</div>
+                  </div>
+              </div>
+              <div class="toggle-container">
+                <div id="toggle6" class="toggle-wrapper">
+                                  <button class="toggle-button"></button>
+                                  Mostrar
+                                </div>
+                              </div>
+          </section>
+          <h2 id="notas">Apuntes Finales</h2>
+            <h1>Entendiendo CSS Grid</h1>
+        <p>En este escenario, nuestra primera columna contiene un pequeño dragón con un ancho exacto. Pero, ¿qué pasa si la columna es demasiado estrecha para contenerlo? Las columnas basadas en porcentajes son rígidas, por lo que nuestra imagen de Skye se desbordará, saliéndose de los límites de la columna. En cambio, las columnas basadas en <code>fr</code> son flexibles, lo que significa que nunca se reducirán por debajo de su tamaño mínimo de contenido, incluso si eso rompe las proporciones establecidas.</p>
+        <p>Para ser más precisos: la unidad <code>fr</code> distribuye el espacio adicional. Primero, los anchos de las columnas se calculan en función de su contenido. Si sobra espacio, se distribuye según los valores de <code>fr</code>. Esto es muy similar al comportamiento de <code>flex-grow</code>.</p>
+        <p>En general, esta flexibilidad es algo positivo. Los valores en porcentaje pueden ser demasiado estrictos.</p>
+        <p>Podemos ver un ejemplo perfecto de esto con <code>gap</code>. Esta propiedad mágica de CSS agrega una cantidad fija de espacio entre todas las columnas y filas dentro de nuestra cuadrícula.</p>
+
+            <div class="css_fr_explanation">
+              <p>La unidad <span class="css_fr_highlight">fr</span> significa "fracción" y es una de las características más potentes de CSS Grid. Permite distribuir el espacio disponible de forma proporcional, similar a como funciona <span class="css_fr_highlight">flex-grow</span> en Flexbox.</p>
+              
+              <div class="code-block">
+                grid-template-columns: 1fr 3fr;
+              </div>
+              
+              <p>En este ejemplo, estamos diciendo que:</p>
+              <ul>
+                <li>La primera columna debe consumir <strong>1 unidad</strong> de espacio</li>
+                <li>La segunda columna debe consumir <strong>3 unidades</strong> de espacio</li>
+              </ul>
+              
+              <p>Esto significa que hay <strong>4 unidades totales</strong> de espacio (1 + 3 = 4), lo que se convierte en el denominador. La primera columna ocupa ¼ (25%) del espacio disponible, mientras que la segunda columna ocupa ¾ (75%).</p>
+              
+              <p>La unidad <span class="css_fr_highlight">fr</span> aporta la flexibilidad de Flexbox a CSS Grid. A diferencia de porcentajes o valores de longitud (<span class="css_fr_highlight">px</span>, <span class="css_fr_highlight">em</span>, etc.) que crean restricciones rígidas, las columnas con unidades <span class="css_fr_highlight">fr</span> son libres de crecer y reducirse según sea necesario para contener su contenido.</p>
+            </div>
+            
+            <div class="css_fr_demo_container">
+              <div class="css_fr_grid_demo" id="css_fr_grid_demo_7361">
+                <div class="css_fr_percentage_indicator css_fr_percentage_indicator_1" id="css_fr_percentage_indicator_1_8492">25%</div>
+                <div class="css_fr_percentage_indicator css_fr_percentage_indicator_2" id="css_fr_percentage_indicator_2_9127">75%</div>
+                
+                <div class="css_fr_grid_container" id="css_fr_grid_container_5738">
+                  <div class="css_fr_grid_item css_fr_grid_item_1">
+                    <span class="css_fr_fraction_label" id="css_fr_fraction_label_1_2641">1fr</span>
+                    <div>Columna 1</div>
+                    <div>¼ del espacio</div>
+                  </div>
+                  <div class="css_fr_grid_item css_fr_grid_item_2">
+                    <span class="css_fr_fraction_label" id="css_fr_fraction_label_2_3859">3fr</span>
+                    <img src="../../../assets/skye/support.png" alt="Imagen de ejemplo" class="css_fr_grid_item_image">
+                    <div>Columna 2: ¾ del espacio</div>
+                  </div>
+                </div>
+                
+                <div class="css_fr_grid_overlay" id="css_fr_grid_overlay_4682">
+                  <div class="css_fr_grid_line css_fr_grid_line_vertical" id="css_fr_grid_line_vertical_1973"></div>
+                </div>
+              </div>
+              
+              <div class="css_fr_controls">
+                
+                <div class="css_fr_control_group">
+                  <label for="css_fr_ratio_slider_7195">Ajustar proporción:</label>
+                  <input type="range" id="css_fr_ratio_slider_7195" class="css_fr_range_slider" min="1" max="5" value="1" step="0.5"  style="background: rgb(132, 1, 220);">
+                  <span id="css_fr_ratio_display_9083">1fr : 3fr</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="css_fr_explanation">
+              <h3>Ventajas de la unidad 'fr'</h3>
+              <ul>
+                <li><strong>Flexibilidad</strong>: Las columnas y filas se adaptan automáticamente al espacio disponible.</li>
+                <li><strong>Proporcionalidad</strong>: Crear diseños basados en proporciones es mucho más intuitivo que con porcentajes.</li>
+                <li><strong>Compatibilidad</strong>: Se puede combinar con otras unidades como <span class="css_fr_highlight">px</span>, <span class="css_fr_highlight">%</span> o <span class="css_fr_highlight">auto</span>.</li>
+                <li><strong>Responsividad</strong>: Facilita la creación de diseños que se adaptan a diferentes tamaños de pantalla.</li>
+              </ul>
+              
+              <p>Puedes jugar con los controles de arriba para ver cómo funciona la unidad <span class="css_fr_highlight">fr</span> en acción. El deslizador ajusta la proporción entre las columnas, demostrando cómo se distribuye el espacio disponible.</p>
+            <h1> Historia</h1>
+            <p>Antes de CSS Grid, los desarrolladores web dependían de métodos menos eficientes como:</p>
+
+<p><strong>Tablas HTML:</strong> Usadas en los primeros años de la web para maquetación.</p>
+
+<p><strong>Floats y Clearfix:</strong> Utilizados para posicionar elementos antes de Flexbox.</p>
+
+<p><strong>Flexbox:</strong> Introducido para diseños unidimensionales, pero menos eficiente para estructuras de grilla complejas.</p>
+
+<p>CSS Grid resuelve estos problemas al proporcionar un sistema robusto para diseñar filas y columnas simultáneamente.</p>
+            
+            </div>
+
+            <h2 id="conclusion">Conclusión</h2>
+            <p>CSS Grid ha revolucionado la forma en que diseñamos interfaces web al proporcionar un sistema de cuadrícula bidimensional flexible y eficiente. A lo largo de este temario, hemos explorado sus conceptos fundamentales, desde la creación de filas y columnas hasta el posicionamiento avanzado de elementos y su integración con otras tecnologías como Flexbox.</p>  
+
+<p>Una de las principales ventajas de CSS Grid es su capacidad para simplificar estructuras de diseño complejas, reduciendo la necesidad de soluciones alternativas como <code>float</code> o <code>inline-block</code>. Además, su compatibilidad con técnicas de diseño responsivo lo convierte en una herramienta imprescindible para desarrollar sitios web modernos y adaptables a diferentes dispositivos.</p>  
+
+<p>Para aprovechar al máximo CSS Grid, es recomendable experimentar con sus propiedades, combinarlo con Flexbox cuando sea necesario y aplicar buenas prácticas como el uso de <code>grid-template-areas</code> para una mayor legibilidad del código. Con práctica y exploración, CSS Grid puede convertirse en una solución poderosa para la maquetación web, optimizando tanto la estética como la funcionalidad de nuestros proyectos.</p>
+
+            <p>Gracias por leer :3</p>
+        </main>
+    </div>
+    
+    <div class="comments">
+      <main class="content">
+    <!-- begin wwww.htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%2476gBfZFjo3Ne22wg7kCrl1"+"&opts=16798&num=10&ts=1742831387485");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end www.htmlcommentbox.com -->
+</main>
+</div>
+	<!-- Music player lol-->
+  <div class="music-player">
+    <div class="highlight top-right"></div>
+    <div class="highlight bottom-left"></div>
+    
+    <button class="slide-toggle">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    
+    <div class="corner-tag">Now Playing</div>
+    
+    <div class="player-header">
+        <div class="visualizer">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="album-art">
+            <img src="../../../assets/sound-effects/rings.svg" alt="Album Art">
+        </div>
+        
+        <div class="song-info">
+            <h3 class="song-title">Current Song</h3>
+        </div>
+        
+        <div class="progress-container">
+            <div class="current-time">0:00</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="duration">0:00</div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="prev">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button class="control-btn" id="play">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="next">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!---End of the music player :D-->
+
+  			  <!--Nav bar-->
+          <div id="nav2-wrapper">
+            <div id="nav2-custom-sidebar" class="hidden">
+              <h2>Filesystem</h2>
+              <ul>
+              <li><a href="../../../home/index.html"><img src="../../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+              <li><a href="#"><img src="../../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+              <li><a href="../../../filesystem/social/index.html"><img src="../../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+              <li><a href="../../../filesystem/support/index.html"><img src="../../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+              <li><a href="../../../filesystem/tos/index.html"><img src="../../../assets/nav-bar/rules.png" alt="games Icon">Tos</a></li>
+              <li><a href="#"><img src="../../../assets/nav-bar/tools.png" alt="friends Icon">Tools</a></li>
+              <li><a href="#"><img src="../../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog <img src="../../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+              <li><a href="#"><img src="../../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+              <li><a href="#"><img src="../../../assets/nav-bar/software.png" alt="Chat Icon">Software</a></li>
+              <li><a href="../../../filesystem/credits/index.html"><img src="../../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+              <li><a href="https://trello.com/b/bosL3mrV/skye-workstation-queue"><img src="../../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+                <li><a href="#"><img src="../../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+              </ul>
+              </div>
+              <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+              <button id="nav2-sidebar-toggle"></button>
+            </div>
+
+    <!-- Overlay-->
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+        </div>
+        <style>
+
+            /* Star Particles */
+            .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+            }
+            
+            .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: move-stars 10s linear infinite;
+            opacity: 0.8;
+            }
+            
+            @keyframes move-stars {
+            0% {
+            transform: translateY(100vh);
+            opacity: 0.2;
+            }
+            100% {
+            transform: translateY(-10vh);
+            opacity: 1;
+            }
+            }
+            </style>
+        
+            <div class="stars"></div>
+            
+            <script>
+            // Generate stars dynamically
+            const starsContainer = document.querySelector('.stars');
+            const starCount = 500; 
+            
+            for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            star.style.animationDuration = 5 + Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+            }
+            </script>
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+
+
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+<!-- Mouse effect :) -->
+<script>
+
+    var b = document.body;
+    var imgurl = "../../../assets/mouse/cursor.ico";
+    var size = [10, 20];
+    function rand(min, max)
+    {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    function getSize()
+    {
+    return rand(size[0], size[1]);
+    }
+    function lerp(a,b,f)
+    {
+    return (b-a)*f+a;
+    }
+    function heart(x,y)
+    {
+    var s = getSize();
+    x -= s/2;
+    y -= s/2;
+    x = Math.floor(x) + rand(-5, 5);
+    y = Math.floor(y) + rand(-5, 5);
+    var fx = x + rand(-40, 40);
+    var fy = y + rand(-40, 40);
+    var i = document.createElement("img");
+    i.src = imgurl;
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    b.appendChild(i);
+    var f = 0;
+    var interval;
+    interval = setInterval(function() {
+    var _x = Math.floor(lerp(x, fx, f));
+    var _y = Math.floor(lerp(y, fy, f));
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    i.style.opacity = 1-f;
+    f += 0.01;
+    if (f > 1)
+    {
+    clearInterval(interval);
+    b.removeChild(i);
+    }
+    }, 10);
+    }
+    function bro(x,y)
+    {
+    for (var i = 0; i < 5; i++)
+    {
+    heart(x,y);
+    }
+    }
+    b.addEventListener("click", function(event){
+    var x = event.clientX;
+    var y = event.clientY;
+    bro(x,y);
+    });
+    
+    </script>
+
+<script>
+  // Smooth scroll for navigation with sound effect
+  document.querySelectorAll('.blog-sidebar a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Play sound effect
+          const soundEffect = new Audio('selection.mp3');
+          soundEffect.play();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          window.scrollTo({
+              top: targetElement.offsetTop - 20,
+              behavior: 'smooth'
+          });
+      });
+  });
+          </script>
+
+          <!--Background-->
+          <div class="video-background">
+            <video autoplay muted loop>
+                <source src="../../../assets/background/Intro-background.webm" type="video/webm">
+            </video>
+        </div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      function setupToggle(toggleId, targetSelector) {
+          const toggleWrapper = document.getElementById(toggleId);
+          if (!toggleWrapper) {
+              console.warn(`Toggle button with ID '${toggleId}' not found.`);
+              return;
+          }
+
+          const toggleButton = toggleWrapper.querySelector('.toggle-button');
+          const target = document.querySelector(targetSelector);
+          const gridLines = document.querySelector('.draw'); // Asegura que el grid exista
+
+          if (!target) {
+              console.warn(`Target element '${targetSelector}' not found.`);
+              return;
+          }
+
+          toggleWrapper.addEventListener('click', function() {
+              toggleButton.classList.toggle('active');
+              toggleWrapper.classList.toggle('active');
+              target.classList.toggle('perspective-view');
+
+              // Crear y reproducir el audio solo cuando se necesite
+              const audio = new Audio('selection.mp3'); 
+              audio.play().catch(e => console.log('Audio play failed:', e));
+
+              // Reiniciar la animación de dibujo
+              if (gridLines) {
+                  gridLines.style.animation = 'none'; // Reinicia la animación
+                  void gridLines.offsetWidth; // Forzar reflow para reiniciar la animación
+                  gridLines.style.animation = 'draw 1.5s ease-out forwards';
+              }
+          });
+      }
+
+      setupToggle('toggle1', '.cuadro'); 
+      setupToggle('toggle2', '#exercise1'); 
+      setupToggle('toggle3', '#exercise2'); 
+      setupToggle('toggle4', '#exercise3'); 
+      setupToggle('toggle5', '#exercise4'); 
+      setupToggle('toggle6', '#exercise5'); 
+  });
+</script>
+
+
+  
+<!-- Scripts -->
+<script>
+ // Initial code values
+const initialCode = {
+    1: `/* Modify the grid properties below */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+/* These styles control the individual grid items */
+.grid-item {
+  padding: 20px;
+  font-size: 1.5em;
+}`,
+    2: `/* Modify the grid layout using grid-template-areas */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    "header header"
+    "nav main"
+    "footer footer";
+  gap: 10px;
+  height: 100%;
+}
+
+.header {
+  grid-area: header;
+  background-color: rgba(108, 142, 235, 0.6);
+  border-color: #8baaf3;
+  height: 50px;
+}
+
+.nav {
+  grid-area: nav;
+  background-color: rgba(138, 150, 230, 0.6);
+  border-color: #9aa5f2;
+  
+}
+
+.main {
+  grid-area: main;
+  background-color: rgba(153, 140, 227, 0.6);
+  border-color: #a59be3;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: rgba(170, 128, 222, 0.6);
+  border-color: #b18dde;
+  height: 50px;
+}`,
+    3: `/* Modify the flexbox properties below */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.flex-item {
+  flex: 1;
+  padding: 20px;
+  min-width: 100px;
+  height: 80px;
+}`,
+    4: `/* Create an advanced grid layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+}
+
+.grid-item:nth-child(1) {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  background-color: rgba(108, 142, 235, 0.6);
+  border-color: #8baaf3;
+}
+
+.grid-item:nth-child(2) {
+  grid-column: 3 / 5;
+  grid-row: 1 / 2;
+  background-color: rgba(125, 146, 232, 0.6);
+  border-color: #94a2f0;
+}
+
+.grid-item:nth-child(3) {
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+  background-color: rgba(138, 150, 230, 0.6);
+  border-color: #9aa5f2;
+}
+
+.grid-item:nth-child(4) {
+  grid-column: 2 / 5;
+  grid-row: 2 / 3;
+  background-color: rgba(153, 140, 227, 0.6);
+  border-color: #a59be3;
+}
+
+.grid-item:nth-child(5) {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+  background-color: rgba(170, 128, 222, 0.6);
+  border-color: #b18dde;
+}
+
+.grid-item:nth-child(6) {
+  grid-column: 4 / 5;
+  grid-row: 3 / 4;
+  background-color: rgba(185, 120, 215, 0.6);
+  border-color: #c27fd7;
+}`,
+    5: `/* Create a responsive layout using both Grid and Flexbox */
+.page-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    "header header"
+    "sidebar content"
+    "footer footer";
+  gap: 10px;
+  height: 100%;
+}
+
+.header {
+  grid-area: header;
+  background-color: rgba(108, 142, 235, 0.6);
+  border-color: #8baaf3;
+  height: 50px;
+  
+  /* Flexbox for header items */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: rgba(125, 146, 232, 0.6);
+  border-color: #94a2f0;
+  
+  /* Flexbox for sidebar items */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.content-area {
+  grid-area: content;
+  background-color: rgba(153, 140, 227, 0.6);
+  border-color: #a59be3;
+  
+  /* Flexbox for content items */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  align-content: flex-start;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: rgba(170, 128, 222, 0.6);
+  border-color: #b18dde;
+  height: 50px;
+  
+  /* Flexbox for footer items */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "header"
+      "sidebar"
+      "content"
+      "footer";
+  }
+}`
+};
+
+// Add exercise completion tracking
+const completedExercises = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false
+};
+
+// Load confetti script
+document.addEventListener("DOMContentLoaded", function() {
+    // Add confetti script to the page
+    const confettiScript = document.createElement('script');
+    confettiScript.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js";
+    document.head.appendChild(confettiScript);
+    
+    // Set initial code in textareas
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`code${i}`).value = initialCode[i];
+    }
+    
+    // Create audio element for the sound effect
+    const soundEffect = document.createElement('audio');
+    soundEffect.id = 'completion-sound';
+    soundEffect.src = 'mystical-chime.mp3';
+    soundEffect.preload = 'auto';
+    document.body.appendChild(soundEffect);
+});
+
+// Function to Aplicar
+function applyCode(exerciseNum) {
+    const code = document.getElementById(`code${exerciseNum}`).value;
+    const style = document.createElement('style');
+    style.textContent = code;
+    
+    // Remove any previous style for this exercise
+    const oldStyle = document.getElementById(`style${exerciseNum}`);
+    if (oldStyle) {
+        oldStyle.remove();
+    }
+    
+    // Add the new style
+    style.id = `style${exerciseNum}`;
+    document.head.appendChild(style);
+}
+
+// Function to Reiniciar code
+function ReiniciarCode(exerciseNum) {
+    document.getElementById(`code${exerciseNum}`).value = initialCode[exerciseNum];
+    applyCode(exerciseNum);
+}
+
+// Function to mark an exercise as complete
+function completeExercise(exerciseNum) {
+    if (completedExercises[exerciseNum]) return; // Don't celebrate twice
+    
+    completedExercises[exerciseNum] = true;
+    
+    // Play sound
+    const sound = document.getElementById('completion-sound');
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Sound play failed:", e));
+    }
+    
+    // Show confetti
+    if (window.confetti) {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+    } else {
+        console.log("Confetti not loaded yet");
+    }
+    
+    // Add visual indication that exercise is complete
+    const exerciseContainer = document.querySelector(`.exercise:nth-child(${exerciseNum})`);
+    if (exerciseContainer) {
+        exerciseContainer.classList.add('completed');
+    }
+}
+
+function setupCompleteButtons() {
+    for (let i = 1; i <= 5; i++) {
+        const completeBtn = document.createElement('button');
+        completeBtn.className = 'complete-btn';
+        completeBtn.textContent = 'Completo';
+        completeBtn.onclick = function() { completeExercise(i); };
+        
+        // Find the container for this exercise
+        const exerciseContainer = document.querySelector(`.exercise:nth-child(${i}) .controls`) || 
+                                  document.querySelector(`.exercise:nth-child(${i})`);
+        
+        if (exerciseContainer) {
+            exerciseContainer.appendChild(completeBtn);
+        }
+    }
+}
+
+// Call setup function when DOM is loaded
+document.addEventListener("DOMContentLoaded", function() {
+    setupCompleteButtons();
+});
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const gridDemo = document.getElementById('css_fr_grid_demo_7361');
+    const gridContainer = document.getElementById('css_fr_grid_container_5738');
+    const gridOverlay = document.getElementById('css_fr_grid_overlay_4682');
+    const toggleVisual = document.getElementById('css_fr_toggle_visual_6284');
+    const ratioSlider = document.getElementById('css_fr_ratio_slider_7195');
+    const ratioDisplay = document.getElementById('css_fr_ratio_display_9083');
+    const fractionLabel1 = document.getElementById('css_fr_fraction_label_1_2641');
+    const fractionLabel2 = document.getElementById('css_fr_fraction_label_2_3859');
+    const percentageIndicator1 = document.getElementById('css_fr_percentage_indicator_1_8492');
+    const percentageIndicator2 = document.getElementById('css_fr_percentage_indicator_2_9127');
+    const gridLineVertical = document.getElementById('css_fr_grid_line_vertical_1973');
+    
+    // Update ratio
+    ratioSlider.addEventListener('input', function() {
+      const firstFr = parseFloat(this.value);
+      const secondFr = 6 - firstFr; // Ensure sum is always 6 for simplicity
+      
+      // Update grid
+      gridContainer.style.gridTemplateColumns = `${firstFr}fr ${secondFr}fr`;
+      
+      // Update labels
+      fractionLabel1.textContent = `${firstFr}fr`;
+      fractionLabel2.textContent = `${secondFr}fr`;
+      
+      // Update ratio display
+      ratioDisplay.textContent = `${firstFr}fr : ${secondFr}fr`;
+      
+      // Calculate percentages
+      const totalFr = firstFr + secondFr;
+      const percent1 = Math.round((firstFr / totalFr) * 100);
+      const percent2 = 100 - percent1;
+      
+      // Update percentage indicators
+      percentageIndicator1.textContent = `${percent1}%`;
+      percentageIndicator1.style.width = `${percent1}%`;
+      
+      percentageIndicator2.textContent = `${percent2}%`;
+      percentageIndicator2.style.width = `${percent2}%`;
+      percentageIndicator2.style.left = `${percent1}%`;
+      
+      // Update grid line
+      gridLineVertical.style.left = `${percent1}%`;
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script src="preloader.js"></script>
+<script src="draw.js"></script>
+<script src="../../../main-music-player/music-player.js"></script>
+<script type="text/javascript" src="../../../nav bar.js"></script>
+
+</body>
+</html>

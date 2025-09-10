@@ -1,0 +1,317 @@
+@font-face {
+  font-family: 'departure-mono';
+  src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'genshin impact';
+  src: url('../../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+@font-face {
+  font-family: 'ZHFont';
+  src: url('../../assets/fonts/zhcn.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  background-image: url('assets/bg.jpg');
+  background-size:contain;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  z-index: -100;
+   font-family: "kawaii", serif;
+  position: relative;
+}
+
+
+.profile-image {
+  width: 350px;
+  height: 750px;
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  object-fit: cover;
+}
+
+.kitty-image {
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 50%;
+  right: -1%;
+  object-fit: cover;
+}
+
+.kitty2-image {
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 60%;
+  right: 40%;
+  object-fit: cover;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #7cc6ffcc;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e3f3ffcc;
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #edf5ff;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+
+/* ========================================
+   FLOATING ANIMATION CLASSES
+======================================== */
+/* Standard floating animation */
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Slow floating variation */
+.floating-slow {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Fast floating variation */
+.floating-fast {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Large movement floating variation */
+.floating-large {
+    animation: float-large 3.5s ease-in-out infinite;
+}
+
+/* ========================================
+   SPARKLES POSITIONED RANDOMLY ON SCREEN
+======================================== */
+.sparkle {
+    position: fixed;
+    width: 80px;
+    height: auto;
+    z-index: 999;
+    pointer-events: none; /* So they don't interfere with clicks */
+}
+
+/* Individual sparkle positions - More sparkles for magical effect */
+.sparkle-1 {
+    top: 10%;
+    left: 55%;
+    width: 505px;
+    z-index: -1;
+}
+
+.sparkle-2 {
+    top: 15%;
+    right: 3%;
+    width: 205px;
+}
+
+.sparkle-3 {
+    bottom: 30%;
+    left: 10%;
+    width: 40px;
+}
+
+.sparkle-4 {
+    top: 60%;
+    left: 20%;
+    z-index: -1;
+    width: 408px;
+}
+
+.sparkle-5 {
+    top: 40%;
+    right: 25%;
+    width: 402px;
+    z-index: -1;
+}
+
+.sparkle-6 {
+    bottom: 20%;
+    right: 30%;
+    width: 86px;
+}
+
+        .sparkle-7 {
+            top: 20%;
+            left: 15%;
+            width: 15px;
+        }
+
+        .sparkle-8 {
+            top: 8%;
+            left: 25%;
+            width: 20px;
+        }
+
+        .sparkle-9 {
+            top: 25%;
+            right: 15%;
+            width: 25px;
+        }
+
+        .sparkle-10 {
+            top: 45%;
+            right: 5%;
+            width: 35px;
+        }
+
+        .sparkle-11 {
+            top: 65%;
+            right: 20%;
+            width: 40px;
+        }
+
+        .sparkle-12 {
+            top: 80%;
+            right: 10%;
+            width: 30px;
+        }
+
+        .sparkle-13 {
+            top: 35%;
+            right: 35%;
+            width: 25px;
+        }
+
+        .sparkle-14 {
+            top: 12%;
+            left: 10%;
+            width: 40px;
+        }
+
+        .sparkle-15 {
+            bottom: 15%;
+            right: 8%;
+            width: 35px;
+        }
+
+        .sparkle-16 {
+            top: 55%;
+            right: 12%;
+            width: 20px;
+        }
+
+        .sparkle-17 {
+            top: 3%;
+            left: 18%;
+            width: 28px;
+        }
+
+        .sparkle-18 {
+            bottom: 25%;
+            right: 30%;
+            width: 33px;
+        }
+/* ========================================
+   ANIMATION DELAYS FOR RANDOMNESS
+======================================== */
+.floating:nth-child(1) { animation-delay: 0s; }
+.floating:nth-child(2) { animation-delay: 0.5s; }
+.floating:nth-child(3) { animation-delay: 1s; }
+.floating:nth-child(4) { animation-delay: 1.5s; }
+.floating:nth-child(5) { animation-delay: 2s; }
+.floating:nth-child(6) { animation-delay: 2.5s; }
+.floating:nth-child(7) { animation-delay: 1.2s; }
+.floating:nth-child(8) { animation-delay: 0.8s; }
+.floating:nth-child(9) { animation-delay: 1.8s; }
+.floating:nth-child(10) { animation-delay: 0.3s; }
+.floating:nth-child(11) { animation-delay: 2.2s; }
+.floating:nth-child(12) { animation-delay: 1.7s; }
+.floating:nth-child(13) { animation-delay: 0.9s; }
+.floating:nth-child(14) { animation-delay: 2.8s; }
+.floating:nth-child(15) { animation-delay: 0.6s; }
+.floating:nth-child(16) { animation-delay: 1.4s; }
+.floating:nth-child(17) { animation-delay: 2.1s; }
+.floating:nth-child(18) { animation-delay: 1.1s; }
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+/* Main floating animation keyframe */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Large floating animation keyframe */
+@keyframes float-large {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: url('assets/bg-2.png');
+    background-size: auto 100px;
+    background-position: top center;
+    background-repeat: repeat-x;
+    z-index: -1;
+    opacity: 1;
+}
+
+/* Speech bubble styling */
+.speech-bubble {
+    position: fixed;
+    top: 20%;
+    right: 28%;
+    z-index: 100;
+    animation: float 3s ease-in-out infinite;
+}
+
+.bubble-image {
+    width: 300px;
+    height: auto;
+}
+
+.bubble-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #05002baa;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.bubble-text a{
+    color: #ff99c5;
+    text-decoration: underline;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}

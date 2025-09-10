@@ -1,0 +1,85 @@
+/* DESIGN FOR MUSIC PLAYER FROM VIVARISM!!! 
+https://vivarism.net/
+muawhhhh credits to them for the original code wawawawa*/
+/* ========================================
+   FONT IMPORTS
+======================================== */
+@font-face {
+    font-family: 'kawaii';
+    src: url('assets/KTEGAKI.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+   body {
+               font-family: "kawaii", serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        #musicplayer {
+            background: url('background/blue.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 12px; /* Increased padding for thicker blue border */
+            width: 250px; /* Made narrower from 700px */
+            position: absolute; /* Changed from relative to absolute */
+            top: 20px; /* Position at top */
+            left: 400px; /* Position towards left but not completely */
+        }
+
+        .display-area {
+            background: #f8f9ff;
+            border: 3px solid #f2f7ff;
+            padding: 15px 20px; /* Adjusted padding for smaller width */
+            text-align: center;
+            box-shadow: 
+                inset 1px 1px 3px rgba(0, 0, 0, 0.1),
+                inset -1px -1px 3px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+        }
+
+        .songtitle {
+            font-size: 20px;
+            color: #2c3e50;
+            font-weight: bold;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 12s linear infinite; /* Adjusted timing for narrower width */
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Cute decorative elements */
+        .decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('background/music_icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .decoration.left {
+            top: -15px;
+            left: -15px;
+        }
+
+        .decoration.right {
+            top: -15px;
+            right: -15px;
+        }
+
+        audio {
+            display: none;
+        }

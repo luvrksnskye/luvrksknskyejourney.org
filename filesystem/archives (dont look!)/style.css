@@ -1,0 +1,853 @@
+/* ========== FONT IMPORTS ========== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+/* ========== CUSTOM FONTS ========== */
+@font-face {
+    font-family: 'departure-mono';
+    src: url('../../assets/fonts/DepartureMono-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'genshin impact';
+    src: url('../../assets/fonts/Genshin\ Impact\ DRIP\ FONT.ttf') format('woff');
+}
+
+/* ========== GENERAL STYLES ========== */
+::selection {
+    color: white;
+    background-color: #7b9eff;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Evita scrollbar en el body */
+}
+
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cfdeff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7db8ff;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.text-node { 
+    background-clip: text !important; 
+    -webkit-background-clip: text !important; 
+}
+
+/* ========== SCROLLING BACKGROUND STYLES ========== */
+.parallax-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* Removido perspective para evitar problemas de altura */
+}
+
+.parallax-bg {
+    position: absolute; /* Cambiado de fixed a absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--content-height, 200vh); /* Usa la variable CSS que defines en JS */
+    min-height: 100vh; /* Altura mínima de la ventana */
+    background-image: url('clock/bg.png');
+    background-size: cover;
+    background-position: center top; /* Cambiado para mejor alineación */
+    background-repeat: no-repeat;
+    z-index: -1;
+    /* Removido transform que causaba problemas de escala */
+}
+
+/* ========== CONTENT SECTIONS ========== */
+.content-sections {
+    position: relative;
+    z-index: 1;
+    padding-top: 15vh;
+    padding-bottom: 50vh; /* Aumenta el padding inferior para evitar espacios blancos */
+    min-height: 100vh; /* Asegura que el contenido ocupe al menos la altura de la ventana */
+}
+
+.about-section {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    transform-style: preserve-3d;
+    transition: opacity 0.8s ease-in-out, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transición más suave */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.about-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-card {
+    background-color: rgba(255, 255, 255, 0.091);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 800px;
+    box-shadow: 0 4px 30px rgba(123, 158, 255, 0.2);
+    border: 1px solid rgba(123, 158, 255, 0.3);
+    transform: translateZ(0);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transición suave */
+}
+
+.about-card:hover {
+    box-shadow: 0 8px 40px rgba(123, 158, 255, 0.3);
+    transform: translateY(-5px); /* Ligero efecto de elevación al pasar el cursor */
+}
+
+.about-card h1, .about-card h2 {
+    font-family: 'Cinzel', serif;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(123, 158, 255, 0.5);
+}
+
+.about-card h1 {
+    font-size: 2.5rem;
+}
+
+.about-card h2 {
+    font-size: 2rem;
+}
+
+.about-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(123, 158, 255, 0.5), transparent);
+    margin: 30px 0;
+}
+
+.clock-intro {
+    text-align: center;
+    padding: 40px;
+    max-width: 800px;
+    background-color: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+}
+
+.clock-intro h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(123, 158, 255, 0.5);
+}
+
+.clock-intro p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* ========== CLOCK CONTAINER ========== */
+.clock-container {
+    position: relative;
+    width: 1024px;
+    height: 1024px;
+    margin: 100px auto;
+    transform: scale(0.1);
+    opacity: 0;
+    transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.5s ease-out; /* Transición más dinámica */
+    z-index: 2;
+}
+
+.clock-container.visible {
+    transform: scale(0.8);
+    opacity: 1;
+}
+
+/* Clock Glow with Pulsing Animation */
+.u-i-clock-t-b325db893ccf {
+    position: absolute;
+    left: 311px;
+    top: 313px;
+    width: 396px;
+    height: 396px;
+    z-index: 3;
+    border-radius: 50%;
+    background: url('clock/UI_Clock_TimeMask.png') no-repeat center center / cover;
+    opacity: 0.3;
+    animation: clockGlow 3s ease-in-out infinite alternate;
+    box-shadow: 
+        0 0 20px rgba(123, 158, 255, 0.3),
+        0 0 40px rgba(123, 158, 255, 0.2),
+        0 0 60px rgba(123, 158, 255, 0.1);
+}
+
+@keyframes clockGlow {
+    0% {
+        box-shadow: 
+            0 0 20px rgba(123, 158, 255, 0.3),
+            0 0 40px rgba(123, 158, 255, 0.2),
+            0 0 60px rgba(123, 158, 255, 0.1);
+    }
+    100% {
+        box-shadow: 
+            0 0 30px rgba(123, 158, 255, 0.5),
+            0 0 60px rgba(123, 158, 255, 0.4),
+            0 0 90px rgba(123, 158, 255, 0.2);
+    }
+}
+
+/* Clock Dial */
+.u-i-clock-d-b324773a85bb {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 1024px;
+    height: 1024px;
+    border-radius: 50%;
+    background: url('clock/UI_Clock_Dial_NoTag.png') no-repeat center center / cover;
+    z-index: 5;
+}
+
+/* Gear Animations */
+@keyframes rotateClockwise {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateCounterClockwise {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Main Gear - Large, slower rotation */
+.u-i-img-hor-b324c608923d {
+    position: absolute;
+    left: 434px;
+    top: 202px;
+    width: 416px;
+    height: 416px;
+    border-radius: 50%;
+    border: 2px solid rgba(123, 158, 255, 0.4);
+    animation: rotateClockwise 40s linear infinite;
+    background: url('clock/UI_Img_Horoscope03.png') no-repeat center center;
+    transform-origin: center center;
+    opacity: 0.3;
+}
+
+/* Small Gear - Bottom Right */
+.u-i-img-hor-b32496c3209a {
+    position: absolute;
+    left: 466px;
+    top: 645px;
+    width: 238px;
+    height: 238px;
+    border-radius: 50%;
+    border: 2px solid rgba(123, 158, 255, 0.4);
+    background: url('clock/UI_Img_Horoscope04.png') no-repeat center center / cover;
+    animation: rotateCounterClockwise 20s linear infinite;
+    transform-origin: center center;
+    opacity: 0.3;
+}
+
+/* Medium Gear - Left */
+.u-i-img-hor-b32494f1f24c {
+    position: absolute;
+    left: 130px;
+    top: 443px;
+    width: 371px;
+    height: 371px;
+    border-radius: 50%;
+    border: 2px solid rgba(123, 158, 255, 0.4);
+    background: url('clock/UI_Img_Horoscope05.png') no-repeat center center / cover;
+    animation: rotateClockwise 30s linear infinite;
+    transform-origin: center center;
+    opacity: 0.3;
+}
+
+/* Small Center Gear */
+.u-i-img-hor-b3249794a954 {
+    position: absolute;
+    left: 512px;
+    top: 349px;
+    width: 188px;
+    height: 188px;
+    border-radius: 50%;
+    border: 2px solid rgba(123, 158, 255, 0.4);
+    animation: rotateCounterClockwise 15s linear infinite;
+    background: url('clock/UI_Img_Horoscope06.png') no-repeat center center / cover;
+    transform-origin: center center;
+    opacity: 0.3;
+}
+
+/* Background circle inside gear */
+.ellipse-b324ffb1177c {
+    position: absolute;
+    left: 298px;
+    top: 298px;
+    width: 428px;
+    height: 428px;
+    border-radius: 50%;
+    border: 3px solid rgba(123, 158, 255, 0.5);
+    background: url('clock/circle_bg.png') no-repeat center center / cover;
+}
+
+/* ========== CLOCK HANDS ========== */
+.clock-hands {
+    position: absolute;
+    left: 512px;
+    top: 512px;
+    transform-origin: center center;
+}
+
+.hour-hand {
+    position: absolute;
+    left: -75px;
+    top: -187px;
+    width: 150px;
+    height: 375px;
+    background: url('clock/UI_Clock_HourHand.png') no-repeat center center / contain;
+    transform-origin: 75px 187px;
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición suave para las manecillas */
+}
+
+.minute-hand {
+    position: absolute;
+    left: -66px;
+    top: -150px;
+    width: 132px;
+    height: 300px;
+    transform-origin: 66px 150px;
+    background: url('clock/UI_Clock_MinuteHand.png') no-repeat center center / contain;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición suave para las manecillas */
+}
+
+/* Center dot */
+.clock-center {
+    position: absolute;
+    left: 502px;
+    top: 502px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 12;
+}
+
+/* ========== TIME ICONS ========== */
+.time-icon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 10;
+}
+
+.time-icon.active {
+    opacity: 1;
+    animation: iconPulse 2s ease-in-out infinite alternate;
+}
+
+/* Icon positions */
+.noon-icon {
+    left: 382px;
+    top: 130px;
+    background-image: url('clock/UI_ClockIcon_Noon.png');
+    width: 260px;
+    height: 120px;
+}
+
+.night-icon {
+    left: 380px; 
+    top: 773px;  
+    background-image: url('clock/UI_ClockIcon_Night.png');
+    width: 260px;
+    height: 120px;
+}
+
+.morning-icon {
+    left: 111px;
+    top: 458px;
+    background-image: url('clock/UI_ClockIcon_Morning.png');
+    width: 160px;
+    height: 100px;
+}
+
+.dusk-icon {
+    left: 757px;
+    top: 465px; 
+    background-image: url('clock/UI_ClockIcon_Dusk.png');
+    width: 150px;
+    height: 90px;
+}
+
+/* Icon pulsing animations */
+.noon-icon.active {
+    animation: noonPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes noonPulse {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1));
+    }
+}
+
+.night-icon.active {
+    animation: nightPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes nightPulse {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(70, 130, 180, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 30px rgba(70, 130, 180, 1));
+    }
+}
+
+.morning-icon.active {
+    animation: morningPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes morningPulse {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(255, 255, 200, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 30px rgb(254, 255, 211));
+    }
+}
+
+.dusk-icon.active {
+    animation: duskPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes duskPulse {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 30px rgba(255, 140, 0, 1));
+    }
+}
+
+/* ========== TIME CONTROL PANEL ========== */
+.time-control-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-image: url('clock/UI_Tag_IconClock.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s ease;
+}
+
+.time-control-button:hover {
+    transform: scale(1.1);
+}
+
+.time-control-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.084);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1001;
+    display: none;
+}
+
+.time-arrow {
+    width: 100px;
+    height: 40px;
+    background-image: url('clock/UI_Clock_TimeArrow.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 10px 0;
+}
+
+.time-arrow.down {
+    transform: rotate(180deg);
+}
+
+.time-display {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(123, 158, 255, 0.8);
+    margin: 20px 0;
+}
+
+.time-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.time-input {
+    width: 80px;
+    height: 50px;
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(123, 158, 255, 0.5);
+    border-radius: 5px;
+    color: white;
+}
+
+.time-control-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.time-btn {
+    padding: 10px 20px;
+    background-color: rgba(205, 218, 255, 0.3);
+    border: 1px solid rgba(123, 158, 255, 0.059);
+    border-radius: 5px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-btn:hover {
+    background-color: rgba(123, 158, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.fast-rotation {
+    transition: transform 0.1s ease-out;
+}
+
+/* ========== STARS & STARFALL EFFECTS ========== */
+/* Stars background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: move-stars 10s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes move-stars {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 1;
+    }
+}
+
+/* Starfall container */
+.starfall-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    font-family: 'Anton', sans-serif;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.starfall-container .starfield {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    border-radius: 999px;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+    animation:
+        star-tail 3000ms ease-in-out infinite,
+        star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    border-radius: 100%;
+    animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+    transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+    transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+    0% { width: 0; }
+    30% { width: 100px; }
+    100% { width: 0; }
+}
+
+@keyframes star-glow {
+    0% { width: 0; }
+    50% { width: 30px; }
+    100% { width: 0; }
+}
+
+@keyframes star-falling {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(300px); }
+}
+
+/* ========== BUBBLES EFFECT ========== */
+.bubbles-container {
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.bubble {
+    position: absolute;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 40%, rgba(123, 158, 255, 0.2) 60%, rgba(123, 158, 255, 0) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: bubble-rise var(--rise-duration) ease-in infinite;
+    opacity: 0;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--bubble-opacity);
+    }
+    90% {
+        opacity: var(--bubble-opacity);
+    }
+    100% {
+        transform: translateY(calc(-100vh - 100px)) scale(var(--scale-end));
+        opacity: 0;
+    }
+}
+
+/* ========== COUNTER SECTION ========== */
+.counter-section {
+    text-align: center;
+    margin: 100px auto;
+    padding: 40px;
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.069);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.counter-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.blink-counter {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(123, 158, 255, 0.8);
+    margin: 20px 0;
+}
+
+.counter-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    margin: 20px 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.counter-title.visible {
+    opacity: 1;
+}
+
+.counter-message {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-top: 40px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    text-shadow: 0 0 10px rgba(123, 158, 255, 0.5);
+}
+
+.counter-message.visible {
+    opacity: 1;
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 1600px) {
+    .clock-container.visible {
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 1200px) {
+    .clock-container.visible {
+        transform: scale(0.6);
+    }
+    
+    .about-card {
+        padding: 30px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 900px) {
+    .clock-container.visible {
+        transform: scale(0.5);
+    }
+    
+    .about-card h1 {
+        font-size: 2rem;
+    }
+    
+    .about-card h2 {
+        font-size: 1.7rem;
+    }
+    
+    .about-card p {
+        font-size: 1rem;
+    }
+    
+    .blink-counter {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .clock-container.visible {
+        transform: scale(0.4);
+    }
+    
+    .about-card {
+        padding: 20px;
+    }
+    
+    .time-control-panel {
+        width: 90%;
+    }
+    
+    .blink-counter {
+        font-size: 2.5rem;
+    }
+    
+    .counter-title {
+        font-size: 1.2rem;
+    }
+    
+    .counter-message {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye's Diary</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="diary.css">
+    <link rel="stylesheet" href="diary-music-player.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="video-background" id="mainBackground">
+        <video id="mainVideo" autoplay muted loop>
+            <source src="../../assets/background/Day mode scene.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="video-splash-transition" id="transitionVideo">
+        <video id="transition" autoplay muted>
+            <source src="../../assets/transitions/Splash Transition - BeardBoyDigital.webm" type="video/webm">
+        </video>
+    </div>
+
+    <div class="video-background" id="secondBackground">
+        <video id="secondVideo" autoplay muted loop>
+            <source src="../../assets/background/Night Scene Animated.mp4" type="video/mp4">
+        </video>
+    </div>
+      <!-- Diary entries -->
+    <div class="container">
+        <div class="diary">
+            <iframe src="diary-memo-notes/main-entry.html" id="diaryFrame" width="480" height="520" style="border:none;"></iframe> 
+        </div>
+        <div class="memo"> 
+            <div class="header">January 2025 ✦
+                <img src="../../assets/gifs/moon.gif" height="35px" align="right">
+            </div><br>
+            <a href="diary-memo-notes/big-update-entry.html" onclick="return loadPage(this.href)">
+                <b>✦ Very soon ✦</b>
+                big update!!
+            </a>
+            
+            <br><br>
+            
+            <div class="header">December 2024 ✦
+                <img src="../../assets/gifs/jellyfish.gif" height="35px" align="right">
+            </div><br>
+            <a href="diary-memo-notes/wintertime-entry.html" onclick="return loadPage(this.href)">
+                <b>✦ 12.31.24 ✦</b>
+                ah wintertime...
+            </a>
+            <hr>
+            <a href="diary-memo-notes/new-kitty-entry.html" onclick="return loadPage(this.href)">
+                <b>✦ 12.31.24 ✦</b>
+                new kitty!
+            </a>
+            <br><br>
+            
+            <div class="header">June 2023 ✦
+                <img src="../../assets/gifs/umbrella.gif" height="35px" align="right">
+            </div><br>
+            <a href="diary-memo-notes/summertime-entry.html" onclick="return loadPage(this.href)">
+                <b>✦ 06.28.23 ✦</b>
+                my birthday!!
+            </a>
+        </div>
+    </div>
+    <!-- Corner clock -->
+    <div id="digital-clock"></div>
+<!-- Music player -->
+    <div id="app-cover">
+        <div id="bg-artwork"></div>
+        <div id="bg-layer"></div>
+        <div id="player">
+            <div id="player-track">
+                <div id="album-name"></div>
+                <div id="track-name"></div>
+                <div id="track-time">
+                    <div id="current-time">00:00</div>
+                    <div id="track-length">00:00</div>
+                </div>
+                <div id="s-area">
+                    <div id="ins-time"></div>
+                    <div id="s-hover"></div>
+                    <div id="seek-bar"></div>
+                </div>
+            </div>
+            <div id="player-content">
+                <div id="album-art">
+                    <!-- Album covers -->
+                    <img src="diary-music-player/Covers/whitepine.png" class="active" id="_1">
+                    <img src="diary-music-player/Covers/hallow.jpg" class="active" id="_2">
+                    <img src="diary-music-player/Covers/Electronic Gems.jpg"class="active" id="_3">
+                    <img src="diary-music-player/Covers/VOJ.jpg" class="active" id="_4">
+                    <img src="diary-music-player/Covers/offline.jpg" class="active" id="_5">
+                    <img src="diary-music-player/Covers/Thenian.jpg" class="active" id="_6">
+                    <img src="diary-music-player/Covers/Nectry.jpg" class="active" id="_7">
+                    <img src="diary-music-player/Covers/Oneheart.jpg" class="active" id="_8">
+                    <img src="diary-music-player/Covers/sidewalks-and-skeletons.jpg" class="active" id="_9">
+                    <img src="diary-music-player/Covers/PASTEL GHOST.jpg" class="active" id="_10">
+                    <img src="diary-music-player/Covers/kitty.jpg" class="active" id="_11">
+                    <img src="diary-music-player/Covers/C418.png" class="active" id="_12">
+                    <img src="diary-music-player/Covers/C418.png" class="active" id="_13">
+                    <img src="diary-music-player/Covers/C418.png" class="active" id="_14">
+                    <img src="diary-music-player/Covers/C418.png" class="active" id="_15">
+                    <img src="diary-music-player/Covers/C418.png" class="active" id="_16">
+                    <div id="buffer-box">Loading...</div>
+                </div>
+                <div id="player-controls">
+                    <div class="control">
+                        <div class="button" id="play-previous">
+                            <i class="fas fa-backward"></i>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="button" id="play-pause-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="button" id="play-next">
+                            <i class="fas fa-forward"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="corner-icon">
+         <a href="../../home/index.html"> <img src="../../assets/buttons-icons/Room Icon_Entryway.png" width="130" height="90" alt="Corner Icon"></a>
+    </div>
+ <!-- Message :) -->
+ <div id="messageOverlay" class="message-overlay">
+    <div id="transitionMessage" class="transition-message"></div>
+</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Javascript :) -->
+    <script>
+      
+        const pageFlipSound = new Audio('../../assets/sound-effects/sound effect.mp3');
+        
+        function loadPage(url) {
+
+            pageFlipSound.currentTime = 0;
+            pageFlipSound.play()
+            .catch(error => console.log('Audio playback failed:', error));
+            
+            const frame = document.getElementById('diaryFrame');
+            frame.style.opacity = '0';
+            
+            setTimeout(() => {
+                frame.src = url;
+                frame.style.opacity = '1';
+            }, 300);
+            
+            return false;
+        }
+    
+        document.getElementById('diaryFrame').addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+    </script>
+ <!-- Mouse effect :) -->
+<script>
+
+    var b = document.body;
+    var imgurl = "../../assets/mouse/cursor.ico";
+    var size = [10, 20];
+    function rand(min, max)
+    {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    function getSize()
+    {
+    return rand(size[0], size[1]);
+    }
+    function lerp(a,b,f)
+    {
+    return (b-a)*f+a;
+    }
+    function heart(x,y)
+    {
+    var s = getSize();
+    x -= s/2;
+    y -= s/2;
+    x = Math.floor(x) + rand(-5, 5);
+    y = Math.floor(y) + rand(-5, 5);
+    var fx = x + rand(-40, 40);
+    var fy = y + rand(-40, 40);
+    var i = document.createElement("img");
+    i.src = imgurl;
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    b.appendChild(i);
+    var f = 0;
+    var interval;
+    interval = setInterval(function() {
+    var _x = Math.floor(lerp(x, fx, f));
+    var _y = Math.floor(lerp(y, fy, f));
+    i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+    i.style.opacity = 1-f;
+    f += 0.01;
+    if (f > 1)
+    {
+    clearInterval(interval);
+    b.removeChild(i);
+    }
+    }, 10);
+    }
+    function bro(x,y)
+    {
+    for (var i = 0; i < 5; i++)
+    {
+    heart(x,y);
+    }
+    }
+    b.addEventListener("click", function(event){
+    var x = event.clientX;
+    var y = event.clientY;
+    bro(x,y);
+    });
+    
+    </script>
+
+ <!-- Corner clock -w- -->
+    <script>
+        function updateClock() {
+  const clockElement = document.getElementById('digital-clock');
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// Update the clock every second
+setInterval(updateClock, 1000);
+// Initialize the clock immediately
+updateClock();
+
+    </script>
+    <!-- Overlay-->
+    <style>
+
+        /* Star Particles */
+        .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+        }
+        
+        .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        animation: move-stars 10s linear infinite;
+        opacity: 0.8;
+        }
+        
+        @keyframes move-stars {
+        0% {
+        transform: translateY(100vh);
+        opacity: 0.2;
+        }
+        100% {
+        transform: translateY(-10vh);
+        opacity: 1;
+        }
+        }
+        </style>
+    
+        <div class="stars"></div>
+        
+        <script>
+        // Generate stars dynamically
+        const starsContainer = document.querySelector('.stars');
+        const starCount = 500; 
+        
+        for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDelay = Math.random() * 10 + 's';
+        star.style.animationDuration = 5 + Math.random() * 5 + 's';
+        starsContainer.appendChild(star);
+        }
+        </script>
+<!-- Day and night mode :3 -->
+ <script src="about-me-main.js"></script>
+ <!-- Music player forr the diary :3 -->
+<script src="diary-music-player.js"></script>
+

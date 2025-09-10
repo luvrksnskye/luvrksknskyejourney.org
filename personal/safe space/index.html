@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skye Journey</title>
+<link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="safe.css">
+<link rel="stylesheet" href="mp.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="fixed-background"></div>
+    <div id="top-left-container">
+      <a href="../../home/index.html" id="top-left-house">
+        <img title="Go back?? :D"src="assets/bluehangy.gif" alt="Biscuit House" />
+      </a>
+    </div>
+    <img src="background/puppy.png" class="morita">
+    <div class="side">
+      <center>
+        <img src="assets/strawberry.gif"> 
+        <a href="info/safe_space.html" target="page" onclick="playSound()">skye's safe space</a>
+        <br>
+        <img src="assets/umbrella.gif"> 
+        <a href="info/health.html" target="page" onclick="playSound()">mental health</a>
+        <br>
+        <img src="assets/dango.gif"> 
+        <a href="../../home/index.html"> go back??</a>
+        <br>
+      </center>
+    </div>
+    <div class=container-left>
+
+    </div>
+    <img src="background/Q07.png" class="strawberry">
+     <img src="background/C01.png" class="puppy">
+    <div class=container-right>
+      <div class=main>
+        <iframe src="info/safe_space.html" name="page"
+         width="110%" height="625" style="border:none;"
+        ></iframe> 
+  
+      </div>
+    </div>
+      </div>
+    </div>
+
+  <!-- MUSIC PLAYER WAWAWA -->
+
+    <div id="musicplayer">
+        <div class="decoration left"></div>
+        <div class="decoration right"></div>
+        
+        <div class="display-area">
+            <div class="songtitle">
+                <div class="marquee-content">♪ playing: 'Sunday' by Iwasaki Kenichiro, for DOGZ (2004) ♪</div>
+            </div>
+        </div>
+
+        <audio id="music" src="" preload="metadata"></audio>
+    </div>
+
+    <script>
+      function playSound() {
+        const audio = new Audio('../../assets/sound-effects/fliptab.mp3');
+        audio.play();
+      }
+      </script>
+
+<!-- First row of sparkles -->
+<img src="background/A10.png" class="sparkle sparkle-1 floating" alt="sparkle">
+<img src="background/A11.png" class="sparkle sparkle-2 floating-slow" alt="sparkle">
+<img src="background/C08.png" class="sparkle sparkle-3 floating-fast" alt="sparkle">
+<img src="background/C11.png" class="sparkle sparkle-4 floating-large" alt="sparkle">
+<img src="background/B11.png" class="sparkle sparkle-5 floating" alt="sparkle">
+<img src="background/C09.png" class="sparkle sparkle-6 floating-slow" alt="sparkle">
+
+<!-- Second row of sparkles -->
+<img src="background/B10.png" class="sparkle sparkle-7 floating-fast" alt="sparkle">
+<img src="background/C10.png" class="sparkle sparkle-8 floating" alt="sparkle">
+<img src="background/B08.png" class="sparkle sparkle-9 floating-large" alt="sparkle">
+<img src="background/K09.png" class="sparkle sparkle-10 floating-slow" alt="sparkle">
+<img src="background/K10.png" class="sparkle sparkle-11 floating" alt="sparkle">
+<img src="background/K11.png" class="sparkle sparkle-12 floating-fast" alt="sparkle">
+
+<!-- Third row of sparkles -->
+<img src="background/N11.png" class="sparkle sparkle-13 floating-large" alt="sparkle">
+<img src="background/Q08.png" class="sparkle sparkle-14 floating" alt="sparkle">
+<img src="background/Q09.png" class="sparkle sparkle-15 floating-slow" alt="sparkle">
+<img src="background/L08.png" class="sparkle sparkle-16 floating-fast" alt="sparkle">
+<img src="background/T10.png" class="sparkle sparkle-17 floating-large" alt="sparkle">
+<img src="background/L10.png" class="sparkle sparkle-18 floating" alt="sparkle">
+    <script type="text/javascript" src="main.js"></script>
+    <script src="tooltip-jquary.js"></script>
+    <script src="tooltip.js"></script>
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+		<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    <script src="mp.js"></script>
+
+
+
+    </body>
+    </html>

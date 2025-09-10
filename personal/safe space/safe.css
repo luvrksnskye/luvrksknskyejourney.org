@@ -1,0 +1,372 @@
+/* ========================================
+   FONT IMPORTS
+======================================== */
+@font-face {
+    font-family: 'kawaii';
+    src: url('assets/KTEGAKI.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ========================================
+   GLOBAL STYLES
+======================================== */
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* Text selection color */
+body ::selection {
+    background: #aed1ffc5;
+}
+
+/* Link styles */
+a {
+    text-decoration: none;
+    color: #00044aad;
+}
+
+a:hover {
+    color: #aec8ff97;
+    text-decoration: none;
+}
+
+/* ========================================
+   BACKGROUND ELEMENTS
+======================================== */
+/* Fixed background image */
+.fixed-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('background/about-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+/* ========================================
+   MAIN CONTAINERS
+======================================== */
+/* Left side container with about background */
+.container-left {
+    background-image: url(background/about.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    border: 0px solid black;
+    width: 160vw;
+    height: 100vh;
+    left: 81%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Right side container with page background */
+.container-right {
+    background-image: url(background/about-page.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    border: 0px solid black;
+    width: 60vw;
+    height: 95vh;
+    right: 1%;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* ========================================
+   CONTENT SECTIONS
+======================================== */
+/* Main content area */
+.main {
+    position: absolute;
+    margin-left: 0 auto;
+    width: 725px;
+    height: 195px;
+    right: 245px;
+    padding: 15px;
+    top: 90px;
+    overflow: fixed;
+}
+
+/* Side navigation/content */
+.side {
+    position: absolute;
+    border: 0px solid black;
+    margin-left: 0 auto;
+    width: 210px;
+    height: 180px;
+    left: 240px;
+    bottom: 150px;
+    font-size: 28px;
+    z-index: 9999;
+    font-family: "kawaii", serif;
+}
+
+/* ========================================
+   CHARACTER ELEMENTS
+======================================== */
+
+.morita {
+    width: 290px;
+    height: auto;
+    position: absolute;
+    z-index: -1;
+    top: 130px;
+    left: 170px;
+    transform: rotate(10deg);
+}
+
+
+.puppy {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    width: 190px;
+    height: auto;
+    z-index: 1000;
+}
+
+/* ========================================
+   DECORATIVE ELEMENTS
+======================================== */
+/* Home button - top left */
+#top-left-house {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: transparent;
+}
+
+#top-left-house img {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+    image-rendering: pixelated;
+}
+
+/* Strawberry decoration - top right */
+.strawberry {
+    position: fixed;
+    top: 20px;
+    right: 80px;
+    width: 150px;
+    height: auto;
+    z-index: 1000;
+}
+
+/* ========================================
+   TOOLTIP STYLES
+======================================== */
+#s-m-t-tooltip {
+    padding: 0.5em 1em;
+    background: #f3f6ff;
+    color: #01002b78;
+    font-family: "kawaii", serif;
+    font-size: 1.1em;
+    border-radius: 1em;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+    z-index: 999999;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+/* Main floating animation keyframe */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Large floating animation keyframe */
+@keyframes float-large {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+/* ========================================
+   FLOATING ANIMATION CLASSES
+======================================== */
+/* Standard floating animation */
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Slow floating variation */
+.floating-slow {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Fast floating variation */
+.floating-fast {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Large movement floating variation */
+.floating-large {
+    animation: float-large 3.5s ease-in-out infinite;
+}
+
+/* ========================================
+   SPARKLES POSITIONED RANDOMLY ON SCREEN
+======================================== */
+.sparkle {
+    position: fixed;
+    width: 40px;
+    height: auto;
+    z-index: 999;
+    pointer-events: none; /* So they don't interfere with clicks */
+}
+
+/* Individual sparkle positions - More sparkles for magical effect */
+.sparkle-1 {
+    top: 15%;
+    left: 20%;
+    width: 35px;
+}
+
+.sparkle-2 {
+    top: 25%;
+    right: 15%;
+    width: 45px;
+}
+
+.sparkle-3 {
+    bottom: 30%;
+    left: 10%;
+    width: 40px;
+}
+
+.sparkle-4 {
+    top: 60%;
+    left: 30%;
+    width: 38px;
+}
+
+.sparkle-5 {
+    top: 40%;
+    right: 25%;
+    width: 42px;
+}
+
+.sparkle-6 {
+    bottom: 20%;
+    right: 30%;
+    width: 36px;
+}
+
+.sparkle-7 {
+    top: 80%;
+    left: 45%;
+    width: 44px;
+}
+
+.sparkle-8 {
+    top: 10%;
+    left: 60%;
+    width: 39px;
+}
+
+.sparkle-9 {
+    bottom: 60%;
+    right: 10%;
+    width: 41px;
+}
+
+.sparkle-10 {
+    top: 35%;
+    left: 5%;
+    width: 37px;
+}
+
+.sparkle-11 {
+    bottom: 45%;
+    left: 70%;
+    width: 43px;
+}
+
+.sparkle-12 {
+    top: 70%;
+    right: 20%;
+    width: 34px;
+}
+
+.sparkle-13 {
+    top: 50%;
+    left: 85%;
+    width: 46px;
+}
+
+.sparkle-14 {
+    bottom: 15%;
+    left: 25%;
+    width: 40px;
+}
+
+.sparkle-15 {
+    top: 20%;
+    left: 75%;
+    width: 38px;
+}
+
+.sparkle-16 {
+    bottom: 70%;
+    right: 5%;
+    width: 42px;
+}
+
+.sparkle-17 {
+    top: 90%;
+    right: 40%;
+    width: 36px;
+}
+
+.sparkle-18 {
+    top: 5%;
+    left: 40%;
+    width: 44px;
+}
+
+/* ========================================
+   ANIMATION DELAYS FOR RANDOMNESS
+======================================== */
+.floating:nth-child(1) { animation-delay: 0s; }
+.floating:nth-child(2) { animation-delay: 0.5s; }
+.floating:nth-child(3) { animation-delay: 1s; }
+.floating:nth-child(4) { animation-delay: 1.5s; }
+.floating:nth-child(5) { animation-delay: 2s; }
+.floating:nth-child(6) { animation-delay: 2.5s; }
+.floating:nth-child(7) { animation-delay: 1.2s; }
+.floating:nth-child(8) { animation-delay: 0.8s; }
+.floating:nth-child(9) { animation-delay: 1.8s; }
+.floating:nth-child(10) { animation-delay: 0.3s; }
+.floating:nth-child(11) { animation-delay: 2.2s; }
+.floating:nth-child(12) { animation-delay: 1.7s; }
+.floating:nth-child(13) { animation-delay: 0.9s; }
+.floating:nth-child(14) { animation-delay: 2.8s; }
+.floating:nth-child(15) { animation-delay: 0.6s; }
+.floating:nth-child(16) { animation-delay: 1.4s; }
+.floating:nth-child(17) { animation-delay: 2.1s; }
+.floating:nth-child(18) { animation-delay: 1.1s; }

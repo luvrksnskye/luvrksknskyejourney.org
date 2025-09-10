@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye's Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="music.css">
+    <link rel="stylesheet" href="../../nav bar.css">
+</head>
+<body>
+
+   
+    <div class="intro-container" id="introContainer">
+        <p class="mid" id="typewriter">
+            In the endless sea of melodies that surround us, music is more than just sound. It's a vibration that resonates deep within the soul, connecting us to emotions and memories, creating a harmony in a world that often feels chaotic.
+            <br /><br />
+            When I was younger, music was like an adventure--a soundtrack to every moment, weaving through my thoughts, painting the world in vibrant colors. It was a place to escape, a space to dream, and a way to express myself when words weren't enough.
+            <br /><br />
+            This site is a celebration of that feeling--the joy, the freedom, and the happiness that music brings. Here, every note and every beat holds a special place, just like the favorite songs that soundtrack your own journey. Music is a space to connect, to reflect, and to express.
+            <br /><br />
+            Let the melodies guide you, and may you find joy in every rhythm!
+        </p>
+        <!-- Updated click indicator with vertical arrangement -->
+        <div class="click-indicator" id="clickIndicator">
+            <img src="music-assets/click-indicator.png" alt="Click">
+        </div>
+    </div>
+
+    <!-- Skip button -->
+    <div class="skip-button" id="skipButton">
+        <img src="music-assets/skip.png" alt="Skip">
+    </div>
+
+ 
+    <audio id="popSound" src="mystical-chime.mp3" preload="auto"></audio>
+    <audio id="spaceloop" src="spaceloop.mp3" preload="auto"></audio>
+    <audio id="selectSound" src="select.mp3" preload="auto"></audio>
+    <!-- scripts -->
+
+    <!-- Mouse effect -->
+    <script>
+        var b = document.body;
+        var imgurl = "../../assets/mouse/cursor.ico";
+        var size = [10, 20];
+        function rand(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+        function getSize() {
+            return rand(size[0], size[1]);
+        }
+        function lerp(a,b,f) {
+            return (b-a)*f+a;
+        }
+        function heart(x,y) {
+            var s = getSize();
+            x -= s/2;
+            y -= s/2;
+            x = Math.floor(x) + rand(-5, 5);
+            y = Math.floor(y) + rand(-5, 5);
+            var fx = x + rand(-40, 40);
+            var fy = y + rand(-40, 40);
+            var i = document.createElement("img");
+            i.src = imgurl;
+            i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+            b.appendChild(i);
+            var f = 0;
+            var interval;
+            interval = setInterval(function() {
+                var _x = Math.floor(lerp(x, fx, f));
+                var _y = Math.floor(lerp(y, fy, f));
+                i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+                i.style.opacity = 1-f;
+                f += 0.01;
+                if (f > 1) {
+                    clearInterval(interval);
+                    b.removeChild(i);
+                }
+            }, 10);
+        }
+        function bro(x,y) {
+            for (var i = 0; i < 5; i++) {
+                heart(x,y);
+            }
+        }
+        b.addEventListener("click", function(event) {
+            var x = event.clientX;
+            var y = event.clientY;
+            bro(x,y);
+        });
+    </script>
+
+    <!-- Nav bar -->
+    <div id="nav2-wrapper">
+        <div id="nav2-custom-sidebar" class="hidden">
+            <h2>Personal</h2>
+            <ul>
+                <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+                <li><a href="../../personal/#"><img src="../../assets/nav-bar/more.png" alt="about Icon">About me</a></li>
+                <li><a href="../../personal/journal/index.html"><img src="../../assets/nav-bar/my-journey.png" alt="diary Icon">Journal</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/music.png" alt="music Icon">Music <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/games.png" alt="games Icon">Video games</a></li>
+                <li><a href="../../personal/friends/index.html"><img src="../../assets/nav-bar/friends.png" alt="friends Icon">Friends</a></li>
+                <li><a href="../../personal/guestbook/index.html"><img src="../../assets/nav-bar/guestbook.png" alt="guestbook Icon">Guestbook</a></li>
+                <li><a href="../../personal/#"><img src="../../assets/nav-bar/FAQ.png" alt="faq Icon">FAQ</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/hobby.png" alt="Chat Icon">Hobbies</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/archives.png" alt="archives Icon">Gallery</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/cat.png" alt="kitty Icon">Kitty</a></li>
+                <li><a href="../../personal/boyfriend/index.html"><img src="../../assets/nav-bar/more.png">Boyfriend diary</a></li>
+                <li><a href="../special-events/index.html"><img src="../../assets/nav-bar/boyfriend.png">Special events</a></li>
+            </ul>
+        </div>
+        <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+        <button id="nav2-sidebar-toggle"></button>
+    </div>
+
+
+	 <!-- Overlay-->
+	 <style>
+
+        /* Star Particles */
+        .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+        }
+        
+        .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        animation: move-stars 10s linear infinite;
+        opacity: 0.8;
+        }
+        
+        @keyframes move-stars {
+        0% {
+        transform: translateY(100vh);
+        opacity: 0.2;
+        }
+        100% {
+        transform: translateY(-10vh);
+        opacity: 1;
+        }
+        }
+        </style>
+    
+        <div class="stars"></div>
+        
+        <script>
+        // Generate stars dynamically
+        const starsContainer = document.querySelector('.stars');
+        const starCount = 500; 
+        
+        for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDelay = Math.random() * 10 + 's';
+        star.style.animationDuration = 5 + Math.random() * 5 + 's';
+        starsContainer.appendChild(star);
+        }
+        </script>
+
+    <script src="main.js"></script>
+    <script type="text/javascript" src="../../nav bar.js"></script>
+</body>
+</html>

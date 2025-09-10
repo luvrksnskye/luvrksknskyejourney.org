@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye's Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="faq.css">
+    <link rel="stylesheet" href="../../nav bar.css">
+    <link rel="stylesheet" href="../../main-music-player/music-player.css">
+</head>
+<body>
+  <canvas id="orbital-bg-canvas"></canvas>
+  <div class="blur-layer"></div>
+
+  <!--MAIN-->
+
+<div class="main-container">
+
+<div class="center-panel">
+<div class="content-title">
+  <canvas id="titleCanvas" width="400" height="80"></canvas>
+</div>
+
+<div class="content-section">
+<p>I've been noticing I'm getting a lot of private messages with similar questions from my best friends and other close people, so I decided to create this page so I could redirect people here instead of typing the same text over and over again! It's also one of my ways, or at least I think so, to help those who have questions about programming or web development. I'm sorry if not all your questions are answered here! I'm trying to compile a list of everything you need, and in any case, remember that you can read my blogs and also check out my resources page.</p>
+</div>
+
+<div class="content-section">
+<p>If you're new to web development, the best place to start is by learning the three core technologies: HTML for structure, CSS for styling, and JavaScript for interactivity. These three languages form the foundation of virtually all web development.</p>
+<p>Many beginners find it helpful to start with HTML and CSS before moving on to JavaScript, as this allows you to build static pages first before adding dynamic functionality. There are numerous free resources available online to help you learn these technologies.</p>
+</div>
+
+<div class="content-section">
+<h2>Learning Path</h2>
+<p>A typical learning path for web development might look like this:</p>
+<p>1. Learn HTML to understand document structure and semantic markup</p>
+<p>2. Learn CSS to style your HTML and create responsive layouts</p>
+<p>3. Learn JavaScript basics to add interactivity to your pages</p>
+<p>4. Explore JavaScript frameworks like React, Vue, or Angular</p>
+<p>5. Learn backend technologies if you want to become a full-stack developer</p>
+<p>Remember that web development is a vast field, and it's perfectly fine to specialize in areas that interest you the most.</p>
+</div>
+</div>
+
+<div class="right-panel">
+<div class="timeline-container">
+<div class="arrow arrow-up">
+<svg viewBox="0 0 24 24">
+<polyline points="18 15 12 9 6 15"></polyline>
+</svg>
+</div>
+
+<div class="timeline-line"></div>
+
+<div class="timeline-items-wrapper">
+<div class="timeline-items">
+<div class="timeline-item highlighted active" data-item="1">
+<div class="timeline-date">Intro</div>
+<div class="timeline-dot-container">
+<div class="timeline-dot"></div>
+</div>
+<div class="timeline-text">Frequently Asked Questions</div>
+</div>
+
+<div class="timeline-item" data-item="2">
+<div class="timeline-date">Question</div>
+<div class="timeline-dot-container">
+<div class="timeline-dot"></div>
+</div>
+<div class="timeline-text">What programming languages do you use?</div>
+</div>
+
+<div class="timeline-item" data-item="3">
+<div class="timeline-date">Question</div>
+<div class="timeline-dot-container">
+<div class="timeline-dot"></div>
+</div>
+<div class="timeline-text">Can you help me make a website?</div>
+</div>
+
+<div class="timeline-item" data-item="4">
+<div class="timeline-date">Question</div>
+<div class="timeline-dot-container">
+<div class="timeline-dot"></div>
+</div>
+<div class="timeline-text">How to make 3D effects and filters?</div>
+</div>
+
+
+
+<div class="timeline-item" data-item="5">
+  <div class="timeline-date">Comments</div>
+  <div class="timeline-dot-container">
+  <div class="timeline-dot"></div>
+  </div>
+  <div class="timeline-text">Do you have more questions?</div>
+  </div>
+  </div>
+</div>
+<div class="arrow arrow-down">
+<svg viewBox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!---OTHERS-->
+
+<!--Mouse effect-->
+<script>
+
+  var b = document.body;
+  var imgurl = "../../assets/mouse/cursor.ico";
+  var size = [10, 20];
+  function rand(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  function getSize()
+  {
+  return rand(size[0], size[1]);
+  }
+  function lerp(a,b,f)
+  {
+  return (b-a)*f+a;
+  }
+  function heart(x,y)
+  {
+  var s = getSize();
+  x -= s/2;
+  y -= s/2;
+  x = Math.floor(x) + rand(-5, 5);
+  y = Math.floor(y) + rand(-5, 5);
+  var fx = x + rand(-40, 40);
+  var fy = y + rand(-40, 40);
+  var i = document.createElement("img");
+  i.src = imgurl;
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${x}px; top: ${y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  b.appendChild(i);
+  var f = 0;
+  var interval;
+  interval = setInterval(function() {
+  var _x = Math.floor(lerp(x, fx, f));
+  var _y = Math.floor(lerp(y, fy, f));
+  i.style = `pointer-events: none; position: fixed; width: ${s}px; left: ${_x}px; top: ${_y}px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; z-index: 1000000;`;
+  i.style.opacity = 1-f;
+  f += 0.01;
+  if (f > 1)
+  {
+  clearInterval(interval);
+  b.removeChild(i);
+  }
+  }, 10);
+  }
+  function bro(x,y)
+  {
+  for (var i = 0; i < 5; i++)
+  {
+  heart(x,y);
+  }
+  }
+  b.addEventListener("click", function(event){
+  var x = event.clientX;
+  var y = event.clientY;
+  bro(x,y);
+  });
+  
+  </script>
+    <!--Nav bar-->
+<div id="nav2-wrapper">
+<div id="nav2-custom-sidebar" class="hidden">
+<h2>Personal</h2>
+<ul>
+<li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+<li><a href="../../personal/#"><img src="../../assets/nav-bar/more.png" alt="about Icon">About me</a></li>
+<li><a href="../../personal/journal/index.html"><img src="../../assets/nav-bar/my-journey.png" alt="diary Icon">Journal</a></li>
+<li><a href="#"><img src="../../assets/nav-bar/music.png" alt="music Icon">Music</a></li>
+<li><a href="#"><img src="../../assets/nav-bar/games.png" alt="games Icon">Video games</a></li>
+<li><a href="../../personal/friends/index.html"><img src="../../assets/nav-bar/friends.png" alt="friends Icon">Friends</a></li>
+<li><a href="../../personal/guestbook/#"><img src="../../assets/nav-bar/guestbook.png" alt="guestbook Icon">Guestbook</a></li>
+<li><a href="../../personal/#"><img src="../../assets/nav-bar/FAQ.png" alt="faq Icon">FAQ<img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+<li><a href="#"><img src="../../assets/nav-bar/hobby.png" alt="Chat Icon">Hobbies</a></li>
+<li><a href="#"><img src="../../assets/nav-bar/archives.png" alt="archives Icon">Gallery</a></li>
+<li><a href="#"><img src="../../assets/nav-bar/cat.png" alt="kitty Icon">Kitty</a></li>
+<li><a href="../../personal/boyfriend/index.html"><img src="../../assets/nav-bar/more.png">Boyfriend diary</a></li>
+<li><a href="../special-events/index.html"><img src="../../assets/nav-bar/boyfriend.png">Special events</a></li>
+</ul>
+</div>
+<div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+<button id="nav2-sidebar-toggle"></button>
+</div>
+    <!-- Overlay-->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+.starfall-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: transparent;
+overflow: hidden;
+display: flex;
+font-family: 'Anton', sans-serif;
+justify-content: center;
+align-items: center;
+margin: 0;
+z-index: -1;
+}
+
+.starfall-container .starfield {
+position: relative;
+width: 100%;
+height: 100%;
+transform: rotateZ(45deg);
+}
+
+.starfall-container .falling-star {
+position: absolute;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 999px;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+animation:
+star-tail 3000ms ease-in-out infinite,
+star-falling 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before,
+.starfall-container .falling-star::after {
+content: '';
+position: absolute;
+top: calc(50% - 1px);
+right: 0;
+height: 2px;
+background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+border-radius: 100%;
+animation: star-glow 3000ms ease-in-out infinite;
+}
+
+.starfall-container .falling-star::before {
+transform: translateX(50%) rotateZ(45deg);
+}
+
+.starfall-container .falling-star::after {
+transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes star-tail {
+0% { width: 0; }
+30% { width: 100px; }
+100% { width: 0; }
+}
+
+@keyframes star-glow {
+0% { width: 0; }
+50% { width: 30px; }
+100% { width: 0; }
+}
+
+@keyframes star-falling {
+0% { transform: translateX(0); }
+100% { transform: translateX(300px); }
+}
+</style>
+</head>
+<body>
+<div class="starfall-container">
+<div class="starfield" id="starfield"></div>
+</div>
+<script>
+(function() {
+const starfield = document.querySelector('.starfall-container .starfield');
+const skySegments = [
+{ x: [0, 33], y: [0, 33] },
+{ x: [33, 66], y: [0, 33] },
+{ x: [66, 100], y: [0, 33] },
+{ x: [0, 33], y: [33, 66] },
+{ x: [33, 66], y: [33, 66] },
+{ x: [66, 100], y: [33, 66] },
+{ x: [0, 33], y: [66, 100] },
+{ x: [33, 66], y: [66, 100] },
+{ x: [66, 100], y: [66, 100] }
+];
+const starsInSegment = 3;
+
+skySegments.forEach(segment => {
+for (let i = 0; i < starsInSegment; i++) {
+const star = document.createElement('div');
+star.className = 'falling-star';
+const x = segment.x[0] + Math.random() * (segment.x[1] - segment.x[0]);
+const y = segment.y[0] + Math.random() * (segment.y[1] - segment.y[0]);
+star.style.left = `${x}%`;
+star.style.top = `${y}%`;
+const delay = Math.random() * 9999;
+star.style.animationDelay = `${delay}ms`;
+const duration = 3000 + (Math.random() * 1000 - 500);
+star.style.animationDuration = `${duration}ms`;
+star.style.setProperty('--falling-delay', `${delay}ms`);
+const brightness = 0.75 + Math.random() * 0.5;
+star.style.opacity = brightness;
+starfield.appendChild(star);
+}
+});
+})();
+</script>
+<!-- Music player lol-->
+<div class="music-player">
+<div class="highlight top-right"></div>
+<div class="highlight bottom-left"></div>
+
+<button class="slide-toggle">
+<i class="fas fa-chevron-down"></i>
+</button>
+
+<div class="corner-tag">Now Playing</div>
+
+<div class="player-header">
+<div class="visualizer">
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+</div>
+</div>
+
+<div class="content">
+<div class="album-art">
+  <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+</div>
+
+<div class="song-info">
+  <h3 class="song-title">Current Song</h3>
+</div>
+
+<div class="progress-container">
+  <div class="current-time">0:00</div>
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+  <div class="duration">0:00</div>
+</div>
+
+<div class="controls">
+  <button class="control-btn" id="prev">
+    <i class="fas fa-backward"></i>
+  </button>
+  <button class="control-btn" id="play">
+    <i class="fas fa-play"></i>
+  </button>
+  <button class="control-btn" id="next">
+    <i class="fas fa-forward"></i>
+  </button>
+</div>
+</div>
+</div>
+
+ <!--Background-->
+ <div class="video-background">
+  <video autoplay muted loop>
+    <source src="../../assets/background/Intro-background.webm" type="video/webm">
+  </video>
+</div>
+
+<audio id="dotSound" src="visuals/selection.mp3" preload="auto"></audio>
+
+<script>
+
+  const dotSound = document.getElementById('dotSound');
+
+
+  const timelineDots = document.querySelectorAll('.timeline-dot');
+
+  timelineDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+
+      dotSound.currentTime = 0;
+      dotSound.play();
+    });
+  });
+</script>
+
+<script>
+	hcb_user = {
+		/* L10N */
+		comments_header : 'Make your question!',
+		name_label : 'Name',
+		content_label: 'Enter your comment here',
+		submit : 'Comment',
+		logout_link : '<img title="log out" src="https://www.htmlcommentbox.com/static/images/door_out.svg" alt="[logout]" class="hcb-icon hcb-door-out"/>',
+		admin_link : '<img src="https://www.htmlcommentbox.com/static/images/door_in.svg" alt="[login]" class="hcb-icon hcb-door-in"/>',
+		no_comments_msg: 'No one has commented yet. Be the first!',
+		add:'Add your comment',
+		again: 'Post another comment',
+		rss:'<img src="https://www.htmlcommentbox.com/static/images/feed.svg" class="hcb-icon" alt="rss"/> ',
+		said:'said:',
+		prev_page:'<img src="../../assets/special-icons/arrow left.png" class="hcb-icon" title="previous page" alt="[prev]"/>',
+		next_page:'<img src="../../assets/special-icons/arrow-right.png" class="hcb-icon" title="next page" alt="[next]"/>',
+		showing:'Showing',
+		to:'to',
+		website_label:'website (optional)',
+		email_label:'email',
+		anonymous:'Anonymous',
+		mod_label:'(admin)',
+		subscribe:'Email Me Replies',
+		add_image:'Add Image',
+		are_you_sure:'Do you want to flag this comment as inappropriate?',
+	
+		reply:'Reply',
+		flag:'Flag',
+		like:'Like',
+	
+		/* dates */
+		days_ago:'days ago',
+		hours_ago:'hours ago',
+		minutes_ago:'minutes ago',
+		within_the_last_minute:'within the last minute',
+	
+		msg_thankyou:'Thank you for commenting!',
+		msg_approval:'NOTE: This comment is not published until approved',
+		msg_approval_required:'Thank you for commenting! Your comment will appear once approved by a moderator.',
+	
+		err_bad_html:'Your comment contained bad html.',
+		err_bad_email:'Please enter a valid email address.',
+		err_too_frequent:'You must wait a few seconds between posting comments.',
+		err_comment_empty:'Your comment was not posted because it was empty!',
+		err_denied:'Your comment was not accepted.',
+		err_unknown:'Your comment was blocked for unknown reasons, please report this.',
+		err_spam:'Your comment was detected as spam.',
+		err_blocked:'Your comment was blocked by site policy.',
+	
+		/* SETTINGS */
+		MAX_CHARS: 8192,
+		PAGE:'', /* ID of the webpage to show comments for. defaults to the webpage the user is currently visiting. */
+		ON_COMMENT: function(){}, /* Function to call after commenting. */
+		RELATIVE_DATES:true /* show dates in the form "X hours ago." etc. */
+	};
+	</script>
+	<!-- done customizing labels of htmlcommentbox.com -->
+   <script>
+    
+   </script>
+<script src="faq.js"></script>
+<script src="background.js"></script>
+<script type="text/javascript" src="../../nav bar.js"></script>
+<script type="text/javascript" src="../../main-music-player/music-player.js"></script>
+</body>
+</html>

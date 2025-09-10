@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye Journey</title>
+    <link rel="icon" type="image/png" href="../../../assets/buttons-icons/favicon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="../events-calendar.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="../../../nav bar.css">
+    <!-- Added moment.js for date handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <!-- Added jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+
+    <div class="planner-container">
+      <div class="pages">
+        <div class="page-tab left-tab">
+          <span class="tab-title" id="current-month">Month here</span>
+        </div>
+        <div class="page-tab right-tab">
+          <span class="tab-title">Notes</span>
+        </div>
+
+        <!-- Left Page (for calendar) -->
+        <div class="left-page">
+          <div class="content" id="calendar-container">
+            <!-- Calendar will be dynamically generated here -->
+          </div>
+        </div>
+
+        <!-- Right Page (for event details and stickers) -->
+        <div class="right-page">
+          <div id="diary-right-page">
+          <div class="content">
+
+            <!-- Event details display -->
+            <div id="event-details">
+              <div class="no-event-selected">
+                <p>Howdy! Explore the Skye Journey calendar and discover upcoming events and seasons!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="skye-container">
+      <div class="speech-bubble">
+        <p id="dialogue-text">Howdy! Click on a date to see what's happening! I'll tell you all about it!</p>
+      </div>
+      <img src="skye-talking/skye-neutral.PNG" alt="Skye" class="skye-sprite">
+    </div>
+
+     <!-- Nav bar -->
+   <div id="nav2-wrapper">
+    <div id="nav2-custom-sidebar" class="hidden">
+        <h2>Personal</h2>
+        <ul>
+            <li><a href="../../../home/index.html"><img src="../../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+            <li><a href="../../../personal/#"><img src="../../../assets/nav-bar/more.png" alt="about Icon">About me</a></li>
+            <li><a href="../../../personal/journal/index.html"><img src="../../../assets/nav-bar/my-journey.png" alt="diary Icon">Journal</a></li>
+            <li><a href="../../music/index.html"><img src="../../../assets/nav-bar/music.png" alt="music Icon">Music</a></li>
+            <li><a href="#"><img src="../../../assets/nav-bar/games.png" alt="games Icon">Video games</a></li>
+            <li><a href="../../../personal/friends/index.html"><img src="../../../assets/nav-bar/friends.png" alt="friends Icon">Friends</a></li>
+            <li><a href="../../../personal/guestbook/index.html"><img src="../../../assets/nav-bar/guestbook.png" alt="guestbook Icon">Guestbook</a></li>
+            <li><a href="../../../personal/faq/index.html"><img src="../../../assets/nav-bar/FAQ.png" alt="faq Icon">FAQ</a></li>
+            <li><a href="#"><img src="../../../assets/nav-bar/hobby.png" alt="Chat Icon">Hobbies</a></li>
+            <li><a href="#"><img src="../../../assets/nav-bar/archives.png" alt="archives Icon">Gallery</a></li>
+            <li><a href="#"><img src="../../../assets/nav-bar/cat.png" alt="kitty Icon">Kitty</a></li>
+            <li><a href="../../../personal/boyfriend/index.html"><img src="../../../assets/nav-bar/more.png">Boyfriend diary</a></li>
+            <li><a href="#"><img src="../../../assets/nav-bar/boyfriend.png">Special events <img src="../../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+        </ul>
+    </div>
+    <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+    <button id="nav2-sidebar-toggle"></button>
+</div>
+  <!-- Music player -->
+<audio id="music-player">
+<!-- The audio sources will be added dynamically by JavaScript -->
+</audio>
+
+<div class="music-icon-container">
+    <img id="music-toggle" class="music-icon" src="../visuals/music.png" alt="Music Toggle">
+    </div>
+
+ <!--Background-->
+ <div class="video-background">
+    <video autoplay muted loop>
+      <source src="../halloween/Background.webm" type="video/webm">
+    </video>
+    </div>
+
+    <script src="../halloween.js"></script>
+    <script src="skye-talking.js"></script>
+    <script type="text/javascript" src="../../../nav bar.js"></script>
+    <script src="script.js"></script>
+    </body>
+  </html>

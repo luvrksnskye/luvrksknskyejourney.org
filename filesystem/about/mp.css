@@ -1,0 +1,199 @@
+/* DESIGN FOR MUSIC PLAYER FROM VIVARISM!!! 
+https://vivarism.net/
+muawhhhh credits to them for the original code wawawawa*/
+/* ========================================
+   FONT IMPORTS
+======================================== */
+@font-face {
+    font-family: 'kawaii';
+    src: url('assets/KTEGAKI.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'splatoon';
+    src: url('assets/BlitzMain.otf') format('woff');
+}
+/* ========================================
+   GLOBAL STYLES
+======================================== */ 
+
+   body {
+               font-family: "kawaii", serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        #musicplayer {
+            background: url('assets/blue.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 12px; /* Increased padding for thicker blue border */
+            width: 350px; /* Made narrower from 700px */
+            position: fixed; /* Changed from relative to absolute */
+            top: 20px; /* Position at top */
+            right: 400px; /* Position towards left but not completely */
+        }
+
+        .display-area {
+            background: #f8f9ff;
+            border: 3px solid #f2f7ff;
+            padding: 15px 20px; /* Adjusted padding for smaller width */
+            text-align: center;
+            box-shadow: 
+                inset 1px 1px 3px rgba(0, 0, 0, 0.1),
+                inset -1px -1px 3px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+        }
+
+        .songtitle {
+            font-size: 20px;
+            color: #2c3e50;
+            font-weight: bold;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 12s linear infinite; /* Adjusted timing for narrower width */
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Cute decorative elements */
+        .decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('assets/music_icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .decoration.left {
+            top: -15px;
+            left: -15px;
+        }
+
+        .decoration.right {
+            top: -15px;
+            right: -15px;
+        }
+
+        audio {
+            display: none;
+        }
+        #big-marquee {
+    background: url('assets/blue.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 15px;
+    width: 500px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.big-display-area {
+    background: #f8f9ff;
+    border: 3px solid #f2f7ff;
+    padding: 20px 25px;
+    text-align: center;
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.1),
+        inset -1px -1px 3px rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+}
+
+.big-marquee-title {
+    font-size: 28px;
+    color: #9cb3ff9b;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap;
+   font-family: "Splatoon", woff;
+}
+
+.big-marquee-content {
+    display: inline-block;
+  
+}
+
+#counter-marquee {
+    background: url('assets/blue.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 12px;
+    width: 320px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.counter-display-area {
+    background: #f8f9ff;
+    border: 3px solid #f2f7ff;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.1),
+        inset -1px -1px 3px rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+}
+
+.counter-title {
+    font-size: 18px;
+    color: #1c1e6c;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.counter-marquee-content {
+    display: inline-block;
+    animation: scroll-counter 10s linear infinite;
+}
+
+@keyframes scroll-counter {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+.text-content {
+    font-family: "kawaii", serif;
+    font-size: 36px;
+    color: #000a61bb;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.text-content h2 {
+    color: #1c1e6c;
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "splatoon", serif;
+}
+
+.text-content p {
+    margin-bottom: 10px;
+}
+.text-display-area {
+    padding: 30px;
+
+}
+
+.text-container {
+    padding: 20px;
+    width: 800px;
+    position: absolute;
+    top: 150px;
+    left: 20px;
+    max-height: 600px;
+    z-index: 1;
+}

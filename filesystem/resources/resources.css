@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+
+@font-face {
+    font-family: 'trojan';
+    src: url('fonts/TrajanPro-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'zhcn';
+    src: url('fonts/zhcn.ttf') format('truetype');
+}
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'zhcn', sans-serif;
+    color: white;
+    position: relative;
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+.macbook-pro {
+  position: relative;
+  width: 1728px;
+  height: 1117px;
+}
+
+.macbook-pro .resources-tutorials {
+  top: 550px;
+  position: absolute;
+  width: 905px;
+  height: 87px;
+  left: 16px;
+}
+
+/* New Game Development Resources Section */
+.macbook-pro .resources-gamedev {
+  top: 685px;
+  position: absolute;
+  width: 905px;
+  height: 87px;
+  left: 16px;
+}
+
+.macbook-pro .overlap-group {
+  position: absolute;
+  width: 842px;
+  height: 87px;
+  top: 0;
+  left: 61px;
+}
+
+.macbook-pro .text-wrapper {
+  position: absolute;
+  width: 725px;
+  top: 44px;
+  left: 58px;
+  font-family: "trojan", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.macbook-pro .ARROW-RIGHT {
+  left: 739px;
+  position: absolute;
+  width: 61px;
+  height: 44px;
+  top: 35px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.macbook-pro .OPTION {
+  position: absolute;
+  width: 842px;
+  height: 87px;
+  top: 0;
+  left: 0;
+  aspect-ratio: 9.68;
+  object-fit: cover;
+}
+
+.macbook-pro .ARROW-LEFT {
+  left: 0;
+  position: absolute;
+  width: 61px;
+  height: 44px;
+  top: 35px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.macbook-pro .resources-tools {
+  top: 415px;
+  position: absolute;
+  width: 905px;
+  height: 87px;
+  left: 16px;
+}
+
+.macbook-pro .img {
+  top: 35px;
+  left: 572px;
+  position: absolute;
+  width: 61px;
+  height: 44px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.macbook-pro .resources-about {
+  position: absolute;
+  width: 905px;
+  height: 87px;
+  top: 280px;
+  left: 16px;
+}
+
+.macbook-pro .div {
+  position: absolute;
+  width: 725px;
+  top: 40px;
+  left: 62px;
+ font-family: 'trojan', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.macbook-pro .ARROW-RIGHT-2 {
+  top: 32px;
+  left: 725px;
+  position: absolute;
+  width: 61px;
+  height: 44px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.macbook-pro .ARROW-LEFT-2 {
+  position: absolute;
+  width: 61px;
+  height: 44px;
+  top: 36px;
+  left: 0;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.macbook-pro .resources-about-2 {
+  position: absolute;
+  width: 965px;
+  height: 87px;
+  top: 145px;
+  left: 16px;
+}
+
+.macbook-pro .overlap {
+  position: absolute;
+  width: 906px;
+  height: 91px;
+  top: 0;
+  left: 61px;
+}
+
+.macbook-pro .hover-effect {
+  position: absolute;
+  width: 889px;
+  height: 83px;
+  top: 8px;
+  left: 17px;
+  mix-blend-mode: luminosity;
+  background-blend-mode: overlay;
+}
+
+.macbook-pro .ARROW-RIGHT-3 {
+  top: 28px;
+  left: 769px;
+  position: absolute;
+  width: 61px;
+  height: 44px;
+  aspect-ratio: 1.38;
+  object-fit: cover;
+}
+
+.macbook-pro .overlap-2 {
+  position: absolute;
+  width: 719px;
+  height: 1024px;
+  top: 75px;
+  left: 990px;
+}
+
+.macbook-pro .content-data {
+  width: 719px;
+  left: 0;
+  position: absolute;
+  height: 1024px;
+  top: 0;
+}
+
+.macbook-pro .overlap-3 {
+  position: relative;
+  height: 1024px;
+}
+
+.macbook-pro .content-div {
+  width: 686px;
+  left: 16px;
+  backdrop-filter: blur(5px) brightness(100%);
+  -webkit-backdrop-filter: blur(5px) brightness(100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02) 5%,
+    rgba(255, 255, 255, 0.61) 45%,
+    rgba(255, 255, 255, 0.18) 65%,
+    rgba(255, 255, 255, 0.03) 84%
+  );
+  opacity: 0.6;
+  position: absolute;
+  height: 784px;
+  top: 0;
+}
+
+.macbook-pro .bottom-part {
+  position: absolute;
+  width: 719px;
+  height: 60px;
+  top: 704px;
+  left: 0;
+  aspect-ratio: 11.99;
+  object-fit: cover;
+}
+
+.macbook-pro .top-part {
+  position: absolute;
+  width: 719px;
+  height: 60px;
+  top: 0;
+  left: 0;
+  aspect-ratio: 11.99;
+  object-fit: cover;
+}
+
+.macbook-pro .welcome-text {
+  position: absolute;
+  width: 577px;
+  top: 96px;
+  left: 60px;
+ font-family: 'trojan', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.macbook-pro .p {
+  position: absolute;
+  width: 599px;
+  top: 201px;
+  left: 67px;
+  font-family: 'zhcn', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}

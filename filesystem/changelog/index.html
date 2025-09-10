@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <title>Skye Journey</title>
+    <link rel="icon" type="image/x-icon" href="/assets/buttons-icons/favicon.png">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="tos.css">
+    <link rel="stylesheet" href="../../nav bar.css">
+    <link rel="stylesheet" href="../../main-music-player/music-player.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bookmark" />
+</head>
+
+<body>
+   <!-- ========================================
+         WELCOME PANEL SECTION
+    ======================================== -->
+    <div class="welcome-to-tos-page-panel">
+        <div class="welcome-to-tos-panel">
+            <img src="../../assets/panels/updatelog-panel.png" alt="Floating Panel">
+        </div>
+    </div>
+
+    <!-- ========================================
+         TIMELINE AND CONTENT LAYOUT
+    ======================================== -->
+    <div class="main-layout">
+        <!-- Left Panel - Content Display -->
+        <div class="left-panel">
+            <div class="content-wrapper">
+                <!-- Content containers will be added via JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Right Panel - Timeline -->
+        <div class="right-panel">
+            <div class="timeline-container">
+                <!-- Up Arrow -->
+                <div class="arrow arrow-up">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </div>
+                
+                <!-- Timeline Line -->
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Items Container -->
+                <div class="timeline-items-wrapper">
+                    <div class="timeline-items">
+                        <!-- Timeline items will be added via JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Down Arrow -->
+                <div class="arrow arrow-down">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Music player lol-->
+     <div class="music-player">
+      <div class="highlight top-right"></div>
+      <div class="highlight bottom-left"></div>
+      
+      <button class="slide-toggle">
+          <i class="fas fa-chevron-down"></i>
+      </button>
+      
+      <div class="corner-tag">Now Playing</div>
+      
+      <div class="player-header">
+          <div class="visualizer">
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+              <div class="visualizer-bar"></div>
+          </div>
+      </div>
+      
+      <div class="content">
+          <div class="album-art">
+              <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+          </div>
+          
+          <div class="song-info">
+              <h3 class="song-title">Current Song</h3>
+          </div>
+          
+          <div class="progress-container">
+              <div class="current-time">0:00</div>
+              <div class="progress-bar">
+                  <div class="progress"></div>
+              </div>
+              <div class="duration">0:00</div>
+          </div>
+          
+          <div class="controls">
+              <button class="control-btn" id="prev">
+                  <i class="fas fa-backward"></i>
+              </button>
+              <button class="control-btn" id="play">
+                  <i class="fas fa-play"></i>
+              </button>
+              <button class="control-btn" id="next">
+                  <i class="fas fa-forward"></i>
+              </button>
+          </div>
+      </div>
+    </div>
+
+    <!---End of the music player :D-->
+
+    <!--Nav bar-->
+    <div id="nav2-wrapper">
+      <div id="nav2-custom-sidebar" class="hidden">
+        <h2>Filesystem</h2>
+        <ul>
+          <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+          <li><a href="../about/index.html"><img src="../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+          <li><a href="../../filesystem/social/index.html"><img src="../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+          <li><a href="../../filesystem/support/index.html"><img src="../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+          <li><a href="#"><img src="../../assets/nav-bar/rules.png" alt="games Icon">Changelog <img src="../../assets/buttons-icons/Phone App_Navigation.png" alt="new symbol"></a></li>
+          <li><a href="../../filesystem/blogs/index.html"><img src="../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
+          <li><a href="#"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+          <li><a href="../../filesystem/credits/index.html"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+          <li><a href="../../filesystem/workstation/index.html"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+            <li><a href="../sitemap/index.html"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+        </ul>
+        </div>
+        <div class="nav2-blur-overlay" onclick="closeNav2Sidebar()"></div>
+        <button id="nav2-sidebar-toggle"></button>
+      </div>
+
+    <!-- ========================================
+         BACKGROUND ELEMENTS & EFFECTS
+    ======================================== -->
+    
+    <!-- Background Overlay Image -->
+    <div class="background-overlay">
+        <img src="img/bg.png" alt="Background Overlay">
+    </div>
+
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="../../assets/background/Intro-background.webm" type="video/webm">
+        </video>
+    </div>
+
+    <!-- Animated Stars Effect -->
+    <div class="stars"></div>
+
+    <!-- Starfall Animation Container -->
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+    </div>
+
+    <!-- ========================================
+         AUDIO ELEMENTS
+    ======================================== -->
+    <audio id="selectSound" src="../../assets/sound-effects/select.mp3"></audio>
+    <audio id="selectionSound" src="../../assets/sound-effects/selection.mp3"></audio>
+    <!-- ========================================
+         EXTERNAL SCRIPTS
+    ======================================== -->
+    <script src="main.js"></script>
+     <script src="timeline.js"></script>
+    <script src="../../main-music-player/music-player.js"></script>
+    <script src="../../nav bar.js"></script>
+</body>
+</html>

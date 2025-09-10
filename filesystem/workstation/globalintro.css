@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'splatoon';
+    src: url('font/BlitzMain.otf') format('woff');
+}
+
+.box .group {
+  position: fixed;
+  width: 1763px;
+  height: 1111px;
+  top: 0;
+  left: 0;
+}
+
+.box .overlap-group {
+  position: relative;
+  width: 1744px;
+  height: 1020px;
+  top: 20px; /* Moved up from 92px */
+  background-image: url(https://c.animaapp.com/eDsofCMx/img/group-5.png);
+  background-size: 100% 100%;
+}
+
+.box .union {
+  position: absolute;
+  width: 917px;
+  height: 591px;
+  top: 50px; /* Moved up from 213px */
+  left: 349px;
+}
+
+.box .vector {
+  position: absolute;
+  width: 186px;
+  height: 174px;
+  top: 200px; /* Moved up from 423px */
+  left: 630px;
+}
+
+.box .img {
+  position: absolute;
+  width: 293px;
+  height: 238px;
+  top: 180px; /* Moved up from 416px */
+  left: 866px;
+}
+
+.box .vector-2 {
+  position: absolute;
+  width: 275px;
+  height: 277px;
+  top: 100px; /* Moved up from 320px */
+  left: 750px;
+}
+
+.box .union-2 {
+  position: absolute;
+  width: 210px;
+  height: 219px;
+  top: 30px; /* Moved up from 192px */
+  left: 327px;
+}
+
+.box .union-3 {
+  position: absolute;
+  width: 257px;
+  height: 143px;
+  top: 400px; /* Moved up from 690px */
+  left: 1121px;
+}
+
+.box .rectangle {
+  position: absolute;
+  width: 155px;
+  height: 62px;
+  top: 50px; /* Moved up from 213px */
+  left: 829px;
+}
+
+.box .rectangle-2 {
+  position: absolute;
+  width: 155px;
+  height: 62px;
+  top: 50px; /* Moved up from 213px */
+  left: 966px;
+}
+
+.box .rectangle-3 {
+  position: absolute;
+  width: 155px;
+  height: 62px;
+  top: 50px; /* Moved up from 213px */
+  left: 1102px;
+}
+
+.box .div {
+  position: absolute;
+  width: 81px;
+  height: 81px;
+  top: 450px; /* Moved up from 721px */
+  left: 272px;
+  background-color: #e0e5ff;
+  transform: rotate(45deg);
+  opacity: 0; /* Hidden initially for animation */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.box .rectangle-4 {
+  position: absolute;
+  width: 132px;
+  height: 132px;
+  top: 425px; /* Moved up from 696px */
+  left: 246px;
+  border: 10px solid;
+  border-color: #cdaaff;
+  transform: rotate(45deg);
+  opacity: 0; /* Hidden initially for animation */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.box .text-wrapper {
+  position: absolute;
+  width: 178px;
+  height: 80px;
+  top: 465px; /* Moved up from 735px */
+  left: 1150px;
+  text-shadow: 4px 4px 0px #4e6cff;
+  font-family: "Splatoon", woff;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 36px;
+  letter-spacing: 7.20px;
+  line-height: 39.6px;
+  opacity: 0; /* Hidden initially for animation */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.box .skye-workstation {
+  position: absolute;
+  width: 953px;
+  height: 268px;
+  top: 220px; /* Moved up from 370px */
+  left: 420px;
+  text-shadow: 6px 6px 0px #4e6cff;
+  font-family: "SpAlterna-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 64px;
+  letter-spacing: 12.80px;
+  line-height: 70.4px;
+  opacity: 0; /* Hidden initially for animation */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.box .description-paragraph {
+  position: absolute;
+  width: 400px;
+  height: auto;
+  top: 390px; /* Below the main title */
+  left: 420px; /* Aligned with main title */
+  font-family: "splatoon", woff;
+  font-weight: 300;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  line-height: 24px;
+  opacity: 0; /* Hidden initially for animation */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Active class to show elements */
+.active {
+  opacity: 1 !important;
+}
