@@ -18,41 +18,72 @@ function initMuuri() {
             fillGaps: true,
         }
     });
+    
     window.addEventListener('load', function () {
         grid.refreshItems().layout();
-        });
+    });
 }
 
 function handleMuuriFiltering() {
-    $('.sort-btn li').on('click', function() {
-        $('.sort-btn li').removeClass('active'); 
-        $(this).addClass('active'); 
+    // Handle category filter buttons
+    const categoryButtons = document.querySelectorAll('.option-box');
+    const searchInput = document.getElementById('search-filter');
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove 'selected' class from all buttons
+            categoryButtons.forEach(btn => btn.classList.remove('selected'));
+            // Add 'selected' class to clicked button
+            this.classList.add('selected');
+            
+            const filterValue = this.getAttribute('data-value');
+            applyFilters(filterValue, searchInput.value.trim());
+        });
+    });
+    
+    // Handle search input
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const selectedButton = document.querySelector('.option-box.selected');
+            const categoryFilter = selectedButton ? selectedButton.getAttribute('data-value') : 'all';
+            applyFilters(categoryFilter, this.value.trim());
+        });
+    }
+}
 
-        var className = $(this).attr('class').split(' ')[0]; 
-        if (className === 'sort00') {
-            grid.filter('*'); 
-        } else {
-            grid.filter('.' + className); 
+function applyFilters(categoryFilter, searchText) {
+    grid.filter(function(item) {
+        const element = item.getElement();
+        const category = element.getAttribute('data-category');
+        const tagElement = element.querySelector('.tag');
+        const titleElement = element.querySelector('.title');
+        const descriptionElement = element.querySelector('.description');
+        
+        // Check category filter
+        let categoryMatch = true;
+        if (categoryFilter && categoryFilter !== 'all') {
+            categoryMatch = category === categoryFilter;
         }
+        
+        // Check search filter
+        let searchMatch = true;
+        if (searchText) {
+            const searchLower = searchText.toLowerCase();
+            const tagText = tagElement ? tagElement.textContent.toLowerCase() : '';
+            const titleText = titleElement ? titleElement.textContent.toLowerCase() : '';
+            const descriptionText = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
+            
+            searchMatch = tagText.includes(searchLower) || 
+                         titleText.includes(searchLower) || 
+                         descriptionText.includes(searchLower);
+        }
+        
+        return categoryMatch && searchMatch;
     });
 }
 
-if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-    window.addEventListener("DOMContentLoaded", (event) => {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                buildPage(this); 
-                initMuuri(); 
-                handleMuuriFiltering(); 
-            }
-        };
-        xhttp.open("GET", RSSLink, true);
-        xhttp.send();
-    });
-} else {
-    window.addEventListener("DOMContentLoaded", (event) => {
-        initMuuri(); 
-        handleMuuriFiltering(); 
-    });
-}
+// Initialize when DOM is loaded
+window.addEventListener("DOMContentLoaded", (event) => {
+    initMuuri(); 
+    handleMuuriFiltering(); 
+});
