@@ -3,6 +3,11 @@
     src: url('font/BlitzMain.otf') format('woff');
 }
 
+@font-face {
+    font-family: 'SpAlterna-Regular';
+    src: url('font/SpAlterna-Regular.otf') format('woff');
+}
+
 .box .group {
   position: fixed;
   width: 1763px;
