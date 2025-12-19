@@ -894,7 +894,7 @@ button.navBtns:hover {
 .about-me-container {
     position: fixed;
     right: 440px;
-    top: 80px;
+    top: 120px;
     transform: translateY(-50%);
     width: calc(100% - 200px);
     max-width: 480px;
@@ -925,7 +925,7 @@ button.navBtns:hover {
 
 
 		.sakura-stamp#sakuraStamp2 {
-			top: 10%;
+			top: 20%;
 			right: 220px;
 			width: 150px;
 			transform: rotate(-10deg);
