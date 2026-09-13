@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skye Journey</title>
+<link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../main-music-player/music-player.css">
+<link rel="stylesheet" href="/assets/css/nav-bar.css">
+<link rel="stylesheet" href="support.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/starfall.css">
+<link rel="stylesheet" href="/assets/css/stars.css">
+</head>
+<body>
+    <div class="support-panel">
+        <img src="../../assets/panels/welcome-support-panel.png" alt="Support Panel" />
+    </div>
+
+    <div class="filter-controls">
+        <div class="filter-group">
+          <label>SELECT CATEGORY:</label>
+          <select id="category-filter" aria-hidden="true">
+            <option value="all">All Categories</option>
+            <option value="troubleshooting">Troubleshooting</option>
+            <option value="guides">Guides</option>
+            <option value="faq">FAQ</option>
+            <option value="contact-support">Contact Support</option>
+          </select>
+          <div class="category-options">
+            <button class="option-box selected" data-value="all">All Categories</button>
+            <button class="option-box" data-value="troubleshooting">Troubleshooting</button>
+            <button class="option-box" data-value="guides">Guides</button>
+            <button class="option-box" data-value="faq">FAQ</button>
+            <button class="option-box" data-value="contact-support">Contact Support</button>
+          </div>
+        </div>
+  <div class="filter-group">
+    <label for="search-filter">SEARCH TAGS:</label>
+    <input type="text" id="search-filter" placeholder="Type to search...">
+  </div>
+</div>
+
+<div class="grid">
+    <div class="item" data-tags="contact-support">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># TECHNICAL SUPPORT</div>
+          <div class="date">Jan 15, 2025</div>
+          <img src="../../assets/skye/support.png" alt="support preview" class="preview-image">
+          <div class="description">
+            If you see any errors on my website, please let me know and feel free to contact me or discuss them in the chat. You can also check support to see if any of the proposed solutions fix it! You can see my social media in the social section of the navigation bar on the left, or you can email me at luvrksnskyedev@icloud.com
+          </div>
+          <div class="footer">
+            <span class="tag"># Contact</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="troubleshooting">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># MUSIC ON AUTOPLAY DOESN'T WORK</div>
+          <div class="date">Dec 25, 2024</div>
+          <img src="../../assets/kitty/sos-cat.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            Automatic playback may not work the same way on iOS devices or other phones in case you are on mobile. Check your browser settings; some browsers have settings that block automatic playback of multimedia content. Make sure that autoplay is enabled in your browser settings. Also, ensure that your browser is up to date, as updates can fix errors and improve performance! You can try testing the website on another browser to see if the issue persists. Finally, check the website's permissions. Ensure that the website has permission to play sound in your browser! If you are on mobile, autoplay may not function, so try using the music player manually by clicking on the music player. :3
+          </div>
+          <div class="footer">
+            <span class="tag"># Music # Troubleshooting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="troubleshooting">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># SOME IMAGES ARE BROKEN</div>
+          <div class="date">Dec 25, 2024</div>
+          <img src="../../assets/kitty/bag-cat.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            If you're returning, please CTRL+F5 or delete your browser cache if anything looks broken! Please note that my site is still a work in progress, so it may still have some bugs. 
+          </div>
+          <div class="footer">
+            <span class="tag"># Media # Troubleshooting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="faq">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># MOBILE OPTIMIZATION</div>
+          <div class="date">Dec 25, 2024</div>
+          <img src="../../assets/kitty/kitty-letter.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            This website is no longer optimized for phones, so you may notice some errors or differences. I recommend you browse the site on your PC or laptop instead. :')
+          </div>
+          <div class="footer">
+            <span class="tag"># Mobile #FAQ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="faq">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># I HAVE A RECOMMENDATION</div>
+          <div class="date">Dec 26, 2024</div>
+          <div class="description">
+            If you have any suggestions for a new section to add to the page, new music or something new, you can comment on the chat or send me an email at luvrksnskyedev@icloud.com. I'm always reading people's comments and I'd love to hear your opinion. If you want to add a new feature to the page, share your ideas with me!
+          </div>
+          <div class="footer">
+            <span class="tag"># FAQ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="guides">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title">#HOW TO NAVIGATE THE SITE?</div>
+          <div class="date">Jan 15, 2025</div>
+          <img src="../../assets/kitty/laptop-kitty.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            Making this website I realize that it is huge and easy to get lost. That's why I'm working on a sitemap and decided to make it into tech support! If you get lost while browsing my website, use the nav bar on the left, it will indicate where you are with the map icon. It's possible that by the time you read this, the sitemap won't be available yet, since as you know, the website is in the middle of a huge upgrade. Just remember that the map icon will tell you where you are! Also, at the top of the page there is a navigation bar dividing the sections by categories.
+          </div>
+          <div class="footer">
+            <span class="tag"># Website # General #Guides</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="faq">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># WHY DOES THE WEBSITE TAKE TIME TO LOAD?</div>
+          <div class="date">Jan 15, 2025</div>
+          <img src="../../assets/kitty/winter-cat.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            If the page takes a long time to load, it may not be your fault. If it's not your internet connection, it may be because the page is too heavy and consumes too many resources! I'm trying to keep it as light as possible for the next updates, but I can't promise much. Some temporary solutions I can think of are clearing the browser cache.
+          </div>
+          <div class="footer">
+            <span class="tag"># Browser # FAQ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="faq">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># WHEN DO YOU OPEN COMMISSIONS?</div>
+          <div class="date">Jan 15, 2025</div>
+          <img src="../../assets/kitty/cake-hound.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            Probably in a thousand years lol (jkkkkk) I'm really busy with personal projects and college. So I can't give an answer to that right now, the websites and carrds I can make for now are limited to my social circle. So for now, I'll just focus on my own website and Selysun's website.
+          </div>
+          <div class="footer">
+            <span class="tag"># FAQ # General # Commissions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="item" data-tags="troubleshooting">
+      <div class="window-muuri">
+        <div class="window-muuri-header">
+          <div class="drag-handle">
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="window-muuri-controls">
+            <span class="material-icons">remove</span>
+            <span class="material-icons">crop_square</span>
+            <span class="material-icons">close</span>
+          </div>
+        </div>
+        <div class="window-muuri-content">
+          <div class="title"># STELLAR HUNTER BUG</div>
+          <div class="date">Jan 15, 2025</div>
+          <img src="../../assets/kitty/cute-cake-hound.jpg" alt="support preview" class="preview-image">
+          <div class="description">
+            It would be rare for this to happen, but if no stars appear, use CTRL + F5 to restart and it should fix it. Under no circumstances DO NOT DELETE your local storage, as if you do that, you will lose all your star hunting progress and all your encyclopedia entries! So be careful when messing with any of your browser settings. I definitely wouldn't want to be you if I lost all my progress, considering that the zodiac stars only appear in specific months of the year!
+          </div>
+          <div class="footer">
+            <span class="tag"># Bug # Troubleshooting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="item" data-tags="faq">
+    <div class="window-muuri">
+      <div class="window-muuri-header">
+        <div class="drag-handle">
+          <span class="material-icons">drag_indicator</span>
+        </div>
+        <div class="window-muuri-controls">
+          <span class="material-icons">remove</span>
+          <span class="material-icons">crop_square</span>
+          <span class="material-icons">close</span>
+        </div>
+      </div>
+      <div class="window-muuri-content">
+        <div class="title">SPECIAL EVENT UPDATE</div>
+        <div class="date">Jan 15, 2025</div>
+        <img src="../../assets/kitty/this-is-not-a-cat-lol.jpg" alt="support preview" class="preview-image">
+        <div class="description">
+            I've been thinking about adding a special events section for a very future update to the site, you know, Christmas, Halloween, etc. Maybe I'll even do it ahead of time and add it to the list of things for this giant update! But who knows. I'm a constant brainstormer. This has nothing to do with tech support, but I wanted to add it anyway in case anyone is wondering if I'll be doing special events on my website again.
+        </div>
+        <div class="footer">
+          <span class="tag"># Event # FAQ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" data-tags="guides">
+    <div class="window-muuri">
+      <div class="window-muuri-header">
+        <div class="drag-handle">
+          <span class="material-icons">drag_indicator</span>
+        </div>
+        <div class="window-muuri-controls">
+          <span class="material-icons">remove</span>
+          <span class="material-icons">crop_square</span>
+          <span class="material-icons">close</span>
+        </div>
+      </div>
+      <div class="window-muuri-content">
+        <div class="title"># HOW TO PLAY STELLAR HUNTER</div>
+        <div class="date">Jan 15, 2025</div>
+        <img src="../../assets/buttons-icons/exp-star-jelly-4.webp" alt="stars lol" class="preview-image">
+        <div class="description">
+            I wanted to write this in case the game instructions weren't that simple to understand, since I'm terrible at explaining. So! Basically, you just need to head to the credits section and click on the stars falling in the sky. I recommend doing this best starting at 7 PM, which is when there are the most falling stars and rare stars can appear. Depending on the month, zodiac stars will fall, so pay attention to that! And that's it! It's really a simple game, but I hope people can enjoy it a bit. And remember: don't delete your local storage! if you don't want to lose all your progress.
+        </div>
+        <div class="footer">
+          <span class="tag"># Guides # Stellar hunter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" data-tags="guides">
+    <div class="window-muuri">
+      <div class="window-muuri-header">
+        <div class="drag-handle">
+          <span class="material-icons">drag_indicator</span>
+        </div>
+        <div class="window-muuri-controls">
+          <span class="material-icons">remove</span>
+          <span class="material-icons">crop_square</span>
+          <span class="material-icons">close</span>
+        </div>
+      </div>
+      <div class="window-muuri-content">
+        <div class="title"># ZODIAC STAR MONTHS</div>
+        <div class="date">Jan 15, 2025</div>
+        <img src="../../assets/buttons-icons/exp-star-jelly-2.webp" alt="new themes" class="preview-image">
+        <div class="description">
+            Here is a complete list of Stellar Hunter's zodiac star months! Keep this in mind when star hunting:
+            <ul>
+            <li>Capricorn: January 1 - January 19</li>
+            <li>Aquarius: January 20 - February 18</li>
+            <li>Pisces: February 19 - March 20</li>
+            <li>Aries: March 21 - April 18</li>
+            <li>Taurus: April 20 - May 20</li>
+            <li>Gemini: May 21 - June 20</li>
+            <li>Cancer: June 21 - July 22</li>
+            <li>Leo: July 23 - August 22</li>
+            <li>Virgo: August 23 - September 22</li>
+            <li>Libra: September 23 - October 22</li>
+            <li>Scorpio: October 23 - November 21</li>
+            <li>Sagittarius: November 22 - December 21</li>
+            </ul>
+        </div>
+        <div class="footer">
+          <span class="tag"># Guides # Stellar hunter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" data-tags="troubleshooting">
+    <div class="window-muuri">
+      <div class="window-muuri-header">
+        <div class="drag-handle">
+          <span class="material-icons">drag_indicator</span>
+        </div>
+        <div class="window-muuri-controls">
+          <span class="material-icons">remove</span>
+          <span class="material-icons">crop_square</span>
+          <span class="material-icons">close</span>
+        </div>
+      </div>
+      <div class="window-muuri-content">
+        <div class="title"># BROWSER COMPATIBILITY</div>
+        <div class="date">Jan 15, 2025</div>
+        <img src="../../assets/kitty/kitty-computer.jpg" alt="support preview" class="preview-image">
+        <div class="description">
+          For the best experience, use these recommended browsers: Chrome, Firefox or Edge and Safari.The site uses modern web features like CSS Grid, Flexbox, and Web Audio API which may not work properly in older browsers. If you encounter issues, first try updating your browser to the latest version. Note that some features like the star particle effects may be limited on older hardware regardless of browser choice.
+        </div>
+        <div class="footer">
+          <span class="tag"># Bug # Troubleshooting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="item" data-tags="faq">
+    <div class="window-muuri">
+      <div class="window-muuri-header">
+        <div class="drag-handle">
+          <span class="material-icons">drag_indicator</span>
+        </div>
+        <div class="window-muuri-controls">
+          <span class="material-icons">remove</span>
+          <span class="material-icons">crop_square</span>
+          <span class="material-icons">close</span>
+        </div>
+      </div>
+      <div class="window-muuri-content">
+        <div class="title"># STELLAR HUNTER ALBUM</div>
+        <div class="date">Jan 15, 2025</div>
+        <img src="../../assets/buttons-icons/exp-star-jelly.webp" alt="support preview" class="preview-image">
+        <div class="description">
+          The Stellar Hunter album is not yet available, so if you get an error when trying to access it, don't worry! As of this writing, the album is still in development and I'm still undecided about its functionality. However, all of your progress in the encyclopedia will be saved and will carry over to the album when it is released.
+        </div>
+        <div class="footer">
+          <span class="tag"># FAQ # Stellar hunter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+
+<!-- Music player lol-->
+  <div class="music-player">
+    <div class="highlight top-right"></div>
+    <div class="highlight bottom-left"></div>
+    
+    <button class="slide-toggle">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    
+    <div class="corner-tag">Now Playing</div>
+    
+    <div class="player-header">
+        <div class="visualizer">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="album-art">
+            <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+        </div>
+        
+        <div class="song-info">
+            <h3 class="song-title">Current Song</h3>
+        </div>
+        
+        <div class="progress-container">
+            <div class="current-time">0:00</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="duration">0:00</div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="prev">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button class="control-btn" id="play">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="next">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!---End of the music player :D-->
+
+          <div id="nav2-wrapper">
+            <div id="nav2-custom-sidebar" class="hidden">
+              <h2>Filesystem</h2>
+              <ul>
+                <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+                <li><a href="../../filesystem/about/index.html"><img src="../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+                <li><a href="../../filesystem/social/index.html"><img src="../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+                <li><a href="#"><img src="../../assets/nav-bar/support.png" alt="music Icon">Support<img src="../../assets/buttons-icons/phone-app-navigation.png" alt="new symbol"></a></li>
+                <li><a href="../changelog/index.html"><img src="../../assets/nav-bar/rules.png" alt="games Icon">Changelog</a></li>
+                <li><a href="../../filesystem/blogs/index.html"><img src="../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
+                <li><a href="../../filesystem/resources/index.html"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+                <li><a href="../../filesystem/credits/index.html"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+                <li><a href="../../filesystem/workstation/index.html"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+                  <li><a href="../sitemap/index.html"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
+              </ul>
+              </div>
+              <div class="nav2-blur-overlay"></div>
+              <button id="nav2-sidebar-toggle"></button>
+            </div>
+
+    <div class="starfall-container">
+        <div class="starfield" id="starfield"></div>
+        </div>
+        <div class="stars"></div>
+            
+            <!-- Mouse effect :) -->
+<script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/muuri@0.9.5/dist/muuri.min.js"></script>
+<script src="index.inline.js"></script>
+
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="../../assets/background/intro-background.webm" type="video/webm">
+        </video>
+    </div>
+
+<script src="../../main-music-player/music-player.js"></script>
+<script type="text/javascript" src="/assets/js/nav-bar.js"></script>
+
+
+<script type="module" src="/assets/js/starfall.js"></script>
+<script type="module" src="/assets/js/stars.js"></script>
+</body>
+</html>

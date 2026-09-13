@@ -1,0 +1,184 @@
+{
+  "stars": [
+    {
+      "id": 1,
+      "name": "Aries",
+      "type": "zodiac",
+      "entry": "entry1.html"
+    },
+    {
+      "id": 2,
+      "name": "Taurus",
+      "type": "zodiac",
+      "entry": "entry2.html"
+    },
+    {
+      "id": 3,
+      "name": "Gemini",
+      "type": "zodiac",
+      "entry": "entry3.html"
+    },
+    {
+      "id": 4,
+      "name": "Cancer",
+      "type": "zodiac",
+      "entry": "entry4.html"
+    },
+    {
+      "id": 5,
+      "name": "Leo",
+      "type": "zodiac",
+      "entry": "entry5.html"
+    },
+    {
+      "id": 6,
+      "name": "Virgo",
+      "type": "zodiac",
+      "entry": "entry6.html"
+    },
+    {
+      "id": 7,
+      "name": "Libra",
+      "type": "zodiac",
+      "entry": "entry7.html"
+    },
+    {
+      "id": 8,
+      "name": "Scorpio",
+      "type": "zodiac",
+      "entry": "entry8.html"
+    },
+    {
+      "id": 9,
+      "name": "Sagittarius",
+      "type": "zodiac",
+      "entry": "entry9.html"
+    },
+    {
+      "id": 10,
+      "name": "Capricorn",
+      "type": "zodiac",
+      "entry": "entry10.html"
+    },
+    {
+      "id": 11,
+      "name": "Aquarius",
+      "type": "zodiac",
+      "entry": "entry11.html"
+    },
+    {
+      "id": 12,
+      "name": "Pisces",
+      "type": "zodiac",
+      "entry": "entry12.html"
+    },
+    {
+      "id": 13,
+      "name": "Sirius",
+      "type": "special",
+      "entry": "entry13.html"
+    },
+    {
+      "id": 14,
+      "name": "Vega",
+      "type": "special",
+      "entry": "entry14.html"
+    },
+    {
+      "id": 15,
+      "name": "Antares",
+      "type": "special",
+      "entry": "entry15.html"
+    },
+    {
+      "id": 16,
+      "name": "Betelgeuse",
+      "type": "special",
+      "entry": "entry16.html"
+    },
+    {
+      "id": 17,
+      "name": "Aldebaran",
+      "type": "special",
+      "entry": "entry17.html"
+    },
+    {
+      "id": 18,
+      "name": "Rigel",
+      "type": "special",
+      "entry": "entry18.html"
+    },
+    {
+      "id": 19,
+      "name": "Arcturus",
+      "type": "special",
+      "entry": "entry19.html"
+    },
+    {
+      "id": 20,
+      "name": "Polaris",
+      "type": "special",
+      "entry": "entry20.html"
+    },
+    {
+      "id": 21,
+      "name": "Deneb",
+      "type": "special",
+      "entry": "entry21.html"
+    },
+    {
+      "id": 22,
+      "name": "Altair",
+      "type": "special",
+      "entry": "entry22.html"
+    },
+    {
+      "id": 23,
+      "name": "Cachi",
+      "type": "pet",
+      "entry": "entry23.html"
+    },
+    {
+      "id": 24,
+      "name": "Gordo",
+      "type": "pet",
+      "entry": "entry24.html"
+    },
+    {
+      "id": 25,
+      "name": "Yogui",
+      "type": "pet",
+      "entry": "entry25.html"
+    },
+    {
+      "id": 26,
+      "name": "Midnight",
+      "type": "pet",
+      "entry": "entry26.html"
+    },
+    {
+      "id": 27,
+      "name": "Dawn",
+      "type": "pet",
+      "entry": "entry27.html"
+    },
+    {
+      "id": 28,
+      "name": "Mochi",
+      "type": "pet",
+      "entry": "entry28.html"
+    },
+    {
+      "id": 29,
+      "name": "Cream",
+      "type": "pet",
+      "entry": "entry29.html"
+    },
+    {
+      "id": 30,
+      "name": "Filomeno",
+      "type": "pet",
+      "entry": "entry30.html"
+    }
+  ]
+}

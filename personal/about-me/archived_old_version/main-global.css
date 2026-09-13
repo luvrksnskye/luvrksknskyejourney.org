@@ -1,0 +1,1012 @@
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-image: url('assets/bg2.png');
+  background-size:contain;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  z-index: -100;
+  position: relative;
+}
+
+/* Animation overlay styles */
+#animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  display: none;
+}
+
+#plane-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#logo-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#plane-svg {
+  max-height: 250px;
+  max-width: 250px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#logo-svg {
+  max-height: 250px;
+  max-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover-image {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+/* Mantener los estilos anteriores y agregar estos */
+
+.cover-image.blue-bg {
+  background-color: #1999cc;
+  clip-path: circle(0% at 50% 50%);
+  -webkit-clip-path: circle(0% at 50% 50%);
+  z-index: 1;
+}
+
+.cover-image.black-bg {
+  background-color: #000000;
+  clip-path: circle(0% at 50% 50%);
+  -webkit-clip-path: circle(0% at 50% 50%);
+  z-index: 2;
+}
+
+#logo-container {
+  z-index: 3;
+}
+
+#plane-container {
+  z-index: 4;
+}
+
+.macbook-pro {
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 50px;
+}
+
+        .macbook-pro .overlap-wrapper {
+            overflow: hidden;
+            width: 1728px;
+            height: 1117px;
+        }
+
+        .macbook-pro .overlap {
+            position: relative;
+            width: 2061px;
+            height: 1148px;
+            top: -9px;
+            left: -238px;
+        }
+
+        .macbook-pro .things-you-can-do-at {
+            position: absolute;
+            width: 1312px;
+            height: 752px;
+            top: 50px;
+            left: 435px;
+            background-color: #1591d1;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .macbook-pro .overlap-group {
+            position: relative;
+            width: 1280px;
+            height: 712px;
+            top: 8px;
+        }
+
+        .macbook-pro .rectangle {
+            position: absolute;
+            width: 109px;
+            height: 43px;
+            top: 24px;
+            left: 260px;
+        }
+
+        .macbook-pro .div {
+            position: absolute;
+            width: 1280px;
+            height: 570px;
+            top: 142px;
+            left: 0;
+            background-color: #f5f7e1;
+        }
+
+        .macbook-pro .rectangle-2 {
+            position: absolute;
+            width: 374px;
+            height: 320px;
+            top: 270px;
+            left: 858px;
+            background-color: #094f425c;
+            border-radius: 32px;
+            filter: blur(18px);
+        }
+
+        .macbook-pro .mask-group {
+            position: absolute;
+            width: 729px;
+            height: 65px;
+            top: 205px;
+            left: 70px;
+        }
+
+        .macbook-pro .group {
+            position: absolute;
+            width: 202px;
+            height: 45px;
+            top: 656px;
+            left: 1059px;
+        }
+
+        .macbook-pro .overlap-group-2 {
+            position: relative;
+            width: 197px;
+            height: 45px;
+            background-image: url(https://c.animaapp.com/OKKl5iAa/img/rectangle-17.svg);
+            background-size: 100% 100%;
+        }
+
+        .macbook-pro .div-wrapper {
+            position: absolute;
+            width: 31px;
+            height: 31px;
+            top: 8px;
+            left: 8px;
+            background-color: #fdfde5;
+            border-radius: 15.5px;
+        }
+
+        .macbook-pro .text-wrapper {
+            position: absolute;
+            top: 1px;
+            left: 7px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #1591d1;
+            font-size: 26px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .text-wrapper-2 {
+            position: absolute;
+            top: 9px;
+            left: 49px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #fdfde5;
+            font-size: 26px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .group-2 {
+            position: absolute;
+            width: 775px;
+            height: 462px;
+            top: 207px;
+            left: 20px;
+        }
+
+        .macbook-pro .group-3 {
+            position: absolute;
+            width: 33px;
+            height: 441px;
+            top: 0;
+            left: 0;
+        }
+
+        .macbook-pro .overlap-group-wrapper {
+            position: absolute;
+            width: 11px;
+            height: 402px;
+            top: 0;
+            left: 11px;
+        }
+
+        .macbook-pro .overlap-group-3 {
+            position: relative;
+            height: 402px;
+        }
+
+        .macbook-pro .rectangle-3 {
+            position: absolute;
+            width: 7px;
+            height: 396px;
+            top: 4px;
+            left: 2px;
+            background-color: #dee1c7;
+            border-radius: 3.5px;
+        }
+
+        .macbook-pro .rectangle-4 {
+            position: absolute;
+            width: 11px;
+            height: 11px;
+            top: 391px;
+            left: 0;
+            background-color: #dee1c7;
+            border-radius: 5.5px;
+        }
+
+        .macbook-pro .rectangle-5 {
+            position: absolute;
+            width: 11px;
+            height: 292px;
+            top: 0;
+            left: 0;
+            background-color: #151618;
+            border-radius: 5.5px;
+        }
+
+        .macbook-pro .group-4 {
+            position: absolute;
+            width: 35px;
+            height: 31px;
+            top: 410px;
+            left: 0;
+        }
+
+        .macbook-pro .overlap-2 {
+            position: relative;
+            width: 33px;
+            height: 31px;
+        }
+
+        .macbook-pro .img {
+            position: absolute;
+            width: 13px;
+            height: 6px;
+            top: 15px;
+            left: 20px;
+        }
+
+        .macbook-pro .rectangle-6 {
+            position: absolute;
+            width: 13px;
+            height: 6px;
+            top: 24px;
+            left: 20px;
+        }
+
+        .macbook-pro .subtract {
+            position: absolute;
+            width: 21px;
+            height: 19px;
+            top: 3px;
+            left: 5px;
+        }
+
+        .macbook-pro .subtract-2 {
+            position: absolute;
+            width: 31px;
+            height: 28px;
+            top: 0;
+            left: 0;
+        }
+
+        .macbook-pro .text-wrapper-3 {
+            position: absolute;
+            top: 4px;
+            left: 11px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #f5f7e1;
+            font-size: 14px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .group-5 {
+            position: absolute;
+            width: 717px;
+            height: 453px;
+            top: 9px;
+            left: 58px;
+        }
+
+        .macbook-pro .group-6 {
+            position: absolute;
+            width: 137px;
+            height: 43px;
+            top: 0;
+            left: 549px;
+        }
+
+        .macbook-pro .text-wrapper-4 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: "Roboto", Helvetica;
+            font-weight: 400;
+            color: #151618;
+            font-size: 37px;
+            text-align: right;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .text-wrapper-5 {
+            position: absolute;
+            top: 3px;
+            left: 26px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 400;
+            color: #151618;
+            font-size: 33px;
+            text-align: right;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .group-7 {
+            position: absolute;
+            width: 289px;
+            height: 43px;
+            top: 0;
+            left: 60px;
+        }
+
+        .macbook-pro .text-wrapper-6 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: "Roboto", Helvetica;
+            font-weight: 600;
+            color: #151618;
+            font-size: 37px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .text-wrapper-7 {
+            position: absolute;
+            top: 9px;
+            left: 232px;
+            opacity: 0.4;
+            font-family: "Roboto", Helvetica;
+            font-weight: 400;
+            color: #000000;
+            font-size: 25px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .group-8 {
+            position: absolute;
+            width: 161px;
+            height: 43px;
+            top: 96px;
+            left: 60px;
+        }
+
+        .macbook-pro .group-9 {
+            position: absolute;
+            width: 138px;
+            height: 43px;
+            top: 192px;
+            left: 60px;
+        }
+
+        .macbook-pro .group-10 {
+            position: absolute;
+            width: 226px;
+            height: 43px;
+            top: 288px;
+            left: 60px;
+        }
+
+        .macbook-pro .group-11 {
+            position: absolute;
+            width: 197px;
+            height: 43px;
+            top: 384px;
+            left: 60px;
+        }
+
+        .macbook-pro .line {
+            height: 2px;
+            top: 163px;
+            position: absolute;
+            width: 717px;
+            left: 0;
+        }
+
+        .macbook-pro .group-12 {
+            position: absolute;
+            width: 31px;
+            height: 31px;
+            top: 109px;
+            left: 15px;
+        }
+
+        .macbook-pro .group-13 {
+            position: absolute;
+            width: 31px;
+            height: 31px;
+            top: 13px;
+            left: 15px;
+        }
+
+        .macbook-pro .group-14 {
+            position: absolute;
+            width: 31px;
+            height: 31px;
+            top: 205px;
+            left: 15px;
+        }
+
+        .macbook-pro .group-15 {
+            position: absolute;
+            width: 31px;
+            height: 31px;
+            top: 301px;
+            left: 15px;
+        }
+
+        .macbook-pro .group-16 {
+            position: absolute;
+            width: 31px;
+            height: 31px;
+            top: 397px;
+            left: 15px;
+        }
+
+        .macbook-pro .line-2 {
+            height: 2px;
+            top: 259px;
+            position: absolute;
+            width: 717px;
+            left: 0;
+        }
+
+        .macbook-pro .line-3 {
+            height: 2px;
+            top: 355px;
+            position: absolute;
+            width: 717px;
+            left: 0;
+        }
+
+        .macbook-pro .line-4 {
+            height: 1px;
+            top: 452px;
+            object-fit: cover;
+            position: absolute;
+            width: 717px;
+            left: 0;
+        }
+
+        .macbook-pro .group-17 {
+            position: absolute;
+            width: 137px;
+            height: 43px;
+            top: 312px;
+            left: 627px;
+        }
+
+        .macbook-pro .group-18 {
+            position: absolute;
+            width: 137px;
+            height: 43px;
+            top: 408px;
+            left: 627px;
+            opacity: 0.6;
+        }
+
+        .macbook-pro .text-wrapper-8 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: "Roboto", Helvetica;
+            font-weight: 400;
+            color: #939487;
+            font-size: 37px;
+            text-align: right;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .text-wrapper-9 {
+            position: absolute;
+            top: 3px;
+            left: 26px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 400;
+            color: #939487;
+            font-size: 33px;
+            text-align: right;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .group-19 {
+            position: absolute;
+            width: 137px;
+            height: 43px;
+            top: 504px;
+            left: 627px;
+            opacity: 0.6;
+        }
+
+        .macbook-pro .group-20 {
+            position: absolute;
+            width: 137px;
+            height: 43px;
+            top: 600px;
+            left: 627px;
+            opacity: 0.6;
+        }
+
+        .macbook-pro .union {
+            position: absolute;
+            width: 15px;
+            height: 14px;
+            top: 332px;
+            left: 363px;
+        }
+
+        .macbook-pro .union-2 {
+            position: absolute;
+            width: 15px;
+            height: 14px;
+            top: 427px;
+            left: 363px;
+        }
+
+        .macbook-pro .union-3 {
+            position: absolute;
+            width: 15px;
+            height: 14px;
+            top: 523px;
+            left: 396px;
+        }
+
+        .macbook-pro .union-4 {
+            position: absolute;
+            width: 15px;
+            height: 14px;
+            top: 622px;
+            left: 396px;
+        }
+
+        .macbook-pro .group-21 {
+            position: absolute;
+            width: 328px;
+            height: 103px;
+            top: 10px;
+            left: 301px;
+        }
+
+        .macbook-pro .overlap-3 {
+            position: relative;
+            height: 103px;
+        }
+
+        .macbook-pro .group-22 {
+            position: absolute;
+            width: 328px;
+            height: 83px;
+            top: 20px;
+            left: 0;
+        }
+
+        .macbook-pro .overlap-4 {
+            position: relative;
+            height: 83px;
+        }
+
+        .macbook-pro .group-23 {
+            position: absolute;
+            width: 328px;
+            height: 83px;
+            top: 0;
+            left: 0;
+        }
+
+        .macbook-pro .overlap-5 {
+            position: relative;
+            width: 330px;
+            height: 83px;
+        }
+
+        .macbook-pro .union-5 {
+            position: absolute;
+            width: 278px;
+            height: 83px;
+            top: 0;
+            left: 25px;
+        }
+
+        .macbook-pro .group-24 {
+            position: absolute;
+            width: 35px;
+            height: 29px;
+            top: 51px;
+            left: 295px;
+        }
+
+        .macbook-pro .overlap-group-4 {
+            position: relative;
+            width: 39px;
+            height: 34px;
+            top: -3px;
+            left: -3px;
+            border-radius: 12px 1px 1px 3px;
+        }
+
+        .macbook-pro .rectangle-7 {
+            position: absolute;
+            width: 39px;
+            height: 34px;
+            top: 0;
+            left: 0;
+            background-color: #8a7965;
+            border-radius: 12px 1px 1px 3px;
+            border: 3px solid;
+            border-color: #fdfde5;
+            transform: rotate(180deg);
+        }
+
+        .macbook-pro .text-wrapper-10 {
+            top: 4px;
+            left: 11px;
+            position: absolute;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #fdfde5;
+            font-size: 24px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .group-25 {
+            position: absolute;
+            width: 35px;
+            height: 29px;
+            top: 51px;
+            left: 0;
+            transform: rotate(180deg);
+        }
+
+        .macbook-pro .overlap-6 {
+            position: relative;
+            width: 39px;
+            height: 38px;
+            left: -3px;
+        }
+
+        .macbook-pro .rectangle-8 {
+            position: absolute;
+            width: 39px;
+            height: 34px;
+            top: 4px;
+            left: 0;
+            background-color: #8a7965;
+            border-radius: 12px 1px 1px 3px;
+            border: 3px solid;
+            border-color: #fdfde5;
+            transform: rotate(-180deg);
+        }
+
+        .macbook-pro .text-wrapper-11 {
+            top: 0;
+            left: 12px;
+            transform: rotate(-180deg);
+            position: absolute;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #fdfde5;
+            font-size: 24px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .vector {
+            position: absolute;
+            width: 49px;
+            height: 49px;
+            top: 17px;
+            left: 42px;
+        }
+
+        .macbook-pro .frame-wrapper {
+            position: absolute;
+            width: 90px;
+            height: 28px;
+            top: 0;
+            left: 22px;
+        }
+
+        .macbook-pro .frame {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0px 10px;
+            position: relative;
+            background-color: #006da5;
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .macbook-pro .text-wrapper-12 {
+            position: relative;
+            width: fit-content;
+            margin-top: -1px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #f2f6f7;
+            font-size: 24px;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .union-6 {
+            position: absolute;
+            width: 38px;
+            height: 35px;
+            top: 44px;
+            left: 115px;
+        }
+
+        .macbook-pro .union-7 {
+            position: absolute;
+            width: 43px;
+            height: 34px;
+            top: 44px;
+            left: 176px;
+        }
+
+        .macbook-pro .union-8 {
+            position: absolute;
+            width: 33px;
+            height: 25px;
+            top: 49px;
+            left: 246px;
+        }
+
+        .macbook-pro .group-26 {
+            position: absolute;
+            width: 1140px;
+            height: 126px;
+            top: 0;
+            left: 0;
+        }
+
+        .macbook-pro .group-27 {
+            position: absolute;
+            width: 1280px;
+            height: 86px;
+            top: 117px;
+            left: 0;
+        }
+
+        .macbook-pro .group-28 {
+            position: absolute;
+            width: 66px;
+            height: 66px;
+            top: 18px;
+            left: 1009px;
+        }
+
+        .macbook-pro .subtract-3 {
+            position: absolute;
+            width: 161px;
+            height: 45px;
+            top: 29px;
+            left: 1090px;
+        }
+
+        .macbook-pro .group-29 {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 266px;
+            left: 808px;
+        }
+
+        .macbook-pro .map {
+            position: absolute;
+            width: 400px;
+            height: 384px;
+            top: 189px;
+            left: 851px;
+        }
+
+        .macbook-pro .overlap-7 {
+            position: relative;
+            height: 384px;
+        }
+
+        .macbook-pro .rectangle-9 {
+            position: absolute;
+            width: 400px;
+            height: 339px;
+            top: 45px;
+            left: 0;
+            background-color: #79d6c4;
+            border-radius: 32px;
+        }
+
+        .macbook-pro .mask-group-2 {
+            position: absolute;
+            width: 378px;
+            height: 300px;
+            top: 69px;
+            left: 7px;
+        }
+
+        .macbook-pro .group-30 {
+            position: absolute;
+            width: 219px;
+            height: 58px;
+            top: 0;
+            left: 95px;
+        }
+
+        .macbook-pro .overlap-group-5 {
+            position: relative;
+            width: 217px;
+            height: 58px;
+        }
+
+        .macbook-pro .group-31 {
+            position: absolute;
+            width: 54px;
+            height: 41px;
+            top: 17px;
+            left: 163px;
+        }
+
+        .macbook-pro .group-32 {
+            position: absolute;
+            width: 54px;
+            height: 41px;
+            top: 17px;
+            left: 0;
+        }
+
+        .macbook-pro .rectangle-10 {
+            position: absolute;
+            width: 185px;
+            height: 50px;
+            top: 0;
+            left: 16px;
+        }
+
+        .macbook-pro .text-wrapper-13 {
+            position: absolute;
+            width: 134px;
+            top: 10px;
+            left: 42px;
+            font-family: "Roboto", Helvetica;
+            font-weight: 700;
+            color: #82735c;
+            font-size: 26px;
+            text-align: center;
+            letter-spacing: 0;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .macbook-pro .pointer {
+            position: absolute;
+            width: 121px;
+            height: 123px;
+            top: 210px;
+            left: 739px;
+            background-image: url(https://c.animaapp.com/OKKl5iAa/img/screen-shot-2022-03-18-at-2-3@2x.png);
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        /* Additional styles for functionality */
+        .country-option {
+            cursor: pointer;
+        }
+
+        .country-option.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Pointer and hover animation */
+        .pointer {
+            transition: top 0.2s ease;
+        }
+
+        .mask-group {
+            transition: top 0.2s ease;
+        }
+
+        /* Circle overlay animations */
+        .circle-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            clip-path: circle(0% at 50% 50%);
+            -webkit-clip-path: circle(0% at 50% 50%);
+        }
+
+        .circle-overlay.blue-circle {
+            background-color: #1999cc;
+        }
+
+        .circle-overlay.black-circle {
+            background-color: #000000;
+        }
+
+        /* Ensure animations work properly */
+        #project-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .macbook-pro {
+            transition: opacity 0.3s ease-out;
+        }
+
+        .macbook-pro.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+

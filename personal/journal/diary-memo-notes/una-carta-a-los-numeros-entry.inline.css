@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'departure-mono';
+  src: url('../../../assets/fonts/departuremono-regular.woff') format('woff');
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #acd7ff;
+}
+
+body {
+  background-color: white;
+  font-family: 'departure-mono', monospace;
+  color: #87b5ff;
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 4px 6px 40px;
+}
+
+p { margin: 0 0 1em; }
+
+em, i { color: #6ea8ff; font-style: italic; }
+b, strong { color: #b881ff; font-weight: normal; }
+
+blockquote {
+  margin: 1.4em 0.4em;
+  padding: 6px 14px;
+  border-left: 3px solid #b1e6ff;
+  color: #7ea9d9;
+  font-style: italic;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 4px;
+  color: #b881ff;
+  font-size: 12.5px;
+  font-style: normal;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #d7e6ff;
+  margin: 1.8em 0;
+}
+
+a:link { color: #b881ff; text-decoration: none; }
+a:visited { color: #df82e6; }
+a:hover { color: #80c6ff; }
+
+::selection { background-color: #bfeaff98; }
+
+.header-cite {
+  background-color: #b1e6ff8a;
+  padding: 2px 5px;
+}
+
+.section-divider {
+  text-align: center;
+  color: #b881ff;
+  letter-spacing: 6px;
+  margin: 2.2em 0;
+}
+
+.section-title {
+  color: #7db8ff;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 2em 0 1em;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed #cfe6ff;
+}
+
+.signoff {
+  margin-top: 2.2em;
+  color: #b881ff;
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye's Journey</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="sitemap.css">
+    <link rel="stylesheet" href="/assets/css/nav-bar.css">
+    <link rel="stylesheet" href="../../main-music-player/music-player.css">
+
+<link rel="stylesheet" href="/assets/css/starfall.css">
+</head><canvas id="orbital-bg-canvas"></canvas>
+  <div class="blur-layer"></div>
+
+  <div class="background-stars" id="background-stars"></div>
+
+  <div class="constellations-wrapper">
+      <div class="constellation-container" id="filesystem-container">
+          <div id="filesystem" class="constellation active"></div>
+      </div>
+      <div class="constellation-container" id="personal-container">
+          <div id="personal" class="constellation inactive"></div>
+      </div>
+      <div class="constellation-container" id="stellar-hunter-container">
+          <div id="stellar-hunter" class="constellation inactive"></div>
+      </div>
+  </div>
+
+  <div class="compass-container">
+      <img src="visuals/center.png" class="center-img" id="center-img" alt="Center">
+      <img src="visuals/compass.png" class="compass-img" id="compass-img" alt="Compass">
+  </div>
+
+  <div class="category-buttons">
+      <button id="filesystem-btn" class="category-button active" data-constellation="filesystem">Filesystem</button>
+      <button id="personal-btn" class="category-button" data-constellation="personal">Personal</button>
+      <button id="stellar-hunter-btn" class="category-button" data-constellation="stellar-hunter">Stellar Hunter</button>
+  </div>
+
+  <div class="title-container">
+      <img src="visuals/sitemap.png" alt="STELLAR SITE MAP" class="title-img">
+  </div>
+
+  <div class="legend">
+      <img src="visuals/sitemap-skye.png" alt="Site Map Legend" class="legend-img">
+  </div>
+
+  <div class="view-controls">
+      <div class="current-location" id="current-location">
+          Current constellation: Filesystem
+      </div>
+      <button id="toggle-tree-view" class="tree-view-button">
+          Show File Tree View
+      </button>
+  </div>
+
+  <div class="info-panel" id="info-panel">
+      <button class="close-button" data-close="info-panel">×</button>
+      <h3 id="panel-title">Page Name</h3>
+      <p id="panel-description">Page description goes here</p>
+  </div>
+
+  <div id="tree-view-overlay" class="tree-view-overlay">
+      <div class="tree-view-panel">
+          <button class="close-button" data-close="tree-view">×</button>
+          <h3>Directory Structure</h3>
+          <div class="file-tree">
+              <span style="color: white;font-family: 'ZHFont', sans-serif;">
+                  <b style="font-weight: 600;">C:\site_map</b>
+                  │
+                  ├──<b style="font-weight: 600;">intro</b> _log-in and updates
+                  ├──<b style="font-weight: 600;">filesystem</b> _first root of the site
+                  │ ├── <b style="font-weight: 600;">home</b> _the homepage
+                  │ ├── <b style="font-weight: 600;">about</b> _infos about the site
+                  │ ├── <b style="font-weight: 600;">social</b> _all my social medias and chat
+                  │ ├── <b style="font-weight: 600;">support</b> _support and contact
+                  │ ├── <b style="font-weight: 600;">changelog</b> _updates and news
+                  │ ├── <b style="font-weight: 600;">blog</b> _personal blog
+                  │ ├── <b style="font-weight: 600;">resources</b> _useful tools and data
+                  │ ├── <b style="font-weight: 600;">credits</b> _end credits of the site
+                  │ ├── <b style="font-weight: 600;">workstation</b> _about my OS and funky little terminal!
+                  │ └── <b style="font-weight: 600;">sitemap</b> _map of all pages (you are here!)
+                  │ 
+                  ├──<b style="font-weight: 600;">Personal</b> _personal stuff
+                  │ 　 ├── <b style="font-weight: 600;">about me</b> _infos about me
+                  │ 　 ├── <b style="font-weight: 600;">journal</b> _my digital diary
+                  │ 　 ├── <b style="font-weight: 600;">music</b> _my fav music
+                  │ 　 ├── <b style="font-weight: 600;">video games</b> _my fav games!!
+                  │ 　 ├── <b style="font-weight: 600;">guestbook</b> _my guestbook
+                  │ 　 ├── <b style="font-weight: 600;">hobbies</b> _hobbies and extras
+                  │ 　 ├── <b style="font-weight: 600;">friends</b> _my internet neighbors
+                  │ 　 ├── <b style="font-weight: 600;">faq</b> _frequently asked questions
+                  │ 　 ├── <b style="font-weight: 600;">gallery</b> _drawings and photos
+                  │ 　 ├── <b style="font-weight: 600;">safe-space</b> _page dedicated to my sister!
+                  │ 　 ├── <b style="font-weight: 600;">kitty</b> _shrine for my cats!
+                  │ 　 ├── <b style="font-weight: 600;">boyfriend-diary</b> _shrine for my cute bf
+                  │ 　 └── <b style="font-weight: 600;">special events</b> _calendar of the site!
+                  │
+                  ├──<b style="font-weight: 600;">Stellar Hunter</b> _lore of Stellar Hunter
+                  │ ├── <b style="font-weight: 600;">allscan</b> _album of drawings and stories
+                  │ ├── <b style="font-weight: 600;">encyclopedia</b> _infos about the stars
+                  │ └── <b style="font-weight: 600;">end</b> _thanks for being here!
+                  └──
+              </span>
+          </div>
+      </div>
+  </div>
+
+
+    <div id="nav2-wrapper">
+      <div id="nav2-custom-sidebar" class="hidden">
+        <h2>Filesystem</h2>
+        <ul>
+          <li><a href="../../home/index.html"><img src="../../assets/nav-bar/home.png" alt="Home Icon">Home</a></li>
+          <li><a href="../about/index.html"><img src="../../assets/nav-bar/about.png" alt="about Icon">About</a></li>
+          <li><a href="../../filesystem/social/index.html"><img src="../../assets/nav-bar/social.png" alt="diary Icon">Social</a></li>
+          <li><a href="../../filesystem/support/index.html"><img src="../../assets/nav-bar/support.png" alt="music Icon">Support</a></li>
+          <li><a href="../changelog/index.html"><img src="../../assets/nav-bar/rules.png" alt="games Icon">Changelog</a></li>
+          <li><a href="../../filesystem/blogs/index.html"><img src="../../assets/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
+          <li><a href="../../filesystem/resources/index.html"><img src="../../assets/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
+          <li><a href="../../filesystem/credits/index.html"><img src="../../assets/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
+          <li><a href="../../filesystem/workstation/index.html"><img src="../../assets/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
+            <li><a href="#"><img src="../../assets/nav-bar/sitemap.png" alt="kitty Icon">Sitemap  <img src="../../assets/buttons-icons/phone-app-navigation.png" alt="new symbol"></a></li>
+        </ul>
+        </div>
+        <div class="nav2-blur-overlay"></div>
+        <button id="nav2-sidebar-toggle"></button>
+      </div>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<body>
+<div class="starfall-container">
+<div class="starfield" id="starfield"></div>
+</div>
+<!-- Music player lol-->
+<div class="music-player">
+<div class="highlight top-right"></div>
+<div class="highlight bottom-left"></div>
+
+<button class="slide-toggle">
+<i class="fas fa-chevron-down"></i>
+</button>
+
+<div class="corner-tag">Now Playing</div>
+
+<div class="player-header">
+<div class="visualizer">
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+  <div class="visualizer-bar"></div>
+</div>
+</div>
+
+<div class="content">
+<div class="album-art">
+  <img src="../../assets/sound-effects/rings.svg" alt="Album Art">
+</div>
+
+<div class="song-info">
+  <h3 class="song-title">Current Song</h3>
+</div>
+
+<div class="progress-container">
+  <div class="current-time">0:00</div>
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+  <div class="duration">0:00</div>
+</div>
+
+<div class="controls">
+  <button class="control-btn" id="prev">
+    <i class="fas fa-backward"></i>
+  </button>
+  <button class="control-btn" id="play">
+    <i class="fas fa-play"></i>
+  </button>
+  <button class="control-btn" id="next">
+    <i class="fas fa-forward"></i>
+  </button>
+</div>
+</div>
+</div>
+
+ <div class="video-background">
+  <video autoplay muted loop>
+    <source src="../../assets/background/intro-background.webm" type="video/webm">
+  </video>
+</div>
+
+    
+   </script>
+<script src="sitemap.js"></script>
+<script src="background.js"></script>
+<script type="text/javascript" src="/assets/js/nav-bar.js"></script>
+<script type="text/javascript" src="../../main-music-player/music-player.js"></script>
+
+<script type="module" src="/assets/js/starfall.js"></script>
+</body>
+</html>

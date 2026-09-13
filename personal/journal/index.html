@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skye's Diary</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/buttons-icons/favicon.png">
+    <link rel="stylesheet" href="diary.css">
+    <link rel="stylesheet" href="diary-music-player.css">
+    <link rel="stylesheet" href="clock-timer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<link rel="stylesheet" href="/assets/css/stars.css">
+</head>
+<body>
+
+    <div class="video-background" id="mainBackground">
+        <video id="mainVideo" autoplay muted loop>
+            <source src="../../assets/background/day-mode-scene.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="video-splash-transition" id="transitionVideo">
+        <video id="transition" autoplay muted>
+            <source src="../../assets/transitions/splash-transition-beardboydigital.webm" type="video/webm">
+        </video>
+    </div>
+
+    <div class="video-background" id="secondBackground">
+        <video id="secondVideo" autoplay muted loop>
+            <source src="../../assets/background/night-scene-animated.mp4" type="video/mp4">
+        </video>
+    </div>
+      <div class="journal-search" id="journalSearch">
+        <div class="search-field">
+          <span class="search-glyph" aria-hidden="true"></span>
+          <input type="search" id="entrySearch" placeholder="search the diary…" aria-label="Search diary entries">
+        </div>
+        <div class="filter-chips" role="group" aria-label="Filter entries">
+          <span class="chip-slider" aria-hidden="true"></span>
+          <button type="button" class="chip cat is-active" data-cat="all" aria-pressed="true">all</button>
+          <button type="button" class="chip cat" data-cat="personal" aria-pressed="false">personal</button>
+          <button type="button" class="chip cat" data-cat="reflections" aria-pressed="false">reflections</button>
+          <button type="button" class="chip cat" data-cat="essays" aria-pressed="false">essays</button>
+          <button type="button" class="chip cat" data-cat="updates" aria-pressed="false">updates</button>
+          <button type="button" class="chip fav" id="favToggle" aria-pressed="false">
+            <img src="../../assets/gifs/puffystar.gif" alt="" width="14" height="14"> bookmarked
+          </button>
+        </div>
+      </div>
+    <div class="container">
+        <div class="diary">
+            <iframe src="diary-memo-notes/main-entry.html" id="diaryFrame" width="480" height="520" style="border:none;"></iframe> 
+        </div>
+        <div class="memo" id="memo">
+            <div class="memo-empty" id="memoEmpty" hidden>no entries match</div>
+
+            <section class="month" data-month="2026-09" data-year="2026">
+                <div class="header">September 2026 ✦
+                    <img src="../../assets/gifs/moon.gif" height="35px" align="right">
+                </div>
+                <div class="entry" data-title="some notes on math being called stupid quantum philosophy essay" data-category="essays">
+                    <button type="button" class="fav-btn" aria-pressed="false" aria-label="Bookmark entry"><img src="../../assets/newversion-assetsicons/enemymarker.png" alt="" width="28" height="28"></button>
+                    <a href="diary-memo-notes/una-carta-a-los-numeros-entry.html" data-diary-entry>
+                        <b>✦ 09.10.26 ✦</b>
+                        some notes on math
+                    </a>
+                </div>
+                <div class="entry" data-title="the shape of a person" data-category="reflections">
+                    <button type="button" class="fav-btn" aria-pressed="false" aria-label="Bookmark entry"><img src="../../assets/newversion-assetsicons/enemymarker.png" alt="" width="28" height="28"></button>
+                    <a href="diary-memo-notes/shape-of-a-person-entry.html" data-diary-entry>
+                        <b>✦ 09.09.26 ✦</b>
+                        the shape of a person
+                    </a>
+                </div>
+            </section>
+
+            <section class="month" data-month="2025-01" data-year="2025">
+                <div class="header">January 2025 ✦
+                    <img src="../../assets/gifs/moon.gif" height="35px" align="right">
+                </div>
+                <div class="entry" data-title="big update" data-category="updates">
+                    <button type="button" class="fav-btn" aria-pressed="false" aria-label="Bookmark entry"><img src="../../assets/newversion-assetsicons/enemymarker.png" alt="" width="28" height="28"></button>
+                    <a href="diary-memo-notes/big-update-entry.html" data-diary-entry>
+                        <b>✦ Very soon ✦</b>
+                        big update!!
+                    </a>
+                </div>
+            </section>
+
+            <section class="month" data-month="2024-12" data-year="2024">
+                <div class="header">December 2024 ✦
+                    <img src="../../assets/gifs/jellyfish.gif" height="35px" align="right">
+                </div>
+                <div class="entry" data-title="ah wintertime" data-category="personal">
+                    <button type="button" class="fav-btn" aria-pressed="false" aria-label="Bookmark entry"><img src="../../assets/newversion-assetsicons/enemymarker.png" alt="" width="28" height="28"></button>
+                    <a href="diary-memo-notes/wintertime-entry.html" data-diary-entry>
+                        <b>✦ 12.31.24 ✦</b>
+                        ah wintertime...
+                    </a>
+                </div>
+                <div class="entry" data-title="new kitty" data-category="personal">
+                    <button type="button" class="fav-btn" aria-pressed="false" aria-label="Bookmark entry"><img src="../../assets/newversion-assetsicons/enemymarker.png" alt="" width="28" height="28"></button>
+                    <a href="diary-memo-notes/new-kitty-entry.html" data-diary-entry>
+                        <b>✦ 12.31.24 ✦</b>
+                        new kitty!
+                    </a>
+                </div>
+            </section>
+
+            <section class="month" data-month="2023-06" data-year="2023">
+                <div class="header">June 2023 ✦
+                    <img src="../../assets/gifs/umbrella.gif" height="35px" align="right">
+                </div>
+                <div class="entry" data-title="my birthday" data-category="personal">
+                    <button type="button" class="fav-btn" aria-pressed="false" aria-label="Bookmark entry"><img src="../../assets/newversion-assetsicons/enemymarker.png" alt="" width="28" height="28"></button>
+                    <a href="diary-memo-notes/summertime-entry.html" data-diary-entry>
+                        <b>✦ 06.28.23 ✦</b>
+                        my birthday!!
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="digital-clock"></div>
+    <div id="app-cover">
+        <div id="bg-artwork"></div>
+        <div id="bg-layer"></div>
+        <div id="player">
+            <div id="player-track">
+                <div id="album-name"></div>
+                <div id="track-name"></div>
+                <div id="track-time">
+                    <div id="current-time">00:00</div>
+                    <div id="track-length">00:00</div>
+                </div>
+                <div id="s-area">
+                    <div id="ins-time"></div>
+                    <div id="s-hover"></div>
+                    <div id="seek-bar"></div>
+                </div>
+            </div>
+            <div id="player-content">
+                <div id="album-art">
+                    <img src="diary-music-player/covers/ww.png" class="active" id="_1">
+                    <img src="diary-music-player/covers/whitepine.png" class="active" id="_2">
+                    <img src="diary-music-player/covers/hallow.jpg" class="active" id="_3">
+                    <img src="diary-music-player/covers/electronic-gems.jpg"class="active" id="_4">
+                    <img src="diary-music-player/covers/voj.jpg" class="active" id="_5">
+                    <img src="diary-music-player/covers/offline.jpg" class="active" id="_6">
+                    <img src="diary-music-player/covers/thenian.jpg" class="active" id="_7">
+                    <img src="diary-music-player/covers/nectry.jpg" class="active" id="_8">
+                    <img src="diary-music-player/covers/oneheart.jpg" class="active" id="_9">
+                    <img src="diary-music-player/covers/sidewalks-and-skeletons.jpg" class="active" id="_10">
+                    <img src="diary-music-player/covers/pastel-ghost.jpg" class="active" id="_11">
+                    <img src="diary-music-player/covers/kitty.jpg" class="active" id="_12">
+                    <img src="diary-music-player/covers/c418.png" class="active" id="_13">
+                    <img src="diary-music-player/covers/c418.png" class="active" id="_14">
+                    <img src="diary-music-player/covers/c418.png" class="active" id="_15">
+                    <img src="diary-music-player/covers/c418.png" class="active" id="_16">
+                    <div id="buffer-box">Loading...</div>
+                </div>
+                <div id="player-controls">
+                    <div class="control">
+                        <div class="button" id="play-previous">
+                            <i class="fas fa-backward"></i>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="button" id="play-pause-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="button" id="play-next">
+                            <i class="fas fa-forward"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="corner-icon">
+         <a href="../../home/index.html"> <img src="../../assets/buttons-icons/room-icon-entryway.png" width="130" height="90" alt="Corner Icon"></a>
+    </div>
+ <!-- Message :) -->
+ <div id="messageOverlay" class="message-overlay">
+    <div id="transitionMessage" class="transition-message"></div>
+</div>
+
+  <button class="clock-toggle" id="clockToggle" aria-label="Open clock timer" title="Time control">
+    <img src="/assets/journalclocktimer/clock-tag-icon.png" alt="">
+  </button>
+
+  <div class="clock-overlay" id="clockOverlay"></div>
+
+  <aside class="clock-panel" id="clockPanel" role="dialog" aria-modal="true" aria-labelledby="clockPanelTitle">
+    <div class="clock-ambient" id="clockAmbient" aria-hidden="true"></div>
+    <header class="clock-header">
+      <h3 id="clockPanelTitle">✦ Time Control</h3>
+      <button class="close" data-close-clock aria-label="Close clock">×</button>
+    </header>
+
+    <div class="clock-body">
+      <div class="clock-face" id="clockFace">
+        <div class="inner-disc"></div>
+        <div class="gear-layer">
+          <div class="gear gear-a"></div>
+          <div class="gear gear-b"></div>
+          <div class="gear gear-c"></div>
+          <div class="gear gear-d"></div>
+        </div>
+        <div class="dial"></div>
+
+        <div class="glow noon" data-glow="noon"></div>
+        <div class="glow dusk" data-glow="dusk"></div>
+        <div class="glow night" data-glow="night"></div>
+        <div class="glow morning" data-glow="morning"></div>
+
+        <div class="particles" id="clockParticles"></div>
+
+        <div class="hand minute-hand" id="clockMinuteHand" aria-hidden="true"></div>
+        <div class="hand hour-hand" id="clockHourHand" aria-label="Drag to set the hour" tabindex="0"></div>
+
+        <button type="button" class="hitbox noon" data-time-icon="noon" aria-label="Set to noon"></button>
+        <button type="button" class="hitbox dusk" data-time-icon="dusk" aria-label="Set to dusk"></button>
+        <button type="button" class="hitbox night" data-time-icon="night" aria-label="Set to night"></button>
+        <button type="button" class="hitbox morning" data-time-icon="morning" aria-label="Set to morning"></button>
+      </div>
+
+      <div class="clock-info">
+        <div class="divider"></div>
+        <span class="label">Current Time</span>
+        <div class="time-display" id="clockTimeDisplay">12:00</div>
+        <span class="subtitle" id="clockSubtitle">following real time (EST)</span>
+      </div>
+    </div>
+
+    <footer class="clock-footer">
+      <div class="sync-row">
+        <div class="label-wrap">
+          <span class="title">Sync with real time</span>
+          <span class="hint">Follow the actual EST clock instead of a manual hour</span>
+        </div>
+        <label class="clock-switch">
+          <input type="checkbox" id="clockSyncCheckbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <button type="button" class="reset-btn" id="clockResetBtn">Reset to defaults</button>
+    </footer>
+  </aside>
+
+  <audio id="clock-sfx-open"      preload="auto"><source src="clock-sfx/open.mp3"      type="audio/mpeg"></audio>
+  <audio id="clock-sfx-close"     preload="auto"><source src="clock-sfx/close.mp3"     type="audio/mpeg"></audio>
+  <audio id="clock-sfx-tick"      preload="auto"><source src="clock-sfx/tick.mp3"      type="audio/mpeg"></audio>
+  <audio id="clock-sfx-tick-spin" preload="auto"><source src="clock-sfx/tick-spin.mp3" type="audio/mpeg"></audio>
+  <audio id="clock-sfx-land"      preload="auto"><source src="clock-sfx/land.mp3"      type="audio/mpeg"></audio>
+
+  <!-- Javascript :) -->
+    <script src="index.inline.js"></script>
+    <div class="stars"></div>
+
+        <!-- Day and night mode :3 -->
+ <script src="about-me-main.js"></script>
+ <script src="clock-timer.js"></script>
+ <!-- Music player forr the diary :3 -->
+<script src="diary-music-player.js"></script>
+
+
+<script type="module" src="/assets/js/stars.js"></script>

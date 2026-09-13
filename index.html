@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <title>Skye Journey</title>
+  <link rel="icon" type="image/x-icon" href="assets/buttons-icons/favicon.png">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source src="assets/background.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="logo-panel">
+    <img src="assets/skye-journey-logo.png" alt="Skye Journey">
+  </div>
+
+  <div class="enter-container">
+    <img src="assets/special-icons/arrow-left.png" alt="" class="enter-arrow left-arrow">
+    <p class="enter">Press enter to continue</p>
+    <img src="assets/special-icons/arrow-right.png" alt="" class="enter-arrow right-arrow">
+  </div>
+
+  <div class="menu-container">
+    <div class="menu-item vertical-layout" data-panel="notices">
+      <img src="assets/buttons-icons/updates.png" alt="Notices">
+      <span>Notices</span>
+    </div>
+    <div class="menu-item vertical-layout" data-panel="events">
+      <img src="assets/buttons-icons/phone-app-version-info.png" alt="Event">
+      <span>Event</span>
+    </div>
+    <div class="menu-item vertical-layout" data-panel="updates">
+      <div class="update-alert-container">
+        <img src="assets/special-icons/alert.png" alt="" class="update-alert-icon">
+        <img src="assets/buttons-icons/phone-app-data-bank.png" alt="Update">
+      </div>
+      <span>Update</span>
+    </div>
+    <div class="menu-item vertical-layout" data-panel="settings">
+      <img src="assets/buttons-icons/event-icon-apocalyptic-shadow.png" alt="Settings">
+      <span>Settings</span>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-panel" id="noticesPanel">
+      <div class="close-button">×</div>
+      <p>NOTICES</p>
+      <div class="panel-content">
+        Hi! As you may know, the website is in the middle of a huge, huge update, a lot of things have changed. Therefore, I always recommend that you check the options on your right, read everything you need to know and adjust your browser settings! This site contains javascript, iframes, and autoplaying sound! Also, it was not made for mobile browsing, or at least it is no longer available for phones! So check out this website on your computer or laptop.
+      </div>
+    </div>
+    <div class="modal-panel" id="eventsPanel">
+      <div class="close-button">×</div>
+      <p>EVENTS</p>
+      <div class="panel-content">
+        Currently, there are no active special events. But you can check out the calendar of future events now!
+      </div>
+    </div>
+    <div class="modal-panel" id="updatesPanel">
+      <div class="close-button">×</div>
+      <p>UPDATE: VERSION 2.4</p>
+      <div class="panel-content">
+        If you want to go back, press CTRL + F5 before entering the page. I'm working on constant updates! So you'll need to do this every time you enter. This forces a hard reload, which means the browser retrieves the webpage from the server instead of loading it from the cache.
+      </div>
+    </div>
+    <div class="modal-panel" id="settingsPanel">
+      <div class="close-button">×</div>
+      <p>SETTINGS</p>
+      <div class="panel-content">
+        Remember to enable sound and javascript in allow in your site settings permissions!
+      </div>
+    </div>
+  </div>
+
+  <div class="music-control" id="musicControl">
+    <img src="assets/special-icons/music-icon.png" alt="Music Control" id="musicIcon" class="music-icon">
+  </div>
+
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="assets/background-music.mp3" type="audio/mp3">
+  </audio>
+
+  <script type="module" src="index.js"></script>
+  <script type="module" src="settings.js"></script>
+</body>
+</html>

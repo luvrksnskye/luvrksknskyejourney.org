@@ -1,0 +1,22 @@
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.stars .star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-white);
+  border-radius: 50%;
+  animation: move-stars 10s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes move-stars {
+  0%   { transform: translateY(100vh); opacity: 0.2; }
+  100% { transform: translateY(-10vh); opacity: 1; }
+}

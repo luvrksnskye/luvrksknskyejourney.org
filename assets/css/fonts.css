@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons');
+
+@font-face {
+  font-family: 'departure-mono';
+  src: url('../fonts/departuremono-regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'genshin impact';
+  src: url('../fonts/genshin-impact-drip-font.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZHFont';
+  src: url('../fonts/zhcn.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'zhcn';
+  src: url('../fonts/zhcn.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'kawaii';
+  src: url('../fonts/ktegaki.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('../fonts/din.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'VintageSimple';
+  src: url('../fonts/vintagesimple-regular.otf') format('opentype');
+  font-display: swap;
+}
