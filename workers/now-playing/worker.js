@@ -1,12 +1,13 @@
 const PATH = '/now-playing';
 const API = 'https://ws.audioscrobbler.com/2.0/';
 const ITUNES = 'https://itunes.apple.com/search';
+const DEEZER = 'https://api.deezer.com/search';
 const PER_PAGE = 30;
 const MAX_PAGE = 500;
 const TIMEOUT_MS = 4_000;
 const ART_BUDGET = 8;
 const ART_TTL_MS = 7 * 86_400_000;
-const ART_MISS_TTL_MS = 86_400_000;
+const ART_MISS_TTL_MS = 3_600_000;
 const ART_MEMO_LIMIT = 800;
 const MEMO_PAGES = 6;
 const BLANK_ART = '2a96cbd8b46e442fc41c2b86b821562f';
@@ -42,7 +43,7 @@ function safeUrl(value, allow) {
 }
 
 const trackUrl = (value) => safeUrl(value, (host) => TRACK_HOSTS.has(host));
-const imageUrl = (value) => safeUrl(value, (host) => LASTFM_IMAGE_HOSTS.has(host) || host.endsWith('.mzstatic.com'));
+const imageUrl = (value) => safeUrl(value, (host) => LASTFM_IMAGE_HOSTS.has(host) || host.endsWith('.mzstatic.com') || host.endsWith('.dzcdn.net'));
 
 function clean(value, max = 256) {
   return typeof value === 'string' ? value.trim().slice(0, max) : '';
@@ -91,39 +92,143 @@ async function lastfm(env, params) {
   return data;
 }
 
-async function itunesArt(track) {
-  const url = new URL(ITUNES);
-  url.search = new URLSearchParams({
-    term: `${track.artist} ${track.album || track.name}`,
-    media: 'music',
-    entity: track.album ? 'album' : 'song',
-    limit: '1'
-  }).toString();
+const SCRIPT = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
+const JUNK = /\s*[([【][^)\]】]*(soundtrack|\bost\b|official|video|audio|lyric|\bmv\b|remaster|\bhd\b|\b4k\b|visuali[sz]er|full ver|extended)[^)\]】]*[)\]】]/gi;
+const STOP = new Set(['and', 'the', 'feat', 'ft', 'with']);
+const MIN_SCORE = 0.8;
+
+const escapeRe = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+function cleanTrack({ name = '', artist = '' }) {
+  const rawArtist = artist.trim();
+  let who = rawArtist;
+  const roman = rawArtist.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  if (roman && SCRIPT.test(roman[1])) who = roman[2].trim();
+
+  let title = name.trim();
+  for (const label of new Set([rawArtist, who])) {
+    if (!label) continue;
+    const pattern = escapeRe(label);
+    title = title
+      .replace(new RegExp(`\\s*[-–—|]\\s*${pattern}\\s*$`, 'i'), '')
+      .replace(new RegExp(`^\\s*${pattern}\\s*[-–—|]\\s*`, 'i'), '');
+  }
+
+  title = title
+    .replace(JUNK, '')
+    .replace(/^.*?\bsoundtrack\b\s*[-–—]\s*(\d+\s*[-–—.]\s*)?/i, '')
+    .replace(/\s+(feat\.?|ft\.?)\s.*$/i, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  return { title: title || name.trim(), artist: who };
+}
+
+function norm(value = '') {
+  return String(value)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[([【].*?[)\]】]/g, ' ')
+    .replace(/\b(feat|ft)\b.*$/, ' ')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
+function words(value) {
+  return norm(value).split(' ').filter((word) => word && !STOP.has(word) && (word.length > 1 || SCRIPT.test(word)));
+}
+
+function titleScore(want, got) {
+  const a = norm(want);
+  const b = norm(got);
+  if (!a || !b) return 0;
+  if (a === b) return 1;
+  if (a.startsWith(b) || b.startsWith(a)) return 0.86;
+  const left = new Set(a.split(' '));
+  const right = new Set(b.split(' '));
+  let shared = 0;
+  for (const word of left) if (right.has(word)) shared++;
+  return shared / (left.size + right.size - shared);
+}
+
+function artistMatch(want, got) {
+  const known = new Set(words(want));
+  return words(got).some((word) => known.has(word));
+}
+
+function pickBest(candidates, want) {
+  let top = null;
+  let score = 0;
+  for (const candidate of candidates) {
+    if (!candidate?.art || !candidate.title || !candidate.artist) continue;
+    if (!artistMatch(want.artist, candidate.artist)) continue;
+    const next = titleScore(want.title, candidate.title);
+    if (next > score) {
+      top = candidate;
+      score = next;
+    }
+  }
+  return score >= MIN_SCORE ? top.art : null;
+}
+
+async function getJson(url) {
   const response = await fetch(url, {
-    headers: { accept: 'application/json' },
+    headers: { accept: 'application/json', 'user-agent': 'Mozilla/5.0 (compatible; now-playing-worker)' },
     signal: AbortSignal.timeout(TIMEOUT_MS)
   });
-  if (!response.ok) return null;
-  const hit = (await response.json())?.results?.[0]?.artworkUrl100;
-  if (typeof hit !== 'string') return null;
-  const image = imageUrl(hit.replace(/\/\d+x\d+bb\./, '/600x600bb.'));
+  if (!response.ok) throw new Error(`upstream ${response.status}`);
+  return response.json();
+}
+
+function itunesPair(url) {
+  if (typeof url !== 'string') return null;
+  const image = imageUrl(url.replace(/\/\d+x\d+bb\./, '/600x600bb.'));
   if (!image) return null;
-  return { image, thumb: imageUrl(hit.replace(/\/\d+x\d+bb\./, '/160x160bb.')) ?? image };
+  return { image, thumb: imageUrl(url.replace(/\/\d+x\d+bb\./, '/160x160bb.')) ?? image };
+}
+
+async function itunesArt(want) {
+  const url = new URL(ITUNES);
+  url.search = new URLSearchParams({ term: `${want.artist} ${want.title}`, media: 'music', entity: 'song', limit: '5' }).toString();
+  const data = await getJson(url);
+  return pickBest((data?.results ?? []).map((item) => ({
+    title: item?.trackName,
+    artist: item?.artistName,
+    art: itunesPair(item?.artworkUrl100)
+  })), want);
+}
+
+async function deezerArt(want) {
+  const url = new URL(DEEZER);
+  url.search = new URLSearchParams({ q: `${want.artist} ${want.title}`, limit: '5' }).toString();
+  const data = await getJson(url);
+  return pickBest((data?.data ?? []).map((item) => {
+    const image = imageUrl(item?.album?.cover_xl ?? item?.album?.cover_big ?? '');
+    return {
+      title: item?.title,
+      artist: item?.artist?.name,
+      art: image ? { image, thumb: imageUrl(item?.album?.cover_medium ?? '') ?? image } : null
+    };
+  }), want);
 }
 
 async function lookupArt(env, track) {
+  const want = cleanTrack(track);
   try {
     const data = track.album
-      ? await lastfm(env, { method: 'album.getinfo', artist: track.artist, album: track.album, autocorrect: '1' })
-      : await lastfm(env, { method: 'track.getinfo', artist: track.artist, track: track.name, autocorrect: '1' });
+      ? await lastfm(env, { method: 'album.getinfo', artist: want.artist, album: track.album, autocorrect: '1' })
+      : await lastfm(env, { method: 'track.getinfo', artist: want.artist, track: want.title, autocorrect: '1' });
     const art = pickLastfmArt((data?.album ?? data?.track?.album)?.image);
     if (art) return art;
   } catch {}
-  try {
-    return await itunesArt(track);
-  } catch {
-    return null;
+  for (const source of [itunesArt, deezerArt]) {
+    try {
+      const art = await source(want);
+      if (art) return art;
+    } catch {}
   }
+  return null;
 }
 
 const artKey = (track) => `${track.artist}\u0000${track.album || track.name}`.toLowerCase();

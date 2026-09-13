@@ -1,5 +1,6 @@
 import { motion, still } from './fx.js?v=8';
-import { lastfm, discs, statusCafe, rightNow, stats, loves } from './profile.js?v=5';
+import { lastfm, discs, covers, statusCafe, rightNow, stats, loves } from './profile.js?v=6';
+import { findCover } from './cover.js?v=1';
 
 const POLL = 15000;
 const MAX_POLL = 300000;
@@ -51,6 +52,16 @@ function since(uts) {
 
 const trackKey = (track) => `${track.playedAt ?? 'live'}|${track.name}|${track.artist}`;
 
+function manualCover(track) {
+  const artist = (track.artist || '').toLowerCase().trim();
+  for (const label of [track.album, track.name]) {
+    const key = `${artist}|${(label || '').toLowerCase().trim()}`;
+    const hit = Object.entries(covers).find(([name]) => name.toLowerCase().trim() === key);
+    if (hit) return hit[1];
+  }
+  return '';
+}
+
 function discFor(track) {
   if (!discs.length) return '';
   let hash = 2166136261;
@@ -83,6 +94,16 @@ function art(className, src, fallback) {
     box.classList.toggle('is-disc', !src);
   }
   return { box, img, fallback };
+}
+
+function upgrade(thumb, track) {
+  findCover(track).then((found) => {
+    if (!found || !thumb.box.classList.contains('is-disc')) return;
+    thumb.img.classList.remove('is-ready');
+    thumb.img.src = found.thumb || found.image;
+    thumb.box.classList.add('has-art');
+    thumb.box.classList.remove('is-disc');
+  });
 }
 
 class NowPlaying {
@@ -262,7 +283,9 @@ class NowPlaying {
       link.target = '_blank';
       link.rel = 'noopener';
     }
-    const thumb = art('ab-np-thumb', track.thumb || track.image, discFor(track));
+    const own = track.thumb || track.image || manualCover(track);
+    const thumb = art('ab-np-thumb', own, discFor(track));
+    if (!own) upgrade(thumb, track);
     const text = el('span', 'ab-np-row-text');
     text.append(el('span', 'ab-np-row-name', track.name), el('span', 'ab-np-row-artist', track.artist));
     const time = el('span', 'ab-np-row-time', since(track.playedAt));
@@ -335,7 +358,9 @@ class NowPlaying {
     this.heroPlayedAt = live ? null : track.playedAt;
     this.stateText.textContent = live ? 'LISTENING NOW' : track.playedAt ? `PLAYED ${since(track.playedAt)}` : 'LAST PLAYED';
 
-    const real = track.image || track.thumb || '';
+    const song = `${name}|${artist}`;
+    const found = this.foundFor === song ? this.found : null;
+    const real = track.image || track.thumb || manualCover(track) || found?.image || '';
     this.fallback = discFor(track);
     const src = real || this.fallback;
     this.root.classList.toggle('is-disc', !real);
@@ -359,6 +384,23 @@ class NowPlaying {
       this.img.removeAttribute('src');
       this.glow.removeAttribute('src');
       this.root.classList.remove('has-art');
+    }
+
+    if (!real && this.lookupFor !== song) {
+      this.lookupFor = song;
+      findCover(track).then((art) => {
+        if (!art || this.lookupFor !== song) return;
+        this.found = art;
+        this.foundFor = song;
+        const image = art.image || art.thumb;
+        this.heroKey = `${this.root.classList.contains('is-live')}|${song}|${image}`;
+        this.img.classList.remove('is-ready');
+        this.glow.classList.remove('is-ready');
+        this.img.src = image;
+        this.glow.src = image;
+        this.root.classList.add('has-art');
+        this.root.classList.remove('is-disc');
+      });
     }
 
     if (sameSong) return;
