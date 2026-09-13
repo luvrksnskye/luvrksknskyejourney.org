@@ -1,6 +1,6 @@
 export const lastfm = {
   user: 'luvrksnskyedev',
-  apiKey: ''
+  endpoint: 'https://now-playing.luvrksnskye.workers.dev/now-playing'
 };
 
 export const statusCafe = {

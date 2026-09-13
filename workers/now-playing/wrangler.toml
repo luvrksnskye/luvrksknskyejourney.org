@@ -1,0 +1,17 @@
+name = "now-playing"
+main = "worker.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+preview_urls = false
+
+[vars]
+LASTFM_USER = "luvrksnskyedev"
+ALLOWED_ORIGINS = "https://luvrksknskyejourney.org,https://www.luvrksknskyejourney.org"
+
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+
+[ratelimits.simple]
+limit = 60
+period = 60

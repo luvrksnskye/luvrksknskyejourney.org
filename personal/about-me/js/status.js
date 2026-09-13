@@ -1,9 +1,8 @@
 import { motion, still } from './fx.js?v=8';
-import { lastfm, statusCafe, rightNow, stats, loves } from './profile.js?v=3';
+import { lastfm, statusCafe, rightNow, stats, loves } from './profile.js?v=4';
 
-const API = 'https://ws.audioscrobbler.com/2.0/';
-const BLANK_ART = '2a96cbd8b46e442fc41c2b86b821562f';
 const POLL = 30000;
+const MAX_POLL = 300000;
 const EMPTY = 'EMPTY SLOT';
 
 function el(tag, className, text) {
@@ -49,6 +48,7 @@ class NowPlaying {
   constructor(host) {
     this.key = '';
     this.timer = 0;
+    this.fails = 0;
 
     const root = el('div', 'ab-np is-offline');
     const art = el('div', 'ab-np-art');
@@ -86,7 +86,7 @@ class NowPlaying {
   }
 
   get enabled() {
-    return Boolean(lastfm.user && lastfm.apiKey);
+    return Boolean(lastfm.endpoint);
   }
 
   start() {
@@ -97,28 +97,30 @@ class NowPlaying {
     this.poll();
   }
 
+  schedule() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.poll(), Math.min(MAX_POLL, POLL * 2 ** this.fails));
+  }
+
   async poll() {
     clearTimeout(this.timer);
     if (document.hidden) return;
     try {
-      const params = new URLSearchParams({
-        method: 'user.getrecenttracks',
-        user: lastfm.user,
-        api_key: lastfm.apiKey,
-        format: 'json',
-        limit: '1'
+      const res = await fetch(lastfm.endpoint, {
+        headers: { accept: 'application/json' },
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer'
       });
-      const res = await fetch(`${API}?${params}`);
       if (!res.ok) throw new Error(String(res.status));
       const data = await res.json();
-      const tracks = data?.recenttracks?.track;
-      const track = Array.isArray(tracks) ? tracks[0] : tracks;
-      if (track) await this.show(track);
+      this.fails = 0;
+      if (data?.track?.name) await this.show(data);
       else this.offline('NO SIGNAL');
     } catch (_) {
+      this.fails = Math.min(this.fails + 1, 4);
       this.offline('SIGNAL LOST');
     }
-    this.timer = setTimeout(() => this.poll(), POLL);
+    this.schedule();
   }
 
   offline(label) {
@@ -127,15 +129,13 @@ class NowPlaying {
     this.stateText.textContent = label;
   }
 
-  async show(track) {
-    const live = track['@attr']?.nowplaying === 'true';
-    const name = track.name || '';
-    const artist = track.artist?.['#text'] || track.artist?.name || '';
-    const art = (track.image || []).map((image) => image['#text']).filter(Boolean).pop() || '';
+  async show({ live, track }) {
+    const name = track.name;
+    const artist = track.artist || '';
 
     this.root.classList.remove('is-offline');
-    this.root.classList.toggle('is-live', live);
-    this.stateText.textContent = live ? 'LISTENING NOW' : ago(Number(track.date?.uts));
+    this.root.classList.toggle('is-live', Boolean(live));
+    this.stateText.textContent = live ? 'LISTENING NOW' : ago(track.playedAt);
 
     const key = `${name}|${artist}`;
     if (key === this.key) return;
@@ -146,8 +146,8 @@ class NowPlaying {
     this.artist.textContent = artist;
 
     this.img.classList.remove('is-ready');
-    if (art && !art.includes(BLANK_ART)) {
-      this.img.src = art;
+    if (track.image) {
+      this.img.src = track.image;
       this.root.classList.add('has-art');
     } else {
       this.img.removeAttribute('src');
