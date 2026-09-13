@@ -3,6 +3,10 @@ export const lastfm = {
   endpoint: 'https://now-playing.luvrksnskye.workers.dev/now-playing'
 };
 
+export const discs = [
+  'new_version-assets/atlas/disc/mikudisc.jpg'
+];
+
 export const statusCafe = {
   user: 'skyejourney'
 };

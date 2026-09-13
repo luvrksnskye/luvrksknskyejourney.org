@@ -6,7 +6,7 @@ import { ScrollDriver } from './scroll.js?v=6';
 import { motion, sparkle, wipe, spotlight, frame, still } from './fx.js?v=8';
 import { boot } from './boot.js?v=8';
 import { OrbitMap } from './orbit.js?v=9';
-import { StatusBoard } from './status.js?v=9';
+import { StatusBoard } from './status.js?v=11';
 
 const $ = (id) => document.getElementById(id);
 
