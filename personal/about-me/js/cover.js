@@ -1,4 +1,4 @@
-import { covers, coverSearch } from './profile.js?v=8';
+import { covers, coverSearch } from './profile.js?v=9';
 
 const ITUNES = 'https://itunes.apple.com/search';
 const STORE = 'skye-cover-cache-v2';

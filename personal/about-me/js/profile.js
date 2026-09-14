@@ -78,7 +78,7 @@ export const systems = [
       { name: 'PowerShell', icon: 'powershell', about: 'Microsoft\'s command shell and scripting language for automating tasks on Windows and beyond.', note: '', since: '', level: 0 },
       { name: 'Visual Studio Code', icon: 'visualstudiocode', about: 'Microsoft\'s free code editor, with extensions for almost any language.', note: '', since: '', level: 0 },
       { name: 'Notion', icon: 'notion', about: 'An all in one workspace for notes, documents, databases and planning.', note: '', since: '', level: 0 },
-      { name: 'Leonardo Beta', icon: 'leonardoai', about: 'An image generation platform for creating concept art and visual assets.', note: '', since: '', level: 0 }
+      { name: 'Leonardo Beta', icon: 'leonardo', about: 'Leonardo is a high-speed, lightweight digital drawing and painting application for Windows tablets and desktops that is famously maintained in an ongoing beta phase while offering fully functional features.', note: '', since: '', level: 0 }
     ]
   }
 ];
