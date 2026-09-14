@@ -1,10 +1,11 @@
 import { motion, svg, still, polar, arc } from './fx.js?v=8';
-import { systems } from './profile.js?v=6';
+import { systems } from './profile.js?v=8';
 
 const C = 500;
 const RADII = [205, 325];
 const OFFSETS = [-60, -16];
 const EMPTY = 'EMPTY SLOT';
+const ICONS = 'new_version-assets/icons/';
 const pad = (n) => String(n).padStart(2, '0');
 
 function el(tag, className, text) {
@@ -139,7 +140,13 @@ export class OrbitMap {
     const head = el('div', 'ab-node-card-head');
     head.append(this.cIndex, this.cSystem, this.cCount);
 
+    this.cIcon = el('span', 'ab-node-card-icon');
+    this.cIcon.setAttribute('aria-hidden', 'true');
+    this.cIcon.hidden = true;
     this.cName = el('h3', 'ab-node-card-name', EMPTY);
+    const title = el('div', 'ab-node-card-title');
+    title.append(this.cIcon, this.cName);
+    this.cAbout = el('p', 'ab-node-card-about', '');
     this.cNote = el('p', 'ab-node-card-note', '');
 
     this.cSince = el('dd', '', '···');
@@ -154,7 +161,7 @@ export class OrbitMap {
     this.cData.append(since, level);
 
     const hint = el('p', 'ab-node-card-hint', 'HOVER, CLICK OR TAB THROUGH THE NODES');
-    this.card.append(head, this.cName, this.cNote, this.cData, hint);
+    this.card.append(head, title, this.cAbout, this.cNote, this.cData, hint);
   }
 
   async activate(entry) {
@@ -175,6 +182,9 @@ export class OrbitMap {
     this.cSystem.textContent = system.label.toUpperCase();
     this.cCount.textContent = `${pad(j + 1)}/${pad(system.nodes.length)}`;
     this.cNote.textContent = node.note || '';
+    this.cAbout.textContent = node.about || '';
+    this.cIcon.hidden = !node.icon;
+    if (node.icon) this.cIcon.style.setProperty('--icon', `url("${new URL(`${ICONS}${node.icon}.svg`, document.baseURI).href}")`);
     this.cSince.textContent = node.since || '···';
     [...this.cLevel.children].forEach((bar, i) => bar.classList.toggle('is-on', i < (node.level || 0)));
 
@@ -190,7 +200,7 @@ export class OrbitMap {
     }
 
     gsap.to(this.cName, { duration: 0.6, overwrite: 'auto', scrambleText: { text: name, chars: 'upperCase', speed: 0.9 } });
-    gsap.fromTo([this.cName, this.cNote, this.cData],
+    gsap.fromTo([this.cIcon, this.cName, this.cAbout, this.cNote, this.cData],
       { clipPath: 'inset(0 100% 0 0)' },
       { clipPath: 'inset(0 0% 0 0)', duration: 0.75, ease: 'expo.out', stagger: 0.07, overwrite: 'auto' });
     gsap.fromTo(this.ripple,

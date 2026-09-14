@@ -1166,3 +1166,34 @@ a.ab-np-row:focus-visible {
     animation: none;
   }
 }
+
+.ab-node-card-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.ab-node-card-icon {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  background: #f2f7ff;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.ab-node-card-icon[hidden] {
+  display: none;
+}
+
+.ab-node-card-about {
+  margin: 0;
+  font-size: clamp(0.92rem, 0.98vw, 1rem);
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.ab-node-card-about:empty {
+  display: none;
+}

@@ -1,7 +1,10 @@
+import { covers, coverSearch } from './profile.js?v=8';
+
 const ITUNES = 'https://itunes.apple.com/search';
-const STORE = 'skye-cover-cache-v1';
+const STORE = 'skye-cover-cache-v2';
+const OLD_STORES = ['skye-cover-cache-v1'];
 const HIT_TTL = 14 * 86400000;
-const MISS_TTL = 86400000;
+const MISS_TTL = 6 * 3600000;
 const MAX_ENTRIES = 400;
 const LIMIT = 18;
 const WINDOW = 60000;
@@ -9,7 +12,9 @@ const COOLDOWN = 300000;
 const MIN_SCORE = 0.8;
 
 const SCRIPT = /[぀-ヿ㐀-鿿가-힯]/;
-const JUNK = /\s*[([【][^)\]】]*(soundtrack|\bost\b|official|video|audio|lyric|\bmv\b|remaster|\bhd\b|\b4k\b|visuali[sz]er|full ver|extended)[^)\]】]*[)\]】]/gi;
+const JUNK = /\s*[([【][^)\]】]*(soundtrack|\bost\b|official|oficial|v[ií]deo|audio|lyrics?|letra|\bmv\b|remaster|\bhd\b|\b4k\b|visuali[sz]er|full ver|extended|\bfrom\b)[^)\]】]*[)\]】]/gi;
+const QUOTES = /[“”„‟"«»]/g;
+const SWAPPED = /soundtrack|\bost\b/i;
 const STOP = new Set(['and', 'the', 'feat', 'ft', 'with']);
 
 const stamps = [];
@@ -25,9 +30,10 @@ export function cleanTrack({ name = '', artist = '' }) {
   let who = rawArtist;
   const roman = rawArtist.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
   if (roman && SCRIPT.test(roman[1])) who = roman[2].trim();
+  const lead = who.split(/\s*(?:,|&|\bx\b|\bfeat\.?\s|\bft\.?\s)\s*/i)[0].trim() || who;
 
   let title = name.trim();
-  for (const label of new Set([rawArtist, who])) {
+  for (const label of new Set([rawArtist, who, lead])) {
     if (!label) continue;
     const pattern = escape(label);
     title = title
@@ -39,10 +45,12 @@ export function cleanTrack({ name = '', artist = '' }) {
     .replace(JUNK, '')
     .replace(/^.*?\bsoundtrack\b\s*[-–—]\s*(\d+\s*[-–—.]\s*)?/i, '')
     .replace(/\s+(feat\.?|ft\.?)\s.*$/i, '')
+    .replace(/\s+con\s+[^,]+,.*$/i, '')
+    .replace(QUOTES, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
 
-  return { title: title || name.trim(), artist: who };
+  return { title: title || name.trim(), artist: who, lead };
 }
 
 function norm(value = '') {
@@ -75,7 +83,10 @@ export function titleScore(want, got) {
 
 export function artistMatch(want, got) {
   const known = new Set(words(want));
-  return words(got).some((word) => known.has(word));
+  if (words(got).some((word) => known.has(word))) return true;
+  const a = norm(want).replace(/ /g, '');
+  const b = norm(got).replace(/ /g, '');
+  return a.length >= 4 && b.length >= 4 && (a.includes(b) || b.includes(a));
 }
 
 export function pickBest(candidates, want) {
@@ -92,6 +103,19 @@ export function pickBest(candidates, want) {
   }
   return score >= MIN_SCORE ? top.art : null;
 }
+
+function lookup(table, track) {
+  const artist = (track.artist || '').toLowerCase().trim();
+  for (const label of [track.album, track.name]) {
+    if (!label) continue;
+    const key = `${artist}|${label.toLowerCase().trim()}`;
+    const hit = Object.entries(table).find(([name]) => name.toLowerCase().trim() === key);
+    if (hit) return hit[1];
+  }
+  return null;
+}
+
+export const manualCover = (track) => lookup(covers, track) || '';
 
 function itunesPair(url) {
   if (typeof url !== 'string') return null;
@@ -111,6 +135,7 @@ function store() {
   if (cache) return cache;
   cache = new Map();
   try {
+    for (const old of OLD_STORES) localStorage.removeItem(old);
     const saved = JSON.parse(localStorage.getItem(STORE) || '[]');
     const now = Date.now();
     for (const [key, entry] of saved) {
@@ -151,7 +176,7 @@ async function searchItunes(want) {
   await slot();
   const url = new URL(ITUNES);
   url.search = new URLSearchParams({
-    term: `${want.artist} ${want.title}`,
+    term: `${want.lead || want.artist} ${want.title}`,
     media: 'music',
     entity: 'song',
     limit: '5'
@@ -183,7 +208,11 @@ export function findCover(track) {
   const job = (chain = chain.then(async () => {
     if (Date.now() < blockedUntil) return null;
     try {
-      const art = await searchItunes(cleanTrack(track));
+      const hint = lookup(coverSearch, track);
+      let art = await searchItunes(hint?.artist && hint?.title ? cleanTrack({ name: hint.title, artist: hint.artist }) : cleanTrack(track));
+      if (!art && !hint && SWAPPED.test(track.artist)) {
+        art = await searchItunes(cleanTrack({ name: track.artist, artist: track.name }));
+      }
       remember(key, art);
       return art;
     } catch (_) {

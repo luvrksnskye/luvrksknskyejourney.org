@@ -1,6 +1,7 @@
 import { motion, still } from './fx.js?v=8';
-import { lastfm, discs, covers, statusCafe, rightNow, stats, loves } from './profile.js?v=6';
-import { findCover } from './cover.js?v=1';
+import { lastfm, discs, statusCafe, rightNow, stats, loves } from './profile.js?v=8';
+import { findCover, manualCover } from './cover.js?v=2';
+import { ListeningClock } from './clock.js?v=2';
 
 const POLL = 15000;
 const MAX_POLL = 300000;
@@ -51,16 +52,6 @@ function since(uts) {
 }
 
 const trackKey = (track) => `${track.playedAt ?? 'live'}|${track.name}|${track.artist}`;
-
-function manualCover(track) {
-  const artist = (track.artist || '').toLowerCase().trim();
-  for (const label of [track.album, track.name]) {
-    const key = `${artist}|${(label || '').toLowerCase().trim()}`;
-    const hit = Object.entries(covers).find(([name]) => name.toLowerCase().trim() === key);
-    if (hit) return hit[1];
-  }
-  return '';
-}
 
 function discFor(track) {
   if (!discs.length) return '';
@@ -162,7 +153,9 @@ class NowPlaying {
     }
 
     meta.append(state, this.title, this.artist, this.album, bars);
-    hero.append(this.glow, cover, meta);
+    this.clockHost = el('div');
+    hero.append(this.glow, cover, meta, this.clockHost);
+    this.clock = new ListeningClock(this.clockHost);
 
     const history = el('section', 'ab-np-history');
     history.setAttribute('aria-label', 'Listening history');
