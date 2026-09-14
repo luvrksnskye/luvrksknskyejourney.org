@@ -222,8 +222,11 @@ export class EchoWall {
       }
     });
     this.form.addEventListener('submit', (e) => this.submit(e));
-    this.form.addEventListener('focusin', () => this.prepareVerify(), { once: true });
-    this.form.addEventListener('pointerenter', () => this.prepareVerify(), { once: true });
+    const warmVerify = () => {
+      if (!this.owner) this.prepareVerify();
+    };
+    this.form.addEventListener('focusin', warmVerify);
+    this.form.addEventListener('pointerenter', warmVerify);
     this.older.addEventListener('click', () => this.loadOlder());
 
     this.ownerUnlock.addEventListener('click', () => this.unlock(this.ownerInput.value.trim(), false));
@@ -493,7 +496,6 @@ export class EchoWall {
     const cover = el('span', 'ab-wall-cover');
     const img = el('img');
     img.alt = '';
-    img.loading = 'lazy';
     img.decoding = 'async';
     const fallback = discs[0] || '';
     img.addEventListener('error', () => {

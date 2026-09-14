@@ -67,7 +67,6 @@ function art(className, src, fallback) {
   const img = el('img');
   img.alt = '';
   img.decoding = 'async';
-  img.loading = 'lazy';
   img.addEventListener('load', () => img.classList.add('is-ready'));
   img.addEventListener('error', () => {
     if (fallback && img.getAttribute('src') !== fallback) {
