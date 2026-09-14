@@ -1,5 +1,5 @@
 import { motion, still, svg, polar } from './fx.js?v=8';
-import { clock } from './profile.js?v=9';
+import { clock } from './profile.js?v=10';
 
 const C = 100;
 const BASE = 50;

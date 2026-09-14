@@ -1,18 +1,18 @@
 @font-face {
   font-family: 'Hexaframe';
-  src: url('../new_version-assets/Hexaframe.otf') format('opentype');
+  src: url('../assets/fonts/Hexaframe.otf') format('opentype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'TechHud';
-  src: url('../new_version-assets/tech.ttf') format('truetype');
+  src: url('../assets/fonts/tech.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Sprintura';
-  src: url('../new_version-assets/sprintura.otf') format('opentype');
+  src: url('../assets/fonts/sprintura.otf') format('opentype');
   font-display: swap;
 }
 

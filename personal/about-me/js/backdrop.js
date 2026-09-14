@@ -1,4 +1,4 @@
-const SIGIL = 'new_version-assets/exp_symbol_';
+const SIGIL = 'assets/video/exp_symbol_';
 const NEAR = 1.2;
 
 const STAGE_SIGIL = {

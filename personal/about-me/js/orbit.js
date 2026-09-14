@@ -1,11 +1,11 @@
 import { motion, svg, still, polar, arc } from './fx.js?v=8';
-import { systems } from './profile.js?v=10';
+import { systems } from './profile.js?v=11';
 
 const C = 500;
 const RADII = [205, 325];
 const OFFSETS = [-60, -16];
 const EMPTY = 'EMPTY SLOT';
-const ICONS = 'new_version-assets/icons/';
+const ICONS = 'assets/images/icons/';
 const pad = (n) => String(n).padStart(2, '0');
 
 function el(tag, className, text) {

@@ -1,5 +1,5 @@
-const MUSIC = 'new_version-assets/music/';
-const SFX = 'new_version-assets/sfx/';
+const MUSIC = 'assets/audio/music/';
+const SFX = 'assets/audio/sfx/';
 const STORE_KEY = 'skye-about-muted';
 
 const INTRO = MUSIC + 'Main_song.mp3';

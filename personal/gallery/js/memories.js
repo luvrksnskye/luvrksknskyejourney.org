@@ -1,4 +1,4 @@
-const A = 'design_handoff_memory_album/assets/';
+const A = 'assets/images/';
 
 const CORE_SEEDS = [
   { id: 'roots',      icon: 'ico-handbook.png',      label: 'ROOTS',      r: 58,  a: -2.55 },
@@ -13,7 +13,7 @@ const CORE_SEEDS = [
   { id: 'notes',      icon: 'ico-handbook.png',      label: 'NOTES',      r: 126, a:  3.02 },
 ];
 
-const R = 'photos/roots/';
+const R = 'assets/images/photos/roots/';
 
 const TIMELINES = {
   roots: [

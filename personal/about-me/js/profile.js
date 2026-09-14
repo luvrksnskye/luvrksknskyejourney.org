@@ -4,11 +4,11 @@ export const lastfm = {
 };
 
 export const discs = [
-  'new_version-assets/atlas/disc/mikudisc.jpg'
+  'assets/images/atlas/disc/mikudisc.jpg'
 ];
 
 export const covers = {
-  'Ben Prunty|Subnautica 2 Original Soundtrack': 'new_version-assets/atlas/covers/subnautica-2-ost.jpg'
+  'Ben Prunty|Subnautica 2 Original Soundtrack': 'assets/images/atlas/covers/subnautica-2-ost.jpg'
 };
 
 export const coverSearch = {

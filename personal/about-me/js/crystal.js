@@ -1,5 +1,5 @@
 import { fragments } from './fragments.js?v=9';
-import { shapes, placeBox } from './shapes.js?v=9';
+import { shapes, placeBox } from './shapes.js?v=10';
 
 const NS = 'http://www.w3.org/2000/svg';
 

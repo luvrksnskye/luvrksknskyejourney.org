@@ -1,7 +1,7 @@
 import { motion, still } from './fx.js?v=8';
-import { lastfm, discs, statusCafe, loves } from './profile.js?v=10';
-import { findCover, manualCover } from './cover.js?v=3';
-import { ListeningClock } from './clock.js?v=3';
+import { lastfm, discs, statusCafe, loves } from './profile.js?v=11';
+import { findCover, manualCover } from './cover.js?v=4';
+import { ListeningClock } from './clock.js?v=4';
 
 const POLL = 15000;
 const MAX_POLL = 300000;

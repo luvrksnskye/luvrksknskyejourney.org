@@ -1,4 +1,4 @@
-const IMG_URL = '/assets/mouse/cursor.ico';
+const IMG_URL = '/assets/images/mouse/cursor.ico';
 const SIZE = [10, 20];
 const BURST = 5;
 

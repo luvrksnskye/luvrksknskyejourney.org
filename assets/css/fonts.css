@@ -8,19 +8,19 @@
 
 @font-face {
   font-family: 'departure-mono';
-  src: url('../fonts/departuremono-regular.woff') format('woff');
+  src: url('/assets/fonts/departuremono-regular.woff') format('woff');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'genshin impact';
-  src: url('../fonts/genshin-impact-drip-font.ttf') format('truetype');
+  src: url('/assets/fonts/genshin-impact-drip-font.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'ZHFont';
-  src: url('../fonts/zhcn.ttf') format('truetype');
+  src: url('/assets/fonts/zhcn.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -28,24 +28,24 @@
 
 @font-face {
   font-family: 'zhcn';
-  src: url('../fonts/zhcn.ttf') format('truetype');
+  src: url('/assets/fonts/zhcn.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'kawaii';
-  src: url('../fonts/ktegaki.ttf') format('truetype');
+  src: url('/assets/fonts/ktegaki.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'DIN';
-  src: url('../fonts/din.otf') format('opentype');
+  src: url('/assets/fonts/din.otf') format('opentype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'VintageSimple';
-  src: url('../fonts/vintagesimple-regular.otf') format('opentype');
+  src: url('/assets/fonts/vintagesimple-regular.otf') format('opentype');
   font-display: swap;
 }

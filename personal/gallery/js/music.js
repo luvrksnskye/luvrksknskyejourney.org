@@ -1,4 +1,4 @@
-const BASE = 'music/';
+const BASE = 'assets/audio/music/';
 
 const TRACKS = [
   'ww.mp3',

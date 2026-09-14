@@ -1,6 +1,6 @@
-import { cores } from './memories.js?v=4';
-import { sfx }   from './sfx.js?v=4';
-import { Music } from './music.js?v=4';
+import { cores } from './memories.js?v=5';
+import { sfx }   from './sfx.js?v=5';
+import { Music } from './music.js?v=5';
 
 const $ = (id) => document.getElementById(id);
 
@@ -154,14 +154,14 @@ class MemoryArchive {
 
   async bootClock() {
     try {
-      await loadScript('design_handoff_memory_album/assets/clock3d.js');
+      await loadScript('js/clock3d.js');
       for (let i = 0; i < 40 && !window.MemoryClock; i++) {
         await new Promise((r) => setTimeout(r, 40));
       }
       if (!window.MemoryClock) throw new Error('MemoryClock not available');
       this.clock3d = await window.MemoryClock.init(this.dom.canvas, {
         memories: cores,
-        basePath: 'design_handoff_memory_album/assets/',
+        basePath: 'assets/images/',
         onHover:  (i, x, y) => this.showTip(i, x, y),
         onSelect: (i) => { if (i >= 0) this.focusCore(i); },
       });

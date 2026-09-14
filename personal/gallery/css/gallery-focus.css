@@ -100,7 +100,7 @@
   inset: -20px;
   z-index: 4;
   border: 32px solid transparent;
-  border-image: url('../design_handoff_memory_album/assets/panel.png') 46 / 32px stretch;
+  border-image: url('../assets/images/panel.png') 46 / 32px stretch;
   filter: sepia(.4) saturate(2) brightness(1.75) drop-shadow(0 0 7px rgba(238,214,158,.55));
   pointer-events: none;
 }

@@ -1,4 +1,4 @@
-const ATLAS = 'new_version-assets/atlas/';
+const ATLAS = 'assets/images/atlas/';
 
 export const shapes = {
   '1001r': {

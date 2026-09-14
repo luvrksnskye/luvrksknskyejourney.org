@@ -1,0 +1,70 @@
+
+body {
+  
+  background-color: white;
+  
+}
+@font-face {
+font-family: 'ktegaki';
+src: url(/assets/fonts/ktegaki.ttf) format('woff');
+}
+
+
+::-webkit-scrollbar {
+width: 8px; 
+background: transparent;
+border: 0px ;
+height: 200px;
+}
+
+::-webkit-scrollbar-thumb {
+background: #9fc6ff;
+
+}
+body {
+font-family: 'ktegaki';
+color: #000e6b6d;
+font-size:23px;
+}
+
+hr {
+  border: 1.5px solid #9eb5ff43;
+}
+
+a:link {
+  color: #bbdfff;
+  text-decoration: none;
+}
+ 
+ 
+a:visited {
+  color: #859fff;
+}
+ 
+ 
+a:hover {
+  color: #b1d4ff;
+}
+ 
+ 
+a:active {
+  color: #07024995 ;
+
+}
+ ::selection {
+background-color: #a9d4ff;
+}
+
+.header{
+  background-color:white;  
+  background-image:url("../../assets/images/background/about-background.png"); 
+  background-size:cover; 
+  background-repeat:no-repeat;  
+  width: 500px;
+  height: 25px;
+  overflow: fixed; 
+  padding:10px; 
+ border: 1.7px solid #09003c7f; 
+    border-radius: 5px;
+  font-size: 25px;
+}

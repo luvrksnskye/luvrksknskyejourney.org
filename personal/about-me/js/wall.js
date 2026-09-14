@@ -1,8 +1,8 @@
 import { motion, still } from './fx.js?v=8';
-import { wall, stickers, discs } from './profile.js?v=9';
-import { findCover, manualCover } from './cover.js?v=3';
+import { wall, stickers, discs } from './profile.js?v=10';
+import { findCover, manualCover } from './cover.js?v=4';
 
-const STICKER_DIR = 'new_version-assets/stickers/pom/';
+const STICKER_DIR = 'assets/images/stickers/pom/';
 const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=';
 const BODY_MAX = 140;
 const NAME_MAX = 24;

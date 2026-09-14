@@ -1,4 +1,4 @@
-const A = 'design_handoff_memory_album/assets/';
+const A = 'assets/audio/';
 const POOL_SIZE = 3;
 
 class SfxPool {

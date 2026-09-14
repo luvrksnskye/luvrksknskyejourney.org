@@ -1,13 +1,13 @@
-import { Music, sfx } from './audio.js?v=8';
+import { Music, sfx } from './audio.js?v=9';
 import { fragments } from './fragments.js?v=9';
-import { Backdrop } from './backdrop.js?v=6';
-import { CrystalField } from './crystal.js?v=18';
+import { Backdrop } from './backdrop.js?v=7';
+import { CrystalField } from './crystal.js?v=19';
 import { ScrollDriver } from './scroll.js?v=6';
 import { motion, sparkle, wipe, spotlight, frame, still } from './fx.js?v=8';
 import { boot } from './boot.js?v=8';
-import { OrbitMap } from './orbit.js?v=14';
-import { StatusBoard } from './status.js?v=20';
-import { EchoWall } from './wall.js?v=5';
+import { OrbitMap } from './orbit.js?v=15';
+import { StatusBoard } from './status.js?v=21';
+import { EchoWall } from './wall.js?v=6';
 
 const $ = (id) => document.getElementById(id);
 
