@@ -83,24 +83,6 @@ export const systems = [
   }
 ];
 
-export const rightNow = [
-  { key: 'reading', value: '' },
-  { key: 'playing', value: '' },
-  { key: 'drawing', value: '' },
-  { key: 'watching', value: '' },
-  { key: 'learning', value: '' },
-  { key: 'mood', value: '' }
-];
-
-export const stats = [
-  { key: 'pronouns', value: '' },
-  { key: 'age', value: '' },
-  { key: 'sign', value: '' },
-  { key: 'height', value: '' },
-  { key: 'coffee or tea', value: '' },
-  { key: 'fav color', value: '' }
-];
-
 export const loves = [
   { group: 'games', items: [] },
   { group: 'music', items: [] },

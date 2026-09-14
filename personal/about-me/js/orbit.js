@@ -1,5 +1,5 @@
 import { motion, svg, still, polar, arc } from './fx.js?v=8';
-import { systems } from './profile.js?v=9';
+import { systems } from './profile.js?v=10';
 
 const C = 500;
 const RADII = [205, 325];

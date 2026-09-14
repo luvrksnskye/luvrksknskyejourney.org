@@ -5,9 +5,9 @@ import { CrystalField } from './crystal.js?v=18';
 import { ScrollDriver } from './scroll.js?v=6';
 import { motion, sparkle, wipe, spotlight, frame, still } from './fx.js?v=8';
 import { boot } from './boot.js?v=8';
-import { OrbitMap } from './orbit.js?v=13';
-import { StatusBoard } from './status.js?v=19';
-import { EchoWall } from './wall.js?v=4';
+import { OrbitMap } from './orbit.js?v=14';
+import { StatusBoard } from './status.js?v=20';
+import { EchoWall } from './wall.js?v=5';
 
 const $ = (id) => document.getElementById(id);
 

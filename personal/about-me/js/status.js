@@ -1,5 +1,5 @@
 import { motion, still } from './fx.js?v=8';
-import { lastfm, discs, statusCafe, rightNow, stats, loves } from './profile.js?v=9';
+import { lastfm, discs, statusCafe, loves } from './profile.js?v=10';
 import { findCover, manualCover } from './cover.js?v=3';
 import { ListeningClock } from './clock.js?v=3';
 
@@ -7,6 +7,11 @@ const POLL = 15000;
 const MAX_POLL = 300000;
 const HISTORY_CAP = 600;
 const EMPTY = 'EMPTY SLOT';
+const ABOUT_URL = 'data/about.json';
+const TEXT_MAX = 80;
+const ROWS_MAX = 12;
+const CURRENTLY = ['reading', 'playing', 'drawing', 'watching', 'learning'];
+const STATS = ['pronouns', 'age', 'height', 'coffee or tea', 'fav color'];
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -24,6 +29,62 @@ function fillRows(host, list) {
     return li;
   }));
   return [...host.querySelectorAll('.v')];
+}
+
+const blank = (keys) => keys.map((key) => ({ key, value: '' }));
+
+function readRows(source, fallback) {
+  if (!source || typeof source !== 'object' || Array.isArray(source)) return fallback;
+  return Object.entries(source)
+    .filter(([key, value]) => key.trim() && (typeof value === 'string' || typeof value === 'number'))
+    .slice(0, ROWS_MAX)
+    .map(([key, value]) => ({ key: key.trim().slice(0, 24), value: String(value).trim().slice(0, TEXT_MAX) }));
+}
+
+function photoUrl(value) {
+  if (typeof value !== 'string' || !value.trim()) return '';
+  try {
+    const url = new URL(value.trim(), document.baseURI);
+    return url.protocol === 'https:' || url.origin === location.origin ? url.href : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+async function loadAbout() {
+  try {
+    const res = await fetch(ABOUT_URL, { cache: 'no-cache', credentials: 'omit' });
+    if (!res.ok) throw new Error(String(res.status));
+    const data = await res.json();
+    return {
+      currently: readRows(data?.currently, blank(CURRENTLY)),
+      stats: readRows(data?.stats, blank(STATS)),
+      photo: photoUrl(data?.photo)
+    };
+  } catch (_) {
+    return { currently: blank(CURRENTLY), stats: blank(STATS), photo: '' };
+  }
+}
+
+function fillPhoto(anchor, src) {
+  if (!src) {
+    const empty = el('figure', 'ab-photo is-empty');
+    empty.append(el('span', '', 'PHOTO SOON'));
+    anchor.before(empty);
+    return;
+  }
+  const figure = el('figure', 'ab-photo');
+  const img = el('img');
+  img.alt = "Skye's profile picture";
+  img.decoding = 'async';
+  img.addEventListener('load', () => figure.classList.add('is-ready'));
+  img.addEventListener('error', () => {
+    figure.replaceChildren(el('span', '', 'PHOTO SOON'));
+    figure.classList.add('is-empty');
+  });
+  img.src = src;
+  figure.append(img);
+  anchor.before(figure);
 }
 
 function fillLoves(host, groups) {
@@ -62,19 +123,33 @@ function discFor(track) {
   return discs[hash % discs.length];
 }
 
-function art(className, src, fallback) {
+function art(className, src, fallback, track) {
   const box = el('span', className);
   const img = el('img');
   img.alt = '';
   img.decoding = 'async';
   img.addEventListener('load', () => img.classList.add('is-ready'));
-  img.addEventListener('error', () => {
+  const toDisc = () => {
     if (fallback && img.getAttribute('src') !== fallback) {
       img.src = fallback;
       box.classList.add('is-disc');
     } else {
       box.classList.remove('has-art');
     }
+  };
+  let rescued = !track;
+  img.addEventListener('error', () => {
+    if (rescued || img.getAttribute('src') === fallback) return toDisc();
+    rescued = true;
+    findCover(track).then((found) => {
+      const next = found?.thumb || found?.image;
+      if (next && next !== img.getAttribute('src')) {
+        img.src = next;
+        box.classList.remove('is-disc');
+      } else {
+        toDisc();
+      }
+    });
   });
   box.append(img);
   const first = src || fallback;
@@ -121,7 +196,7 @@ class NowPlaying {
     this.img.alt = '';
     this.img.decoding = 'async';
     this.img.addEventListener('load', () => this.img.classList.add('is-ready'));
-    this.img.addEventListener('error', () => {
+    const heroDisc = () => {
       if (this.fallback && this.img.getAttribute('src') !== this.fallback) {
         this.img.src = this.fallback;
         this.glow.src = this.fallback;
@@ -129,6 +204,22 @@ class NowPlaying {
       } else {
         root.classList.remove('has-art');
       }
+    };
+    this.img.addEventListener('error', () => {
+      const track = this.heroTrack;
+      if (!track || this.rescuedFor === track || this.img.getAttribute('src') === this.fallback) return heroDisc();
+      this.rescuedFor = track;
+      findCover(track).then((found) => {
+        if (this.heroTrack !== track) return;
+        const next = found?.image || found?.thumb;
+        if (next && next !== this.img.getAttribute('src')) {
+          this.img.src = next;
+          this.glow.src = next;
+          root.classList.remove('is-disc');
+        } else {
+          heroDisc();
+        }
+      });
     });
     cover.append(this.img, el('span', 'ab-np-noart'));
 
@@ -276,7 +367,7 @@ class NowPlaying {
       link.rel = 'noopener';
     }
     const own = track.thumb || track.image || manualCover(track);
-    const thumb = art('ab-np-thumb', own, discFor(track));
+    const thumb = art('ab-np-thumb', own, discFor(track), track);
     if (!own) upgrade(thumb, track);
     const text = el('span', 'ab-np-row-text');
     text.append(el('span', 'ab-np-row-name', track.name), el('span', 'ab-np-row-artist', track.artist));
@@ -344,6 +435,7 @@ class NowPlaying {
   async show(track, live) {
     const name = track.name;
     const artist = track.artist || '';
+    this.heroTrack = track;
 
     this.root.classList.remove('is-offline');
     this.root.classList.toggle('is-live', live);
@@ -449,7 +541,11 @@ class CafeStatus {
 
 export class StatusBoard {
   constructor({ nowPlaying, rightNow: nowHost, stats: statsHost, loves: lovesHost }) {
-    this.values = [...fillRows(nowHost, rightNow), ...fillRows(statsHost, stats)];
+    this.values = [...fillRows(nowHost, blank(CURRENTLY)), ...fillRows(statsHost, blank(STATS))];
+    this.aboutReady = loadAbout().then(({ currently, stats: sheet, photo }) => {
+      this.values = [...fillRows(nowHost, currently), ...fillRows(statsHost, sheet)];
+      fillPhoto(statsHost, photo);
+    });
     fillLoves(lovesHost, loves);
     this.cafe = new CafeStatus(nowHost);
     this.cafeReady = this.cafe.load();
@@ -461,6 +557,7 @@ export class StatusBoard {
   async intro() {
     if (this.introduced) return;
     this.introduced = true;
+    await this.aboutReady;
     const gsap = still ? null : await motion();
     if (!gsap) return;
     this.values.forEach((value, i) => {

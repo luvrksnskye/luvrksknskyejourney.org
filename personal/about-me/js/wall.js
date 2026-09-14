@@ -498,11 +498,25 @@ export class EchoWall {
     img.alt = '';
     img.decoding = 'async';
     const fallback = discs[0] || '';
-    img.addEventListener('error', () => {
+    const toDisc = () => {
       if (fallback && img.getAttribute('src') !== fallback) {
         img.src = fallback;
         cover.classList.add('is-disc');
       }
+    };
+    let rescued = false;
+    img.addEventListener('error', () => {
+      if (rescued || img.getAttribute('src') === fallback) return toDisc();
+      rescued = true;
+      findCover(track).then((found) => {
+        const next = found?.thumb || found?.image;
+        if (next && next !== img.getAttribute('src')) {
+          img.src = next;
+          cover.classList.remove('is-disc');
+        } else {
+          toDisc();
+        }
+      });
     });
     const real = track.thumb || track.image || manualCover(track);
     img.src = real || fallback;

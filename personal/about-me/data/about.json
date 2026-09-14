@@ -1,0 +1,18 @@
+{
+  "photo": "new_version-assets/profile-photo.jpg",
+  "currently": {
+    "building": "this website",
+    "reading": "nothing right now",
+    "playing": "haven't had time to play anything lately",
+    "drawing": "environment concept art",
+    "watching": "my code break in real time",
+    "learning": "backend (still bad at it lol)"
+  },
+  "stats": {
+    "pronouns": "she/they",
+    "age": "21",
+    "height": "5'10",
+    "coffee or tea": "Mocha Frappuccino",
+    "fav color": "pastel blue / sky blue"
+  }
+}
