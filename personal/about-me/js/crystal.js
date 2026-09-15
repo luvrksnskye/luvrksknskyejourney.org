@@ -1,5 +1,6 @@
 import { fragments } from './fragments.js?v=9';
 import { shapes, placeBox } from './shapes.js?v=10';
+import { pageScale } from '/assets/js/page-scale.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -159,7 +160,7 @@ export class CrystalField {
 
   centre() {
     if (!this.section || this.narrow.matches) return;
-    const top = this.section.offsetTop + (this.section.offsetHeight - innerHeight) / 2;
+    const top = (this.section.offsetTop + this.section.offsetHeight / 2) * pageScale() - innerHeight / 2;
     scrollTo({ top, behavior: 'instant' });
   }
 

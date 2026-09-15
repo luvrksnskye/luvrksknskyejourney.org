@@ -70,10 +70,10 @@
   --font-voice: var(--font-body);
   --font-accent: 'Sprintura', 'Hexaframe', sans-serif;
 
-  --grid-step: clamp(96px, 9vw, 148px);
+  --grid-step: clamp(96px, calc(9 * var(--vw, 1vw)), 148px);
   --nav-w: 130px;
   --rail-w: 120px;
-  --gutter: clamp(22px, 4vw, 74px);
+  --gutter: clamp(22px, calc(4 * var(--vw, 1vw)), 74px);
 
   transition: --temp 900ms var(--ease-decel);
 }
@@ -92,7 +92,7 @@ html {
 
 body.ab-root {
   margin: 0;
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh, 1vh));
   background: var(--void);
   color: var(--ink);
   font-family: var(--font-voice);
@@ -120,8 +120,8 @@ body.ab-root[data-locked='true'] {
   top: 0;
   left: 0;
   right: 0;
-  height: 340vh;
-  transform: translate3d(0, calc(var(--depth) * -240vh), 0);
+  height: calc(340 * var(--vh, 1vh));
+  transform: translate3d(0, calc(var(--depth) * -240 * var(--vh, 1vh)), 0);
   will-change: transform;
 }
 
@@ -129,14 +129,14 @@ body.ab-root[data-locked='true'] {
   position: absolute;
   left: 0;
   right: 0;
-  height: 170vh;
+  height: calc(170 * var(--vh, 1vh));
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
 }
 
-.ab-panel-bg[data-index='0'] { top: 0; height: 170vh; }
-.ab-panel-bg[data-index='1'] { top: 140vh; height: 200vh; }
+.ab-panel-bg[data-index='0'] { top: 0; height: calc(170 * var(--vh, 1vh)); }
+.ab-panel-bg[data-index='1'] { top: calc(140 * var(--vh, 1vh)); height: calc(200 * var(--vh, 1vh)); }
 
 .ab-panel-bg video {
   width: 100%;
@@ -202,8 +202,8 @@ body.ab-root[data-locked='true'] {
 
 .ab-sigil {
   grid-area: 1 / 1;
-  width: min(92vh, 88vw);
-  height: min(92vh, 88vw);
+  width: min(calc(92 * var(--vh, 1vh)), calc(88 * var(--vw, 1vw)));
+  height: min(calc(92 * var(--vh, 1vh)), calc(88 * var(--vw, 1vw)));
   object-fit: contain;
   mix-blend-mode: screen;
   opacity: 0;
@@ -227,8 +227,8 @@ body.ab-root[data-locked='true'] {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: min(78vh, 74vw);
-  margin: calc(min(78vh, 74vw) / -2) 0 0 calc(min(78vh, 74vw) / -2);
+  width: min(calc(78 * var(--vh, 1vh)), calc(74 * var(--vw, 1vw)));
+  margin: calc(min(calc(78 * var(--vh, 1vh)), calc(74 * var(--vw, 1vw))) / -2) 0 0 calc(min(calc(78 * var(--vh, 1vh)), calc(74 * var(--vw, 1vw))) / -2);
   z-index: 1;
   pointer-events: none;
   mix-blend-mode: screen;
@@ -249,7 +249,7 @@ body.ab-root[data-locked='true'] {
 .ab-chapter-title {
   font-family: var(--font-mark);
   font-weight: 500;
-  font-size: clamp(1.8rem, 4.4vw, 3.3rem);
+  font-size: clamp(1.8rem, calc(4.4 * var(--vw, 1vw)), 3.3rem);
   line-height: 1.14;
   letter-spacing: 0.035em;
   margin: 0;
@@ -260,7 +260,7 @@ body.ab-root[data-locked='true'] {
 .ab-prose p,
 .ab-lede p {
   font-family: var(--font-voice);
-  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+  font-size: clamp(0.98rem, calc(1.1 * var(--vw, 1vw)), 1.12rem);
   font-weight: 400;
   line-height: 1.95;
   letter-spacing: 0.012em;
@@ -276,8 +276,8 @@ body.ab-root[data-locked='true'] {
 
 .ab-audio-toggle {
   position: fixed;
-  right: clamp(18px, 3vw, 38px);
-  bottom: clamp(18px, 3vw, 38px);
+  right: clamp(18px, calc(3 * var(--vw, 1vw)), 38px);
+  bottom: clamp(18px, calc(3 * var(--vw, 1vw)), 38px);
   z-index: var(--z-nav);
   width: 42px;
   height: 42px;
@@ -341,7 +341,7 @@ body.ab-root[data-locked='true'] {
 
 @media (max-width: 860px) {
   .ab-reticle {
-    width: 120vw;
-    margin: -60vw 0 0 -60vw;
+    width: calc(120 * var(--vw, 1vw));
+    margin: calc(-60 * var(--vw, 1vw)) 0 0 calc(-60 * var(--vw, 1vw));
   }
 }

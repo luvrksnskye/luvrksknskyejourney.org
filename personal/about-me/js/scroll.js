@@ -1,3 +1,5 @@
+import { pageScale } from '/assets/js/page-scale.js';
+
 const clamp = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
 
 export class ScrollDriver {
@@ -64,8 +66,9 @@ export class ScrollDriver {
 
     const depth = clamp(y / max);
     const rise = clamp((y - vh * 0.85) / (vh * 1.8));
+    const scale = pageScale();
     const exit = this.returnEl
-      ? clamp((y + vh - this.returnEl.offsetTop) / Math.max(1, this.returnEl.offsetHeight))
+      ? clamp((y + vh - this.returnEl.offsetTop * scale) / Math.max(1, this.returnEl.offsetHeight * scale))
       : 0;
     const hud = rise * (1 - exit * 0.8);
     this.root.toggleAttribute('data-hud-on', hud > 0.25);

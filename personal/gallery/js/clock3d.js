@@ -24,7 +24,6 @@
     const host = canvas.parentElement;
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
@@ -511,6 +510,8 @@
     function resize() {
       const w = host.clientWidth || window.innerWidth;
       const h = host.clientHeight || window.innerHeight;
+      const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75) * scale);
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();

@@ -4,7 +4,7 @@
   --vh: 1vh;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
   :root {
     --page-scale: 0.9;
   }

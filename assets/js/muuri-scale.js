@@ -15,9 +15,11 @@
     };
   };
 
+  const snap = (value) => Math.round(value * 8) / 8;
+
   const unscaleSize = function (scale) {
-    this._width /= scale;
-    this._height /= scale;
+    this._width = snap(this._width / scale);
+    this._height = snap(this._height / scale);
   };
 
   const isDragging = function () {

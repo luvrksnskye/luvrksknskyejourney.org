@@ -1,4 +1,5 @@
 import * as THREE from 'https://esm.sh/three@0.177.0';
+import { pageScale } from '/assets/js/page-scale.js';
 
 const MAX_EDGES = 8;
 const GLOW_SCALE = 1.3;
@@ -262,7 +263,6 @@ export class Glass {
       premultipliedAlpha: false,
       powerPreference: 'high-performance'
     });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(0, 1, 0, 1, -1, 1);
@@ -418,9 +418,11 @@ export class Glass {
 
   resize() {
     if (!this.renderer) return;
+    const scale = pageScale();
     const w = innerWidth;
     const h = innerHeight;
-    this.renderer.setSize(w, h);
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75) * scale);
+    this.renderer.setSize(w / scale, h / scale);
     this.camera.right = w;
     this.camera.bottom = h;
     this.camera.updateProjectionMatrix();

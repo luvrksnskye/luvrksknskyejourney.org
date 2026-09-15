@@ -5,7 +5,7 @@
 }
 
 .ab-wall-scroll {
-  max-height: min(520px, 62vh);
+  max-height: min(520px, calc(62 * var(--vh, 1vh)));
   min-height: 180px;
   padding: 6px 8px 10px 0;
   overflow-y: auto;

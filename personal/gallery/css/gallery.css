@@ -176,7 +176,7 @@ button {
 .mg-fade-bottom {
   position: fixed;
   left: 0; right: 0; bottom: 0;
-  height: 60vh;
+  height: calc(60 * var(--vh, 1vh));
   z-index: 4;
   pointer-events: none;
   background: linear-gradient(0deg,
@@ -337,7 +337,7 @@ button {
   position: relative;
   z-index: 2;
   font-family: 'Cinzel', serif;
-  font-size: clamp(24px, 3.4vw, 42px);
+  font-size: clamp(24px, calc(3.4 * var(--vw, 1vw)), 42px);
   letter-spacing: .22em;
   color: var(--mg-ivory-2);
   text-shadow: 0 0 26px rgba(140,190,255,.5);

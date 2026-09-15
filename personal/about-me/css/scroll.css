@@ -15,7 +15,7 @@
 }
 
 .ab-arrival {
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh, 1vh));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 .ab-eyebrow {
-  margin: 0 0 clamp(16px, 2.4vh, 28px);
+  margin: 0 0 clamp(16px, calc(2.4 * var(--vh, 1vh)), 28px);
   opacity: 0;
   animation: ab-rise 1600ms 900ms var(--ease-decel) forwards;
 }
@@ -32,7 +32,7 @@
   margin: 0;
   font-family: var(--font-mark);
   font-weight: 400;
-  font-size: clamp(3.2rem, 12vw, 9.6rem);
+  font-size: clamp(3.2rem, calc(12 * var(--vw, 1vw)), 9.6rem);
   line-height: 0.98;
   letter-spacing: 0.045em;
   color: var(--ink);
@@ -43,19 +43,19 @@
 
 .ab-lede {
   max-width: 46ch;
-  margin-top: clamp(34px, 5.5vh, 64px);
+  margin-top: clamp(34px, calc(5.5 * var(--vh, 1vh)), 64px);
   opacity: 0;
   animation: ab-rise 2000ms 1500ms var(--ease-decel) forwards;
 }
 
 .ab-lede p {
-  font-size: clamp(1.04rem, 1.22vw, 1.24rem);
+  font-size: clamp(1.04rem, calc(1.22 * var(--vw, 1vw)), 1.24rem);
   line-height: 2;
 }
 
 .ab-scroll-hint {
   position: absolute;
-  bottom: clamp(28px, 5vh, 58px);
+  bottom: clamp(28px, calc(5 * var(--vh, 1vh)), 58px);
   left: 50%;
   translate: -50% 0;
   display: flex;
@@ -89,21 +89,21 @@
 }
 
 .ab-chapter {
-  min-height: 120vh;
+  min-height: calc(120 * var(--vh, 1vh));
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 1180px;
-  padding-top: 20vh;
-  padding-bottom: 20vh;
+  padding-top: calc(20 * var(--vh, 1vh));
+  padding-bottom: calc(20 * var(--vh, 1vh));
 }
 
 .ab-chapter-head {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: baseline;
-  column-gap: clamp(14px, 2vw, 26px);
-  margin-bottom: clamp(34px, 6vh, 68px);
+  column-gap: clamp(14px, calc(2 * var(--vw, 1vw)), 26px);
+  margin-bottom: clamp(34px, calc(6 * var(--vh, 1vh)), 68px);
 }
 
 .ab-chapter-tag {
@@ -124,7 +124,7 @@
 .ab-prose::before {
   content: '';
   position: absolute;
-  left: calc(-1 * clamp(16px, 2vw, 28px));
+  left: calc(-1 * clamp(16px, calc(2 * var(--vw, 1vw)), 28px));
   top: 4px;
   bottom: 4px;
   width: 1px;
@@ -161,20 +161,20 @@
 .ab-stage.is-visible .ab-exits { transition-delay: 620ms; }
 
 .ab-return {
-  min-height: 118vh;
+  min-height: calc(118 * var(--vh, 1vh));
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 1180px;
-  padding-top: 20vh;
-  padding-bottom: 22vh;
+  padding-top: calc(20 * var(--vh, 1vh));
+  padding-bottom: calc(22 * var(--vh, 1vh));
 }
 
 .ab-exits {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(18px, 3vw, 40px);
-  margin-top: clamp(48px, 8vh, 92px);
+  gap: clamp(18px, calc(3 * var(--vw, 1vw)), 40px);
+  margin-top: clamp(48px, calc(8 * var(--vh, 1vh)), 92px);
 }
 
 .ab-exits a {
@@ -212,8 +212,8 @@
   .ab-chapter,
   .ab-return {
     min-height: auto;
-    padding-top: 18vh;
-    padding-bottom: 18vh;
+    padding-top: calc(18 * var(--vh, 1vh));
+    padding-bottom: calc(18 * var(--vh, 1vh));
   }
 
   .ab-prose::before {

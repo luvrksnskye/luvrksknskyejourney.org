@@ -1,6 +1,7 @@
 import { cores } from './memories.js?v=5';
 import { sfx }   from './sfx.js?v=5';
 import { Music } from './music.js?v=5';
+import { pageScale } from '/assets/js/page-scale.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -154,7 +155,7 @@ class MemoryArchive {
 
   async bootClock() {
     try {
-      await loadScript('js/clock3d.js');
+      await loadScript('js/clock3d.js?v=2');
       for (let i = 0; i < 40 && !window.MemoryClock; i++) {
         await new Promise((r) => setTimeout(r, 40));
       }
@@ -177,10 +178,11 @@ class MemoryArchive {
     const btn = this.dom.gateBtn;
     if (btn && e) {
       const rect = btn.getBoundingClientRect();
+      const scale = pageScale();
       const ripple = document.createElement('span');
       ripple.className = 'mg-ripple';
-      ripple.style.left = ((e.clientX ?? rect.left + rect.width / 2) - rect.left) + 'px';
-      ripple.style.top  = ((e.clientY ?? rect.top  + rect.height / 2) - rect.top)  + 'px';
+      ripple.style.left = ((e.clientX ?? rect.left + rect.width / 2) - rect.left) / scale + 'px';
+      ripple.style.top  = ((e.clientY ?? rect.top  + rect.height / 2) - rect.top)  / scale + 'px';
       btn.appendChild(ripple);
       setTimeout(() => ripple.remove(), 700);
     }
@@ -310,7 +312,8 @@ class MemoryArchive {
     const c = cores[i];
     if (!c) return;
     if (this.dom.tipText.textContent !== c.title) this.dom.tipText.textContent = c.title;
-    tip.style.transform = `translate(-50%, -140%) translate(${x}px, ${y}px)`;
+    const scale = pageScale();
+    tip.style.transform = `translate(-50%, -140%) translate(${x / scale}px, ${y / scale}px)`;
     tip.style.opacity = '1';
   }
 
@@ -324,7 +327,7 @@ class MemoryArchive {
       this.clock3d?.spin((ev.clientX - last) * 0.011);
       last = ev.clientX;
       const dx = Math.max(-120, Math.min(120, ev.clientX - startX));
-      knob.style.transform = `translateX(${dx}px)`;
+      knob.style.transform = `translateX(${dx / pageScale()}px)`;
     };
     const up = () => {
       window.removeEventListener('pointermove', move);

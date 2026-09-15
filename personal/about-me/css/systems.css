@@ -7,13 +7,13 @@
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
   align-items: center;
-  gap: clamp(28px, 4vw, 80px);
+  gap: clamp(28px, calc(4 * var(--vw, 1vw)), 80px);
 }
 
 .ab-orbit {
   position: relative;
   width: 100%;
-  max-width: min(76vh, 700px);
+  max-width: min(calc(76 * var(--vh, 1vh)), 700px);
   aspect-ratio: 1;
   justify-self: center;
   opacity: 0;
@@ -215,7 +215,7 @@
   flex-direction: column;
   gap: 18px;
   min-height: 320px;
-  padding: clamp(24px, 2.6vw, 40px);
+  padding: clamp(24px, calc(2.6 * var(--vw, 1vw)), 40px);
 }
 
 .ab-node-card-head {
@@ -246,7 +246,7 @@
   min-height: 1.2em;
   font-family: var(--font-mark);
   font-weight: 500;
-  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-size: clamp(1.5rem, calc(2.6 * var(--vw, 1vw)), 2.2rem);
   letter-spacing: 0.04em;
   color: var(--ink);
 }
@@ -262,7 +262,7 @@
 .ab-node-card-note {
   margin: 0;
   min-height: 3.6em;
-  font-size: clamp(0.95rem, 1.02vw, 1.05rem);
+  font-size: clamp(0.95rem, calc(1.02 * var(--vw, 1vw)), 1.05rem);
   line-height: 1.8;
   color: var(--ink-soft);
 }
@@ -326,11 +326,11 @@
 .ab-status-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 1.8vw, 26px);
+  gap: clamp(16px, calc(1.8 * var(--vw, 1vw)), 26px);
 }
 
 .ab-card {
-  padding: clamp(22px, 2.3vw, 34px);
+  padding: clamp(22px, calc(2.3 * var(--vw, 1vw)), 34px);
 }
 
 .ab-card-wide {
@@ -581,7 +581,7 @@
   margin: 10px 0 4px;
   overflow: hidden;
   font-family: var(--font-mark);
-  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-size: clamp(1.05rem, calc(1.4 * var(--vw, 1vw)), 1.3rem);
   color: var(--ink);
   text-decoration: none;
   text-overflow: ellipsis;
@@ -841,7 +841,7 @@
 .ab-np {
   grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
   align-items: stretch;
-  gap: clamp(22px, 3vw, 48px);
+  gap: clamp(22px, calc(3 * var(--vw, 1vw)), 48px);
 }
 
 .ab-np-hero {
@@ -1123,7 +1123,7 @@ a.ab-np-row:focus-visible {
 }
 
 .ab-np-scroll {
-  max-height: min(580px, 74vh);
+  max-height: min(580px, calc(74 * var(--vh, 1vh)));
 }
 
 .ab-np-row {
@@ -1192,7 +1192,7 @@ a.ab-np-row:focus-visible {
 
 .ab-node-card-about {
   margin: 0;
-  font-size: clamp(0.92rem, 0.98vw, 1rem);
+  font-size: clamp(0.92rem, calc(0.98 * var(--vw, 1vw)), 1rem);
   line-height: 1.7;
   color: var(--ink);
 }

@@ -1,13 +1,14 @@
 import { Music, sfx } from './audio.js?v=9';
 import { fragments } from './fragments.js?v=9';
 import { Backdrop } from './backdrop.js?v=7';
-import { CrystalField } from './crystal.js?v=19';
-import { ScrollDriver } from './scroll.js?v=6';
+import { CrystalField } from './crystal.js?v=20';
+import { ScrollDriver } from './scroll.js?v=7';
 import { motion, sparkle, wipe, spotlight, frame, still } from './fx.js?v=8';
 import { boot } from './boot.js?v=8';
 import { OrbitMap } from './orbit.js?v=15';
 import { StatusBoard } from './status.js?v=21';
 import { EchoWall } from './wall.js?v=6';
+import { pageScale } from '/assets/js/page-scale.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -19,7 +20,7 @@ motion();
 const music = new Music($('trackA'));
 const backdrop = new Backdrop();
 
-const glassReady = import('./glass.js?v=17')
+const glassReady = import('./glass.js?v=18')
   .then(({ Glass }) => new Glass({
     canvas: $('glass'),
     videos: [...document.querySelectorAll('.ab-panel-bg video')]
@@ -41,12 +42,13 @@ addEventListener('pointerdown', (e) => {
 }, { passive: true });
 
 function burst(el) {
+  const scale = pageScale();
   if (performance.now() - pointer.t < 700) {
-    sparkle(pointer.x, pointer.y);
+    sparkle(pointer.x / scale, pointer.y / scale);
     return;
   }
   const r = el.getBoundingClientRect();
-  sparkle(r.left + r.width / 2, r.top + r.height / 2);
+  sparkle((r.left + r.width / 2) / scale, (r.top + r.height / 2) / scale);
 }
 
 const field = new CrystalField({
@@ -101,7 +103,7 @@ function moveRailCursor(name = railStage) {
   railStage = name;
   const mark = rail.querySelector(`li[data-stage="${name}"]`);
   if (!mark) return;
-  const y = mark.getBoundingClientRect().top - rail.getBoundingClientRect().top + mark.offsetHeight / 2 - 3.5;
+  const y = (mark.getBoundingClientRect().top - rail.getBoundingClientRect().top) / pageScale() + mark.offsetHeight / 2 - 3.5;
   motion().then((gsap) => {
     if (gsap && !still) gsap.to(railCursor, { y, duration: 0.9, ease: 'expo.out', overwrite: true });
     else railCursor.style.transform = `translateY(${y}px)`;
@@ -162,8 +164,9 @@ document.querySelector('.ab-rail-marks').addEventListener('click', (e) => {
   const mark = e.target.closest('li[data-stage]');
   const stage = mark && document.querySelector(`.ab-stage[data-stage="${mark.dataset.stage}"]`);
   if (!stage || jumping || mark.dataset.stage === railStage) return;
-  let top = stage.offsetTop;
-  if (stage === $('field')) top += (stage.offsetHeight - innerHeight) / 2;
+  const scale = pageScale();
+  let top = stage.offsetTop * scale;
+  if (stage === $('field')) top += (stage.offsetHeight * scale - innerHeight) / 2;
   const dir = STAGE_ORDER.indexOf(mark.dataset.stage) >= STAGE_ORDER.indexOf(railStage) ? 1 : -1;
   jumping = true;
   field.clear();

@@ -11,7 +11,7 @@
   position: absolute;
   left: 60px;
   top: 92px;
-  max-width: min(440px, 38vw);
+  max-width: min(440px, calc(38 * var(--vw, 1vw)));
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -22,7 +22,7 @@
   margin: 0;
   font-family: 'Cinzel', serif;
   font-weight: 500;
-  font-size: clamp(20px, 2vw, 27px);
+  font-size: clamp(20px, calc(2 * var(--vw, 1vw)), 27px);
   line-height: 1.42;
   letter-spacing: .03em;
   color: #f6f8ff;
@@ -96,7 +96,7 @@
 }
 .mg-scrub {
   position: relative;
-  width: min(300px, 32vw);
+  width: min(300px, calc(32 * var(--vw, 1vw)));
   height: 22px;
   cursor: ew-resize;
   display: flex;
