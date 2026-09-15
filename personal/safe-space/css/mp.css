@@ -72,3 +72,17 @@ body {
         audio {
             display: none;
         }
+
+@media (max-width: 768px) {
+    body {
+        padding: 72px 16px 120px;
+    }
+
+    #musicplayer {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: auto;
+        margin-bottom: 16px;
+    }
+}

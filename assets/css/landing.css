@@ -355,4 +355,19 @@
 body ::selection {
     background: #91ceff;
   }
-  
+
+@media (max-width: 768px) {
+    .enter-container {
+        padding: 0 16px;
+    }
+
+    .enter-arrow {
+        width: calc(20 * var(--vw, 1vw));
+        max-width: 120px;
+        margin: 0 4px;
+    }
+
+    .enter {
+        font-size: 24px;
+    }
+}

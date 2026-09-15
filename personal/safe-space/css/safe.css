@@ -310,3 +310,81 @@ a:hover {
 .floating:nth-child(16) { animation-delay: 1.4s; }
 .floating:nth-child(17) { animation-delay: 2.1s; }
 .floating:nth-child(18) { animation-delay: 1.1s; }
+
+@media (max-width: 768px) {
+    html,
+    body {
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .container-left {
+        display: none;
+    }
+
+    .morita {
+        position: relative;
+        top: auto;
+        left: auto;
+        display: block;
+        width: 180px;
+        margin: 0 auto;
+    }
+
+    .side {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        width: auto;
+        height: auto;
+        margin: 16px 0;
+        padding: 16px;
+        font-size: 22px;
+        line-height: 1.6;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 20px;
+    }
+
+    .container-right {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: auto;
+        height: auto;
+        background-image: none;
+        overflow: visible;
+    }
+
+    .main {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: auto;
+        height: auto;
+        padding: 0;
+    }
+
+    .main iframe {
+        width: 100%;
+        height: calc(70 * var(--vh, 1vh));
+        background: #ffffff;
+        border-radius: 20px;
+    }
+
+    .strawberry {
+        right: 16px;
+        width: 70px;
+    }
+
+    .sparkle {
+        pointer-events: none;
+    }
+
+    .puppy {
+        right: 12px;
+        bottom: 16px;
+        width: 90px;
+    }
+}

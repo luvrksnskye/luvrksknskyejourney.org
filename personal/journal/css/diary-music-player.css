@@ -272,4 +272,34 @@
     .button:hover i {
         color: #fff;
     }
-    
+
+@media (max-width: 768px) {
+    #app-cover {
+        position: fixed;
+        top: auto;
+        right: 12px;
+        bottom: 16px;
+        left: 12px;
+        width: auto;
+        margin: 0;
+        z-index: 60;
+    }
+
+    #player-track {
+        padding-left: 150px;
+    }
+
+    #album-art {
+        margin-left: 20px;
+    }
+
+    #player-controls {
+        float: none;
+        width: auto;
+        margin-left: 145px;
+    }
+
+    .button {
+        padding: 14px;
+    }
+}

@@ -184,3 +184,53 @@ muawhhhh credits to them for the original code wawawawa*/
     max-height: 600px;
     z-index: 1;
 }
+
+@media (max-width: 768px) {
+    body {
+        padding: 16px 16px 140px;
+    }
+
+    #musicplayer {
+        top: 16px;
+        right: 16px;
+        width: 220px;
+    }
+
+    #big-marquee,
+    .text-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: auto;
+        box-sizing: border-box;
+    }
+
+    #big-marquee {
+        margin-top: 16px;
+    }
+
+    .big-marquee-title {
+        font-size: 20px;
+        white-space: normal;
+    }
+
+    .text-container {
+        max-height: none;
+        padding: 16px 0 0;
+    }
+
+    .text-display-area {
+        padding: 16px;
+    }
+
+    .text-content {
+        font-size: 22px;
+    }
+
+    #counter-marquee {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        width: auto;
+    }
+}

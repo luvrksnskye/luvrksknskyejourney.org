@@ -575,3 +575,82 @@ body ::selection {
     30%  { opacity: 1; }
     100% { opacity: 0; transform: scale(1.9); }
 }
+
+@media (max-width: 768px) {
+    #digital-clock {
+        top: 20px;
+        bottom: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 16px;
+    }
+
+    .journal-search {
+        position: absolute;
+        top: 86px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        width: calc(100% - 32px);
+        box-sizing: border-box;
+    }
+
+    .journal-search .search-field {
+        flex: none;
+    }
+
+    .journal-search .filter-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .journal-search .filter-chips::-webkit-scrollbar {
+        display: none;
+    }
+
+    .container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: auto;
+        height: auto;
+        margin: 200px 16px 170px;
+        background-image: none;
+    }
+
+    .memo,
+    .diary {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        width: auto;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(126, 169, 255, 0.45);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(10, 14, 32, 0.25);
+    }
+
+    .memo {
+        order: -1;
+        height: 260px;
+        padding: 12px;
+    }
+
+    .diary {
+        height: calc(70 * var(--vh, 1vh));
+        overflow: hidden;
+    }
+
+    .diary iframe {
+        width: 100%;
+        height: 100%;
+    }
+}

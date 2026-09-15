@@ -168,4 +168,55 @@
 body ::selection {
     background: #91ceff;
   }
-  
+
+@media (max-width: 768px) {
+    .container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: auto;
+        height: auto;
+        margin: 90px 16px 120px;
+        background-image: none;
+    }
+
+    .memo,
+    .diary {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        width: auto;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(135, 181, 255, 0.45);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(10, 14, 32, 0.25);
+    }
+
+    .memo {
+        order: -1;
+        height: 260px;
+        padding: 12px;
+    }
+
+    .diary {
+        height: calc(70 * var(--vh, 1vh));
+        overflow: hidden;
+    }
+
+    .diary iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .illustration {
+        max-height: 140px;
+        max-width: 130px;
+    }
+}

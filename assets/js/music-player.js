@@ -21,6 +21,11 @@ slideToggle.addEventListener('click', () => {
     }
 });
 
+if (matchMedia('(max-width: 480px)').matches) {
+    musicPlayer.classList.add('slide-out');
+    cornerTag.classList.add('hide');
+}
+
 const basePath = (() => {
     const baseURL = window.location.origin;
     

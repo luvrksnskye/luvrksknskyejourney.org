@@ -287,3 +287,80 @@ body ::selection {
     -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical;
   }
+
+@media (max-width: 768px) {
+    .music-icon {
+        width: 110px;
+    }
+
+    .splash-effect.active {
+        width: 240px;
+    }
+
+    .planner-container {
+        display: block;
+        width: auto;
+        height: auto;
+        min-height: calc(100 * var(--vh, 1vh));
+        padding: 80px 12px 220px;
+        background-image: none;
+    }
+
+    .pages {
+        flex-direction: column;
+        gap: 16px;
+        min-width: 0;
+        height: auto;
+        padding-top: 55px;
+    }
+
+    .left-page,
+    .right-page {
+        flex: none;
+        min-width: 0;
+    }
+
+    .left-page {
+        height: calc(60 * var(--vh, 1vh));
+    }
+
+    .page-tab {
+        min-width: 0;
+        padding: 0 16px;
+    }
+
+    .left-tab {
+        left: 12px;
+    }
+
+    .right-tab {
+        right: 12px;
+    }
+
+    .skye-container {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        align-items: flex-end;
+        width: auto;
+        max-width: 100%;
+    }
+
+    .skye-sprite {
+        width: 110px;
+        margin-top: 0;
+    }
+
+    .speech-bubble {
+        right: 0;
+        bottom: 24px;
+        width: 190px;
+        height: auto;
+        margin-right: 4px;
+        padding: 8px 12px;
+    }
+
+    #dialogue-text {
+        font-size: 13px;
+    }
+}

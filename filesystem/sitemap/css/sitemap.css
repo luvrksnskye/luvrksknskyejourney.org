@@ -497,3 +497,62 @@ body {
   -webkit-backdrop-filter: blur(10px); 
   z-index: -1; 
 }
+
+@media (max-width: 768px) {
+  .title-container {
+    top: 20px;
+    width: 100%;
+    padding: 0 56px;
+  }
+
+  .title-img {
+    max-width: 100%;
+  }
+
+  .compass-container {
+    top: auto;
+    right: 16px;
+    bottom: 96px;
+    width: 72px;
+    height: 72px;
+  }
+
+  .category-buttons {
+    top: 150px;
+    left: 50%;
+    flex-direction: row;
+    gap: 8px;
+    transform: translateX(-50%);
+  }
+
+  .category-button {
+    margin-bottom: 0;
+    padding: 8px 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .category-button:hover,
+  .category-button.active {
+    transform: none;
+  }
+
+  .constellations-wrapper {
+    top: 210px;
+    height: calc(100% - 330px);
+  }
+
+  .constellation-label {
+    font-size: 14px;
+  }
+
+  .legend {
+    display: none;
+  }
+
+  .view-controls {
+    right: auto;
+    bottom: 96px;
+    left: 16px;
+  }
+}

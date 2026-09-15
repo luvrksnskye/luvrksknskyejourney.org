@@ -1069,3 +1069,9 @@ span.author::before {
 #HCB_comment_box .comment .likes img{
 visibility: hidden;
 }
+
+@media (max-width: 768px) {
+  .blog-sidebar {
+    box-sizing: border-box;
+  }
+}

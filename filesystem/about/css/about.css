@@ -277,3 +277,61 @@ body {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
 }
+
+@media (max-width: 768px) {
+  .profile-image {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: block;
+    width: 160px;
+    height: auto;
+    margin: 84px auto 0;
+  }
+
+  .kitty-image,
+  .kitty2-image {
+    top: auto;
+    bottom: 90px;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+  }
+
+  .kitty-image {
+    right: 8px;
+  }
+
+  .kitty2-image {
+    right: auto;
+    left: 8px;
+  }
+
+  .speech-bubble {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 280px;
+    margin: 16px auto 0;
+  }
+
+  .bubble-image {
+    width: 100%;
+  }
+
+  .bubble-text {
+    position: absolute;
+    width: 76%;
+    font-size: 14px;
+  }
+
+  .sparkle-1,
+  .sparkle-4,
+  .sparkle-5 {
+    width: calc(40 * var(--vw, 1vw));
+  }
+
+  .sparkle-2 {
+    width: 90px;
+  }
+}

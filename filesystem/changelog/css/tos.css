@@ -588,3 +588,10 @@ body ::selection {
                 font-size: 22px;
             }
         }
+
+@media (max-width: 992px) {
+    .left-panel,
+    .right-panel {
+        box-sizing: border-box;
+    }
+}
