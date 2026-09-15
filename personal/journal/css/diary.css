@@ -10,19 +10,32 @@
     border-radius: 5px;
   }
   
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+body {
+    background: #0b1024;
 }
 
-.video-background video {
+.video-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -2;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+}
+
+.video-background.is-active {
+    z-index: -1;
+    opacity: 1;
+}
+
+.video-background.is-under {
+    opacity: 1;
+    transition: none;
+}
+
+.video-background video,
+.video-splash-transition video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -30,15 +43,23 @@
 
 .video-splash-transition {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     overflow: hidden;
     z-index: 10000;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.video-splash-transition.is-playing {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .video-background { transition-duration: 0.4s; }
 }
 
 .container {
