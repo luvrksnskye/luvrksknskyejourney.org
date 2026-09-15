@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const video = document.createElement('video');
       video.autoplay = true;
       video.muted = true;
+      video.playsInline = true;
       video.loop = true;
       video.innerHTML = '<source src="assets/videos/background.mp4" type="video/mp4">';
       videoBackground.appendChild(video);
