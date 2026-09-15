@@ -17,6 +17,6 @@
 }
 
 @keyframes move-stars {
-  0%   { transform: translateY(100vh); opacity: 0.2; }
-  100% { transform: translateY(-10vh); opacity: 1; }
+  0%   { transform: translateY(calc(100 * var(--vh, 1vh))); opacity: 0.2; }
+  100% { transform: translateY(calc(-10 * var(--vh, 1vh))); opacity: 1; }
 }

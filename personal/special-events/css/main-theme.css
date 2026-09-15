@@ -44,7 +44,7 @@ body {
     font-weight: 400;
     font-style: normal;
     text-shadow: 2px 2px 30px rgb(53, 0, 128);
-    margin-top: 10vh;
+    margin-top: calc(10 * var(--vh, 1vh));
     position: relative;
     z-index: 3;
 }
@@ -60,7 +60,7 @@ body {
     font-weight: 400;
     font-style: normal;
     text-shadow: 2px 2px 30px rgb(75, 0, 128);
-    margin-top: 5vh;
+    margin-top: calc(5 * var(--vh, 1vh));
     position: relative;
     z-index: 3;
 }

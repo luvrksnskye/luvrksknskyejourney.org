@@ -27,7 +27,7 @@ body {
 
 .intro-container {
   position: relative;
-  height: 100vh;
+  height: calc(100 * var(--vh, 1vh));
   display: flex;
   flex-direction: column;
   justify-content: center;

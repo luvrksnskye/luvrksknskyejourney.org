@@ -23,8 +23,8 @@ a:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: calc(100 * var(--vw, 1vw));
+    height: calc(100 * var(--vh, 1vh));
     overflow: hidden;
     background-image: url('../assets/images/background/about-background.png');
     background-size: cover;
@@ -39,8 +39,8 @@ a:hover {
     background-repeat: no-repeat;
     position: absolute;
     border: 0px solid black;
-    width: 160vw;
-    height: 100vh;
+    width: calc(160 * var(--vw, 1vw));
+    height: calc(100 * var(--vh, 1vh));
     left: 81%;
     top: 48%;
     transform: translate(-50%, -50%);
@@ -54,8 +54,8 @@ a:hover {
     background-repeat: no-repeat;
     position: absolute;
     border: 0px solid black;
-    width: 60vw;
-    height: 95vh;
+    width: calc(60 * var(--vw, 1vw));
+    height: calc(95 * var(--vh, 1vh));
     right: 1%;
     top: 50%;
     transform: translateY(-50%);

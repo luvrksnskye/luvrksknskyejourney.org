@@ -57,8 +57,9 @@ const starsContainer = document.querySelector('.stars');
         }
       }
       b.addEventListener("click", function(event){
-        var x = event.clientX;
-        var y = event.clientY;
+        var scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+        var x = event.clientX / scale;
+        var y = event.clientY / scale;
         bro(x,y);
       });
 

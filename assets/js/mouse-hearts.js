@@ -37,5 +37,6 @@ function spawn(x, y) {
 }
 
 document.body.addEventListener('click', (e) => {
-  for (let i = 0; i < BURST; i++) spawn(e.clientX, e.clientY);
+  const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+  for (let i = 0; i < BURST; i++) spawn(e.clientX / scale, e.clientY / scale);
 });

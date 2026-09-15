@@ -142,8 +142,8 @@ styleSheet.textContent = `
         border-radius: 12px;
         padding: 2rem;
         width: 500px;
-        max-width: 90vw;
-        max-height: 80vh;
+        max-width: calc(90 * var(--vw, 1vw));
+        max-height: calc(80 * var(--vh, 1vh));
         overflow-y: auto;
         z-index: 1000;
         display: none;

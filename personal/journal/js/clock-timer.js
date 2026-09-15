@@ -119,7 +119,7 @@ function paintMode() {
 
 function burstParticles(count = 26) {
   if (!ui.particles || !ui.face) return;
-  const radius = ui.face.getBoundingClientRect().width * 0.3;
+  const radius = ui.face.offsetWidth * 0.3;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('span');
     p.className = 'particle';

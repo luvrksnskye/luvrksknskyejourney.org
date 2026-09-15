@@ -15,7 +15,7 @@
 }
 
 body {
-    min-height: 100vh;
+    min-height: calc(100 * var(--vh, 1vh));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,9 +65,9 @@ body::selection {
 }
 
 .terminal-window {
-    width: 90vw;
+    width: calc(90 * var(--vw, 1vw));
     max-width: 1000px;
-    height: 94vh;
+    height: calc(94 * var(--vh, 1vh));
     min-height: 600px;
     background: rgba(50, 50, 50, 0.05);
     backdrop-filter: blur(15px);
@@ -439,8 +439,8 @@ body.caffeine-mode {
     left: 50%;
     transform: translateX(-50%);
     z-index: -1;
-    width: 100vw;
-    height: 100vh;
+    width: calc(100 * var(--vw, 1vw));
+    height: calc(100 * var(--vh, 1vh));
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -732,7 +732,7 @@ body.caffeine-mode {
 .modal-window {
     width: 80%;
     max-width: 800px;
-    max-height: 80vh;
+    max-height: calc(80 * var(--vh, 1vh));
     background: rgba(30, 30, 50, 0.85);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -842,7 +842,7 @@ body.caffeine-mode {
     font-size: 14px;
     line-height: 1.6;
     overflow-y: auto;
-    max-height: calc(80vh - 65px);
+    max-height: calc(calc(80 * var(--vh, 1vh)) - 65px);
     background: rgba(179, 178, 227, 0.15);
     backdrop-filter: blur(15px);
 }
@@ -983,8 +983,8 @@ body.caffeine-mode {
 
 @media (max-width: 768px) {
     .terminal-window {
-        width: 95vw;
-        height: 85vh;
+        width: calc(95 * var(--vw, 1vw));
+        height: calc(85 * var(--vh, 1vh));
     }
     
     #art {
@@ -1040,7 +1040,7 @@ body.caffeine-mode {
     
     .modal-window {
         width: 95%;
-        max-height: 90vh;
+        max-height: calc(90 * var(--vh, 1vh));
     }
     
     .modal-header {
@@ -1121,7 +1121,7 @@ body.caffeine-mode {
     
     .modal-window {
         width: 98%;
-        max-height: 95vh;
+        max-height: calc(95 * var(--vh, 1vh));
     }
     
     .modal-header {

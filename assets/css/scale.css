@@ -1,0 +1,27 @@
+:root {
+  --page-scale: 1;
+  --vw: 1vw;
+  --vh: 1vh;
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --page-scale: 0.9;
+  }
+
+  @media (max-width: 1599px) { :root { --page-scale: 0.66; } }
+  @media (min-width: 1600px) and (max-width: 1899px) { :root { --page-scale: 0.78; } }
+  @media (min-width: 2300px) { :root { --page-scale: 1.1; } }
+
+  @supports (zoom: calc(100vw / 1920px)) {
+    :root {
+      --page-scale: clamp(0.55, calc(0.9 * min(100vw / 1920px, 100vh / 920px)), 1.3);
+    }
+  }
+
+  :root {
+    zoom: var(--page-scale);
+    --vw: calc(1vw / var(--page-scale));
+    --vh: calc(1vh / var(--page-scale));
+  }
+}

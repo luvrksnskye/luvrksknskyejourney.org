@@ -54,8 +54,8 @@
   position: fixed;
   top: 0;
   right: 0;
-  height: 100vh;
-  width: min(640px, 98vw);
+  height: calc(100 * var(--vh, 1vh));
+  width: min(640px, calc(98 * var(--vw, 1vw)));
   background:
     linear-gradient(
       to left,
@@ -116,9 +116,9 @@
 @keyframes ambient-float {
   0%   { transform: translate3d(0, 0, 0); opacity: 0; }
   10%  { opacity: var(--peak, 0.85); }
-  60%  { transform: translate3d(calc(var(--drift, 0px) * 0.5), -55vh, 0); opacity: var(--peak, 0.85); }
+  60%  { transform: translate3d(calc(var(--drift, 0px) * 0.5), calc(-55 * var(--vh, 1vh)), 0); opacity: var(--peak, 0.85); }
   90%  { opacity: var(--peak, 0.4); }
-  100% { transform: translate3d(var(--drift, 20px), -110vh, 0); opacity: 0; }
+  100% { transform: translate3d(var(--drift, 20px), calc(-110 * var(--vh, 1vh)), 0); opacity: 0; }
 }
 
 .clock-panel > * {

@@ -257,8 +257,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.96) translateY(14px);
-  width: min(1400px, 96vw);
-  height: min(1000px, 92vh);
+  width: min(1400px, calc(96 * var(--vw, 1vw)));
+  height: min(1000px, calc(92 * var(--vh, 1vh)));
   border-radius: 28px;
   overflow: hidden;
   z-index: 1600;
@@ -682,7 +682,7 @@
 }
 
 @media (max-width: 640px) {
-  .notif-toast { min-width: 240px; max-width: 88vw; }
-  #notif-toasts { top: 12px; right: 12px; max-width: 92vw; }
-  #notif-panel { width: 94vw; height: 82vh; }
+  .notif-toast { min-width: 240px; max-width: calc(88 * var(--vw, 1vw)); }
+  #notif-toasts { top: 12px; right: 12px; max-width: calc(92 * var(--vw, 1vw)); }
+  #notif-panel { width: calc(94 * var(--vw, 1vw)); height: calc(82 * var(--vh, 1vh)); }
 }

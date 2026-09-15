@@ -92,10 +92,8 @@ function moveChipSlider(activeChip) {
   const slider = document.querySelector('.journal-search .chip-slider');
   if (!slider || !activeChip) return;
   const parent = slider.parentElement;
-  const chipRect = activeChip.getBoundingClientRect();
-  const parentRect = parent.getBoundingClientRect();
-  const x = chipRect.left - parentRect.left;
-  slider.style.width = `${chipRect.width}px`;
+  const x = activeChip.offsetLeft;
+  slider.style.width = `${activeChip.offsetWidth}px`;
   slider.style.transform = `translateX(${x}px)`;
   slider.classList.add('is-ready');
 }

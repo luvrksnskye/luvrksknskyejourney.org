@@ -93,11 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showHover(event) {
     const rect = sArea.getBoundingClientRect();
+    const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
     seekT = event.clientX - rect.left;
     seekLoc = audio.duration * (seekT / rect.width);
-    sHover.style.width = `${seekT}px`;
+    sHover.style.width = `${seekT / scale}px`;
     insTime.textContent = fmt(seekLoc);
-    insTime.style.left = `${seekT}px`;
+    insTime.style.left = `${seekT / scale}px`;
     insTime.style.marginLeft = '-21px';
     insTime.style.display = 'block';
     insTime.style.opacity = '1';

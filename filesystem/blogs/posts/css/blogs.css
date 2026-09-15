@@ -54,7 +54,7 @@ body {
   width: 100%;
   display: flex;
   position: fixed;
-  height: 100vh;
+  height: calc(100 * var(--vh, 1vh));
   left: 0;
   top: 0;
   z-index: 100000;
@@ -80,7 +80,7 @@ body {
   height: fit-content;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: calc(90 * var(--vh, 1vh));
   left: 0;
 }
 

@@ -1,7 +1,7 @@
 .starfall-container {
   position: fixed;
   inset: 0;
-  height: 100vh;
+  height: calc(100 * var(--vh, 1vh));
   overflow: hidden;
   z-index: -1;
   pointer-events: none;

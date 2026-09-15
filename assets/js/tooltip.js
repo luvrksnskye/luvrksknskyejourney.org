@@ -30,8 +30,9 @@
       let y = e.clientY + 12;
       if (x + rect.width > w) x = Math.max(0, e.clientX - rect.width - 12);
       if (y + rect.height > h) y = Math.max(0, e.clientY - rect.height - 12);
-      tip.style.left = `${x + window.scrollX}px`;
-      tip.style.top = `${y + window.scrollY}px`;
+      const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+      tip.style.left = `${(x + window.scrollX) / scale}px`;
+      tip.style.top = `${(y + window.scrollY) / scale}px`;
     };
 
     const show = (el, e) => {

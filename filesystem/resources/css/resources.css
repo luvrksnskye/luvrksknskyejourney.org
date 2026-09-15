@@ -26,7 +26,7 @@ body {
     font-family: 'zhcn', sans-serif;
     color: white;
     position: relative;
-    min-height: 100vh;
+    min-height: calc(100 * var(--vh, 1vh));
     overflow-y: hidden;
 }
 
@@ -289,7 +289,7 @@ body {
   display: none;
   justify-items: center;
   align-items: start;
-  width: 100vw;
+  width: calc(100 * var(--vw, 1vw));
 }
 
 .iphone .div {

@@ -128,8 +128,9 @@ const MouseEffect = {
     
     init() {
         this.body.addEventListener("click", (event) => {
-            const x = event.clientX;
-            const y = event.clientY;
+            const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+            const x = event.clientX / scale;
+            const y = event.clientY / scale;
             this.createMultipleHearts(x, y);
         });
     }

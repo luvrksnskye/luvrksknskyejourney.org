@@ -149,8 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     b.addEventListener("click", function(event) {
-        var x = event.clientX;
-        var y = event.clientY;
+        var scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+        var x = event.clientX / scale;
+        var y = event.clientY / scale;
         bro(x, y);
     });
     
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function adjustBackgroundHeight() {
         if (contentSections) {
             const contentHeight = contentSections.scrollHeight;
-            const minHeight = window.innerHeight * 1.2;
+            const minHeight = (window.innerHeight / (parseFloat(getComputedStyle(document.documentElement).zoom) || 1)) * 1.2;
             const finalHeight = Math.max(contentHeight, minHeight);
             document.documentElement.style.setProperty('--content-height', `${finalHeight}px`);
         }

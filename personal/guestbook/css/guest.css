@@ -1,5 +1,5 @@
 body {
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh, 1vh));
   overflow-x: hidden;
   font-family: 'ZHFont', sans-serif;
   color: white;
@@ -26,8 +26,8 @@ body {
 .title {
   text-align: center;
   color: #fff;
-  font-size: clamp(40px, 6vw, 70px);
-  margin-bottom: 1vh;
+  font-size: clamp(40px, calc(6 * var(--vw, 1vw)), 70px);
+  margin-bottom: calc(1 * var(--vh, 1vh));
   text-shadow: 0 0 10px rgba(255,255,255,0.5);
   font-family: 'genshin impact', Arial, sans-serif;
   padding: 0 15px;
@@ -43,13 +43,13 @@ body {
 .container p {
   text-align: center;
   color: white;
-  font-size: clamp(14px, 2vw, 16px);
+  font-size: clamp(14px, calc(2 * var(--vw, 1vw)), 16px);
   margin-top: 20px;
   font-family: 'departure-mono', monospace;
 }
 
 .guestbook-image {
-  width: min(300px, 80vw);
+  width: min(300px, calc(80 * var(--vw, 1vw)));
   height: auto;
   border-radius: 10px;
   position: relative;
@@ -65,7 +65,7 @@ body {
   cursor: pointer;
   z-index: 1000;
   opacity: 0;
-  max-width: min(300px, 40vw);
+  max-width: min(300px, calc(40 * var(--vw, 1vw)));
   animation: float 3s ease-in-out infinite;
 }
 

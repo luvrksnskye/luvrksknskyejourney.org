@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
         layoutEasing: 'ease'
     });
 
+    window.addEventListener('load', () => {
+        grid.refreshItems().layout();
+    });
+
     function filterGrid() {
         const selectedCategory = categorySelect.value;
         searchTerms = searchFilter.value.toLowerCase().split(' ').filter(term => term);

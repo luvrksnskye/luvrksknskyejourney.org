@@ -1,7 +1,7 @@
 .music-player {
     height: auto;
     width: 350px;
-    max-width: 90vw;
+    max-width: calc(90 * var(--vw, 1vw));
     padding: 20px;
     background: linear-gradient(145deg, #ffffff2e, #4646b444);
     border-radius: 35px;

@@ -32,7 +32,7 @@ body ::selection {
     width: 100%;
     display: flex;
     position: fixed;
-    height: 100vh;
+    height: calc(100 * var(--vh, 1vh));
     left: 0;
     top: 0;
     z-index: 9999999999;
@@ -308,37 +308,37 @@ input::placeholder {
 
 @supports not (width: 1cqw) {
     .grid .item.small {
-        width: clamp(15rem, calc(15vw / var(--zoom-factor, 1)), 17rem);
+        width: clamp(15rem, calc(15 * var(--vw, 1vw)), 17rem);
     }
     
     .grid .item.medium {
-        width: clamp(16rem, calc(16vw / var(--zoom-factor, 1)), 20rem);
+        width: clamp(16rem, calc(16 * var(--vw, 1vw)), 20rem);
     }
     
     .grid .item.smallarge {
-        width: clamp(22rem, calc(22vw / var(--zoom-factor, 1)), 29rem);
+        width: clamp(22rem, calc(22 * var(--vw, 1vw)), 29rem);
     }
     
     .grid .item.large {
-        width: clamp(42rem, calc(42vw / var(--zoom-factor, 1)), 44rem);
+        width: clamp(42rem, calc(42 * var(--vw, 1vw)), 44rem);
     }
 }
 
 @supports not (width: 1cqw) and not (width: calc(1vw / 1)) {
     .grid .item.small {
-        width: clamp(15rem, 15vw, 17rem);
+        width: clamp(15rem, calc(15 * var(--vw, 1vw)), 17rem);
     }
     
     .grid .item.medium {
-        width: clamp(16rem, 16vw, 20rem);
+        width: clamp(16rem, calc(16 * var(--vw, 1vw)), 20rem);
     }
     
     .grid .item.smallarge {
-        width: clamp(22rem, 20vw, 29rem);
+        width: clamp(22rem, calc(20 * var(--vw, 1vw)), 29rem);
     }
     
     .grid .item.large {
-        width: clamp(42rem, 42vw, 44rem);
+        width: clamp(42rem, calc(42 * var(--vw, 1vw)), 44rem);
     }
 }
 
@@ -658,7 +658,7 @@ input::placeholder {
     .item.medium,
     .item.smallarge,
     .item.large {
-        width: 80vw !important;
+        width: calc(80 * var(--vw, 1vw)) !important;
         margin: 1.2rem auto;
     }
 

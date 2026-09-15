@@ -479,16 +479,17 @@ function selectStar(star) {
     panel.classList.add('active');
 
     const starRect = star.getBoundingClientRect();
-    panel.style.top = `${starRect.bottom + 10}px`;
-    panel.style.left = `${starRect.left}px`;
+    const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+    panel.style.top = `${(starRect.bottom + 10) / scale}px`;
+    panel.style.left = `${starRect.left / scale}px`;
 
     setTimeout(() => {
         const panelRect = panel.getBoundingClientRect();
         if (panelRect.right > window.innerWidth) {
-            panel.style.left = `${window.innerWidth - panelRect.width - 20}px`;
+            panel.style.left = `${(window.innerWidth - panelRect.width - 20) / scale}px`;
         }
         if (panelRect.bottom > window.innerHeight) {
-            panel.style.top = `${starRect.top - panelRect.height - 10}px`;
+            panel.style.top = `${(starRect.top - panelRect.height - 10) / scale}px`;
         }
     }, 10);
 }

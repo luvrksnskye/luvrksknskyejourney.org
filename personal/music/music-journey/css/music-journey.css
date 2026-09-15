@@ -53,7 +53,7 @@ body {
   padding: 0;
   font-family: 'ZHFont', sans-serif;
   color: var(--text-color);
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh, 1vh));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -670,7 +670,7 @@ body {
   backdrop-filter: blur(20px);
   width: 90%;
   max-width: 600px;
-  max-height: 90vh;
+  max-height: calc(90 * var(--vh, 1vh));
   border-radius: 15px;
   box-shadow: 0 0 30px rgba(114, 199, 255, 0.3), 0 0 100px rgba(114, 199, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);

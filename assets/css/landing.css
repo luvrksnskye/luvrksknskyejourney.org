@@ -249,7 +249,7 @@
     border-radius: 15px;
     min-width: 300px;
     max-width: 80%;
-    max-height: 80vh;
+    max-height: calc(80 * var(--vh, 1vh));
     overflow-y: auto;
     color: white;
     font-family: 'ZHFont', sans-serif;

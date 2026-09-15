@@ -48,7 +48,7 @@ body {
 .parallax-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: calc(100 * var(--vh, 1vh));
     overflow-y: auto;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -59,8 +59,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--content-height, 200vh);
-    min-height: 100vh;
+    height: var(--content-height, calc(200 * var(--vh, 1vh)));
+    min-height: calc(100 * var(--vh, 1vh));
     background-image: url('../assets/images/clock/bg.png');
     background-size: cover;
     background-position: center top;
@@ -71,13 +71,13 @@ body {
 .content-sections {
     position: relative;
     z-index: 1;
-    padding-top: 15vh;
-    padding-bottom: 50vh;
-    min-height: 100vh;
+    padding-top: calc(15 * var(--vh, 1vh));
+    padding-bottom: calc(50 * var(--vh, 1vh));
+    min-height: calc(100 * var(--vh, 1vh));
 }
 
 .about-section {
-    min-height: 50vh;
+    min-height: calc(50 * var(--vh, 1vh));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -573,11 +573,11 @@ body {
 
 @keyframes move-stars {
     0% {
-        transform: translateY(100vh);
+        transform: translateY(calc(100 * var(--vh, 1vh)));
         opacity: 0.2;
     }
     100% {
-        transform: translateY(-10vh);
+        transform: translateY(calc(-10 * var(--vh, 1vh)));
         opacity: 1;
     }
 }
@@ -587,7 +587,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: calc(100 * var(--vh, 1vh));
     background: transparent;
     overflow: hidden;
     display: flex;
@@ -659,7 +659,7 @@ body {
     bottom: -100px;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: calc(100 * var(--vh, 1vh));
     pointer-events: none;
     z-index: 2;
 }
@@ -686,7 +686,7 @@ body {
         opacity: var(--bubble-opacity);
     }
     100% {
-        transform: translateY(calc(-100vh - 100px)) scale(var(--scale-end));
+        transform: translateY(calc(calc(-100 * var(--vh, 1vh)) - 100px)) scale(var(--scale-end));
         opacity: 0;
     }
 }

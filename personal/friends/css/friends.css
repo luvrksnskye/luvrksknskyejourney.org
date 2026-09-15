@@ -83,6 +83,8 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
+    width: calc(100 * var(--vw, 1vw));
+    height: calc(100 * var(--vh, 1vh));
     z-index: 1;
 
 }
@@ -104,14 +106,14 @@ canvas {
 }
 
 .info-panel h2 {
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(18px, calc(2 * var(--vw, 1vw)), 24px);
     margin: 0 0 15px 0;
     text-align: center;
    font-family: 'ZHFont', sans-serif;
 }
 
 .info-panel p {
-    font-size: clamp(14px, 1.5vw, 16px);
+    font-size: clamp(14px, calc(1.5 * var(--vw, 1vw)), 16px);
     line-height: 1.5;
    font-family: 'ZHFont', sans-serif;
     margin: 0;
@@ -160,7 +162,7 @@ border-radius: 5px;
 color: white;
 font-family: 'ZHFont', sans-serif;
 cursor: pointer;
-font-size: clamp(14px, 1.5vw, 16px);
+font-size: clamp(14px, calc(1.5 * var(--vw, 1vw)), 16px);
 transition: background-color 0.3s;
 }
 
@@ -183,7 +185,7 @@ display: block;
 }
 
 .info-panel {
-max-height: 80vh;
+max-height: calc(80 * var(--vh, 1vh));
 overflow-y: auto;
 }
 
@@ -300,8 +302,8 @@ body ::selection {
     padding: 2rem;
     width: 500px;
     height: 580px;
-    max-width: 90vw;
-    max-height: 80vh;
+    max-width: calc(90 * var(--vw, 1vw));
+    max-height: calc(80 * var(--vh, 1vh));
     overflow-y: auto;
     opacity: 0;
     box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
