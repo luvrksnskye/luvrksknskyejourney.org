@@ -619,7 +619,7 @@ body ::selection {
         gap: 16px;
         width: auto;
         height: auto;
-        margin: 200px 16px 170px;
+        margin: 200px 16px 40px;
         background-image: none;
     }
 

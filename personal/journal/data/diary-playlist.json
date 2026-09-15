@@ -1,0 +1,19 @@
+[
+  { "title": "Nihility and Causality", "artist": "Wuthering Waves OST", "src": "assets/audio/diary-songs/ww.mp3", "cover": "assets/images/covers/ww.png" },
+  { "title": "Lacebark pine", "artist": "Whitepine OST", "src": "assets/audio/diary-songs/lacebark-pine.mp3", "cover": "assets/images/covers/whitepine.png" },
+  { "title": "Drifter", "artist": "Hallow", "src": "assets/audio/diary-songs/drifter.mp3", "cover": "assets/images/covers/hallow.jpg" },
+  { "title": "Resonance", "artist": "HOME", "src": "assets/audio/diary-songs/home-resonance.mp3", "cover": "assets/images/covers/electronic-gems.jpg" },
+  { "title": "Memory reboot", "artist": "VØJ", "src": "assets/audio/diary-songs/memory-reboot.mp3", "cover": "assets/images/covers/voj.jpg" },
+  { "title": "Offline", "artist": "L0WS", "src": "assets/audio/diary-songs/offline.mp3", "cover": "assets/images/covers/offline.jpg" },
+  { "title": "River's end", "artist": "Thenian", "src": "assets/audio/diary-songs/rivers-end.mp3", "cover": "assets/images/covers/thenian.jpg" },
+  { "title": "See, i'm sorry", "artist": "Nectry", "src": "assets/audio/diary-songs/see-im-sorry.mp3", "cover": "assets/images/covers/nectry.jpg" },
+  { "title": "Snowfall", "artist": "Øneheart", "src": "assets/audio/diary-songs/snowfall.mp3", "cover": "assets/images/covers/oneheart.jpg" },
+  { "title": "GOTH", "artist": "Sidewalks and skeletons", "src": "assets/audio/diary-songs/goth.mp3", "cover": "assets/images/covers/sidewalks-and-skeletons.jpg" },
+  { "title": "Clouds", "artist": "PASTEL GOTH", "src": "assets/audio/diary-songs/clouds.mp3", "cover": "assets/images/covers/pastel-ghost.jpg" },
+  { "title": "After dark", "artist": "Mr.Kitty", "src": "assets/audio/diary-songs/after-dark.mp3", "cover": "assets/images/covers/kitty.jpg" },
+  { "title": "The ghost", "artist": "Trevor something", "src": "assets/audio/diary-songs/the-ghost.mp3", "cover": "assets/images/covers/trevorr-something.jpg" },
+  { "title": "Minecraft", "artist": "C418", "src": "assets/audio/diary-songs/minecraft.mp3", "cover": "assets/images/covers/c418.png" },
+  { "title": "Key", "artist": "C418", "src": "assets/audio/diary-songs/key.mp3", "cover": "assets/images/covers/c418.png" },
+  { "title": "Mice on Venus", "artist": "C418", "src": "assets/audio/diary-songs/mice-on-venus.mp3", "cover": "assets/images/covers/c418.png" },
+  { "title": "Subwoofer lullaby", "artist": "C418", "src": "assets/audio/diary-songs/subwoofer-lullaby.mp3", "cover": "assets/images/covers/c418.png" }
+]

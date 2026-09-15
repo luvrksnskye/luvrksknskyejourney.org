@@ -23,10 +23,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skye's Diary</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/icons/buttons/favicon.png">
-    <link rel="stylesheet" href="css/diary.css?v=3">
-    <link rel="stylesheet" href="css/diary-music-player.css">
+    <link rel="stylesheet" href="css/diary.css?v=5">
+    <link rel="stylesheet" href="css/diary-music-player.css?v=5">
     <link rel="stylesheet" href="css/clock-timer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
 
 <link rel="stylesheet" href="/assets/css/stars.css">
 </head>
@@ -148,65 +147,49 @@
         </div>
     </div>
     <div id="digital-clock"></div>
-    <div id="app-cover">
-        <div id="bg-artwork"></div>
-        <div id="bg-layer"></div>
-        <div id="player">
-            <div id="player-track">
-                <div id="album-name"></div>
-                <div id="track-name"></div>
-                <div id="track-time">
-                    <div id="current-time">00:00</div>
-                    <div id="track-length">00:00</div>
-                </div>
-                <div id="s-area">
-                    <div id="ins-time"></div>
-                    <div id="s-hover"></div>
-                    <div id="seek-bar"></div>
-                </div>
+    <aside class="deck" id="diaryDeck" data-state="paused" aria-label="Diary music player">
+        <button type="button" class="deck-tab" id="deckTab" aria-controls="deckPanel" aria-expanded="false" aria-label="Open music player">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+            <span class="deck-tab-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        </button>
+        <div class="deck-panel" id="deckPanel">
+            <div class="deck-head">
+                <span class="deck-label" id="deckLabel">paused</span>
+                <span class="deck-index" id="deckIndex">01 / 17</span>
             </div>
-            <div id="player-content">
-                <div id="album-art">
-                    <img src="assets/images/covers/ww.png" class="active" id="_1">
-                    <img src="assets/images/covers/whitepine.png" class="active" id="_2">
-                    <img src="assets/images/covers/hallow.jpg" class="active" id="_3">
-                    <img src="assets/images/covers/electronic-gems.jpg"class="active" id="_4">
-                    <img src="assets/images/covers/voj.jpg" class="active" id="_5">
-                    <img src="assets/images/covers/offline.jpg" class="active" id="_6">
-                    <img src="assets/images/covers/thenian.jpg" class="active" id="_7">
-                    <img src="assets/images/covers/nectry.jpg" class="active" id="_8">
-                    <img src="assets/images/covers/oneheart.jpg" class="active" id="_9">
-                    <img src="assets/images/covers/sidewalks-and-skeletons.jpg" class="active" id="_10">
-                    <img src="assets/images/covers/pastel-ghost.jpg" class="active" id="_11">
-                    <img src="assets/images/covers/kitty.jpg" class="active" id="_12">
-                    <img src="assets/images/covers/c418.png" class="active" id="_13">
-                    <img src="assets/images/covers/c418.png" class="active" id="_14">
-                    <img src="assets/images/covers/c418.png" class="active" id="_15">
-                    <img src="assets/images/covers/c418.png" class="active" id="_16">
-                    <div id="buffer-box">Loading...</div>
-                </div>
-                <div id="player-controls">
-                    <div class="control">
-                        <div class="button" id="play-previous">
-                            <i class="fas fa-backward"></i>
-                        </div>
-                    </div>
-                    <div class="control">
-                        <div class="button" id="play-pause-button">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="control">
-                        <div class="button" id="play-next">
-                            <i class="fas fa-forward"></i>
-                        </div>
-                    </div>
-                </div>
+            <div class="deck-now">
+                <span class="deck-cover"><img id="deckCover" alt=""></span>
+                <span class="deck-text">
+                    <span class="deck-title" id="deckTitle">&nbsp;</span>
+                    <span class="deck-artist" id="deckArtist">&nbsp;</span>
+                </span>
             </div>
+            <div class="deck-rail" id="deckRail" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="00:00">
+                <span class="deck-rail-fill"></span>
+                <span class="deck-rail-head"></span>
+                <span class="deck-rail-tag" id="deckRailTag">00:00</span>
+            </div>
+            <div class="deck-times">
+                <span id="deckCurrent">00:00</span>
+                <span id="deckLength">00:00</span>
+            </div>
+            <div class="deck-controls">
+                <button type="button" class="deck-btn" id="deckPrev" aria-label="Previous song">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5 9 12l10 7z"/><path d="M5 5v14"/></svg>
+                </button>
+                <button type="button" class="deck-btn deck-play" id="deckPlay" aria-label="Play">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="deck-play-icon" d="M8 5v14l11-7z"/><path class="deck-pause-icon" d="M8 5v14M16 5v14"/></svg>
+                </button>
+                <button type="button" class="deck-btn" id="deckNext" aria-label="Next song">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 10 7-10 7z"/><path d="M19 5v14"/></svg>
+                </button>
+            </div>
+            <ol class="deck-list" id="deckList" aria-label="Songs"></ol>
         </div>
-    </div>
+    </aside>
+    <div class="deck-overlay" id="deckOverlay"></div>
     <div class="corner-icon">
-         <a href="../../home/index.html"> <img src="/assets/images/icons/buttons/room-icon-entryway.png" width="130" height="90" alt="Corner Icon"></a>
+         <a href="../../home/index.html"> <img src="/assets/images/icons/buttons/room-icon-entryway.png" width="100" height="90" alt="Corner Icon"></a>
     </div>
  <!-- Message :) -->
  <div id="messageOverlay" class="message-overlay">
@@ -286,11 +269,13 @@
     <script src="js/index.js"></script>
     <div class="stars"></div>
 
-        <!-- Day and night mode :3 -->
+        <!-- Day and night mode-->
  <script type="module" src="js/day-night.js?v=1"></script>
  <script type="module" src="js/clock-timer.js?v=3"></script>
- <!-- Music player forr the diary :3 -->
-<script src="js/diary-music-player.js"></script>
+ <!-- Music player forr the diary -->
+<script type="module" src="js/diary-music-player.js?v=3"></script>
 
 
 <script type="module" src="/assets/js/stars.js"></script>
+</body>
+</html>
