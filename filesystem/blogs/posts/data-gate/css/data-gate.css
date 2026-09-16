@@ -1620,6 +1620,25 @@ html:has(.dg) {
   margin: -18px 0 0 -40px;
 }
 
+.dg-starmap-label.is-theta {
+  margin: -12px 0 0 -4px;
+  font-family: var(--dg-mark);
+  font-size: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-warm);
+}
+
+.dg-starmap-label.is-formula {
+  margin: 6px 0 0 -90px;
+  font-family: var(--dg-mark);
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--ink-cool);
+}
+
 .dg-artwork {
   display: block;
   width: 100%;
