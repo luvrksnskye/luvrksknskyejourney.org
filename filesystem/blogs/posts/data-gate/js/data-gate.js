@@ -8,7 +8,7 @@ const MODULES = {
   fold: () => import('./lightcurve.js?v=4').then((m) => ({ mount: m.mountFold })),
   sonify: () => import('./sonify.js?v=3'),
   topology: () => import('./topology.js?v=3'),
-  starmap: () => import('./starmap.js?v=2'),
+  starmap: () => import('./starmap.js?v=5'),
   periodogram: () => import('./periodogram.js?v=4')
 };
 

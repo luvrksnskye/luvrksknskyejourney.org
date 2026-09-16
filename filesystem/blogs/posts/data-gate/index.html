@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="/assets/css/scale.css">
   <link rel="stylesheet" href="/assets/css/fonts.css">
   <link rel="stylesheet" href="/assets/css/nav-bar.css">
-  <link rel="stylesheet" href="css/data-gate.css?v=13">
+  <link rel="stylesheet" href="css/data-gate.css?v=15">
 </head>
 <body class="dg">
 
@@ -352,18 +352,18 @@
 
         <h3>Dónde están de verdad</h3>
         <p>Kepler miró siempre el mismo trozo de cielo, un parche pequeño entre el Cisne y la Lira. Visto desde aquí parece plano, como estrellas pegadas a un techo. Pero cada una está a una distancia distinta, y algunas están miles de veces más lejos que otras.</p>
-        <p>Estimé la distancia de cada estrella con candidatos a planeta y las puse en su sitio. Toca el botón y mira lo que pasa: el parche plano se estira y se vuelve un cono larguísimo que se aleja de nosotros. Ese punto pequeño con su anillo somos nosotros.</p>
+        <p>Estimé la distancia de cada estrella con candidatos a planeta y las puse en su sitio. Quédate un momento aquí abajo y mira lo que pasa. Primero lo ves como lo veía Kepler: un parche plano partido en cuadritos, que son los 21 módulos de su cámara. Después ese parche empieza a estirarse hacia el fondo hasta volverse un cono enorme que se abre lejos de nosotros. Parecía plano solo porque lo estábamos mirando de frente, justo desde la punta.</p>
 
-        <figure class="dg-figure is-wide" data-module="starmap">
-          <div class="dg-frame">
-            <p class="dg-frame-tag">el campo de kepler, en tres dimensiones</p>
-            <div class="dg-starmap" data-role="host" role="img" aria-label="Mapa tridimensional de las estrellas del campo de Kepler que se puede girar"></div>
-            <div class="dg-controls">
-              <button type="button" class="dg-btn" data-role="morph" aria-pressed="false">ver dónde están de verdad</button>
-              <span class="dg-readout" data-role="readout">cargando el cielo…</span>
-            </div>
+        <figure class="dg-figure is-bleed" data-module="starmap">
+          <p class="dg-bleed-tag">el campo de kepler, en tres dimensiones</p>
+          <div class="dg-starmap" data-role="host" role="img" aria-label="Mapa tridimensional de las estrellas del campo de Kepler: un cono de estrellas que se abre desde la Tierra y se puede girar arrastrando">
+            <div class="dg-starmap-labels" data-role="labels" aria-hidden="true"></div>
           </div>
-          <figcaption>El color viene de la temperatura de cada estrella: naranja las frías, azul las calientes. La distancia es una estimación hecha con su tamaño y su temperatura, no una medida exacta, así que la profundidad es aproximada. Arrástralo para girarlo.</figcaption>
+          <div class="dg-controls dg-bleed-copy">
+            <button type="button" class="dg-btn" data-role="morph" aria-pressed="false">ver dónde están de verdad</button>
+            <span class="dg-readout" data-role="readout">cargando el cielo…</span>
+          </div>
+          <figcaption class="dg-bleed-copy">El color viene de la temperatura de cada estrella: naranja las frías, azul las calientes. Los destellos que viajan hacia nosotros representan la luz que tarda miles de años en llegar. Para que quepa en la pantalla abrí el ángulo del cono unas dos veces y media y comprimí las distancias, y cada distancia es una estimación hecha con el tamaño y la temperatura de la estrella, no una medida exacta. Arrástralo para girarlo.</figcaption>
         </figure>
       </div>
     </section>
@@ -844,6 +844,6 @@
   </div>
 
   <script src="/assets/js/nav-bar.js" defer></script>
-  <script type="module" src="js/data-gate.js?v=14"></script>
+  <script type="module" src="js/data-gate.js?v=17"></script>
 </body>
 </html>
