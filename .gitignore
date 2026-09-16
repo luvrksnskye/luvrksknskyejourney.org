@@ -33,3 +33,10 @@ node_modules/
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# Videos pesados: los originales 4K se quedan aqui, la web usa las copias ligeras
+assets/video/loopwallpapers/
+filesystem/blogs/posts/data-gate/assets/video/datagate.mp4
+
+# Material de referencia de las entradas
+filesystem/blogs/posts/*/references/

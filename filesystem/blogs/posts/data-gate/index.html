@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5PHHOhQDqN/yjDMdk3eJ6ZsPnqpp2UPXbS0sPhr377s=' https://www.htmlcommentbox.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.htmlcommentbox.com; img-src 'self' data: https://www.htmlcommentbox.com https://www.gravatar.com https://secure.gravatar.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; media-src 'self'; connect-src 'self' https://www.htmlcommentbox.com; frame-src https://www.htmlcommentbox.com; form-action 'self' https://www.htmlcommentbox.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>¿Cabe el universo en un cubo? · DATA GATE de Ouchhh · Skye Journey</title>
+  <meta name="description" content="DATA GATE de Ouchhh explicado con calma y en español: la escultura de Nanjing que convirtió la luz medida por el telescopio Kepler en arte con inteligencia artificial.">
+  <link rel="icon" type="image/png" href="/assets/images/icons/buttons/favicon.png">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/scale.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/nav-bar.css">
+  <link rel="stylesheet" href="css/data-gate.css?v=12">
+</head>
+<body class="dg">
+
+  <div class="video-background" aria-hidden="true">
+    <video id="dgVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/background-poster.jpg" disablepictureinpicture disableremoteplayback>
+      <source src="assets/video/background-loop.mp4" type="video/mp4">
+    </video>
+  </div>
+
+
+  <div class="dg-boot" id="dgBoot" aria-hidden="true">
+    <img src="assets/images/gate-mark.svg" alt="" width="56" height="56">
+    <p class="dg-boot-line">abriendo la puerta</p>
+    <span class="dg-boot-bar"></span>
+  </div>
+
+  <header class="dg-hud" aria-label="Estado de lectura">
+    <a class="dg-hud-brand" href="/filesystem/blogs/index.html">
+      <img src="assets/images/gate-mark.svg" alt="" width="22" height="22">
+      <span>skye journey / blog</span>
+    </a>
+    <span class="dg-hud-section" id="dgHudSection" aria-live="polite">inicio</span>
+    <span class="dg-hud-progress" aria-hidden="true"><span class="dg-hud-bar" id="dgProgress"></span><b id="dgProgressText">000</b></span>
+    <span class="dg-hud-clock"><i class="dg-rec" aria-hidden="true"></i>nanjing <time id="dgClock">--:--:--</time></span>
+  </header>
+
+  <nav class="dg-rail" id="dgRail" aria-label="Índice de la entrada">
+    <button type="button" class="dg-rail-toggle" id="dgRailToggle" aria-expanded="false" aria-controls="dgRailList">índice</button>
+    <ol id="dgRailList">
+      <li><a href="#inicio"><b>00</b>Inicio</a></li>
+      <li><a href="#por-que"><b>01</b>Por qué escribo esto</a></li>
+      <li><a href="#pregunta"><b>02</b>La pregunta</a></li>
+      <li><a href="#ouchhh"><b>03</b>Ouchhh</a></li>
+      <li><a href="#la-obra"><b>04</b>La obra</a></li>
+      <li><a href="#kepler"><b>05</b>Kepler, sin miedo</a></li>
+      <li><a href="#mapa"><b>06</b>El mapa del proceso</a></li>
+      <li><a href="#autoencoder"><b>07</b>Muchas columnas, un cubo</a></li>
+      <li><a href="#rnn"><b>08</b>La red que no funcionó</a></li>
+      <li><a href="#gan"><b>09</b>Gráficas que aprenden a mentir</a></li>
+      <li><a href="#topologia"><b>10</b>Montañas hechas de tiempo</a></li>
+      <li><a href="#cielos"><b>11</b>Cielos inventados</a></li>
+      <li><a href="#taller"><b>12</b>El taller</a></li>
+      <li><a href="#arte-no-deteccion"><b>13</b>Arte, no detección</a></li>
+      <li><a href="#no-publicado"><b>14</b>Lo que no se sabe</a></li>
+      <li><a href="#creditos"><b>15</b>Créditos y fuentes</a></li>
+      <li><a href="#comentarios"><b>16</b>Comentarios</a></li>
+    </ol>
+  </nav>
+
+  <main class="dg-main">
+
+    <section class="dg-hero" id="inicio" data-section="inicio">
+      <div class="dg-hero-copy">
+        <p class="dg-kicker">una entrada sobre DATA GATE, de Ouchhh</p>
+        <h1 class="dg-title">¿Cabe el universo en un cubo?</h1>
+        <p class="dg-lede">Nueve años midiendo la luz de las estrellas, una inteligencia artificial y un cubo de quince toneladas en Nanjing.</p>
+        <ul class="dg-meta">
+          <li><span>publicado</span>15 de septiembre, 2026</li>
+          <li><span>lectura</span>unos 30 minutos</li>
+        </ul>
+      </div>
+
+      <figure class="dg-hero-stage">
+        <div class="dg-cube is-hero" data-module="cube" data-mode="hero" role="img" aria-label="Un cubo transparente que gira con miles de puntos de luz; cada punto es un objeto observado por el telescopio Kepler"></div>
+        <div class="dg-hero-hud" aria-hidden="true">
+          <span class="dg-hud-tag is-tl">KOI · 9&#8239;564</span>
+          <span class="dg-hud-tag is-tr">LATENTE · 3D</span>
+          <span class="dg-hud-tag is-bl">ERROR · 0.124</span>
+          <span class="dg-hud-tag is-br">DATOS · NASA</span>
+        </div>
+        <figcaption>Esto no es DATA GATE. Es mi pequeño ejemplo: 9&#8239;564 objetos que Kepler vigiló, ordenados por una red neuronal que entrené para esta entrada. Las líneas azules unen los planetas de Kepler-90 que están en la tabla. <a href="#autoencoder">Abajo cuento un poco de cómo.</a></figcaption>
+      </figure>
+
+      <div class="dg-stats">
+        <div class="dg-stat"><b data-count="530506">0</b><span>estrellas observadas</span></div>
+        <div class="dg-stat"><b data-count="2662">0</b><span>planetas descubiertos</span></div>
+        <div class="dg-stat"><b data-count="61">0</b><span>supernovas</span></div>
+        <div class="dg-stat"><b data-count="9.6" data-decimals="1">0</b><span>años mirando</span></div>
+      </div>
+      <p class="dg-hero-credit">DATA GATE es una obra de Ouchhh New Media Studio. Las cifras de la misión son de NASA.</p>
+    </section>
+
+    <section class="dg-section" id="por-que" data-section="por qué escribo esto">
+      <header class="dg-head">
+        <span class="dg-num">01</span>
+        <h2>Por qué escribo esto</h2>
+      </header>
+      <div class="dg-body">
+        <p>Holi. Esta entrada va en español porque busqué y busqué, y casi no hay nada sobre DATA GATE en nuestro idioma. Un par de notas de prensa mal traducidas, las mismas tres frases copiadas en todos lados, y ya está.</p>
+        <p>Y me dio pena, honestamente. Esta obra junta tres cosas que quiero mucho: las estrellas (las estudio), el 3D (lo hago) y el código (lo rompo todos los días).</p>
+        <p>Así que escribí lo que me hubiera gustado encontrar. Es largo, pero voy despacio. Si nunca oíste hablar de una red neuronal, está bien, empezamos desde cero. Y si ya abres Houdini sin miedo, también hay algo para ti.</p>
+        <p>Antes de nada, aquí tienes las palabras que vas a leer, explicadas en corto. Si alguna se te olvida, vuelve aquí y sigue leyendo con calma.</p>
+
+        <div class="dg-paper">
+          <p class="dg-paper-head">las palabras, en simple</p>
+          <dl class="dg-leaders">
+            <div><dt>Exoplaneta</dt><dd>Un planeta que da vueltas alrededor de otra estrella, no de nuestro Sol.</dd></div>
+            <div><dt>Tránsito</dt><dd>El momento en que un planeta pasa por delante de su estrella y nos tapa un poquito su luz.</dd></div>
+            <div><dt>Curva de luz</dt><dd>La gráfica de cuánto brilla una estrella a lo largo del tiempo. Es casi todo lo que midió Kepler.</dd></div>
+            <div><dt>Objeto de interés</dt><dd>Una señal sospechosa de ser un planeta. Puede confirmarse o quedar en falsa alarma. La lista de todas se llama tabla KOI.</dd></div>
+            <div><dt>Falso positivo</dt><dd>Una señal que parecía un planeta y resultó ser otra cosa, como dos estrellas que se eclipsan entre ellas.</dd></div>
+            <div><dt>Red neuronal</dt><dd>Un programa que aprende de ejemplos en vez de seguir reglas escritas a mano, ajustando miles de numeritos hasta acertar.</dd></div>
+            <div><dt>Dimensiones</dt><dd>Cada dato que tienes de algo es una dimensión. Con tamaño, temperatura y periodo ya vas por tres.</dd></div>
+            <div><dt>Autoencoder</dt><dd>Una red que aprende a resumir algo en pocos números y luego a reconstruirlo. El resumen es lo que nos interesa.</dd></div>
+            <div><dt>Espacio latente</dt><dd>El mapa que forma ese resumen. Las cosas parecidas caen cerca, sin que nadie le diga qué es cada una.</dd></div>
+            <div><dt>GAN</dt><dd>Dos redes que compiten: una inventa imágenes y la otra intenta descubrir cuáles son falsas.</dd></div>
+            <div><dt>Ruido Perlin</dt><dd>Un azar suave, con colinas y valles, que sirve para inventar nubes, humo y montañas creíbles.</dd></div>
+            <div><dt>Sonificación</dt><dd>Convertir datos en sonido, igual que una gráfica los convierte en dibujo.</dd></div>
+            <div><dt>Escultura de datos</dt><dd>Una obra cuya forma, color y movimiento salen de datos reales, no de la imaginación.</dd></div>
+          </dl>
+        </div>
+
+        <p>Una cosa importante antes de seguir: la obra es de <strong>Ouchhh</strong>. Yo solo la miro de cerca, con mucho cariño, para entenderla. Y cuando algo no está confirmado, te lo digo. Prefiero un "no sé" antes que inventar.</p>
+      </div>
+    </section>
+
+    <section class="dg-section" id="pregunta" data-section="la pregunta">
+      <header class="dg-head">
+        <span class="dg-num">02</span>
+        <h2>La pregunta</h2>
+      </header>
+      <div class="dg-body">
+        <p class="dg-voice">"Can you fit the whole universe into just one simple cube?"</p>
+        <p>Así presenta Ouchhh la obra. ¿Se puede meter el universo entero en un simple cubo?</p>
+        <p>Cuando la leí me acordé de "El Aleph", el cuento de Borges. Hay un puntito en un sótano desde donde se ven todos los lugares del mundo a la vez. DATA GATE se siente un poco así: algo pequeño que intenta guardar algo que no cabe en ningún lado.</p>
+        <p>La respuesta honesta es que no, el universo no cabe. Pero su huella sí. La luz que un telescopio midió durante años, ordenada y resumida, sí puede vivir dentro de un cubo. Es como un modelo low poly: no es el personaje, pero conserva su silueta. Y a veces la silueta dice más.</p>
+        <aside class="dg-aside">
+          <p class="dg-aside-title">si te gustan los detalles</p>
+          <p>Hay una lectura casi literal. Cuando una red neuronal resume cada fila de una tabla en tres números y esos números se acomodan entre -1 y 1, cada fila termina viviendo dentro de un cubo. El cubo de arriba es exactamente eso. Sí, la información cabe, siempre que aceptemos perder un poquito al comprimirla.</p>
+        </aside>
+        <p>Guárdate esa idea de perder un poco para poder ver. Es el corazón de toda la obra.</p>
+      </div>
+    </section>
+
+    <section class="dg-section" id="ouchhh" data-section="ouchhh">
+      <header class="dg-head">
+        <span class="dg-num">03</span>
+        <h2>Ouchhh</h2>
+      </header>
+      <div class="dg-body">
+        <p>Ouchhh es un estudio de Estambul. Lo fundó <strong>Ferdi Alici</strong> en 2011 y lo dirige junto a <strong>Eylül Duranağaç Alıcı</strong>. Tienen socios en Los Ángeles, Viena, Barcelona, París, Londres y Berlín, y más de 75 obras públicas repartidas por todos los continentes, con gente como NASA, CERN, Google o Ars Electronica.</p>
+        <p>Su lema lo explica mejor que yo: <em>los datos como pintura, el algoritmo como pincel</em>. No pintan con óleo, pintan con tablas. Y el pincel es un programa que decide cómo se mueve cada partícula.</p>
+
+        <div class="dg-paper">
+          <p class="dg-paper-head">quiénes son</p>
+          <dl class="dg-leaders">
+            <div><dt>Ferdi Alici</dt><dd>cofundador y director creativo. Nació en Esmirna en 1981 y estudió diseño de comunicación visual en Istanbul Bilgi University.</dd></div>
+            <div><dt>Eylül Duranağaç Alıcı</dt><dd>codirectora creativa, investigadora y artista. Hizo su doctorado en Arte y Diseño en Yıldız Technical University, donde también enseña.</dd></div>
+            <div><dt>El equipo</dt><dd>ingenieras e ingenieros, gente de la academia, programadores de IA, científicos de datos, arquitectos, diseñadores y animadores.</dd></div>
+          </dl>
+        </div>
+
+        <p>Antes de DATA GATE hicieron <strong>POETIC AI</strong> en París, en 2018. Le dieron a una red neuronal unos 20 millones de líneas escritas por científicos que cambiaron la historia, las ordenaron por parecido y lo proyectaron todo con 136 proyectores dentro de una antigua fundición.</p>
+        <p>Te lo cuento porque ahí ya estaban las dos ideas que después llevaron al cielo: resumir mucha información y generar cosas nuevas a partir de ella.</p>
+
+        <blockquote class="dg-quote">
+          <p>"AI is like a baby, so we have to feed it properly."</p>
+          <footer>Ferdi Alici, en una entrevista con Forward Festival. <span>La IA es como un bebé, hay que alimentarla bien.</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="dg-section" id="la-obra" data-section="la obra">
+      <header class="dg-head">
+        <span class="dg-num">04</span>
+        <h2>La obra</h2>
+      </header>
+      <div class="dg-body">
+        <p>DATA GATE es un cubo gigante cubierto de pantallas LED por todos sus lados. Vive, de forma permanente, en Nanjing, en el este de China. Ouchhh la llama la primera escultura de datos del mundo hecha con inteligencia artificial y datos astronómicos de NASA.</p>
+
+        <div class="dg-paper">
+          <p class="dg-paper-head">la ficha, con lo que pude confirmar</p>
+          <dl class="dg-leaders">
+            <div><dt>Nombre</dt><dd>DATA GATE (en chino 数据门 o 数据之门)</dd></div>
+            <div><dt>Estudio</dt><dd>Ouchhh</dd></div>
+            <div><dt>Dónde</dt><dd>Nanjing Jiangbei New Area, Jiangsu, China</dd></div>
+            <div><dt>Encargo</dt><dd>Nanjing Jiangbei New Area</dd></div>
+            <div><dt>Cuándo</dt><dd>hecha en 2018, inaugurada el 30 de enero de 2019</dd></div>
+            <div><dt>Qué es</dt><dd>una escultura LED de 360 grados</dd></div>
+            <div><dt>Cuánto pesa</dt><dd>15 toneladas</dd></div>
+            <div><dt>Cuánto mide</dt><dd>unos 12 metros de alto, según China Daily</dd></div>
+            <div><dt>Qué muestra</dt><dd>20 animaciones de datos y 10 de transición, en orden aleatorio, según la prensa china</dd></div>
+            <div><dt>Los datos</dt><dd>la misión Kepler de NASA</dd></div>
+            <div><dt>Ciencia</dt><dd>con la guía de Dawn Gelino, del NASA Exoplanet Science Institute</dd></div>
+            <div><dt>Sonido</dt><dd>Audiofil</dd></div>
+            <div><dt>En China</dt><dd>junto a TRU-M</dd></div>
+          </dl>
+        </div>
+
+        <h3>Forma, luz y espacio</h3>
+        <p>Ouchhh divide la obra en tres partes. La <strong>forma</strong> es el objeto: el cubo de acero y luz. La <strong>luz</strong> es lo que se ve en las pantallas, y ahí vive la inteligencia artificial. El <strong>espacio</strong> es la relación con la gente.</p>
+        <p>Y esa relación tiene algo muy bonito. Cuando la inauguraron, cualquier persona podía subir una foto o un mensaje a una página web. Todo eso formaba una especie de conciencia colectiva que se veía en Nanjing y se enviaba al espacio convertido en señales. Una puerta, de verdad, entre nosotros y los planetas que Kepler encontró. No pude comprobar si esa página sigue viva, así que tómalo como algo del estreno.</p>
+
+        <h3>Cómo llegó ahí</h3>
+        <p>Se presentó dentro de <strong>Cosmic AI (宇宙无际)</strong>, la primera exposición de Ouchhh en Asia, en enero de 2019. La prensa china cuenta que también fue un homenaje a Kepler, que NASA había retirado pocos meses antes. Ganó, entre otros, el MUSE Creative Awards 2019, dos AVIXA Awards en 2020 y el oro del Asia Design Prize 2020.</p>
+
+        <aside class="dg-aside">
+          <p class="dg-aside-title">sobre las traducciones</p>
+          <p>Leí fuentes en inglés, turco y chino. En chino aparece como 数据门 (puerta de datos) y 数据之门 (la puerta de los datos); ese 之 solo le da un aire más literario. Hay una frase china que dice que transformaron el tamaño, el color y el material de cada "partícula planetaria". Suena a que cada punto de luz era un planeta, pero no encontré ningún documento técnico que lo confirme, así que no lo doy por hecho.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dg-section" id="kepler" data-section="kepler, sin miedo">
+      <header class="dg-head">
+        <span class="dg-num">05</span>
+        <h2>Kepler, sin miedo</h2>
+      </header>
+      <div class="dg-body">
+        <p>Sal al patio esta noche y elige una estrella cualquiera. Es un punto. Solo eso. Si tuviera planetas alrededor no lo notarías, y tampoco lo notaría el telescopio más grande del mundo: un planeta no tiene luz propia y está pegadísimo a su estrella, que brilla mil millones de veces más. Es como intentar ver una mosca parada en un faro, desde otra ciudad.</p>
+        <p>Durante siglos eso pareció el final del asunto. Si no se puede ver, no se puede saber. Hasta que alguien se dio cuenta de que no hacía falta ver nada. Bastaba con <em>contar la luz</em>.</p>
+
+        <h3>Primero, el señor Kepler</h3>
+        <p>El telescopio se llama así por <strong>Johannes Kepler</strong>, un alemán que a principios del siglo XVII se pasó años peleando con las mediciones de la órbita de Marte. Todos daban por hecho que los planetas se movían en círculos perfectos, porque el círculo era la figura noble, la que le correspondía al cielo. A Kepler los números no le cuadraban por un pelito, ocho minutos de arco, una diferencia ridícula. Cualquiera la habría redondeado. Él no.</p>
+        <p>De esa cabezonería salieron sus tres leyes: los planetas van en elipses, no en círculos; se mueven más rápido cuando pasan cerca del Sol; y hay una relación exacta entre lo que tarda un planeta en dar la vuelta y lo lejos que está. Esa tercera ley es la que usamos hoy, cuatrocientos años después, para saber a qué distancia está un planeta de otra estrella con solo cronometrar cada cuánto pasa. Kepler también escribió que las estrellas podían ser otros soles con sus propios mundos. No tenía cómo comprobarlo. Le pusieron su nombre al telescopio que lo comprobó.</p>
+
+        <h3>Y ahora, el telescopio</h3>
+        <p>La idea que lo hizo posible es sencilla. Imagina una lámpara lejana y una polilla que pasa por delante. No ves la polilla, pero la luz baja un poquito justo cuando pasa. Si baja igual cada cierto tiempo, algo está dando vueltas por ahí. A eso se le llama <strong>tránsito</strong>, y a la gráfica del brillo a lo largo del tiempo, <strong>curva de luz</strong>.</p>
+        <p>El problema es que esas bajadas son minúsculas. Si un extraterrestre mirara nuestro Sol desde lejos y la Tierra le pasara por delante, vería caer el brillo un 0.008%. Ocho partes en cien mil. Para medir eso hay que ser absurdamente estable, y ningún telescopio en el suelo lo es: la atmósfera tiembla y se come la señal. Por eso Kepler se fue al espacio en 2009, se apartó de la Tierra y se quedó mirando fijamente el mismo trozo de cielo durante cuatro años seguidos, midiendo el brillo de unas 150&#8239;000 estrellas cada media hora, sin parpadear.</p>
+        <p>No tomó ni una sola foto bonita. Su trabajo entero fue contar luz. Y con eso encontró miles de mundos.</p>
+
+        <figure class="dg-figure">
+          <div class="dg-frame">
+            <svg class="dg-diagram" viewBox="0 0 720 260" role="img" aria-labelledby="transitTitle">
+              <title id="transitTitle">Un planeta pasa frente a su estrella y la curva de luz baja mientras pasa</title>
+              <circle cx="150" cy="120" r="78" class="dg-svg-star"/>
+              <circle cx="150" cy="120" r="94" class="dg-svg-thin"/>
+              <circle cx="120" cy="132" r="13" class="dg-svg-planet"/>
+              <path d="M40 132h260" class="dg-svg-dash"/>
+              <path d="M340 60h370" class="dg-svg-thin"/>
+              <path d="M340 70H500c12 0 16 38 30 38h40c14 0 18-38 30-38h110" class="dg-svg-line"/>
+              <path d="M530 70v38" class="dg-svg-dash"/>
+              <text x="340" y="140" class="dg-svg-label">brillo</text>
+              <text x="660" y="140" class="dg-svg-label">tiempo</text>
+              <text x="40" y="236" class="dg-svg-label">la Tierra frente al Sol: 0.008% · Júpiter: 1%</text>
+            </svg>
+          </div>
+          <figcaption>Cuanto más grande es el planeta comparado con su estrella, más baja la luz.</figcaption>
+        </figure>
+
+        <aside class="dg-aside">
+          <p class="dg-aside-title">si te gustan los detalles</p>
+          <p>Kepler despegó en marzo de 2009 con una cámara de 95 megapíxeles repartidos en 42 sensores, mirando una zona entre las constelaciones del Cisne y la Lira. En 2013 se le rompió una segunda rueda de orientación y la misión se reinventó como K2. Se apagó el 30 de octubre de 2018, sin combustible. Según NASA: 9.6 años en órbita, 530&#8239;506 estrellas observadas, 2&#8239;662 planetas descubiertos y 61 supernovas.</p>
+          <p>Los datos son públicos. Viven en MAST, el archivo del Space Telescope Science Institute, en archivos FITS, con una medición cada 29.4 minutos. Traen dos versiones del brillo: <code>SAP_FLUX</code>, cruda, y <code>PDCSAP_FLUX</code>, con los errores del instrumento corregidos. Y el NASA Exoplanet Archive publica una tabla con más de cien columnas sobre cada candidato a planeta.</p>
+        </aside>
+
+        <p>Esto lo descargué yo misma para esta entrada. Es la curva real de <strong>Kepler-90</strong>, una estrella con ocho planetas, igual que nuestro Sistema Solar. Arrastra la ventanita de arriba para pasear por cuatro años de luz. Las bajadas hondas que vas a ver de vez en cuando son sus planetas gigantes.</p>
+
+        <figure class="dg-figure is-wide" data-module="kepler90">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">kepler-90 · cuatro años de luz</p>
+            <canvas class="dg-canvas is-overview" data-role="overview" tabindex="0" aria-label="Curva de luz completa de Kepler-90. Usa las flechas para mover la ventana"></canvas>
+            <canvas class="dg-canvas is-detail" data-role="detail" aria-hidden="true"></canvas>
+            <p class="dg-readout" data-role="readout">cargando la curva de luz…</p>
+          </div>
+          <figcaption>Cada punto es una medición real del brillo. Quité las mediciones con problemas de calidad. Los huecos son meses en los que la estrella cayó sobre una parte de la cámara que dejó de funcionar.</figcaption>
+        </figure>
+
+        <p>Ahora un truco de astrónomas. Si sabes cada cuánto pasa un planeta, puedes doblar la curva sobre ese tiempo, como doblar una tira de papel, y todas las bajadas quedan una encima de otra. Este es <strong>Kepler-7 b</strong>, un planeta gigante y caliente que da la vuelta a su estrella en casi cinco días. Mueve el control y mira cómo la bajada se vuelve nítida justo en el número correcto.</p>
+
+        <figure class="dg-figure is-wide" data-module="fold">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">kepler-7 b · doblando el tiempo</p>
+            <canvas class="dg-canvas is-fold" data-role="canvas" aria-label="Curva de luz de Kepler-7 doblada sobre su periodo"></canvas>
+            <div class="dg-controls">
+              <label class="dg-range">
+                <span>periodo</span>
+                <input type="range" data-role="period" min="4.84" max="4.93" step="0.0001" value="4.8700">
+                <output data-role="value">4.8700 d</output>
+              </label>
+              <button type="button" class="dg-btn" data-role="snap">usar el valor de NASA</button>
+            </div>
+            <p class="dg-readout" data-role="readout">cargando…</p>
+          </div>
+          <figcaption>Casi 60&#8239;000 mediciones de cuatro años. La línea azul es el promedio. El periodo publicado es 4.88549 días y la luz baja casi un 0.75%.</figcaption>
+        </figure>
+        <h3>Cómo se busca un planeta que nadie ha visto</h3>
+        <p>Doblar la curva funciona de maravilla cuando ya sabes cada cuánto pasa el planeta. Pero al principio nadie lo sabe. La estrella no viene con una etiqueta. Entonces, ¿cómo se encuentra el primero?</p>
+        <p>La respuesta es de una simpleza casi ofensiva: se prueban todos. Doblas la curva en un periodo cualquiera y preguntas si encaja un escalón. No encaja. Pruebas otro. Y otro. Y otros noventa mil. Cuando aciertas el periodo bueno, todas las bajadas se apilan en el mismo sitio y el escalón aparece de golpe. El método se llama <strong>búsqueda del escalón que mejor encaja</strong>, o BLS por sus siglas en inglés, y lo publicaron Kovács, Zucker y Mazeh en 2002. Es lo que usa la NASA.</p>
+        <p>Lo corrí de verdad para esta entrada. Escribí el buscador desde cero en Python y lo solté sobre las 44&#8239;744 mediciones reales de Kepler-90, probando 90&#8239;000 periodos entre 0.6 y 400 días. Tardó 102 segundos en mi computadora. Esto es lo que salió.</p>
+
+        <figure class="dg-figure is-wide" data-module="periodogram">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">noventa mil periodos, uno por uno</p>
+            <canvas class="dg-canvas is-search" data-role="canvas" aria-label="Gráfica de la fuerza de la señal para cada periodo probado en Kepler-90"></canvas>
+            <p class="dg-readout" data-role="readout">buscando…</p>
+          </div>
+          <figcaption>Cada punto de la línea es un periodo probado. Cuanto más alto, mejor encaja un escalón ahí. Las líneas punteadas marcan dónde están los planetas de verdad, según la NASA. Pasa el cursor para leer cualquier periodo.</figcaption>
+        </figure>
+
+        <p>Mira los dos picos gigantes: ahí están <strong>Kepler-90 g</strong> y <strong>Kepler-90 h</strong>, los dos planetas grandes del sistema, encontrados por un programa que no sabía nada de ellos. Pero fíjate también en los picos que no caen sobre ninguna línea punteada. Son <em>ecos</em>: si un planeta pasa cada 331 días, también encaja, a medias, si le preguntas por 165 días o por 110. La mitad y el tercio del periodo verdadero siempre suenan. Distinguir el planeta de su eco es parte del trabajo.</p>
+        <p>Y los planetas pequeños, los cinco que faltan, no aparecen. Sus bajadas son de unas 400 partes por millón y el ruido de cada medición es de 246. Están ahí, pero enterrados. Para sacarlos hay que hacer algo más: encontrar el grande, borrar sus bajadas de la curva y volver a buscar en lo que queda. Justo por eso el equipo de Google entrenó una red neuronal, y justo por eso el octavo planeta de esta estrella tardó tanto en aparecer.</p>
+
+        <h3>Buscar, borrar, repetir</h3>
+        <p>Así que lo intenté. Escribí una segunda versión que hace justo eso: busca el mejor tránsito, lo apunta, borra esas bajadas de la curva y vuelve a buscar en lo que queda. Ocho vueltas, nueve minutos de cálculo. Esto es lo que encontró, en orden.</p>
+
+        <div class="dg-paper">
+          <p class="dg-paper-head">ocho vueltas sobre la misma estrella</p>
+          <div class="dg-table-wrap">
+            <table class="dg-table">
+              <thead>
+                <tr><th scope="col">vuelta</th><th scope="col">periodo</th><th scope="col">bajada</th><th scope="col">qué resultó ser</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">1</th><td>110.55 d</td><td>1554 ppm</td><td>eco de Kepler-90 h</td></tr>
+                <tr><th scope="row">2</th><td>210.67 d</td><td>1930 ppm</td><td><strong>Kepler-90 g</strong></td></tr>
+                <tr><th scope="row">3</th><td>339.70 d</td><td>3711 ppm</td><td>fantasma</td></tr>
+                <tr><th scope="row">4</th><td>32.06 d</td><td>117 ppm</td><td>fantasma</td></tr>
+                <tr><th scope="row">5</th><td>31.78 d</td><td>106 ppm</td><td>eco de Kepler-90 f</td></tr>
+                <tr><th scope="row">6</th><td>69.46 d</td><td>139 ppm</td><td>eco de Kepler-90 g</td></tr>
+                <tr><th scope="row">7</th><td>68.42 d</td><td>98 ppm</td><td>fantasma</td></tr>
+                <tr><th scope="row">8</th><td>54.62 d</td><td>114 ppm</td><td>fantasma</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dg-paper-note">Comparado contra los ocho planetas publicados por la NASA. "Eco" es un múltiplo o una fracción del periodo verdadero. "Fantasma" es una señal que no corresponde a nada conocido.</p>
+        </div>
+
+        <p>Funciona tres veces y después se envenena solo. En la vuelta dos encuentra a Kepler-90 g clavado, y en la tres a un periodo de 339 días que es casi el de Kepler-90 h. A partir de ahí empieza a inventar. El motivo es sencillo y un poco triste: cada vez que borro un tránsito dejo un hueco en la curva, y con suficientes huecos el buscador acaba encontrando la forma de los huecos, no la de los planetas. Para la vuelta ocho ya había borrado 16&#8239;000 de las 44&#8239;744 mediciones.</p>
+        <p>Esto lo dejo tal cual, con el fracaso incluido, porque explica mejor que cualquier otra cosa por qué Shallue y Vanderburg entrenaron una red neuronal en 2018. No la usaron para tener un buscador más rápido. La usaron para tener un <em>criterio</em>: alguien que mire cada señal candidata y diga si eso parece un planeta o parece un hueco. Ese fue el paso que faltaba, y por eso el octavo planeta de esta estrella apareció nueve años después del lanzamiento.</p>
+
+        <h3>Dónde están de verdad</h3>
+        <p>Kepler miró siempre el mismo trozo de cielo, un parche pequeño entre el Cisne y la Lira. Visto desde aquí parece plano, como estrellas pegadas a un techo. Pero cada una está a una distancia distinta, y algunas están miles de veces más lejos que otras.</p>
+        <p>Estimé la distancia de cada estrella con candidatos a planeta y las puse en su sitio. Toca el botón y mira lo que pasa: el parche plano se estira y se vuelve un cono larguísimo que se aleja de nosotros. Ese punto pequeño con su anillo somos nosotros.</p>
+
+        <figure class="dg-figure is-wide" data-module="starmap">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">el campo de kepler, en tres dimensiones</p>
+            <div class="dg-starmap" data-role="host" role="img" aria-label="Mapa tridimensional de las estrellas del campo de Kepler que se puede girar"></div>
+            <div class="dg-controls">
+              <button type="button" class="dg-btn" data-role="morph" aria-pressed="false">ver dónde están de verdad</button>
+              <span class="dg-readout" data-role="readout">cargando el cielo…</span>
+            </div>
+          </div>
+          <figcaption>El color viene de la temperatura de cada estrella: naranja las frías, azul las calientes. La distancia es una estimación hecha con su tamaño y su temperatura, no una medida exacta, así que la profundidad es aproximada. Arrástralo para girarlo.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="dg-section" id="mapa" data-section="el mapa del proceso">
+      <header class="dg-head">
+        <span class="dg-num">06</span>
+        <h2>El mapa del proceso</h2>
+      </header>
+      <div class="dg-body">
+        <p>Ouchhh contó cómo trabajó y compartió animaciones y capturas de su proceso. Con eso armé este mapa. Tiene dos caminos: uno empieza en la <strong>tabla</strong> de planetas y otro en las <strong>curvas de luz</strong>. Los dos terminan en el cubo.</p>
+
+        <figure class="dg-figure is-wide">
+          <div class="dg-frame">
+            <svg class="dg-diagram dg-pipeline" viewBox="0 0 960 470" role="img" aria-labelledby="pipeTitle">
+              <title id="pipeTitle">Mapa del proceso de DATA GATE con dos caminos, la tabla y las curvas de luz, que terminan en la escultura</title>
+              <g class="dg-svg-node"><rect x="20" y="40" width="190" height="56"/><text x="36" y="64">DATOS DE NASA</text><text x="36" y="84" class="is-sub">tabla · curvas de luz</text></g>
+              <g class="dg-svg-node"><rect x="260" y="40" width="200" height="56"/><text x="276" y="64">LIMPIEZA</text><text x="276" y="84" class="is-sub">texto a número</text></g>
+              <g class="dg-svg-node"><rect x="510" y="40" width="200" height="56"/><text x="526" y="64">AUTOENCODER</text><text x="526" y="84" class="is-sub">resumir en 2, 3 o 4</text></g>
+              <g class="dg-svg-node"><rect x="760" y="40" width="180" height="56"/><text x="776" y="64">NUBES DE PUNTOS</text><text x="776" y="84" class="is-sub">animación · ruido</text></g>
+              <g class="dg-svg-node is-fail"><rect x="260" y="150" width="200" height="56"/><text x="276" y="174">RED RECURRENTE</text><text x="276" y="194" class="is-sub">no funcionó</text></g>
+              <g class="dg-svg-node"><rect x="20" y="260" width="190" height="56"/><text x="36" y="284">CURVAS DE LUZ</text><text x="36" y="304" class="is-sub">dibujadas en cuadrado</text></g>
+              <g class="dg-svg-node"><rect x="260" y="260" width="200" height="56"/><text x="276" y="284">GAN 1</text><text x="276" y="304" class="is-sub">gráficas inventadas</text></g>
+              <g class="dg-svg-node"><rect x="510" y="260" width="200" height="56"/><text x="526" y="284">APILAR FOTOGRAMAS</text><text x="526" y="304" class="is-sub">topologías</text></g>
+              <g class="dg-svg-node"><rect x="760" y="260" width="180" height="56"/><text x="776" y="284">GAN 2</text><text x="776" y="304" class="is-sub">superficies vivas</text></g>
+              <g class="dg-svg-node"><rect x="260" y="370" width="200" height="56"/><text x="276" y="394">A SONIDO</text><text x="276" y="414" class="is-sub">velocidad · tono</text></g>
+              <g class="dg-svg-node"><rect x="20" y="370" width="190" height="56"/><text x="36" y="394">FOTOS DEL CIELO</text><text x="36" y="414" class="is-sub">GAN de cielos</text></g>
+              <g class="dg-svg-node is-gate"><rect x="620" y="370" width="320" height="70"/><text x="636" y="400">DATA GATE</text><text x="636" y="422" class="is-sub">cubo LED · Nanjing</text></g>
+              <path class="dg-svg-link" d="M210 68h50M460 68h50M710 68h50M360 96v54M210 288h50M460 288h50M710 288h50M360 316v54M850 96v274h-60M850 316v54M460 398h160M210 398h50"/>
+            </svg>
+          </div>
+          <figcaption>Lo dibujé a partir del texto del estudio y de sus animaciones. Las cajas son etapas, no programas.</figcaption>
+        </figure>
+
+        <p>Vamos caja por caja. Primero, la tabla.</p>
+      </div>
+    </section>
+
+    <section class="dg-section" id="autoencoder" data-section="muchas columnas, un cubo">
+      <header class="dg-head">
+        <span class="dg-num">07</span>
+        <h2>Muchas columnas, un cubo</h2>
+      </header>
+      <div class="dg-body">
+        <p>Cada candidato a planeta tiene decenas de datos: cuánto tarda en dar la vuelta, cuánto mide, qué tan caliente está, cómo es su estrella. Ouchhh lo explica así: si un planeta tiene 90 datos, esa información tiene 90 dimensiones. Y nosotras solo podemos ver tres.</p>
+        <p>Entonces entrenaron una red neuronal para resumir. Que aprendiera a guardar esos datos en muy pocos números sin perder lo importante. Es como una sombra, pero una sombra lista, que se acomoda para que sigas reconociendo la forma.</p>
+
+        <p>En sus animaciones el estudio muestra los pasos, y los traduzco tal cual porque son preciosos:</p>
+        <ol class="dg-steps">
+          <li>Se descargan los datos públicos de exoplanetas de NASA.</li>
+          <li>Se preparan las tablas: el texto se convierte en números y se quitan las columnas con muy poca información.</li>
+          <li>Con autoencoders se reducen las dimensiones y se crean versiones de la tabla en 2D, 3D y 4D.</li>
+          <li>Eso se muestra como nubes de puntos y animaciones sobre DATA GATE.</li>
+        </ol>
+
+        <h3>Qué es un autoencoder</h3>
+        <p>Tiene dos mitades que juegan al teléfono descompuesto. La primera mitad recibe todos los datos de un planeta y los va apretando hasta dejar solo unos pocos números. La segunda mitad recibe esos pocos números e intenta reconstruir todo lo original. Si la reconstrucción sale parecida, la red aprendió a resumir bien. Al final nos quedamos con los pocos números del medio y los usamos como posición en el espacio.</p>
+
+        <figure class="dg-figure">
+          <div class="dg-frame">
+            <svg class="dg-diagram" viewBox="0 0 720 240" role="img" aria-labelledby="aeTitle">
+              <title id="aeTitle">Un autoencoder: entradas que se estrechan hasta tres números y se vuelven a expandir</title>
+              <g class="dg-svg-layers">
+                <rect x="30" y="30" width="24" height="180"/><rect x="120" y="10" width="24" height="220"/><rect x="210" y="45" width="24" height="150"/><rect x="290" y="75" width="24" height="90"/>
+                <rect x="352" y="100" width="36" height="40" class="is-latent"/>
+                <rect x="426" y="75" width="24" height="90"/><rect x="506" y="45" width="24" height="150"/><rect x="586" y="10" width="24" height="220"/><rect x="666" y="30" width="24" height="180"/>
+              </g>
+              <path class="dg-svg-link" d="M54 120h66M144 120h66M234 120h56M314 120h38M388 120h38M450 120h56M530 120h56M610 120h56"/>
+              <text x="10" y="236" class="dg-svg-label">12 datos + máscara</text>
+              <text x="334" y="164" class="dg-svg-label">3 números</text>
+              <text x="620" y="236" class="dg-svg-label">12 datos</text>
+            </svg>
+          </div>
+          <figcaption>La forma de la red que usé yo: 24 → 96 → 48 → 24 → 3 → 24 → 48 → 96 → 12. La de Ouchhh no está publicada.</figcaption>
+        </figure>
+
+        <h3>Mi versión, hecha con todo el cuidado que pude</h3>
+        <p>Quise tocar la idea con mis manos. Descargué la tabla de objetos de interés de Kepler del NASA Exoplanet Archive, con las mismas columnas que se ven en la animación de Ouchhh, y entrené mi propio autoencoder desde cero, sin librerías. Esta es la segunda versión, y la mejoré todo lo que supe. Te cuento qué hice y por qué:</p>
+
+        <ul class="dg-list">
+          <li><strong>No dejé a nadie fuera.</strong> Muchos objetos tienen algún dato vacío. En vez de borrarlos, le paso a la red una "máscara" que le dice qué datos faltan, y solo le cuento los errores de los datos que sí existen. Así entran los 9&#8239;564.</li>
+          <li><strong>Acomodé los números.</strong> Hay periodos de medio día y de cientos de días. Convertí cada columna según su lugar en el ranking, para que ningún valor extremo mande sobre los demás.</li>
+          <li><strong>La hice aprender con ruido.</strong> Mientras entrena, le escondo datos al azar y le ensucio un poco los números, y tiene que adivinar lo original. Eso la obliga a entender relaciones en vez de memorizar.</li>
+          <li><strong>Separé los datos en tres grupos.</strong> 80% para entrenar, 10% para decidir cuándo parar y 10% que la red nunca vio, solo para el examen final. Así el resultado es honesto.</li>
+          <li><strong>Paré a tiempo.</strong> Si durante un rato ya no mejora con datos nuevos, se detiene y me quedo con su mejor momento. Su mejor versión llegó en la vuelta 348.</li>
+          <li><strong>La comparé con el método clásico.</strong> Hice lo mismo con PCA, la forma tradicional de resumir datos, para ver si la red de verdad valía la pena.</li>
+        </ul>
+
+        <div class="dg-paper">
+          <p class="dg-paper-head">el examen final, con datos que la red nunca vio</p>
+          <div class="dg-table-wrap">
+            <table class="dg-table">
+              <thead>
+                <tr><th scope="col">medida</th><th scope="col">mi red</th><th scope="col">PCA</th><th scope="col">qué significa</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">error al reconstruir</th><td class="is-win">0.124</td><td>0.249</td><td>menos es mejor</td></tr>
+                <tr><th scope="row">no inventa vecinos</th><td class="is-win">0.966</td><td>0.951</td><td>si dos puntos quedan juntos, ¿de verdad se parecen?</td></tr>
+                <tr><th scope="row">no separa vecinos</th><td>0.950</td><td class="is-win">0.988</td><td>si dos se parecían, ¿siguen juntos?</td></tr>
+                <tr><th scope="row">vecinos del mismo tipo</th><td class="is-win">61.7%</td><td>56.8%</td><td>en los datos completos: 64.4%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dg-paper-note">Con solo 3 números, mi red reconstruye los datos con la mitad del error que PCA. También inventa menos vecinos falsos y deja más juntos a los objetos del mismo tipo. PCA gana en una cosa, y me parece justo decirlo: casi nunca separa lo que estaba junto, porque solo gira y aplana los datos sin doblarlos. Probé además con 2 números (error 0.218) y con 4 (error 0.083). Me quedé con 3 porque es lo que cabe en un cubo.</p>
+        </div>
+
+        <p>Y aquí está. Arrástralo para girarlo. Cada punto es un objeto real. Pasa el cursor, o toca en el celular, para ver cuál es.</p>
+
+        <figure class="dg-figure is-wide">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">espacio latente · 9&#8239;564 objetos · arrastra para girar</p>
+            <div class="dg-cube is-explore" data-module="cube" data-mode="explore" role="img" aria-label="Nube de puntos que se puede girar; cada punto es un objeto de interés de Kepler">
+              <div class="dg-cube-tip" data-role="tip" hidden></div>
+            </div>
+            <div class="dg-controls">
+              <button type="button" class="dg-btn" data-disp="0" aria-pressed="true"><i class="dg-swatch is-confirmed"></i>confirmados</button>
+              <button type="button" class="dg-btn" data-disp="1" aria-pressed="true"><i class="dg-swatch is-candidate"></i>candidatos</button>
+              <button type="button" class="dg-btn" data-disp="2" aria-pressed="true"><i class="dg-swatch is-false"></i>falsos positivos</button>
+              <button type="button" class="dg-btn" data-rare-mode aria-pressed="false">mostrar los raros</button>
+            </div>
+            <p class="dg-readout" data-role="readout">cargando…</p>
+          </div>
+          <figcaption>Los "raros" son los objetos que a la red le costó más reconstruir: los que no se parecen a casi nada. La red nunca supo qué es un planeta ni cuál es falso. Solo aprendió a resumir la tabla, así que si los tipos se separan un poco, es porque los datos ya lo decían.</figcaption>
+        </figure>
+
+        <aside class="dg-aside">
+          <p class="dg-aside-title">para ser honesta</p>
+          <p>Esto no es el modelo de Ouchhh ni sus datos exactos: ellos trabajaron en 2018 con una versión anterior de la tabla. Es el mismo tipo de paso, hecho a mi manera, para que puedas tocar la idea.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dg-section" id="rnn" data-section="la red que no funcionó">
+      <header class="dg-head">
+        <span class="dg-num">08</span>
+        <h2>La red que no funcionó</h2>
+      </header>
+      <div class="dg-body">
+        <p>Esta es mi parte favorita, porque cuenta un fracaso. Y casi nadie cuenta sus fracasos.</p>
+        <p>Una red recurrente lee cosas en orden y recuerda lo que vino antes, como el teclado del celular que adivina tu siguiente palabra. El ejemplo de siempre es darle todo Shakespeare para que escriba como Shakespeare. Ouchhh quería hacer lo mismo con curvas de luz: inventar estrellas que no existen, con su propia luz.</p>
+        <p>No funcionó, y lo explican con mucha honestidad. Si la entrenaban con una sola estrella, la red devolvía una copia exacta de esa estrella. Si la entrenaban con muchas, devolvía una línea plana, sin nada.</p>
+        <aside class="dg-aside">
+          <p class="dg-aside-title">por qué pasa eso</p>
+          <p>Con una sola estrella, la curva se repite tanto que la red simplemente la memoriza. Con muchas estrellas, cada una es tan distinta que no forman un solo "idioma". Y cuando una red no sabe qué viene, lo más seguro para ella es responder el promedio. El promedio de miles de curvas distintas es casi una línea recta. La red hizo exactamente lo que le pidieron.</p>
+        </aside>
+        <p>Lo bonito es lo que hicieron después. En vez de pelearse con la red, cambiaron la pregunta. Dejaron de ver la curva como una lista de números y empezaron a verla como una <strong>imagen</strong>.</p>
+      </div>
+    </section>
+
+    <section class="dg-section" id="gan" data-section="gráficas que aprenden a mentir">
+      <header class="dg-head">
+        <span class="dg-num">09</span>
+        <h2>Gráficas que aprenden a mentir</h2>
+      </header>
+      <div class="dg-body">
+        <p>Una GAN son dos redes que juegan. Una es un falsificador que pinta imágenes desde cero. La otra es una detective que mira imágenes reales y falsas y trata de adivinar cuáles son mentira. Cada vez que la detective lo atrapa, el falsificador mejora. Después de miles de rondas, pinta cosas que ya nadie distingue de las reales.</p>
+
+        <figure class="dg-figure">
+          <div class="dg-frame">
+            <svg class="dg-diagram" viewBox="0 0 720 230" role="img" aria-labelledby="ganTitle">
+              <title id="ganTitle">Una GAN: el falsificador crea gráficas y la detective las compara con gráficas reales</title>
+              <g class="dg-svg-node"><rect x="20" y="80" width="110" height="56"/><text x="36" y="112">RUIDO</text></g>
+              <g class="dg-svg-node"><rect x="180" y="80" width="130" height="56"/><text x="196" y="104">GENERADOR</text><text x="196" y="124" class="is-sub">falsificador</text></g>
+              <g class="dg-svg-plot"><rect x="360" y="30" width="80" height="80"/><path d="M364 106V80l8-18 8 22 10-40 10 34 8-14 12 24 12-6v24z"/><text x="360" y="128" class="dg-svg-label">inventada</text></g>
+              <g class="dg-svg-plot"><rect x="360" y="140" width="80" height="80"/><path d="M364 216v-30l12-6 8 12 10-30 12 26 10-8 16 16v20z"/><text x="446" y="214" class="dg-svg-label">real</text></g>
+              <g class="dg-svg-node"><rect x="500" y="80" width="140" height="56"/><text x="516" y="104">DISCRIMINADOR</text><text x="516" y="124" class="is-sub">detective</text></g>
+              <text x="656" y="112" class="dg-svg-label">¿real?</text>
+              <path class="dg-svg-link" d="M130 108h50M310 108h50M440 70l60 30M440 180l60-50"/>
+            </svg>
+          </div>
+          <figcaption>Las GAN nacieron en 2014. Lo curioso es que el falsificador nunca ve una imagen real: aprende solo con las críticas de la detective.</figcaption>
+        </figure>
+
+        <p>Ouchhh dibujó muchísimas curvas de luz y entrenó una GAN con esos dibujos. Sus animaciones cuentan los pasos:</p>
+        <ul class="dg-list">
+          <li>Empiezan con una visualización de <strong>AstroNet</strong>, el código abierto de Google para analizar curvas de Kepler.</li>
+          <li>Las curvas se dibujan rellenas, de un solo color y en formato cuadrado. Así una red de imágenes las entiende mucho mejor que una línea fina llena de ruido.</li>
+          <li>La GAN inventa gráficas nuevas, en imagen y en video. Si cambias poquito a poco lo que le das de entrada, una gráfica se derrite lentamente en otra.</li>
+          <li>Esas gráficas inventadas se vuelven a convertir en números y luego en <strong>música</strong>. Para que suene armónico, los cambios de la curva mueven la velocidad y el tono.</li>
+        </ul>
+
+        <aside class="dg-aside">
+          <p class="dg-aside-title">una pista en las capturas</p>
+          <p>En las capturas del estudio aparecen archivos con nombres como <code>network-snapshot-007200</code> y <code>preset-v2-1gpu-fp32</code>. Ese estilo de nombre es el que usa Progressive GAN, una red de NVIDIA de 2017 que genera imágenes subiendo la resolución por etapas. El estudio no lo dice, así que es una deducción mía, pero la coincidencia es muy concreta.</p>
+          <p>También se ve un cuaderno de Python llamado <code>plot2wav</code>. Para cada columna de píxeles de la gráfica mide hasta dónde llega el relleno, y esa altura se vuelve un número. Con esos números arma un archivo de audio.</p>
+        </aside>
+
+        <p>No puedo entrenar una GAN dentro de tu navegador, pero sí puedo hacer el último paso de forma honesta: tomar la luz real de Kepler-7 y convertirla en sonido con la misma regla. Las bajadas del planeta suenan graves y lentas.</p>
+
+        <figure class="dg-figure is-wide" data-module="sonify">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">escuchar a kepler-7</p>
+            <canvas class="dg-canvas is-sonify" data-role="canvas" aria-hidden="true"></canvas>
+            <div class="dg-controls">
+              <button type="button" class="dg-btn is-primary" data-role="play" aria-pressed="false">▶ escuchar la estrella</button>
+              <span class="dg-readout" data-role="readout">sube un poco el volumen, suena suave</span>
+            </div>
+          </div>
+          <figcaption>La forma de convertirlo es mía, no la de Audiofil ni la de Ouchhh: el brillo elige una nota y el tamaño del cambio elige la velocidad.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="dg-section" id="topologia" data-section="montañas hechas de tiempo">
+      <header class="dg-head">
+        <span class="dg-num">10</span>
+        <h2>Montañas hechas de tiempo</h2>
+      </header>
+      <div class="dg-body">
+        <p>Aquí Ouchhh hizo algo que, como artista 3D, me dejó con la boca abierta. Tomaron esos videos de gráficas inventadas y los convirtieron en <strong>paisajes</strong>.</p>
+        <p>Piensa en un video como un mazo de cartas: cada carta es un fotograma. Aplasta cada carta hasta dejarla como una tira fina y pon todas las tiras una al lado de la otra. Te queda una sola imagen donde está todo el tiempo del video. Si usas el brillo de esa imagen como altura, te sale una montaña. Una montaña hecha de tiempo.</p>
+        <p>Y cierra el círculo de una forma preciosa: con la misma luz que sirvió para encontrar planetas rocosos, inventaron superficies de planetas rocosos que no existen. Después usaron esas imágenes para entrenar <strong>otra GAN</strong>, que crea superficies que no dejan de transformarse.</p>
+
+        <aside class="dg-aside">
+          <p class="dg-aside-title">si te gustan los detalles</p>
+          <p>El estudio lo describe como topologías 2D donde cada columna de la imagen es un fotograma del video. Es la lógica del slit-scan, la técnica que Douglas Trumbull usó para la puerta estelar de <em>2001: Odisea del espacio</em>. Una puerta estelar, en una obra que se llama DATA GATE. Qué bonito, ¿no? En sus capturas se ve una función <code>CreateSurface</code> que abre el video y apila sus fotogramas en una sola matriz.</p>
+        </aside>
+
+        <figure class="dg-figure">
+          <div class="dg-frame">
+            <svg class="dg-diagram" viewBox="0 0 720 220" role="img" aria-labelledby="slitTitle">
+              <title id="slitTitle">Los fotogramas de un video se vuelven tiras, se apilan en una imagen y esa imagen se vuelve una montaña</title>
+              <g class="dg-svg-plot"><rect x="20" y="40" width="70" height="70"/><rect x="36" y="56" width="70" height="70"/><rect x="52" y="72" width="70" height="70"/></g>
+              <text x="20" y="176" class="dg-svg-label">fotogramas</text>
+              <g class="dg-svg-strips"><rect x="200" y="50" width="8" height="110"/><rect x="212" y="50" width="8" height="110"/><rect x="224" y="50" width="8" height="110"/><rect x="236" y="50" width="8" height="110"/><rect x="248" y="50" width="8" height="110"/></g>
+              <text x="170" y="190" class="dg-svg-label">una tira por fotograma</text>
+              <rect x="350" y="50" width="130" height="110" class="dg-svg-thin"/>
+              <path d="M350 130c20-30 30 10 50-30s40 20 50-10 20 30 30 10" class="dg-svg-line"/>
+              <text x="350" y="190" class="dg-svg-label">imagen apilada</text>
+              <path d="M540 150l70-40 90 30-70 40z" class="dg-svg-thin"/>
+              <path d="M540 150c20-40 40-20 50-50s30 10 40-10 30 20 70 50" class="dg-svg-line"/>
+              <text x="570" y="206" class="dg-svg-label">montaña</text>
+              <path class="dg-svg-link" d="M130 100h60M264 100h80M488 100h48"/>
+            </svg>
+          </div>
+          <figcaption>Del video al paisaje en tres pasos.</figcaption>
+        </figure>
+
+        <p>Míralo en vivo. Tomo pedacitos de la luz real de Kepler-90, convierto cada pedacito en una tira, pongo 128 tiras juntas y las uso como altura de una malla. A medida que avanzan los años de datos, el paisaje cambia solo.</p>
+
+        <figure class="dg-figure is-wide" data-module="topology">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">un paisaje hecho con la luz de kepler-90</p>
+            <div class="dg-topology" data-role="host" role="img" aria-label="Superficie de malla que cambia, hecha apilando pedazos de la curva de luz de Kepler-90"></div>
+            <div class="dg-controls">
+              <button type="button" class="dg-btn" data-role="noise" aria-pressed="false">ruido guiado por la estrella</button>
+              <button type="button" class="dg-btn" data-role="pause" aria-pressed="false">pausa</button>
+              <span class="dg-readout" data-role="readout">cargando…</span>
+            </div>
+          </div>
+          <figcaption>Aquí no hay GAN: es solo la técnica de apilar, con datos reales, para que veas de dónde nace la forma.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="dg-section" id="cielos" data-section="cielos inventados">
+      <header class="dg-head">
+        <span class="dg-num">11</span>
+        <h2>Cielos inventados</h2>
+      </header>
+      <div class="dg-body">
+        <p>La última idea del estudio fue entrenar una GAN con fotos de campos de estrellas tomadas por Kepler, para inventar cielos nocturnos de otros lugares del universo. En sus capturas se ve un cuaderno de Python que abre el archivo de Kepler en el navegador y descarga esas imágenes de forma automática, una por una.</p>
+        <aside class="dg-aside">
+          <p class="dg-aside-title">un matiz con cariño</p>
+          <p>Ouchhh dice que, como las fotos se tomaron lejos de la Tierra, las constelaciones son "alienígenas". Suena precioso, pero no es del todo así. Kepler seguía a la Tierra alrededor del Sol, y para estrellas que están a cientos de años luz ese pequeño cambio de lugar no se nota. Desde Kepler, el cielo se ve casi igual que desde tu patio. Lo verdaderamente alienígena es lo que inventa la GAN.</p>
+        </aside>
+
+        <h3>Ruido con memoria</h3>
+        <p>El ruido Perlin es la forma más famosa de hacer que una computadora invente cosas naturales: nubes, montañas, humo. En vez de un azar tipo estática de televisión, da un azar suave, con colinas y valles.</p>
+        <p>Ouchhh hizo algo muy lindo con él. En sus nubes no dejaron que el ruido fuera al azar: le dieron como instrucciones los números que salían de sus redes. La nube se mueve como se mueve la información escondida en la tabla.</p>
+        <aside class="dg-aside">
+          <p class="dg-aside-title">para quien usa blender o houdini</p>
+          <p>Ken Perlin inventó su ruido a principios de los 80 porque estaba harto del aspecto "de máquina" de <em>Tron</em>, y ganó un premio técnico de la Academia por eso. En Blender, la textura Noise tiene modo 4D con una entrada W: puedes usar tres números para la posición y el cuarto para que la textura respire. En Houdini sería llevar ese valor a los parámetros de un nodo de ruido. Si activas "ruido guiado por la estrella" en el paisaje de arriba, la frecuencia y la velocidad del ruido salen de cuánto varía la luz real.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dg-section" id="taller" data-section="el taller">
+      <header class="dg-head">
+        <span class="dg-num">12</span>
+        <h2>El taller</h2>
+      </header>
+      <div class="dg-body">
+        <p>Esta es la parte que yo quería leer como artista 3D. En las capturas de proceso de Ouchhh se ve bastante de su taller. Separo con cuidado lo que se ve, lo que deduzco y lo que haría yo.</p>
+
+        <div class="dg-tools">
+          <article class="dg-tool">
+            <p class="dg-tool-status">se ve en las capturas</p>
+            <h4>Python y Jupyter</h4>
+            <p>Un cuaderno que descarga imágenes de Kepler con <code>selenium</code>, y otro llamado <code>plot2wav</code> que convierte gráficas en números, números en audio y videos en superficies.</p>
+          </article>
+          <article class="dg-tool">
+            <p class="dg-tool-status">se ve en las capturas</p>
+            <h4>Processing</h4>
+            <p>Un sketch llamado <code>kepler_xyz</code> que toma la posición de cada estrella en el cielo y su distancia, y la convierte en coordenadas 3D. O sea, además del mapa de la red, hicieron un mapa real.</p>
+          </article>
+          <article class="dg-tool">
+            <p class="dg-tool-status">se ve en las capturas</p>
+            <h4>Houdini</h4>
+            <p>El propio estudio lo escribe: importaron la tabla de Kepler con Table Import y guardaron los números como un atributo de punto <code>x, y, z, w</code>. Se ven nubes de puntos, hilos y superficies envolviendo un cubo.</p>
+          </article>
+          <article class="dg-tool">
+            <p class="dg-tool-status">se ve en las capturas</p>
+            <h4>Cinema 4D</h4>
+            <p>Partículas cargadas desde archivos de datos, flujos de colores, cubos fracturados y deformados. Ferdi Alici contó que lo usan para meter datos en sus pinturas 3D con X-Particles y Voronoi Fracture.</p>
+          </article>
+          <article class="dg-tool is-guess">
+            <p class="dg-tool-status">deducción mía</p>
+            <h4>Progressive GAN</h4>
+            <p>Por los nombres de los archivos que aparecen en las capturas. En 2018 era de las redes más usadas para generar imágenes con buena calidad.</p>
+          </article>
+          <article class="dg-tool is-guess">
+            <p class="dg-tool-status">deducción mía</p>
+            <h4>Audacity</h4>
+            <p>En una captura se ve un editor de audio con la onda del archivo generado, y por la interfaz parece Audacity. El sonido final de la obra es de Audiofil.</p>
+          </article>
+        </div>
+
+        <h3>Cómo lo haría yo</h3>
+        <p>Si te dan ganas de hacer tu propia pieza con esta idea, así la armaría:</p>
+        <ul class="dg-list">
+          <li><strong>Los datos:</strong> la librería <code>lightkurve</code> de Python para bajar curvas de Kepler o TESS sin pelearte con archivos raros, y <code>pandas</code> para la tabla.</li>
+          <li><strong>En Houdini:</strong> Table Import con los números de la red, un Attribute Wrangle para llevarlos a color y tamaño, VDB from Particles para volver la nube un volumen, y Heightfield para cargar las montañas.</li>
+          <li><strong>En Blender:</strong> un script que crea un punto por fila, Geometry Nodes con Instance on Points o Points to Volume, y la textura Noise en 4D.</li>
+          <li><strong>Para pantallas LED:</strong> pedir el mapa de píxeles real de cada cara, renderizar a esa resolución exacta para evitar moiré, y pensar las caras como una sola tira continua para que la animación doble las esquinas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="dg-section" id="arte-no-deteccion" data-section="arte, no detección">
+      <header class="dg-head">
+        <span class="dg-num">13</span>
+        <h2>Arte</h2>
+      </header>
+      <div class="dg-body">
+        <p>Algo que Ouchhh deja muy claro y que quiero repetir: <strong>DATA GATE no descubre planetas</strong>, y nunca quiso hacerlo. Es otra manera de mirar datos que la ciencia ya estudió y publicó. Lo digo porque ya vi a gente contando que "la IA de esta escultura encontró exoplanetas". No.</p>
+        <p>Lo que sí existe es la IA científica que trabajó con los mismos datos. En 2018, Christopher Shallue, de Google, y Andrew Vanderburg, de la Universidad de Texas, publicaron <strong>AstroNet</strong>: una red que mira curvas de luz plegadas y aprende a separar planetas reales de falsas alarmas. Al usarla sobre sistemas ya conocidos encontró dos planetas nuevos. Uno de ellos fue <strong>Kepler-90 i</strong>, el octavo planeta de Kepler-90.</p>
+        <p>La primera animación del proceso de Ouchhh empieza, justamente, con AstroNet. Por eso Kepler-90 aparece tantas veces en esta entrada.</p>
+        <p class="dg-voice">La ciencia pregunta "¿esto es un planeta?". El arte pregunta "¿cómo se siente saber que existen?".</p>
+      </div>
+    </section>
+
+    <section class="dg-section" id="no-publicado" data-section="lo que no se sabe">
+      <header class="dg-head">
+        <span class="dg-num">14</span>
+        <h2>Lo que no se sabe</h2>
+      </header>
+      <div class="dg-body">
+        <p>Para que nadie tome mis deducciones como hechos, esto es lo que no encontré publicado en ningún lado:</p>
+        <div class="dg-paper">
+          <p class="dg-paper-head">sin publicar, al 15 de septiembre de 2026</p>
+          <dl class="dg-leaders">
+            <div><dt>La red que resume</dt><dd>su forma y cómo la entrenaron</dd></div>
+            <div><dt>Las GAN</dt><dd>cuáles exactamente, más allá de mi deducción</dd></div>
+            <div><dt>El cubo</dt><dd>sus medidas exactas</dd></div>
+            <div><dt>Las pantallas</dt><dd>resolución y tipo de LED</dd></div>
+            <div><dt>El render</dt><dd>con qué motor y qué servidores</dd></div>
+            <div><dt>El sonido</dt><dd>cómo lo hizo Audiofil</dd></div>
+            <div><dt>La web de mensajes</dt><dd>si sigue funcionando</dd></div>
+            <div><dt>El lugar exacto</dt><dd>dónde está dentro de Jiangbei</dd></div>
+          </dl>
+        </div>
+        <p>Si alguien de Ouchhh llega a leer esto, hola. Me encantaría corregir lo que haga falta.</p>
+      </div>
+    </section>
+
+    <section class="dg-section" id="creditos" data-section="créditos y fuentes">
+      <header class="dg-head">
+        <span class="dg-num">15</span>
+        <h2>Créditos y fuentes</h2>
+      </header>
+      <div class="dg-body">
+        <figure class="dg-figure is-wide">
+          <div class="dg-frame">
+            <p class="dg-frame-tag">data gate, en movimiento</p>
+            <video class="dg-artwork" controls preload="none" playsinline poster="assets/images/datagate-poster.jpg">
+              <source src="assets/video/datagate-web.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>Así se ve y se escucha. Video de la obra <strong>DATA GATE</strong>, de Ouchhh New Media Studio, con diseño sonoro de Audiofil. Lo incluyo aquí solo para que puedas verla, con todo el crédito a sus autores.</figcaption>
+        </figure>
+
+        <div class="dg-paper">
+          <p class="dg-paper-head">la obra</p>
+          <dl class="dg-leaders">
+            <div><dt>Obra</dt><dd>DATA GATE, de Ouchhh New Media Studio</dd></div>
+            <div><dt>Dirección creativa</dt><dd>Ferdi Alici y Eylül Duranağaç Alıcı</dd></div>
+            <div><dt>Sonido</dt><dd>Audiofil</dd></div>
+            <div><dt>Guía científica</dt><dd>Dawn Gelino, NASA Exoplanet Science Institute</dd></div>
+            <div><dt>En China</dt><dd>TRU-M</dd></div>
+            <div><dt>Encargo</dt><dd>Nanjing Jiangbei New Area</dd></div>
+          </dl>
+        </div>
+
+        <p>Esta entrada no tiene fines comerciales. Las citas, los nombres y las descripciones del proceso son de sus autores. No publico aquí las imágenes ni las capturas del estudio: para verlas, visita su página.</p>
+
+        <h3>Los datos de las figuras</h3>
+        <p>Las figuras usan datos de la misión Kepler del Mikulski Archive for Space Telescopes (MAST), del Space Telescope Science Institute, y la tabla de objetos de interés del NASA Exoplanet Archive, que opera Caltech para NASA. Son datos públicos sobre estrellas: no hay información de ninguna persona. Todo lo que se calcula en esta página ocurre en tu navegador, y la página no guarda ni envía nada de lo que haces en ella.</p>
+        <p class="dg-small">El video de fondo, la tipografía Departure Mono y three.js se sirven desde este mismo sitio; Cinzel se carga desde Google Fonts, igual que en el resto de la web. La caja de comentarios es de htmlcommentbox.com: si escribes un comentario, ellos lo reciben.</p>
+
+        <h3>Fuentes</h3>
+        <ol class="dg-sources">
+          <li><a href="https://ouchhh.tv/DATAGATE" target="_blank" rel="noopener noreferrer">Ouchhh, DATAGATE</a></li>
+          <li><a href="https://eylulduranagac.com/DATA-GATE_World-s-First-AI-Astronomical-Research-Data-Sculpture" target="_blank" rel="noopener noreferrer">Eylül Duranağaç Alıcı, DATA GATE</a></li>
+          <li><a href="https://museaward.com/winner-info.php?id=2566" target="_blank" rel="noopener noreferrer">MUSE Creative Awards 2019</a></li>
+          <li><a href="https://avxawards.secure-platform.com/a/gallery/rounds/3/details/276" target="_blank" rel="noopener noreferrer">AVIXA AV Experience Awards 2020</a></li>
+          <li><a href="https://www.globaltimes.cn/page/201901/1137500.shtml" target="_blank" rel="noopener noreferrer">Global Times, la inauguración en Nanjing</a></li>
+          <li><a href="https://global.chinadaily.com.cn/a/201901/16/WS5c3e718ea3106c65c34e4a7e.html" target="_blank" rel="noopener noreferrer">China Daily, Cosmic AI en Jiangbei</a></li>
+          <li><a href="https://www.sohu.com/a/296008255_99899025" target="_blank" rel="noopener noreferrer">Sohu, 结合天文研究数据艺术装置 DATA GATE</a> (en chino)</li>
+          <li><a href="https://www.leisureopportunities.co.uk/news/Digital-art-installation-in-Nanjing-helps-the-public-keep-an-eye-on-exoplanets/350055" target="_blank" rel="noopener noreferrer">Leisure Opportunities, la instalación en Nanjing</a></li>
+          <li><a href="https://www.forward-festival.com/article/pushing-the-boundaries-of-ai-with-ouchhh" target="_blank" rel="noopener noreferrer">Forward Festival, entrevista a Ouchhh</a></li>
+          <li><a href="https://blooloop.com/immersive/influencer/ferdi-alici/" target="_blank" rel="noopener noreferrer">Blooloop, perfil de Ferdi Alici</a></li>
+          <li><a href="https://www.metalocus.es/en/news/poetic-ai-ouchhh-exhibition-20-million-lines-text-atelier-des-lumieres-paris" target="_blank" rel="noopener noreferrer">Metalocus, POETIC AI</a></li>
+          <li><a href="https://www.jpl.nasa.gov/news/nasa-retires-kepler-space-telescope/" target="_blank" rel="noopener noreferrer">NASA JPL, el retiro de Kepler</a></li>
+          <li><a href="https://exoplanetarchive.ipac.caltech.edu/docs/API_kepcandidate_columns.html" target="_blank" rel="noopener noreferrer">NASA Exoplanet Archive, columnas de la tabla</a></li>
+          <li><a href="https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_Data_Products_Overview.html" target="_blank" rel="noopener noreferrer">NASA Exoplanet Archive, datos de Kepler</a></li>
+          <li><a href="https://iopscience.iop.org/article/10.3847/1538-3881/aa9e09" target="_blank" rel="noopener noreferrer">Shallue y Vanderburg (2018), The Astronomical Journal</a> · la red que encontró Kepler-90 i</li>
+          <li><a href="https://www.science.org/doi/10.1126/science.1185402" target="_blank" rel="noopener noreferrer">Borucki y otros (2010), Science</a> · la misión Kepler explicada por quienes la hicieron</li>
+          <li><a href="https://www.aanda.org/articles/aa/abs/2002/31/aa2445/aa2445.html" target="_blank" rel="noopener noreferrer">Kovács, Zucker y Mazeh (2002), Astronomy &amp; Astrophysics</a> · el método BLS que usé para buscar los tránsitos</li>
+          <li><a href="https://www.science.org/doi/10.1126/science.1127647" target="_blank" rel="noopener noreferrer">Hinton y Salakhutdinov (2006), Science</a> · reducir dimensiones con redes neuronales, la idea del autoencoder</li>
+          <li><a href="https://papers.nips.cc/paper_files/paper/2014/hash/5ca3e9b122f61f8f06494c97b1afccf3-Abstract.html" target="_blank" rel="noopener noreferrer">Goodfellow y otros (2014)</a> · el artículo donde nacen las GAN</li>
+          <li><a href="https://openreview.net/forum?id=Hk99zCeAb" target="_blank" rel="noopener noreferrer">Karras y otros (2018), ICLR</a> · Progressive GAN, la red que deduzco por los nombres de archivo</li>
+          <li><a href="https://dl.acm.org/doi/10.1145/325165.325247" target="_blank" rel="noopener noreferrer">Ken Perlin (1985), SIGGRAPH</a> · el ruido que lleva su nombre</li>
+          <li><a href="https://science.nasa.gov/mission/kepler/" target="_blank" rel="noopener noreferrer">NASA, misión Kepler</a> · cifras finales y las leyes de Johannes Kepler</li>
+          <li><a href="https://github.com/google-research/exoplanet-ml" target="_blank" rel="noopener noreferrer">google-research/exoplanet-ml (AstroNet)</a></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="dg-section" id="comentarios" data-section="comentarios">
+      <header class="dg-head">
+        <span class="dg-num">16</span>
+        <h2>Comentarios</h2>
+      </header>
+      <div class="dg-body dg-comments">
+        <p>¿Viste DATA GATE en persona? ¿Trabajas con datos y 3D? ¿Encontraste algo que corregir? Escríbeme aquí abajo, me haría muy feliz.</p>
+        <div id="HCB_comment_box"><a href="https://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+        <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%2476gBfZFjo3Ne22wg7kCrl1"+"&opts=16798&num=10&ts=1742846778569");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+      </div>
+    </section>
+
+    <footer class="dg-footer">
+      <img src="assets/images/gate-mark.svg" alt="" width="36" height="36">
+      <p>hecho con mucho cariño, y demasiado café, por skye</p>
+      <a class="dg-btn" href="/filesystem/blogs/index.html">volver al blog</a>
+    </footer>
+  </main>
+
+  <aside class="dg-player" id="dgPlayer" hidden>
+    <button type="button" class="dg-player-btn" data-role="toggle" aria-pressed="false" aria-label="Reproducir música">
+      <svg class="dg-player-ring" viewBox="0 0 44 44" aria-hidden="true">
+        <circle class="dg-ring-track" cx="22" cy="22" r="20"/>
+        <circle class="dg-ring-fill" data-role="progress" cx="22" cy="22" r="20"/>
+      </svg>
+      <span class="dg-player-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </aside>
+
+  <div id="nav2-wrapper">
+    <div id="nav2-custom-sidebar" class="hidden">
+      <h2>Filesystem</h2>
+      <ul>
+        <li><a href="/home/index.html"><img src="/assets/images/nav-bar/home.png" alt="Home Icon">Home</a></li>
+        <li><a href="/filesystem/about/index.html"><img src="/assets/images/nav-bar/about.png" alt="About Icon">About</a></li>
+        <li><a href="/filesystem/social/index.html"><img src="/assets/images/nav-bar/social.png" alt="Social Icon">Social</a></li>
+        <li><a href="/filesystem/support/index.html"><img src="/assets/images/nav-bar/support.png" alt="Support Icon">Support</a></li>
+        <li><a href="/filesystem/changelog/index.html"><img src="/assets/images/nav-bar/rules.png" alt="Changelog Icon">Changelog</a></li>
+        <li><a href="/filesystem/blogs/index.html"><img src="/assets/images/nav-bar/blog.png" alt="Blog Icon">Blogs <img src="/assets/images/icons/buttons/phone-app-navigation.png" alt="new symbol"></a></a></li>
+        <li><a href="/filesystem/resources/index.html"><img src="/assets/images/nav-bar/resources.png" alt="Resources Icon">Resources</a></li>
+        <li><a href="/filesystem/credits/index.html"><img src="/assets/images/nav-bar/credits.png" alt="Credits Icon">Credits</a></li>
+        <li><a href="/filesystem/workstation/index.html"><img src="/assets/images/nav-bar/workstation.png" alt="Workstation Icon">Workstation</a></li>
+        <li><a href="/filesystem/sitemap/index.html"><img src="/assets/images/nav-bar/sitemap.png" alt="Sitemap Icon">Sitemap</a></li>
+      </ul>
+    </div>
+    <div class="nav2-blur-overlay"></div>
+    <button id="nav2-sidebar-toggle" aria-label="Open navigation"></button>
+  </div>
+
+  <script src="/assets/js/nav-bar.js" defer></script>
+  <script type="module" src="js/data-gate.js?v=14"></script>
+</body>
+</html>
