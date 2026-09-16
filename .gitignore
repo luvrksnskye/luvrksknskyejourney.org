@@ -40,3 +40,7 @@ filesystem/blogs/posts/data-gate/assets/video/datagate.mp4
 
 # Material de referencia de las entradas
 filesystem/blogs/posts/*/references/
+
+# Python
+__pycache__/
+*.pyc

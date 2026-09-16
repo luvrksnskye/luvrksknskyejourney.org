@@ -1581,3 +1581,10 @@ html:has(.dg) {
     height: 240px;
   }
 }
+
+.dg-take {
+  padding: 14px 18px;
+  border-left: 1px solid var(--instr-soft);
+  background: var(--plane);
+  font-size: 0.94em;
+}
