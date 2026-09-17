@@ -49,6 +49,8 @@ The live "now playing" feed, the listening clock, the echo wall, the visit count
 
 ASTRA is the system behind the station: a private place where I keep my notes, what I study and pieces of memory, all linked together. When a note about science or art is ready, ASTRA checks it and publishes it here as a blog post (those land in `filesystem/blogs/notes/` and `filesystem/astra/data/`). Everything else stays inside.
 
+It's written in Rust, because the part that decides what leaves has to be strict: it checks everything, never touches the network, and if one thing fails, nothing gets published. Later I want it to find connections between notes by itself, with a model that runs on my own computer, and to bring back the memory network page.
+
 ASTRA lives in its own private repository. Maybe someday it'll be public. Not yet.
 
 ### Running it locally
@@ -110,6 +112,8 @@ El "now playing" en vivo, el reloj de escucha, el echo wall, el contador de visi
 ### ASTRA
 
 ASTRA es el sistema detrás de la estación: un lugar privado donde guardo mis notas, lo que estudio y pedazos de memoria, todo conectado. Cuando una nota de ciencia o arte está lista, ASTRA la revisa y la publica aquí como entrada del blog (terminan en `filesystem/blogs/notes/` y `filesystem/astra/data/`). Todo lo demás se queda adentro.
+
+Está hecha en Rust, porque la parte que decide qué sale tiene que ser estricta: revisa todo, nunca toca la red y si una sola cosa falla, no se publica nada. Más adelante quiero que encuentre conexiones entre notas por sí sola, con un modelo que corra en mi propia computadora, y traer de vuelta la página de la red de memoria.
 
 ASTRA vive en su propio repositorio privado. Quizás algún día sea público. Todavía no.
 
