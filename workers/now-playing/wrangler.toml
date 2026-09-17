@@ -1,5 +1,5 @@
 name = "now-playing"
-main = "worker.js"
+main = "src/index.js"
 compatibility_date = "2025-09-01"
 workers_dev = true
 preview_urls = false
@@ -8,6 +8,7 @@ preview_urls = false
 LASTFM_USER = "luvrksnskyedev"
 ALLOWED_ORIGINS = "https://luvrksknskyejourney.org,https://www.luvrksknskyejourney.org,http://127.0.0.1:5500,http://localhost:5500"
 TIMEZONE = "America/Caracas"
+SITE_ORIGIN = "https://luvrksknskyejourney.org"
 
 [[ratelimits]]
 name = "LIMITER"

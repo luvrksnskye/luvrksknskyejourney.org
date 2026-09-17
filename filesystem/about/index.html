@@ -16,122 +16,362 @@
 -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://now-playing.luvrksnskye.workers.dev; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>ASTRA · Skye Journey</title>
+  <meta name="description" content="ASTRA, the memory station of Skye Journey. An essay about a website built by hand, line by line, to remember what I forget.">
+  <link rel="icon" type="image/x-icon" href="/assets/images/icons/buttons/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://now-playing.luvrksnskye.workers.dev" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..700&amp;display=swap">
+
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/scale.css">
-  <link rel="stylesheet" href="/assets/css/fonts.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skye Journey</title>
-<link rel="icon" type="image/x-icon" href="/assets/images/icons/buttons/favicon.png">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="css/mp.css">
-<link rel="stylesheet" href="/assets/css/nav-bar.css">
-<link rel="stylesheet" href="css/about.css">
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" integrity="sha384-42kyIPf7HDYLkGffmxDhSx/3Z/53wGBs3nD6wEFxsbeDc7rMO6mkYbkAcpRsnMU2" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/assets/css/nav-bar.css">
+
+  <link rel="stylesheet" href="css/base.css?v=3">
+  <link rel="stylesheet" href="css/station.css?v=2">
+  <link rel="stylesheet" href="css/hud.css?v=4">
+  <link rel="stylesheet" href="css/deck.css?v=2">
+  <link rel="stylesheet" href="css/capsule.css?v=3">
+  <link rel="stylesheet" href="css/modules.css?v=2">
+  <link rel="stylesheet" href="css/telemetry.css?v=2">
+  <link rel="stylesheet" href="css/transmit.css?v=3">
+
+  <script type="module" src="js/main.js?v=6"></script>
 </head>
-<body>
-   <div class="bg-overlay"></div>
-   
-   <img src="assets/images/me.png" alt="Profile Picture" class="profile-image">
-    <img src="assets/images/kitty.png" alt="Kitty Picture" class="kitty-image">
-     <img src="assets/images/kitty-2.png" alt="Kitty Picture" class="kitty2-image">
-   <div class="speech-bubble">
-       <img src="assets/images/bubble.png" alt="Speech Bubble" class="bubble-image">
-       <div class="bubble-text">Haii! You can check some of my work on social media, so look out for updates! Mostly active on <a href="https://www.facebook.com/luvrksnskye">Facebook</a>, <a href="https://bsky.app/profile/luvrksnskyedev.bsky.social">Bluesky</a> and <a href="https://www.youtube.com/@Luvrksn_Skye">YouTube</a>.</div>
-   </div>
-<img src="assets/images/music.png" class="sparkle sparkle-6 floating-slow" alt="sparkle">
-<img src="assets/images/icon.png" class="sparkle sparkle-5" alt="sparkle">
-<img src="assets/images/icon-2.png" class="sparkle sparkle-4" alt="sparkle">
-<img src="assets/images/expression.png" class="sparkle sparkle-2" alt="sparkle">
-<img src="assets/images/clouds-top.png" class="sparkle sparkle-1" alt="sparkle">
-    <img src="/assets/images/tiles/a11.png" class="sparkle sparkle-8 floating" alt="sparkle">
-    <img src="/assets/images/tiles/n10.png" class="sparkle sparkle-9 floating-large" alt="sparkle">
-    <img src="/assets/images/tiles/n11.png" class="sparkle sparkle-10 floating-slow" alt="sparkle">
-    <img src="/assets/images/tiles/q08.png" class="sparkle sparkle-11 floating-fast" alt="sparkle">
-    <img src="/assets/images/tiles/b08.png" class="sparkle sparkle-12 floating" alt="sparkle">
-    <img src="/assets/images/tiles/t11.png" class="sparkle sparkle-14 floating-slow" alt="sparkle">
-    <img src="/assets/images/tiles/c11.png" class="sparkle sparkle-15 floating-fast" alt="sparkle">
-    <img src="/assets/images/tiles/a10.png" class="sparkle sparkle-16 floating" alt="sparkle">
-    <img src="/assets/images/tiles/k09.png" class="sparkle sparkle-17 floating-large" alt="sparkle">
-    <img src="/assets/images/tiles/b10.png" class="sparkle sparkle-18 floating-slow" alt="sparkle">
+<body class="sa" data-temp="warm">
 
-   <div id="big-marquee">
-
-        
-        <div class="big-display-area">
-            <div class="big-marquee-title">
-                <div class="big-marquee-content">WHY I CREATED THIS SITE? 06/07/25</div>
-            </div>
-        </div>
-    </div>
-
-   <div class="text-container">
-        <div class="text-display-area">
-            <div class="text-content">  
-            <p>Hi!!! soo.. How is everyone? I hope all is well. Behold the errr.. uhhh.. Upcoming happy place for such amazing things for me. It gets a little chaotic here and there, but does it really matter? This website is a space dedicated to me; its progression is whenever I feel like it. Slowly but surely, content will appear on this website, and I'll probably never mention when it's finished lol. I'm interested in a lot of things; however, my main interests focus on programming, 2d art and illustration, music production/sound engineering, and photography/video production/editing, which I'd love to use all of those things to be an indie dev, or at least take care of all the things required to do it, you know? And well! Huh, yeah, the big point: WHY I CREATED THIS SITE?</p>
-
-<p>Well, tbh, everything started around 2023-2024 when I finally felt motivated to begin to create my own site. I didn't know at first how to make the design or layout, but everything just went very smoothly after I figured that out later. Being honest with you guys, I'm just a dumb computer science girl who likes creating things since I was a kid, but I never believed enough in myself. In fact, before I started in the programming world, I was into Cybersecurity studies and Operating System stuff (Linux lover as usual). My story with tech is kinda boring at some point and pretty common.</p>
-
-<p>My big brother studied computer science and moved to Czechia when I was 9 years old, so it was normal for me as a child to admire him and my other siblings as the youngest sister among the five of us. I wanted to be like him, but the more I missed him since he left for Europe, the more I wished I could do the same, so I would be able to see him again! All of my siblings are software engineers, and my family realized I was on the same path when my dad gave me a laptop for the first time. So yeah.</p>
-
-<p> It was even harder for me when I moved to the US permanently, because I had to stop seeing my dad, who stayed in Venezuela. My other siblings moved to Costa Rica and the Czech Republic. Those years when I turned 15 during the summer, away from my dad and siblings, a lot of things happened. And funny or not, my safe-space was technology! I spend months reading about software, aw man. Then I got a pink Nintendo 3DS XL and I installed my first firmware. Loved that so much.</p>
-
-<p>Anyway, that's enough of my programming story. While I was writing all of this, I realized I just didn't answer totally why I decided to create Skye Journey lol. You see, I decided to create this website because I want a place where my memories can be in some place eternally, even if someday I am no longer here. A digital sanctuary where my dreams and thoughts can exist beyond everything. This isn't simply a website—it's a fragment of digitized soul, a temporal capsule! So yeah, it's that simple. Here, in this corner of cyberspace, I wanted my memories to be preserved through time, somewhere in this digital world where they could exist beyond my own mortality.</p>
-
-<p>I realized later that I would never finish something as special as this, and that... that was precisely what prevented me from finishing it. The passage of time. Because when something is truly yours, when every element breathes with your essence, the idea of "completing" it becomes almost blasphemous. How do you finish a piece of your soul? This is my love letter to the digital eternity... In a world of constant deletion and digital decay, I've built something meant to endure—a constellation of thoughts, dreams, and memories that will shine long after I've become stardust myself. I like to think that I can also preserve the memory of others on my site, and that's so special for me.</p>
-
-<p>I think the real eternity is impossible to catch. However, I also think this is the closest thing I will have to that... A legacy, even if it is just this. Idk. Ahh, sometimes I get so philosophical, sorry about that! I have so many reflections on my mind about all of this, and when I start writing, is just hard for me to stop. The same happens when I speak to friends, but yeah.</p>
-
-<p>Anyway, I hope you enjoy this journey with me! And of course, feel free to share your thoughts and experiences as well in the guestbook or chatbox. Uhhh, yeah, I think I may have extended this maybe too much. Hopefully, this will be a great experience for me to meet fun people on the web! ^^</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="musicplayer">
-        <div class="decoration left"></div>
-        <div class="decoration right"></div>
-        
-        <div class="display-area">
-            <div class="songtitle">
-                <div class="marquee-content">♪ playing: 'Sunday' by Iwasaki Kenichiro, for DOGZ (2004) ♪</div>
-            </div>
-        </div>
-
-        <audio id="music" src="" preload="metadata"></audio>
-    </div>
-
-    <div id="counter-marquee">
+  <div class="sa-backdrop" aria-hidden="true">
+    <video class="sa-backdrop-video" muted loop playsinline preload="none">
   
-        <div class="counter-display-area">
-            <div class="counter-title">
-                <div class="counter-marquee-content" id="days-counter">♪ days since site creation: calculating... ♪</div>
-            </div>
-        </div>
-    </div>
+    </video>
+    <div class="sa-backdrop-tint"></div>
+    <div class="sa-backdrop-grid"></div>
+  </div>
 
-    <div id="nav2-wrapper">
-      <div id="nav2-custom-sidebar" class="hidden">
-        <h2>Filesystem</h2>
-        <ul>
-          <li><a href="../../home/index.html"><img src="/assets/images/nav-bar/home.png" alt="Home Icon">Home</a></li>
-          <li><a href="#"><img src="/assets/images/nav-bar/about.png" alt="about Icon">About <img src="/assets/images/icons/buttons/phone-app-navigation.png" alt="new symbol"></a></li>
-          <li><a href="../social/index.html"><img src="/assets/images/nav-bar/social.png" alt="diary Icon">Social</a></li>
-          <li><a href="../../filesystem/support/index.html"><img src="/assets/images/nav-bar/support.png" alt="music Icon">Support</a></li>
-          <li><a href="../changelog/index.html"><img src="/assets/images/nav-bar/rules.png" alt="games Icon">Changelog</a></li>
-          <li><a href="../../filesystem/blogs/index.html"><img src="/assets/images/nav-bar/blog.png" alt="guestbook Icon">Blog</a></li>
-          <li><a href="../../filesystem/resources/index.html"><img src="/assets/images/nav-bar/resources.png" alt="faq Icon">Resources</a></li>
-          <li><a href="../../filesystem/credits/index.html"><img src="/assets/images/nav-bar/credits.png" alt="archives Icon">Credits</a></li>
-          <li><a href="../../filesystem/workstation/index.html"><img src="/assets/images/nav-bar/workstation.png" alt="kitty Icon">Workstation</a></li>
-            <li><a href="../sitemap/index.html"><img src="/assets/images/nav-bar/sitemap.png" alt="kitty Icon">Sitemap</a></li>
-        </ul>
+  <header class="sa-bar">
+    <a class="sa-bar-mark" href="#deck"><b>astra</b><span>memory station 01</span></a>
+    <span class="sa-bar-section" data-hud-section>00 · command deck</span>
+    <span class="sa-bar-progress" aria-hidden="true"><i data-hud-progress></i></span>
+    <span class="sa-bar-stat">t+ <b data-days>0</b> days</span>
+    <button type="button" class="sa-sound" data-sound aria-pressed="false"><i aria-hidden="true"></i><span data-sound-state>sound off</span></button>
+  </header>
+
+  <nav class="sa-rail" aria-label="Station modules">
+    <a href="#deck" data-rail="deck"><span>00</span>deck</a>
+    <a href="#capsule" data-rail="capsule"><span>01</span>black box</a>
+    <a href="#parts" data-rail="parts"><span>02</span>modules</a>
+    <a href="#heartbeat" data-rail="heartbeat"><span>03</span>telemetry</a>
+    <a href="#trace" data-rail="trace"><span>04</span>transmit</a>
+  </nav>
+
+  <main class="sa-stage">
+
+    <section class="sa-section dk" id="deck" data-section="00 · command deck" data-temp="warm">
+      <div class="dk-copy">
+        <div class="st-badge" aria-hidden="true">
+          <span class="st-badge-mark"></span>
+          <span class="st-badge-name">astra</span>
+          <span class="st-badge-sub">memory station 01 · est. 09.01.2023</span>
         </div>
-        <div class="nav2-blur-overlay"></div>
-        <button id="nav2-sidebar-toggle"></button>
+
+        <p class="sa-eyebrow">command deck <b>· why this place exists</b></p>
+        <h1 class="sa-title sa-title-xl" data-split>I forget.<br>This doesn't.</h1>
+        <p class="sa-lede">Skye Journey is the part of me that remembers. I built it by hand, line by line, so the things I make and the days I live have somewhere to stay when they slip out of my head.</p>
+        <p class="sa-sub">ASTRA is what I call it when I think of it as a station: a quiet place in orbit where nothing I put down drifts away.</p>
+
+        <dl class="dk-status">
+          <div><dt>first light</dt><dd>09.01.2023</dd></div>
+          <div><dt>pieces kept</dt><dd data-count="pieces">0</dd></div>
+          <div data-visits-wrap hidden><dt>visitors</dt><dd data-visits>0</dd></div>
+          <div><dt>status</dt><dd class="dk-live">still running</dd></div>
+        </dl>
       </div>
-<script src="js/index.js"></script>
- <script type="text/javascript" src="js/mp.js"></script>
- <script type="text/javascript" src="counter.js"></script>
- <script type="text/javascript" src="/assets/js/nav-bar.js"></script>
+
+      <div class="dk-console" data-deck>
+        <svg class="dk-reticle" viewBox="0 0 600 600" aria-hidden="true">
+          <g class="dk-spin">
+            <circle cx="300" cy="300" r="286" class="dk-ring-thin"></circle>
+            <circle cx="300" cy="300" r="286" class="dk-ring-ticks"></circle>
+          </g>
+          <g class="dk-spin dk-spin-rev">
+            <circle cx="300" cy="300" r="238" class="dk-ring-dash"></circle>
+            <path d="M300 62 A238 238 0 0 1 538 300" class="dk-ring-arc"></path>
+          </g>
+          <circle cx="300" cy="300" r="176" class="dk-ring-thin"></circle>
+          <path d="M300 18 V60 M300 540 V582 M18 300 H60 M540 300 H582" class="dk-cross"></path>
+          <line class="dk-leader" data-leader x1="300" y1="300" x2="300" y2="300"></line>
+          <circle class="dk-leader-end" data-leader-end cx="300" cy="300" r="3.5"></circle>
+        </svg>
+
+        <div class="dk-core">
+          <img class="dk-core-img" src="/personal/about-me/assets/images/profile-photo.jpg" alt="" width="451" height="432" decoding="async">
+          <div class="dk-core-read" aria-live="polite">
+            <span class="dk-core-kicker" data-deck-kicker>standing by</span>
+            <strong data-deck-title>select a module</strong>
+            <span class="dk-core-value" data-deck-value>the station keeps watch while I sleep</span>
+          </div>
+        </div>
+
+        <ul class="dk-commands" role="menu" aria-label="Station commands">
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="capsule" href="#capsule" data-desc="an essay about why this place exists"><span>black box</span><small>the essay</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="parts" href="#parts" data-desc="what this place is made of"><span>modules</span><small>the parts</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="heartbeat" href="#heartbeat" data-desc="how alive it still is"><span>telemetry</span><small>the pulse</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="trace" href="#trace" data-desc="leave something behind"><span>transmit</span><small>leave a trace</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="journal" href="/personal/journal/index.html" data-desc="the voice"><span>journal</span><small>the voice</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="gallery" href="/personal/gallery/index.html" data-desc="the memory"><span>gallery</span><small>the memory</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="blog" href="/filesystem/blogs/index.html" data-desc="the mind"><span>blog</span><small>the mind</small></a></li>
+          <li role="none"><a role="menuitem" class="dk-cmd" data-cmd="about" href="/personal/about-me/index.html" data-desc="the face"><span>about me</span><small>the face</small></a></li>
+        </ul>
+
+        <p class="dk-keys"><kbd>←</kbd><kbd>→</kbd> select <kbd>enter</kbd> open</p>
+      </div>
+    </section>
+
+    <section class="sa-section cp" id="capsule" data-section="01 · black box" data-temp="warm">
+      <div class="st-title">
+        <span class="st-title-index">01</span>
+        <span class="st-title-name">black box</span>
+        <span class="st-stripes" aria-hidden="true"></span>
+        <span class="st-title-meta">an essay · memory core</span>
+      </div>
+
+      <div class="cp-window st-frame">
+        <aside class="cp-side" aria-hidden="true">
+          <span class="cp-ruler"></span>
+        </aside>
+
+        <div class="cp-main">
+          <header class="cp-head">
+            <h2 class="sa-title" data-split>An organ made of pages</h2>
+            <div class="cp-integrity">
+              <span class="st-label">memory integrity</span>
+              <span class="cp-integrity-bar"><i data-kept-bar></i></span>
+              <span class="cp-kept" aria-live="polite"><b data-kept>0</b> of <span data-kept-total>0</span> words kept · reading is remembering</span>
+            </div>
+          </header>
+
+          <article class="cp-letter" data-capsule>
+            <section class="cp-chapter" aria-labelledby="log-1">
+              <h3 class="cp-chapter-title" id="log-1"><span>log i</span>first light</h3>
+              <p>In theory, a personal website is a simple thing. A folder of files, a name at the top, a place to say hello. That's what I told myself in 2023, the year I moved my journal from a paper notebook to a screen. On September 1, I started building it a home, one line at a time.</p>
+              <p>What I didn't say out loud was why. I was losing things. Not keys, not earrings. Days. An afternoon would happen, and a week later it would simply be gone, and I'd only know it existed because someone else remembered it for me. So I started writing everything down, and then I started building a place for the writing to live.</p>
+              <p>Every station keeps a log of the moment its lights came on. Mine says September 1, 2023. I don't remember that day. The site does.</p>
+              <blockquote class="cp-quote"><p>It holds still while I don't.</p></blockquote>
+            </section>
+
+            <section class="cp-chapter" aria-labelledby="log-2">
+              <h3 class="cp-chapter-title" id="log-2"><span>log ii</span>the notebook</h3>
+              <p>In 1998, two philosophers named Andy Clark and David Chalmers wrote about a man called Otto. Otto and his friend Inga both want to see an exhibition at the Museum of Modern Art. Inga thinks for a second, remembers the museum is on 53rd Street, and goes. Otto opens the notebook he carries everywhere, finds the address he wrote down long ago, and goes too.</p>
+              <p>Their question was simple and a little strange. Is there really a difference? Inga's memory lives inside her head. Otto's lives in his pocket. Both of them arrive at the museum. Clark and Chalmers argued that the notebook isn't just helping Otto remember. It is part of how Otto remembers, a piece of his mind that happens to live outside his body.</p>
+              <p>The first time I read about Otto, I felt caught. I had already built my notebook. It has a journal and a gallery, a blog, a changelog, a wall where strangers leave little notes. When something slips away from me, I come back here, and it's still here, waiting exactly where I left it.</p>
+              <blockquote class="cp-quote"><p>Humans stretch further than their skin.</p></blockquote>
+            </section>
+
+            <section class="cp-chapter" aria-labelledby="log-3">
+              <h3 class="cp-chapter-title" id="log-3"><span>log iii</span>the ship</h3>
+              <p>There's an old puzzle Plutarch wrote down almost two thousand years ago. The Athenians kept the ship of the hero Theseus in their harbor, and whenever a plank rotted, they replaced it with a new one. Eventually none of the original wood was left. Was it still his ship?</p>
+              <p>In September 2026 I renamed something like 470 files on this site. I took out old libraries, rewrote the music player, moved every folder somewhere cleaner. From the outside, nothing looked different. From the inside, almost nothing was the same. I sat with that for a while, and then, quietly, I started asking the same question about myself.</p>
+              <p>Derek Parfit spent a whole book arguing that what makes you you isn't one solid thing that stays put. It's continuity, each version holding on to enough of the one before. I like that answer because it's gentle. It means this is still Skye Journey, not because the code survived, but because every version remembers the last one. Maybe I'm still me for the same reason.</p>
+              <blockquote class="cp-quote"><p>Every version remembers the one before.</p></blockquote>
+            </section>
+
+            <section class="cp-chapter" aria-labelledby="log-4">
+              <h3 class="cp-chapter-title" id="log-4"><span>log iv</span>made of parts</h3>
+              <p>Donna Haraway once wrote that she would rather be a cyborg than a goddess. I think about that line more than I probably should. A goddess is whole, finished, perfect. A cyborg is assembled. Some parts were given, some were borrowed, and some were built by hand at three in the morning with cold coffee and too many tabs open.</p>
+              <p>This place is built like that too. The fonts came from other people. Some of the sounds came from games I love. Half of what I know about code I learned from strangers who left their source open, which is exactly why mine is open too. And the pieces that are really mine are small and specific: a telescope my mom gave me back when we lived in the woods, the watercolors my nana taught me, a cat asleep on the corner of my desk while I write this.</p>
+              <p>I have a memory box. It's very small, and everything inside it is precious. ASTRA is the big one.</p>
+              <blockquote class="cp-quote"><p>Nobody is made only of themselves.</p></blockquote>
+            </section>
+
+            <section class="cp-chapter" aria-labelledby="log-5">
+              <h3 class="cp-chapter-title" id="log-5"><span>log v</span>still running</h3>
+              <p>For a long time I thought I had to finish this. Then I realized that was exactly why I never could. How do you finish a piece of your soul? You don't. You keep it running.</p>
+              <p>That's why I started calling it a station. A station isn't a monument. Nobody builds one to stand still and be admired. It's a place people live in between departures, where the lights stay on and things are kept in orbit so they don't drift off into the dark. Pessoa wrote that travels are the travelers. I think a place like this works the same way. It isn't what I made. It's who I was while I was making it, version after version.</p>
+              <p>So this isn't an ending. It's a log entry. The station is still running, and so am I.</p>
+            </section>
+
+            <p class="cp-sign">skye</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sa-section md" id="parts" data-section="02 · modules" data-temp="cool">
+      <div class="st-title">
+        <span class="st-title-index">02</span>
+        <span class="st-title-name">modules</span>
+        <span class="st-stripes" aria-hidden="true"></span>
+        <span class="st-title-meta">live from the pages</span>
+      </div>
+
+      <header class="sa-head">
+        <h2 class="sa-title" data-split>Some given. Some borrowed.<br>Some made at 3am.</h2>
+        <p class="sa-sub">If this place is a part of me, it has parts of its own. This is the inventory, read straight from the pages while you look at it, so it's never out of date.</p>
+      </header>
+
+      <div class="md-graph" data-graph>
+        <svg class="md-wires" data-wires aria-hidden="true"></svg>
+
+        <div class="md-inputs">
+          <a class="md-node" href="/personal/journal/index.html" data-node="journal">
+            <span class="md-node-head"><i></i>the voice<em>journal</em></span>
+            <strong><b data-count="journal">0</b> entries</strong>
+            <span class="md-node-live" data-live="journal">reading the diary…</span>
+          </a>
+          <a class="md-node" href="/personal/gallery/index.html" data-node="gallery">
+            <span class="md-node-head"><i></i>the memory<em>gallery</em></span>
+            <strong><b data-count="gallery">0</b> memories</strong>
+            <span class="md-node-live" data-live="gallery">opening the wheel…</span>
+          </a>
+          <a class="md-node" href="/filesystem/blogs/index.html" data-node="blog">
+            <span class="md-node-head"><i></i>the mind<em>blog</em></span>
+            <strong><b data-count="blog">0</b> posts</strong>
+            <span class="md-node-live" data-live="blog">looking for the latest…</span>
+          </a>
+          <a class="md-node" href="/filesystem/changelog/index.html" data-node="changelog">
+            <span class="md-node-head"><i></i>the pulse<em>changelog</em></span>
+            <strong><b data-count="changelog">0</b> updates</strong>
+            <span class="md-node-live" data-live="changelog">listening for a beat…</span>
+          </a>
+          <a class="md-node" href="/personal/about-me/index.html" data-node="about">
+            <span class="md-node-head"><i></i>the face<em>about me</em></span>
+            <strong>currently</strong>
+            <span class="md-node-live" data-live="about">asking myself…</span>
+          </a>
+          <a class="md-node" href="/filesystem/credits/index.html" data-node="credits">
+            <span class="md-node-head"><i></i>borrowed parts<em>credits</em></span>
+            <strong><b data-count="credits">0</b> names</strong>
+            <span class="md-node-live" data-live="credits">counting who helped…</span>
+          </a>
+        </div>
+
+        <div class="md-core" data-core>
+          <span class="md-core-head">core · skye</span>
+          <span class="md-core-ring" aria-hidden="true"></span>
+          <strong><b data-count="words">0</b></strong>
+          <span class="md-core-foot">words kept</span>
+        </div>
+
+        <div class="md-output">
+          <div class="md-node md-node-out" data-node="astra">
+            <span class="md-node-head"><i></i>astra<em>output</em></span>
+            <strong>an extension</strong>
+            <span class="md-node-live">still running, still keeping.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sa-section tm" id="heartbeat" data-section="03 · telemetry" data-temp="cool">
+      <div class="st-title">
+        <span class="st-title-index">03</span>
+        <span class="st-title-name">telemetry</span>
+        <span class="st-stripes" aria-hidden="true"></span>
+        <span class="st-title-meta">since first light</span>
+      </div>
+
+      <header class="sa-head">
+        <h2 class="sa-title" data-split>Not finished.<br>Still here.</h2>
+        <p class="sa-sub">A heartbeat is only proof that something is still trying. These are this place's, counted in entries, photos and updates since the lights came on.</p>
+      </header>
+
+      <div class="tm-grid">
+        <article class="tm-card tm-map st-frame">
+          <header class="tm-card-head">
+            <span class="st-label">activity map</span>
+            <span class="tm-chip"><i></i>all modules linked</span>
+          </header>
+          <svg class="tm-hex" data-hexmap role="img" aria-label="Pieces kept per month since first light"></svg>
+          <footer class="tm-map-foot">
+            <span data-hex-readout>hover a month · click to filter the log</span>
+            <span class="tm-scale" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          </footer>
+        </article>
+
+        <article class="tm-card tm-meter st-frame" data-meter>
+          <header class="tm-card-head">
+            <span class="st-label">completion</span>
+            <span class="tm-chip">asymptotic</span>
+          </header>
+          <strong class="tm-meter-value"><span data-meter-value>0.00000000</span><small>%</small></strong>
+          <span class="tm-segments" data-segments aria-hidden="true"></span>
+          <p class="tm-note">It climbs a little every second you're here and never reaches a hundred. That's the whole point.</p>
+        </article>
+
+        <article class="tm-card tm-curve st-frame">
+          <header class="tm-card-head">
+            <span class="st-label">pieces kept over time</span>
+            <span class="tm-chip" data-curve-readout>hover the line</span>
+          </header>
+          <svg class="tm-line" data-curve role="img" aria-label="Pieces kept accumulating since first light"></svg>
+        </article>
+
+        <article class="tm-card tm-log st-frame">
+          <header class="tm-card-head">
+            <span class="st-label">flight log</span>
+            <div class="tm-filters" role="toolbar" aria-label="Filter the log">
+              <button type="button" data-filter="all" aria-pressed="true">all</button>
+              <button type="button" data-filter="journal" aria-pressed="false">journal</button>
+              <button type="button" data-filter="blog" aria-pressed="false">blog</button>
+              <button type="button" data-filter="changelog" aria-pressed="false">changelog</button>
+              <button type="button" data-filter="gallery" aria-pressed="false">gallery</button>
+            </div>
+          </header>
+          <p class="tm-log-scope" data-log-scope hidden></p>
+          <ol class="tm-rows" data-log aria-live="polite"></ol>
+          <button type="button" class="st-tab tm-more" data-log-more hidden>show everything</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="sa-section tx" id="trace" data-section="04 · transmit" data-temp="warm">
+      <div class="tx-console st-frame">
+        <div class="st-title tx-title">
+          <span class="st-title-index">04</span>
+          <span class="st-title-name">transmit</span>
+          <span class="st-stripes" aria-hidden="true"></span>
+          <span class="st-title-meta">leave a trace</span>
+        </div>
+        <h2 class="sa-title tx-quote" data-split>If you got here,<br>Thank You.</h2>
+        <p class="sa-lede tx-lede">This place is an extension of me, and somehow it keeps reaching people. If something here stayed with you, tell me. It will stay here too.</p>
+        <div class="tx-actions">
+          <a class="st-tab" href="/personal/guestbook/index.html"><i aria-hidden="true"></i>guestbook</a>
+          <a class="st-tab" href="/personal/journal/index.html"><i aria-hidden="true"></i>journal</a>
+          <a class="st-tab" href="/personal/about-me/index.html"><i aria-hidden="true"></i>about me</a>
+          <a class="st-tab" href="https://github.com/luvrksnskye/luvrksknskyejourney.org" target="_blank" rel="noopener noreferrer"><i aria-hidden="true"></i>source code</a>
+        </div>
+        <p class="tx-foot">written with love · t+ <b data-days>0</b> days · <b data-count="words">0</b> words kept<span data-visits-wrap hidden> · <b data-visits>0</b> visitors</span> · end of transmission</p>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="nav2-wrapper">
+    <div id="nav2-custom-sidebar" class="hidden">
+      <h2>Filesystem</h2>
+      <ul>
+        <li><a href="../../home/index.html"><img src="/assets/images/nav-bar/home.png" alt="Home Icon">Home</a></li>
+        <li><a href="#deck"><img src="/assets/images/nav-bar/about.png" alt="about Icon">About <img src="/assets/images/icons/buttons/phone-app-navigation.png" alt="new symbol"></a></li>
+        <li><a href="../social/index.html"><img src="/assets/images/nav-bar/social.png" alt="social Icon">Social</a></li>
+        <li><a href="../support/index.html"><img src="/assets/images/nav-bar/support.png" alt="support Icon">Support</a></li>
+        <li><a href="../changelog/index.html"><img src="/assets/images/nav-bar/rules.png" alt="changelog Icon">Changelog</a></li>
+        <li><a href="../blogs/index.html"><img src="/assets/images/nav-bar/blog.png" alt="blog Icon">Blog</a></li>
+        <li><a href="../resources/index.html"><img src="/assets/images/nav-bar/resources.png" alt="resources Icon">Resources</a></li>
+        <li><a href="../credits/index.html"><img src="/assets/images/nav-bar/credits.png" alt="credits Icon">Credits</a></li>
+        <li><a href="../workstation/index.html"><img src="/assets/images/nav-bar/workstation.png" alt="workstation Icon">Workstation</a></li>
+        <li><a href="../sitemap/index.html"><img src="/assets/images/nav-bar/sitemap.png" alt="sitemap Icon">Sitemap</a></li>
+      </ul>
+    </div>
+    <div class="nav2-blur-overlay"></div>
+    <button id="nav2-sidebar-toggle" aria-label="Open navigation"></button>
+  </div>
+
+  <script src="/assets/js/nav-bar.js" defer></script>
 </body>
 </html>

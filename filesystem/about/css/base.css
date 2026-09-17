@@ -1,0 +1,282 @@
+@font-face {
+  font-family: 'ZHFont';
+  src: url('/assets/fonts/zhcn.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'departure-mono';
+  src: url('/assets/fonts/departuremono-regular.woff') format('woff');
+  font-display: swap;
+}
+
+@property --temp {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.sa {
+  --ink-warm: #f6efe3;
+  --ink-cool: #e4eefc;
+  --ink: color-mix(in oklab, var(--ink-cool) calc(var(--temp) * 100%), var(--ink-warm));
+  --ink-soft: color-mix(in oklab, var(--ink) 74%, transparent);
+  --ink-faint: color-mix(in oklab, var(--ink) 44%, transparent);
+  --line: rgba(228, 238, 252, 0.82);
+  --line-soft: rgba(228, 238, 252, 0.34);
+  --line-faint: rgba(228, 238, 252, 0.12);
+  --accent: #91ceff;
+  --accent-soft: rgba(145, 206, 255, 0.35);
+  --void: #01081b6e;
+  --panel: rgba(5, 2, 16, 0.498);
+  --panel-lit: rgba(18, 26, 42, 0.9);
+  --cell: #161c28;
+
+  --k-journal: #f6efe3;
+  --k-blog: #91ceff;
+  --k-gallery: #c9b8ff;
+  --k-changelog: #b9d6f8;
+
+  --mark: 'Cinzel', 'Times New Roman', serif;
+  --station: var(--mark);
+  --hud: var(--mark);
+  --voice: 'ZHFont', 'Poppins', system-ui, sans-serif;
+  --num: var(--voice);
+  --sign: var(--mark);
+  --ease: var(--ease-decel, cubic-bezier(0.16, 1, 0.3, 1));
+  --snap: cubic-bezier(0.7, 0, 0.2, 1);
+
+  --bar-h: 46px;
+  --nav-w: clamp(84px, calc(7 * var(--vw, 1vw)), 130px);
+  --rail-w: clamp(40px, calc(9 * var(--vw, 1vw)), 160px);
+  --gutter: clamp(20px, calc(4 * var(--vw, 1vw)), 70px);
+
+  --temp: 0;
+
+  margin: 0;
+  min-height: calc(100 * var(--vh, 1vh));
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--voice);
+  font-size: clamp(0.98rem, calc(1.05 * var(--vw, 1vw)), 1.1rem);
+  line-height: 1.95;
+  letter-spacing: 0.012em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: --temp 1200ms var(--ease);
+}
+
+.sa[data-temp='cool'] {
+  --temp: 1;
+}
+
+.sa *,
+.sa *::before,
+.sa *::after {
+  box-sizing: border-box;
+}
+
+html:has(.sa) {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar-h) + 16px);
+  background: var(--void);
+}
+
+.sa ::selection {
+  background: var(--ink-cool);
+  color: var(--void);
+}
+
+.sa a {
+  color: var(--ink-cool);
+  text-underline-offset: 4px;
+}
+
+.sa :focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.sa kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border: 1px solid var(--line-soft);
+  font-family: var(--num);
+  font-size: 10px;
+  color: var(--ink-cool);
+}
+
+.sa-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  background: var(--void);
+}
+
+.sa-backdrop-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1600ms ease;
+}
+
+.sa-backdrop-video.is-ready {
+  opacity: 0.62;
+}
+
+.sa-backdrop-tint {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(1, 12, 38, 0.29) 0%, rgba(1, 13, 44, 0.454) 45%, rgba(1, 12, 40, 0.247) 100%),
+    linear-gradient(0deg, rgba(1, 8, 27, 0.304) 0%, transparent 40%);
+}
+
+.sa-backdrop-tint::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--void);
+  opacity: calc(var(--depth, 0) * 0.5);
+}
+
+.sa-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  background:
+    radial-gradient(circle, rgba(228, 238, 252, 0.22) 1px, transparent 1.2px) 0 0 / 48px 48px;
+}
+
+.sa-stage {
+  position: relative;
+}
+
+.sa-section {
+  position: relative;
+  padding: calc(var(--bar-h) + clamp(50px, calc(8 * var(--vh, 1vh)), 110px)) calc(var(--gutter) + var(--rail-w)) clamp(70px, calc(12 * var(--vh, 1vh)), 160px) calc(var(--gutter) + var(--nav-w));
+}
+
+.sa-head {
+  max-width: 920px;
+  margin: clamp(26px, calc(4 * var(--vh, 1vh)), 48px) 0 clamp(36px, calc(6 * var(--vh, 1vh)), 70px);
+}
+
+.sa-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  font-family: var(--hud);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--line-soft);
+}
+
+.sa-eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.sa-eyebrow b {
+  font-weight: 400;
+  color: var(--ink-cool);
+}
+
+.sa-title {
+  margin: 0;
+  font-family: var(--mark);
+  font-weight: 400;
+  font-size: clamp(2rem, calc(3.7 * var(--vw, 1vw)), 3.5rem);
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sa-title-xl {
+  font-size: clamp(3rem, calc(7.4 * var(--vw, 1vw)), 7.2rem);
+  line-height: 0.96;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  font-variant: small-caps;
+}
+
+.sa-word {
+  display: inline-block;
+  clip-path: inset(-0.2em 100% -0.3em 0);
+  translate: 0 0.3em;
+  opacity: 0;
+  transition:
+    clip-path 1000ms var(--snap) calc(var(--i, 0) * 80ms),
+    translate 1000ms var(--ease) calc(var(--i, 0) * 80ms),
+    opacity 600ms ease calc(var(--i, 0) * 80ms);
+}
+
+.is-seen .sa-word {
+  clip-path: inset(-0.2em -0.2em -0.3em 0);
+  translate: 0 0;
+  opacity: 1;
+}
+
+.sa-lede {
+  max-width: 44ch;
+  margin: clamp(20px, calc(3.5 * var(--vh, 1vh)), 38px) 0 0;
+  font-size: clamp(1.04rem, calc(1.2 * var(--vw, 1vw)), 1.24rem);
+  line-height: 1.95;
+}
+
+.sa-sub {
+  max-width: 56ch;
+  margin: 20px 0 0;
+  color: var(--ink-soft);
+}
+
+.sa-reveal {
+  opacity: 0;
+  translate: 0 18px;
+  transition: opacity 900ms var(--ease), translate 900ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.sa-reveal.is-seen {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.sa-section:not(.is-live) *,
+.sa-section:not(.is-live) *::before,
+.sa-section:not(.is-live) *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.sa) {
+    scroll-behavior: auto;
+  }
+
+  .sa *,
+  .sa *::before,
+  .sa *::after {
+    animation: none !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .sa {
+    --nav-w: 0px;
+    --rail-w: 0px;
+  }
+}

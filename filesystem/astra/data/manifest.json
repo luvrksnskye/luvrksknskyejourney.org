@@ -1,0 +1,19 @@
+{
+  "format": "astra-manifest/1",
+  "nodes": 0,
+  "edges": 0,
+  "files": {
+    "feed.xml": {
+      "sha256": "6270ba418cf138e4e8ee95abc98b077ee369ada77617aab29183f092ba9c9fa1",
+      "bytes": 437
+    },
+    "graph.json": {
+      "sha256": "ea778bc8f22878d50af2ba23035f1dc876bc277cea8d28db00016ecbcbed4cc0",
+      "bytes": 62
+    },
+    "posts.json": {
+      "sha256": "e90af6411f8af5bfc4d6da0adc6cc97eac4f73c05b039c3aefc285688acc3ced",
+      "bytes": 47
+    }
+  }
+}

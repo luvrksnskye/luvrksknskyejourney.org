@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#03050a"/>
+  <g fill="none" stroke="#e4eefc" stroke-opacity="0.12">
+    <path d="M0 112.5H800M0 225H800M0 337.5H800M200 0V450M400 0V450M600 0V450"/>
+  </g>
+  <g fill="none" stroke="#e4eefc">
+    <circle cx="400" cy="225" r="120" stroke-opacity="0.34"/>
+    <circle cx="400" cy="225" r="64" stroke-opacity="0.2"/>
+    <path d="M20 20h24M20 20v24M780 430h-24M780 430v-24" stroke-opacity="0.82"/>
+  </g>
+  <path d="M400 187l9 29 29 9-29 9-9 29-9-29-29-9 29-9z" fill="#e4eefc"/>
+  <circle cx="520" cy="225" r="4" fill="#91ceff"/>
+  <text x="400" y="400" fill="#e4eefc" fill-opacity="0.6" font-family="Cinzel, 'Times New Roman', serif" font-size="18" letter-spacing="10" text-anchor="middle">ASTRA</text>
+</svg>

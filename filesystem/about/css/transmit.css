@@ -1,0 +1,55 @@
+.tx {
+  display: grid;
+  place-items: center;
+  min-height: calc(100 * var(--vh, 1vh));
+}
+
+.tx-console {
+  width: min(100%, 980px);
+  display: grid;
+  justify-items: center;
+  padding: 18px clamp(20px, calc(5 * var(--vw, 1vw)), 80px) clamp(40px, calc(6 * var(--vh, 1vh)), 70px);
+  text-align: center;
+}
+
+.tx-title {
+  align-self: stretch;
+  width: 100%;
+  margin-bottom: clamp(40px, calc(7 * var(--vh, 1vh)), 70px);
+  text-align: left;
+}
+
+.tx-quote {
+  font-size: clamp(2.1rem, calc(5 * var(--vw, 1vw)), 4.8rem);
+  text-transform: none;
+  font-variant: small-caps;
+}
+
+.tx-lede {
+  margin-inline: auto;
+}
+
+.tx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(28px, calc(5 * var(--vh, 1vh)), 46px);
+}
+
+.tx-foot {
+  margin: clamp(40px, calc(7 * var(--vh, 1vh)), 70px) 0 0;
+  font-family: var(--hud);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--line-soft);
+}
+
+.tx-foot b {
+  font-family: var(--num);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-cool);
+  font-variant-numeric: tabular-nums;
+}

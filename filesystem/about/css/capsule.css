@@ -1,0 +1,203 @@
+.cp-window {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  margin-top: clamp(26px, calc(4 * var(--vh, 1vh)), 44px);
+}
+
+.cp-side {
+  position: relative;
+  border-right: 1px solid var(--line-faint);
+}
+
+.cp-ruler {
+  position: sticky;
+  top: calc(var(--bar-h) + 30px);
+  display: block;
+  height: min(60vh, 520px);
+  margin: 30px auto 0;
+  width: 18px;
+  background:
+    repeating-linear-gradient(180deg, var(--line-soft) 0 1px, transparent 1px 10px) left / 8px 100% no-repeat,
+    repeating-linear-gradient(180deg, var(--ink-cool) 0 1px, transparent 1px 50px) left / 18px 100% no-repeat;
+}
+
+.cp-ruler::after {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: calc(var(--read, 0) * 100%);
+  border-left: 6px solid var(--accent);
+  border-block: 4px solid transparent;
+  translate: 0 -50%;
+  transition: top 300ms var(--ease);
+}
+
+.cp-main {
+  padding: clamp(28px, calc(4 * var(--vw, 1vw)), 64px) clamp(22px, calc(5 * var(--vw, 1vw)), 90px) clamp(40px, calc(6 * var(--vh, 1vh)), 70px);
+}
+
+.cp-head {
+  display: grid;
+  gap: 22px;
+  max-width: 760px;
+  margin: 0 auto clamp(40px, calc(7 * var(--vh, 1vh)), 80px);
+}
+
+.cp-integrity {
+  display: grid;
+  grid-template-columns: auto minmax(120px, 1fr);
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.cp-integrity-bar {
+  position: relative;
+  height: 1px;
+  background: var(--line-faint);
+}
+
+.cp-integrity-bar i {
+  position: absolute;
+  inset: -1px 0;
+  background: var(--ink-cool);
+  transform-origin: left;
+  transform: scaleX(var(--kept, 0));
+  transition: transform 500ms var(--ease);
+}
+
+.cp-kept {
+  grid-column: 1 / -1;
+  font-family: var(--hud);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--line-soft);
+}
+
+.cp-kept b {
+  font-family: var(--num);
+  font-weight: 400;
+  color: var(--ink-cool);
+  font-variant-numeric: tabular-nums;
+}
+
+.cp-integrity.is-full .cp-kept {
+  color: var(--accent);
+}
+
+.cp-letter {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.cp-chapter {
+  margin-bottom: clamp(56px, calc(9 * var(--vh, 1vh)), 110px);
+}
+
+.cp-chapter-title {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin: 0 0 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-faint);
+  font-family: var(--mark);
+  font-weight: 400;
+  font-size: clamp(1.2rem, calc(1.6 * var(--vw, 1vw)), 1.6rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-warm);
+}
+
+.cp-chapter-title span {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+}
+
+.cp-chapter > p {
+  margin: 0 0 1.5em;
+  font-size: clamp(1.06rem, calc(1.2 * var(--vw, 1vw)), 1.2rem);
+  line-height: 2.05;
+}
+
+.cp-w {
+  --b: 3;
+  color: color-mix(in oklab, var(--ink) calc(100% - var(--b) * 20%), transparent);
+  text-shadow: 0 0 calc(var(--b) * 1.6px) color-mix(in oklab, var(--ink) calc(var(--b) * 14%), transparent);
+  transition: color 600ms ease, text-shadow 600ms ease;
+}
+
+.cp-w.is-kept {
+  --b: 0 !important;
+  text-shadow: none;
+}
+
+.cp-w.is-kept.is-fresh {
+  color: var(--accent);
+  transition: color 1400ms ease;
+}
+
+.cp-quote {
+  position: relative;
+  margin: clamp(40px, calc(6 * var(--vh, 1vh)), 70px) 0 0;
+  padding: clamp(26px, calc(4 * var(--vh, 1vh)), 40px) 0 clamp(18px, calc(3 * var(--vh, 1vh)), 30px) clamp(20px, calc(3 * var(--vw, 1vw)), 40px);
+  border-left: 1px solid var(--ink-cool);
+}
+
+.cp-quote::before {
+  content: 'record · kept';
+  position: absolute;
+  top: 0;
+  left: clamp(20px, calc(3 * var(--vw, 1vw)), 40px);
+  font-family: var(--hud);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cp-quote p {
+  margin: 0;
+  font-family: var(--mark);
+  font-size: clamp(1.6rem, calc(2.9 * var(--vw, 1vw)), 2.7rem);
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  color: var(--ink-warm);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1200ms var(--snap);
+}
+
+.cp-quote.is-seen p {
+  clip-path: inset(0 0 0 0);
+}
+
+.cp-sign {
+  margin: 30px 0 0;
+  text-align: right;
+  font-family: var(--sign);
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  color: var(--ink-cool);
+}
+
+@media (max-width: 700px) {
+  .cp-window {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-side {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-w {
+    --b: 0 !important;
+  }
+
+  .cp-quote p {
+    clip-path: none;
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "format": "blog-posts/1",
+  "posts": [
+    {
+      "title": "¿CABE EL UNIVERSO EN UN CUBO? (ESP)",
+      "date": "2026-09-15",
+      "description": "DATA GATE de Ouchhh a fondo: la escultura LED que convirtió los datos de Kepler en arte con IA.",
+      "tags": [
+        "art",
+        "science",
+        "3d"
+      ],
+      "category": "art",
+      "image": "/filesystem/blogs/posts/data-gate/assets/images/cover.gif",
+      "alt": "DATA GATE Preview",
+      "url": "/filesystem/blogs/posts/data-gate/index.html",
+      "label": "View Details →"
+    },
+    {
+      "title": "HOW TO PENTEST (ESP)",
+      "date": "2025-03-15",
+      "description": "Una guía completa sobre los comandos de pruebas de penetración.",
+      "tags": [
+        "hacking",
+        "guides"
+      ],
+      "category": "guides",
+      "image": "/filesystem/blogs/assets/images/hacking-how-to.png",
+      "alt": "Project Preview",
+      "url": "/filesystem/blogs/posts/01.html",
+      "label": "View Details →"
+    },
+    {
+      "title": "CSS GRID TUTORIAL (ESP)",
+      "date": "2025-03-10",
+      "description": "Una guía interactiva sobre CSS Grid.",
+      "tags": [
+        "guides",
+        "coding"
+      ],
+      "category": "guides",
+      "image": "/filesystem/blogs/assets/images/css-grid.png",
+      "alt": "Update Preview",
+      "url": "/filesystem/blogs/posts/02.html",
+      "label": "Read More →"
+    },
+    {
+      "title": "TWO YEARS OF SKYE JOURNEY",
+      "date": "2025-09-13",
+      "description": "Time flies so fast, and I can't believe it's already been two years since I started this website. I've learned so much and grown as a person and a developer.",
+      "tags": [
+        "personal",
+        "updates"
+      ],
+      "category": "guides",
+      "image": "/filesystem/blogs/assets/images/programming-languages.png",
+      "alt": "Programming Languages Preview",
+      "url": "/filesystem/blogs/posts/07.html",
+      "label": "Read More →"
+    },
+    {
+      "title": "WEEKEND THOUGHTS",
+      "date": "2025-03-27",
+      "description": "Reflecting on creativity, inspiration, and the process of the update 2.1.",
+      "tags": [
+        "personal"
+      ],
+      "category": "personal",
+      "image": "/filesystem/blogs/assets/images/me.png",
+      "alt": "Update Preview",
+      "url": "/filesystem/blogs/posts/06.html",
+      "label": "Read More →"
+    },
+    {
+      "title": "MY FIRST GRAPHIC TABLET!",
+      "date": "2025-03-25",
+      "description": "I just got my first graphics tablet!! Now I can make my own assets and practice digital drawing. This is exciting!",
+      "tags": [
+        "personal",
+        "art"
+      ],
+      "category": "personal",
+      "image": "/filesystem/blogs/assets/images/my-first-digital-tablet.png",
+      "alt": "Project Preview",
+      "url": "/filesystem/blogs/posts/05.html",
+      "label": "View more →"
+    },
+    {
+      "title": "MATH RESOURCES (SPANISH & ENGLISH)",
+      "date": "2025-03-23",
+      "description": "Arithmetic, algebra & geometry, Calculus & Advanced Math, Statistics & Probability",
+      "tags": [
+        "spanish",
+        "guides",
+        "study"
+      ],
+      "category": "hardware",
+      "image": "/filesystem/blogs/assets/images/match-resources.png",
+      "alt": "Project Preview",
+      "url": "/filesystem/blogs/posts/03.html",
+      "label": "View more →"
+    }
+  ]
+}
