@@ -116,7 +116,7 @@ export class Scene {
     this.quiet = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     this.nodes = layout(stars.map((star, i) => ({ ...star, no: i + 1 })), links);
-    this.spread = this.nodes.spread;
+    this.spread = Math.max(this.nodes.spread, 96);
     this.index = new Map(this.nodes.map((node, i) => [node.id, i]));
     this.links = links
       .filter((link) => this.index.has(link.from) && this.index.has(link.to))

@@ -1,4 +1,4 @@
-import { Scene } from './scene.js?v=6';
+import { Scene } from './scene.js?v=7';
 
 const MUSIC = '/filesystem/astra/assets/astraBGmusic.mp3';
 const VOLUME = 0.16;
@@ -154,7 +154,6 @@ export function openNetwork(posts, edges) {
       stage: post.stage ?? 'main-sequence',
       summary: post.description ?? ''
     }));
-  if (!stars.length) return;
   const links = edges.map((edge) => ({ from: edge.from, to: edge.to }));
 
   const overlay = el('div', 'nn is-entering');

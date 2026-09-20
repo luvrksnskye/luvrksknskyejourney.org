@@ -10,7 +10,7 @@ const ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const STAGES = new Set(['nebula', 'protostar', 'main-sequence', 'giant', 'remnant']);
 const MAX_BYTES = 1024 * 1024;
 
-import { openNetwork } from './network/index.js?v=7';
+import { openNetwork } from './network/index.js?v=8';
 
 let grid;
 
@@ -250,12 +250,7 @@ function handleFiltering() {
 function handleViews(stars, edges) {
   const enter = document.querySelector('[data-view="network"]');
   if (!enter) return;
-  const open = () => {
-    if (!stars.length) return;
-    openNetwork(stars, edges);
-  };
-  enter.addEventListener('click', open);
-  enter.disabled = !stars.length;
+  enter.addEventListener('click', () => openNetwork(stars, edges));
 }
 
 async function start() {
