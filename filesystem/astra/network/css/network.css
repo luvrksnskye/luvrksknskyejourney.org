@@ -568,7 +568,7 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
 .intro-text { max-width: min(640px, 54vw); margin-bottom: clamp(28px, 9vh, 86px); }
 .intro-line {
   margin: 0; font-family: var(--display); font-weight: 400;
-  font-size: clamp(21px, 3.1vw, 38px); line-height: 1.32; letter-spacing: 0.012em;
+  font-size: min(clamp(20px, 3.1vw, 38px), 5.4vh); line-height: 1.3; letter-spacing: 0.012em;
   color: var(--signal); text-wrap: balance;
   transition: opacity 260ms var(--ease), transform 260ms var(--ease);
 }
