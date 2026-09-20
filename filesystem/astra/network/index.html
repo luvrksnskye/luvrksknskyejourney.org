@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ASTRA Central Core</title>
+<meta name="description" content="The memory network of ASTRA: every published note and the links between them, in three dimensions.">
+<link rel="icon" type="image/x-icon" href="/assets/images/icons/buttons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="css/network.css?v=1">
+</head>
+<body>
+
+<div id="stage" class="stage">
+
+  <video id="backdrop"  class="backdrop" hidden muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
+
+  <div id="fog" class="fog" hidden aria-hidden="true"></div>
+
+  <canvas id="gl" aria-label="Three-dimensional map of the ASTRA vault"></canvas>
+  <div id="fallback2d" class="fallback" hidden>
+    <p class="fallback-title">NO GL CONTEXT</p>
+    <p class="fallback-body">The lattice needs WebGL. The index and the controls still work.</p>
+  </div>
+
+  <div class="film" aria-hidden="true">
+    <div class="film-grain" id="film-grain"></div>
+    <div class="film-vig"></div>
+  </div>
+
+  <div id="hud" class="hud pre">
+
+    <svg class="crop crop-tl" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 8V0h8M4 0v4H0" /></svg>
+    <svg class="crop crop-tr" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 8V0h-8M20 0v4h4" /></svg>
+    <svg class="crop crop-bl" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 16v8h8M4 24v-4H0" /></svg>
+    <svg class="crop crop-br" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 16v8h-8M20 24v-4h4" /></svg>
+
+    <svg id="leaders" class="leaders" aria-hidden="true"></svg>
+    <div id="labels" class="labels" aria-hidden="true"></div>
+
+    <div class="reticle" id="reticle" aria-hidden="true">
+      <svg viewBox="0 0 160 160"><g id="reticle-art"></g></svg>
+    </div>
+
+    <p class="nothing" id="nothing" hidden>
+      <span class="nothing-cap">THE VAULT IS EMPTY</span>
+      <span class="nothing-body">Nothing is published yet, so there is nothing to draw. Every note that goes public shows up here on its own.</span>
+    </p>
+
+    <header class="rail rail-top">
+      <div class="ident">
+        <div class="ident-mark">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><g id="mark-art"></g></svg>
+        </div>
+        <div class="ident-text">
+          <h1 class="wordmark">ASTRA</h1>
+          <p class="ident-sub">STATION 01<span class="ident-long"> <span class="sep">/</span> SKYE JOURNEY</span></p>
+        </div>
+      </div>
+
+      <div class="top-meta">
+        <div class="meta-row"><span class="k">MET</span><span class="v num" id="m-met">00:00:00:00</span></div>
+        <div class="meta-row"><span class="k">MODE</span><span class="v" id="m-mode">LATTICE</span></div>
+        <div class="meta-row"><span class="k">PEER</span><span class="v" id="m-net">NONE</span></div>
+        <a class="meta-exit" href="/filesystem/blogs/index.html">
+          <span class="engage-brk">[</span><span>EXIT</span><span class="engage-brk">]</span>
+        </a>
+      </div>
+    </header>
+
+    <nav class="rail rail-left" aria-label="Reading controls">
+      <section class="grp">
+        <p class="rail-cap">READ MODE</p>
+        <ul class="modes" id="modes" role="tablist"></ul>
+      </section>
+
+      <section class="grp grp-cats">
+        <p class="rail-cap">
+          DOMAINS
+          <button class="mini" id="cats-all" type="button">ALL</button>
+        </p>
+        <ul class="cats" id="cats"></ul>
+      </section>
+
+      <section class="grp grp-kept">
+        <p class="rail-cap">
+          KEPT <span class="num" id="fav-n">00</span>
+          <button class="mini" id="fav-only" type="button" aria-pressed="false">ONLY</button>
+        </p>
+        <ul class="kept" id="kept"></ul>
+      </section>
+
+      <div class="tally" id="tally">
+        <div class="tally-row"><span class="k">NOTES</span><span class="v num" id="t-nodes">000</span></div>
+        <div class="tally-row"><span class="k">LINKS</span><span class="v num" id="t-links">000</span></div>
+        <div class="tally-row"><span class="k">CLOSE</span><span class="v num" id="t-loose">000</span></div>
+        <div class="tally-row"><span class="k">LISTED</span><span class="v num" id="t-public">000</span></div>
+      </div>
+    </nav>
+
+    <aside class="rail rail-right" aria-label="Instruments">
+      <div class="instr instr-stability">
+        <svg viewBox="0 0 150 150" id="gauge-stability" aria-hidden="true"></svg>
+      </div>
+      <div class="instr instr-bearing">
+        <svg viewBox="0 0 130 130" id="gauge-bearing" aria-hidden="true"></svg>
+        <div class="bearing-readout">
+          <div class="br-row"><span class="k">R</span><span class="v num" id="b-r">00.000</span></div>
+          <div class="br-row"><span class="k">L</span><span class="v num" id="b-l">000</span></div>
+        </div>
+      </div>
+
+      <div class="instr instr-tape">
+        <svg viewBox="0 0 96 240" id="gauge-depth" aria-hidden="true"></svg>
+      </div>
+
+      <div class="readouts" id="readouts">
+        <div class="ro"><span class="k">FOV</span><span class="v num" id="r-fov">000.00°</span></div>
+        <div class="ro"><span class="k">DST</span><span class="v num" id="r-dst">0000.0 u</span></div>
+        <div class="ro"><span class="k">AZM</span><span class="v num" id="r-azm">000.000°</span></div>
+        <div class="ro"><span class="k">ELV</span><span class="v num" id="r-elv">+00.000°</span></div>
+        <div class="ro"><span class="k">FPS</span><span class="v num" id="r-fps">00.0</span></div>
+      </div>
+
+      <div class="flux">
+        <p class="flux-cap">SEMANTIC FLUX</p>
+        <canvas id="flux" width="240" height="44"></canvas>
+      </div>
+    </aside>
+
+    <section class="peer" id="peer" hidden>
+      <div class="peer-head">
+        <span class="peer-tag">ARCHE</span>
+        <span class="peer-state num" id="peer-state">NONE</span>
+      </div>
+      <p class="peer-name" id="peer-name">NO STATION MIRRORED</p>
+      <p class="peer-copy" id="peer-copy">
+        No peer station is mirrored yet. When one is, its records sit here unreadable until every byte checks against its manifest.
+      </p>
+      <pre class="peer-log num" id="peer-log"></pre>
+      <button class="peer-btn" id="peer-btn" type="button" disabled>
+        <span class="engage-brk">[</span><span>OPEN THE LINK</span><span class="engage-brk">]</span>
+      </button>
+    </section>
+
+    <section class="panel" id="panel" hidden aria-live="polite">
+      <div class="panel-head">
+        <span class="panel-tag" id="p-domain">DOMAIN</span>
+        <div class="panel-acts">
+          <button class="act" id="p-fav" type="button" aria-pressed="false" title="Keep this note (K)">+ KEEP</button>
+          <button class="act" id="p-iso" type="button" aria-pressed="false" title="Isolate its neighbourhood (I)">ISOLATE</button>
+          <button class="x" id="p-close" type="button" aria-label="Close note">×</button>
+        </div>
+      </div>
+      <h2 class="panel-title" id="p-title">...</h2>
+      <p class="panel-slug num" id="p-slug">...</p>
+
+      <dl class="panel-grid">
+        <div><dt>TYPE</dt><dd id="p-vis">...</dd></div>
+        <div><dt>STAGE</dt><dd id="p-status">...</dd></div>
+        <div><dt>DEGREE</dt><dd class="num" id="p-deg">...</dd></div>
+        <div><dt>STATION</dt><dd id="p-station">...</dd></div>
+      </dl>
+
+      <p class="panel-abstract" id="p-abstract">...</p>
+
+      <a class="panel-open" id="p-open" href="#" hidden>
+        <span class="engage-brk">[</span><span>READ THE NOTE</span><span class="engage-brk">]</span>
+      </a>
+
+      <div class="panel-block">
+        <p class="block-cap">LINKED <span class="num" id="p-lk-n">0</span></p>
+        <ul class="linklist" id="p-links"></ul>
+      </div>
+      <div class="panel-block">
+        <p class="block-cap">CLOSE <span class="dim">· never linked</span></p>
+        <ul class="linklist loose" id="p-loose"></ul>
+      </div>
+    </section>
+
+    <footer class="rail rail-bottom">
+      <div class="cmd">
+        <span class="cmd-prompt">&gt;&gt;&gt;</span>
+        <span class="cmd-line" id="cmd-line">mounting the lattice</span>
+      </div>
+
+      <div class="tools">
+        <button class="tool" id="t-find" type="button"><kbd>/</kbd> FIND</button>
+        <button class="tool" id="t-ask" type="button"><kbd>A</kbd> ASK</button>
+        <button class="tool" id="t-keys" type="button"><kbd>?</kbd> KEYS</button>
+        <button class="tool" id="t-opt" type="button"><kbd>O</kbd> OPTICS</button>
+      </div>
+
+      <div class="audio" id="audio-widget">
+        <button class="abtn" id="a-toggle" type="button" aria-label="Play or pause the music">
+          <span class="abtn-ico" id="a-ico" aria-hidden="true">||</span>
+          <span class="abtn-lab" id="a-lab">NO SIGNAL</span>
+        </button>
+        <div class="avol">
+          <label class="sr" for="a-vol">Volume</label>
+          <input type="range" id="a-vol" min="0" max="100" value="55">
+          <span class="num" id="a-vol-n">55</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="scrim" id="search" hidden>
+    <div class="scrim-box find">
+      <p class="scrim-cap">FIND A NOTE</p>
+      <div class="find-input">
+        <span class="cmd-prompt">&gt;</span>
+        <label class="sr" for="q">Search the published notes</label>
+        <input type="text" id="q" autocomplete="off" spellcheck="false" placeholder="a word, a title, a tag">
+      </div>
+      <ul class="find-results" id="find-results"></ul>
+      <p class="scrim-foot"><kbd>↑</kbd><kbd>↓</kbd> move · <kbd>ENTER</kbd> fly to · <kbd>ESC</kbd> close</p>
+    </div>
+  </div>
+
+  <div class="scrim" id="ask" hidden>
+    <div class="scrim-box askbox">
+      <p class="scrim-cap">
+        ASK THE STATION
+        <span class="ask-status" id="ask-status">NOT CONNECTED</span>
+      </p>
+
+      <ul class="ask-log" id="ask-log"></ul>
+
+      <p class="ask-hint" id="ask-hint">
+        Nothing runs here. ASTRA's voice lives on my computer and never on the web, so this sector holds
+        the conversation and nothing else. It stays empty until I connect it to something local.
+      </p>
+
+      <div class="ask-input">
+        <label class="sr" for="ask-input">Your question</label>
+        <textarea id="ask-input" rows="2" spellcheck="false" placeholder="not connected"></textarea>
+        <div class="ask-btns">
+          <button class="tool" id="ask-clear" type="button">CLEAR</button>
+          <button class="tool send" id="ask-send" type="button" disabled>SEND</button>
+        </div>
+      </div>
+      <p class="scrim-foot"><kbd>ENTER</kbd> send · <kbd>SHIFT</kbd>+<kbd>ENTER</kbd> newline · <kbd>ESC</kbd> close</p>
+    </div>
+  </div>
+
+  <div class="scrim" id="help" hidden>
+    <div class="scrim-box sheet">
+      <p class="scrim-cap">CONTROLS</p>
+      <div class="sheet-cols" id="help-cols"></div>
+      <p class="scrim-foot"><kbd>ESC</kbd> close</p>
+    </div>
+  </div>
+
+  <div class="scrim" id="settings" hidden>
+    <div class="scrim-box sheet">
+      <p class="scrim-cap">OPTICS</p>
+      <div class="opts" id="opts"></div>
+      <p class="scrim-foot"><kbd>O</kbd> or <kbd>ESC</kbd> close</p>
+    </div>
+  </div>
+
+  <div class="intro" id="intro" hidden>
+    <div class="intro-stat" id="intro-stat" hidden aria-hidden="true">
+      <span class="stat-n num" id="intro-stat-n"></span>
+      <span class="stat-c" id="intro-stat-c"></span>
+    </div>
+    <div class="intro-text">
+      <p class="intro-line" id="intro-line"></p>
+    </div>
+    <div class="intro-foot">
+      <div class="intro-ruler" id="intro-ruler" aria-hidden="true"></div>
+      <button class="intro-skip" id="intro-skip" type="button">SKIP <kbd>ESC</kbd></button>
+    </div>
+  </div>
+
+  <div class="boot" id="boot">
+    <div class="boot-inner">
+      <div class="boot-mark">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><g id="boot-mark-art"></g></svg>
+      </div>
+      <h2 class="boot-word">ASTRA</h2>
+      <p class="boot-sub">CONSTELLATION · <span class="num">v0.5.0</span></p>
+      <pre class="boot-log num" id="boot-log"></pre>
+      <button class="engage" id="engage" type="button" hidden>
+        <span class="engage-brk">[</span>
+        <span class="engage-lab">ENGAGE</span>
+        <span class="engage-brk">]</span>
+      </button>
+      <p class="boot-note" id="boot-note" hidden>click, tap or any key, the music starts with the gesture</p>
+    </div>
+  </div>
+
+  <audio id="track" loop preload="metadata">
+    <source src="assets/audio/astra-theme.mp3" type="audio/mpeg">
+  </audio>
+
+</div>
+
+<script type="module" src="js/main.js?v=1"></script>
+
+</body>
+</html>

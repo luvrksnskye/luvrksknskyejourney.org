@@ -1,0 +1,16 @@
+{
+  "default": "acheron",
+  "options": {
+    "acheron": { "file": "acheron-black-hole-honkai-star-rail-2-moewalls-com.mp4", "dim": 0.34, "brightness": 0.62 },
+    "blackhole": { "file": "black-hole-universe-honkai-star-rail-moewalls-com.mp4", "dim": 0.32, "brightness": 0.6 },
+    "express": { "file": "astral-express-honkai-star-rail-moewalls-com.mp4", "dim": 0.3, "brightness": 0.58 },
+    "penacony": { "file": "honkai-star-rail-penacony-dreams-edge-moewalls-com.mp4", "dim": 0.3, "brightness": 0.6 },
+    "nightsky": { "file": "minecraft-night-sky-moewalls-com.mp4", "dim": 0.4, "brightness": 0.7 },
+    "flowers": { "file": "sea-of-flowers-honkai-star-rail-moewalls-com.mp4", "dim": 0.28, "brightness": 0.58 },
+    "xiao": { "file": "xiaos-azure-ascent.1920x1080.mp4", "dim": 0.3, "brightness": 0.6 },
+    "jinhsi": { "file": "jinhsi-dragon-form.3840x2160.mp4", "dim": 0.28, "brightness": 0.58 },
+    "fauna": { "file": "ceres-fauna.3840x2160.mp4", "dim": 0.3, "brightness": 0.6 },
+    "aemeath": { "file": "aemeath-x-rover-wuthering-waves-moewalls-com.mp4", "dim": 0.3, "brightness": 0.6 },
+    "rabelle": { "file": "rabelle-college-conference-hall-roof-wuthering-waves-moewalls-com.mp4", "dim": 0.3, "brightness": 0.6 }
+  }
+}

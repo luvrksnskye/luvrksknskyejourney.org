@@ -40,6 +40,7 @@ filesystem/blogs/posts/data-gate/assets/video/datagate.mp4
 
 # Referencias visuales, solo para trabajar
 filesystem/astra/assets/reference/
+filesystem/astra/assets/structure/
 
 # Material de referencia de las entradas
 filesystem/blogs/posts/*/references/
