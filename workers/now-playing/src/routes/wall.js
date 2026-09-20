@@ -162,7 +162,8 @@ async function resolveTopic(env, ctx, raw, access) {
   if (topic === null) return { error: fail(400, 'invalid_topic', access) };
   try {
     if (!(await topicExists(env, ctx, topic))) return { error: fail(404, 'topic_not_found', access) };
-  } catch {
+  } catch (error) {
+    console.error('topics', error?.message ?? error);
     return { error: fail(503, 'wall_unavailable', access) };
   }
   return { topic };

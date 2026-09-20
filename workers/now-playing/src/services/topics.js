@@ -21,11 +21,10 @@ export function parseTopic(value) {
 
 async function fetchTopics(env) {
   if (!env.SITE_ORIGIN) throw new Error('site origin is not configured');
-  const response = await fetch(new URL(POSTS_PATH, env.SITE_ORIGIN), {
-    redirect: 'error',
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
+  const wanted = new URL(POSTS_PATH, env.SITE_ORIGIN);
+  const response = await fetch(wanted, { redirect: 'follow', signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!response.ok) throw new Error(`posts ${response.status}`);
+  if (response.url && new URL(response.url).origin !== wanted.origin) throw new Error('posts moved off site');
   const text = await response.text();
   if (text.length > POSTS_MAX_BYTES) throw new Error('posts too large');
   const data = JSON.parse(text);
