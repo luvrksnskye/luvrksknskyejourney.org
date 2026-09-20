@@ -1,0 +1,12 @@
+{
+  "format": "arche/1",
+  "station": "astra",
+  "title": "Skye Journey",
+  "origin": "https://luvrksknskyejourney.org",
+  "data": {
+    "posts": "/filesystem/astra/data/posts.json",
+    "graph": "/filesystem/astra/data/graph.json",
+    "feed": "/filesystem/astra/data/feed.xml",
+    "manifest": "/filesystem/astra/data/manifest.json"
+  }
+}
