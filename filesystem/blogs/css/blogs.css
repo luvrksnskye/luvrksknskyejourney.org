@@ -25,18 +25,6 @@ body ::selection {
     background: #91ceff;
 }
 
-#preloader {
-    background: var(--blue) url("https://samherbert.net/svg-loaders/svg-loaders/three-dots.svg") no-repeat center;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    display: flex;
-    position: fixed;
-    height: calc(100 * var(--vh, 1vh));
-    left: 0;
-    top: 0;
-    z-index: 9999999999;
-}
 
 .video-background {
     position: fixed;
@@ -694,4 +682,66 @@ input::placeholder {
     .sort-btn {
         flex-direction: column;
     }
+}
+.star-mark {
+  --star: #91ceff;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 9px;
+  border-radius: 50%;
+  vertical-align: baseline;
+  background: var(--star);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--star) 60%, transparent);
+}
+
+.star-mark[data-domain="art"] {
+  --star: #f2b07a;
+}
+
+.star-mark[data-stage="nebula"] {
+  width: 11px;
+  height: 11px;
+  background: color-mix(in oklab, var(--star) 35%, transparent);
+  box-shadow: none;
+}
+
+.star-mark[data-stage="protostar"] {
+  width: 7px;
+  height: 7px;
+}
+
+.star-mark[data-stage="giant"] {
+  width: 13px;
+  height: 13px;
+  box-shadow: 0 0 14px color-mix(in oklab, var(--star) 70%, transparent);
+}
+
+.star-mark[data-stage="remnant"] {
+  --star: #7c8698;
+  width: 6px;
+  height: 6px;
+  box-shadow: none;
+}
+
+.network-box {
+  width: 100%;
+  border-color: rgba(145, 206, 255, 0.45) !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: box-shadow 220ms ease, transform 220ms ease, background 220ms ease;
+}
+
+.network-box:hover,
+.network-box:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(145, 206, 255, 0.12);
+  box-shadow: 0 0 26px rgba(145, 206, 255, 0.3);
+}
+
+.network-box:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }

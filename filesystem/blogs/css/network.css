@@ -1,0 +1,592 @@
+body.is-diving {
+  overflow: hidden;
+}
+
+body.is-diving > *:not(.nn) {
+  filter: blur(8px) saturate(0.4) brightness(0.5);
+  transform: scale(0.985);
+  transition: filter 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.nn {
+  --ink: 255, 255, 255;
+  --line: rgba(255, 255, 255, 0.22);
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #000;
+  font-family: 'departure mono', ui-monospace, monospace;
+  opacity: 1;
+  transition: opacity 500ms ease;
+}
+
+.nn.is-entering {
+  opacity: 0;
+}
+
+.nn.is-leaving {
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.nn-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.nn-chrome {
+  position: absolute;
+  inset: 16px;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nn-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 0 solid rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  animation: nn-corner 700ms 120ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.nn-tl { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.nn-tr { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; animation-delay: 200ms; }
+.nn-bl { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; animation-delay: 280ms; }
+.nn-br { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; animation-delay: 360ms; }
+
+@keyframes nn-corner {
+  from { opacity: 0; width: 6px; height: 6px; }
+  to { opacity: 1; width: 26px; height: 26px; }
+}
+
+.nn-hud {
+  position: absolute;
+  inset: 0 0 auto 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 34px clamp(34px, 4vw, 62px);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(var(--ink), 0.75);
+  pointer-events: none;
+}
+
+.nn-hud > * {
+  animation: nn-rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nn-hud > *:nth-child(2) { animation-delay: 120ms; }
+.nn-hud > *:nth-child(3) { animation-delay: 240ms; }
+.nn-hud > *:nth-child(4) { animation-delay: 340ms; }
+
+@keyframes nn-rise {
+  from { opacity: 0; transform: translateY(-12px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.nn-mark {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.nn-mark b {
+  font-size: 14px;
+  letter-spacing: 0.44em;
+  color: rgb(var(--ink));
+}
+
+.nn-mark span {
+  opacity: 0.45;
+}
+
+.nn-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.04));
+}
+
+.nn-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  opacity: 0.7;
+}
+
+.nn-readout b {
+  color: rgb(var(--ink));
+  font-variant-numeric: tabular-nums;
+}
+
+.nn-readout i {
+  font-style: normal;
+  opacity: 0.35;
+}
+
+.nn-exit {
+  pointer-events: auto;
+  position: relative;
+  padding: 9px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgb(var(--ink));
+  cursor: pointer;
+  transition: background 220ms ease, box-shadow 220ms ease, letter-spacing 220ms ease;
+}
+
+.nn-exit:hover,
+.nn-exit:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.4em;
+}
+
+.nn-boot {
+  position: absolute;
+  top: 50%;
+  left: clamp(34px, 4vw, 62px);
+  transform: translateY(-50%);
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(var(--ink), 0.5);
+  pointer-events: none;
+  transition: opacity 700ms ease;
+}
+
+.nn-boot li {
+  opacity: 0;
+  padding-left: 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  animation: nn-boot 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.nn-boot li::before {
+  content: "› ";
+  opacity: 0.6;
+}
+
+@keyframes nn-boot {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.nn.is-ready .nn-boot {
+  opacity: 0;
+}
+
+.nn-index {
+  position: absolute;
+  inset: auto auto 74px clamp(34px, 4vw, 62px);
+  display: grid;
+  gap: 1px;
+  max-height: 42vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  transition: opacity 800ms ease;
+}
+
+.nn.is-ready .nn-index {
+  opacity: 1;
+}
+
+.nn-index-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 7px 12px;
+  border: 0;
+  border-left: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(var(--ink), 0.5);
+  cursor: pointer;
+  transition: color 200ms ease, background 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+
+.nn-index-item:hover,
+.nn-index-item:focus-visible {
+  color: rgb(var(--ink));
+  background: rgba(255, 255, 255, 0.06);
+  border-left-color: rgba(255, 255, 255, 0.6);
+  transform: translateX(5px);
+}
+
+.nn-index-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(var(--ink), 0.9);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.nn-index-item[data-stage="nebula"] .nn-index-dot { opacity: 0.45; }
+.nn-index-item[data-stage="giant"] .nn-index-dot { width: 9px; height: 9px; }
+.nn-index-item[data-stage="remnant"] .nn-index-dot { background: rgba(var(--ink), 0.4); box-shadow: none; }
+
+.nn-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 12px 5px 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.82);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(var(--ink));
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 220ms ease;
+}
+
+.nn-panel {
+  position: absolute;
+  inset: auto clamp(34px, 4vw, 62px) 74px auto;
+  width: min(380px, calc(100% - 2 * clamp(34px, 4vw, 62px)));
+  display: grid;
+  gap: 14px;
+  padding: 26px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.92);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.7), inset 0 0 60px rgba(255, 255, 255, 0.04);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 380ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nn-panel::before,
+.nn-panel::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.nn-panel::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.nn-panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.nn-panel.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.nn-panel-stage {
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(var(--ink), 0.9);
+}
+
+.nn-panel-title {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  font-weight: 500;
+  font-size: 1.55rem;
+  line-height: 1.14;
+  color: rgb(var(--ink));
+}
+
+.nn-panel-meta {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(var(--ink), 0.4);
+}
+
+.nn-panel-summary {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(var(--ink), 0.72);
+}
+
+.nn-panel-read {
+  justify-self: start;
+  padding: 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(var(--ink));
+  transition: background 220ms ease, box-shadow 220ms ease, letter-spacing 220ms ease;
+}
+
+.nn-panel-read:hover,
+.nn-panel-read:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.36em;
+}
+
+.nn-panel-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(var(--ink), 0.4);
+  cursor: pointer;
+}
+
+.nn-panel-close:hover {
+  color: rgb(var(--ink));
+}
+
+@media (max-width: 900px) {
+  .nn-index,
+  .nn-boot {
+    display: none;
+  }
+
+  .nn-panel {
+    inset: auto 14px 14px 14px;
+    width: auto;
+  }
+
+  .nn-hud {
+    padding: 26px 20px;
+  }
+
+  .nn-hint {
+    inset: auto 0 84px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.is-diving > *:not(.nn),
+  .nn,
+  .nn-panel {
+    transition: none;
+  }
+
+  .nn-scan::after {
+    animation: none;
+  }
+
+  .nn-hud > *,
+  .nn-boot li,
+  .nn-corner {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.nn-controls {
+  position: absolute;
+  inset: auto auto 86px clamp(34px, 4vw, 62px);
+  display: grid;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.nn.is-ready .nn-controls {
+  opacity: 0.45;
+}
+
+.nn-controls:hover,
+.nn-controls:focus-within {
+  opacity: 1;
+}
+
+.nn-controls-title {
+  margin-bottom: 6px;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.nn-layer {
+  display: grid;
+  grid-template-columns: 20px 1fr 8px;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 5px 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(-8px);
+  animation: nn-slide 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: color 200ms ease;
+}
+
+.nn-layer:hover,
+.nn-layer:focus-visible {
+  color: #fff;
+}
+
+.nn-layer kbd {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font: inherit;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nn-layer-state {
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.nn-layer.is-on {
+  color: #fff;
+}
+
+.nn-layer.is-on .nn-layer-state {
+  background: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
+}
+
+@keyframes nn-slide {
+  to { opacity: 1; transform: none; }
+}
+
+.nn-keys {
+  position: absolute;
+  inset: auto 0 22px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 22px;
+  padding: 0 clamp(34px, 4vw, 62px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.nn.is-ready .nn-keys {
+  opacity: 0.5;
+}
+
+.nn-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  animation: nn-slide 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.nn-key kbd {
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font: inherit;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.nn.is-held .nn-canvas {
+  cursor: default;
+}
+
+.nn-panel {
+  clip-path: inset(0 0 100% 0);
+  transition: opacity 320ms ease, transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nn-panel.is-in {
+  clip-path: inset(0 0 0 0);
+}
+
+.nn-panel > * {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 400ms ease, transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nn-panel.is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+.nn-panel.is-in .nn-panel-stage { transition-delay: 120ms; }
+.nn-panel.is-in .nn-panel-title { transition-delay: 190ms; }
+.nn-panel.is-in .nn-panel-meta { transition-delay: 250ms; }
+.nn-panel.is-in .nn-panel-summary { transition-delay: 310ms; }
+.nn-panel.is-in .nn-panel-read { transition-delay: 380ms; }
+
+@media (max-width: 900px) {
+  .nn-controls,
+  .nn-keys {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nn-layer,
+  .nn-key {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nn-panel,
+  .nn-panel > * {
+    transition: none;
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+  }
+}
