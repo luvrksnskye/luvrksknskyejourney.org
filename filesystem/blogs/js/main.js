@@ -1,6 +1,5 @@
 const LEGACY_URL = '/filesystem/blogs/data/posts.json';
 const ASTRA_POSTS_URL = '/filesystem/astra/data/posts.json';
-const ASTRA_GRAPH_URL = '/filesystem/astra/data/graph.json';
 const ASTRA_MANIFEST_URL = '/filesystem/astra/data/manifest.json';
 const DEFAULT_COVER = '/filesystem/astra/assets/note-cover.svg';
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -10,7 +9,6 @@ const ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const STAGES = new Set(['nebula', 'protostar', 'main-sequence', 'giant', 'remnant']);
 const MAX_BYTES = 1024 * 1024;
 
-import { openNetwork } from './network/index.js?v=8';
 
 let grid;
 
@@ -92,21 +90,6 @@ async function loadLegacy() {
   return data.posts.map(legacyPost).filter(Boolean);
 }
 
-function astraStar(raw) {
-  if (!raw || !safePath(raw.url) || !ID.test(raw.id ?? '') || !CATEGORIES.has(raw.domain)) return null;
-  const title = text(raw.title, 160);
-  if (!title) return null;
-  return {
-    id: raw.id,
-    plainTitle: title,
-    url: raw.url,
-    category: raw.domain,
-    stage: STAGES.has(raw.stage) ? raw.stage : 'main-sequence',
-    description: text(raw.summary, 400),
-    kind: text(raw.type, 32)
-  };
-}
-
 async function loadVerified(url, manifest, name) {
   const expected = manifest?.files?.[name];
   if (!/^[0-9a-f]{64}$/.test(expected?.sha256 ?? '')) return null;
@@ -117,24 +100,12 @@ async function loadVerified(url, manifest, name) {
   return parse(buffer);
 }
 
-async function loadEdges(manifest) {
-  const data = await loadVerified(ASTRA_GRAPH_URL, manifest, 'graph.json');
-  if (data?.format !== 'astra-graph/1' || !Array.isArray(data.edges)) return [];
-  return data.edges
-    .filter((edge) => ID.test(edge?.from ?? '') && ID.test(edge?.to ?? ''))
-    .slice(0, 4000)
-    .map((edge) => ({ from: edge.from, to: edge.to }));
-}
-
 async function loadAstra() {
   const manifest = parse(await fetchBuffer(ASTRA_MANIFEST_URL));
-  if (manifest?.format !== 'astra-manifest/1') return { posts: [], stars: [], edges: [] };
+  if (manifest?.format !== 'astra-manifest/1') return { posts: [] };
   const data = await loadVerified(ASTRA_POSTS_URL, manifest, 'posts.json');
   if (data?.format !== 'astra-posts/1' || !Array.isArray(data.posts)) throw new Error('unknown astra posts format');
-  const posts = data.posts.map(astraPost).filter(Boolean);
-  const stars = data.posts.map(astraStar).filter(Boolean);
-  const edges = await loadEdges(manifest).catch(() => []);
-  return { posts, stars, edges };
+  return { posts: data.posts.map(astraPost).filter(Boolean) };
 }
 
 function el(tag, className, content) {
@@ -247,10 +218,12 @@ function handleFiltering() {
   searchInput?.addEventListener('input', () => applyFilters(selected(), searchInput.value.trim()));
 }
 
-function handleViews(stars, edges) {
+function handleViews() {
   const enter = document.querySelector('[data-view="network"]');
   if (!enter) return;
-  enter.addEventListener('click', () => openNetwork(stars, edges));
+  enter.addEventListener('click', () => {
+    window.location.href = '/filesystem/astra/network/';
+  });
 }
 
 async function start() {
@@ -261,12 +234,12 @@ async function start() {
   if (legacy.status === 'rejected') console.warn('blog posts:', legacy.reason);
   if (astra.status === 'rejected') console.warn('astra posts:', astra.reason);
 
-  const station = astra.value ?? { posts: [], stars: [], edges: [] };
+  const station = astra.value ?? { posts: [] };
   const posts = merge(legacy.value ?? [], station.posts);
   host.replaceChildren(...posts.map(card));
   initMuuri();
   handleFiltering();
-  handleViews(station.stars, station.edges);
+  handleViews();
 }
 
 start();

@@ -8,26 +8,26 @@ export const intro = (function () {
   'use strict';
 
   const SCRIPT = [
-    { cue: 'vortex',        dur: 2.5, line: '',                                                                   stat: null },
-    { cue: 'beacon',        dur: 4.5, line: 'ASTRA is the lighthouse I built inside this site.',                   stat: 'days' },
-    { cue: 'iris',          dur: 4.5, line: 'She watches what comes in, and what tries to leave.',                 stat: null },
-    { cue: 'cube',          dur: 4.5, line: 'Everything I study turns into a note, and all of them live in here.', stat: null },
-    { cue: 'lattice',       dur: 5.0, line: 'Thousands of small records. Each one finished on its own, and all of them connected.', stat: null },
-    { cue: 'edges',         dur: 4.5, line: 'Two words in a note decide everything. Is it private, and is it finished.', stat: 'leaks' },
-    { cue: 'gyro',          dur: 4.5, line: 'She is written in a strict language, one that catches my mistakes before they happen.', stat: null },
-    { cue: 'gate',          dur: 4.5, line: 'She never goes online. She reads, she checks, she writes, and that is it.', stat: 'closed' },
-    { cue: 'horizon',       dur: 4.5, line: 'Whatever she keeps, she keeps. Nothing slips out of here by accident.', stat: null },
-    { cue: 'tree',          dur: 4.5, line: 'She is new, and she has a long way to go.',                           stat: null },
-    { cue: 'forest',        dur: 4.0, line: 'So much left to find, and to write down.',                            stat: null },
-    { cue: 'vector',        dur: 4.5, line: 'Every note is also a long list of numbers that stands for what it means.', stat: 'dims' },
-    { cue: 'cosine',        dur: 4.5, line: 'The numbers let her measure how close two ideas are.',                stat: null },
-    { cue: 'neuron',        dur: 4.5, line: 'She learns the way a brain does. Small pieces, and the paths between them.', stat: null },
-    { cue: 'network',       dur: 4.5, line: 'So she can find a note by an idea instead of a word,',                stat: null },
-    { cue: 'networkLoose',  dur: 4.5, line: 'and she notices which ones belong together, even the ones I never linked.', stat: 'links' },
-    { cue: 'binary',        dur: 4.5, line: 'She is not alone. There is another station out there,',               stat: 'stations' },
-    { cue: 'mobius',        dur: 4.5, line: 'and a shape we both agreed on, so our sites can read each other.',    stat: null },
-    { cue: 'binaryBridge',  dur: 3.0, line: 'ASTRA and APOLLO.',                                                   stat: null },
-    { cue: 'constellation', dur: 3.5, line: 'Enjoy the journey.',                                                  stat: null }
+    { cue: 'vortex',        dur: 3.0, line: '',                                                              stat: null },
+    { cue: 'beacon',        dur: 4.5, line: 'I built a lighthouse inside this website.',                     stat: 'days' },
+    { cue: 'iris',          dur: 4.5, line: 'She is an eye. She watches what comes in, and what tries to leave.', stat: null },
+    { cue: 'cube',          dur: 4.5, line: 'Behind the eye there is a box, and everything I study goes into it.', stat: null },
+    { cue: 'lattice',       dur: 5.0, line: 'Really it is thousands of small boxes. One note each, finished on its own, all of them touching.', stat: null },
+    { cue: 'edges',         dur: 4.5, line: 'Take the walls away and the rule is left. Two words decide everything. Private, or finished.', stat: 'leaks' },
+    { cue: 'gyro',          dur: 4.5, line: 'Her core turns inside three cages, in a language that catches my mistakes before they happen.', stat: null },
+    { cue: 'gate',          dur: 4.5, line: 'There is one door and it never opens outward. She reads, checks, writes, and stops.', stat: 'closed' },
+    { cue: 'horizon',       dur: 4.5, line: 'What she keeps falls into a black hole. Nothing comes back out by accident.', stat: null },
+    { cue: 'tree',          dur: 4.5, line: 'And still, something grows. A tree, out of a seed I planted one September.', stat: null },
+    { cue: 'forest',        dur: 4.0, line: 'One tree turns into a forest. So much left to find, and to write down.', stat: null },
+    { cue: 'vector',        dur: 4.5, line: 'Every note also becomes a row of numbers that stands for what it means.', stat: 'dims' },
+    { cue: 'cosine',        dur: 4.5, line: 'Two ideas, and the angle between them. That is how she measures how close they are.', stat: null },
+    { cue: 'neuron',        dur: 4.5, line: 'The rows fire like a neuron. Small pieces, and the paths between them.', stat: null },
+    { cue: 'network',       dur: 4.5, line: 'So she finds a note by an idea instead of a word,',             stat: null },
+    { cue: 'networkLoose',  dur: 4.5, line: 'and she sees which ones belong together, even the ones I never linked.', stat: 'links' },
+    { cue: 'binary',        dur: 4.0, line: 'She is not alone. There is another station out there.',          stat: 'stations' },
+    { cue: 'mobius',        dur: 4.5, line: 'One ribbon with a single side, and the two of us read the same shape.', stat: null },
+    { cue: 'binaryBridge',  dur: 3.0, line: 'ASTRA and APOLLO.',                                              stat: null },
+    { cue: 'constellation', dur: 4.0, line: 'A constellation. Enjoy the journey.',                            stat: null }
   ];
 
   const three = n => String(Math.max(0, n | 0)).padStart(3, '0');
@@ -41,7 +41,7 @@ export const intro = (function () {
     stations: () => data.stats.apollo ? ['02', 'stations mirrored'] : ['01', 'station online']
   };
 
-  const SIDE = window.innerWidth < 760 ? 112 : 200;
+  const SIDE = window.innerWidth < 760 ? 128 : 256;
   const P = SIDE * SIDE;
   const RS = rng(0x51AA);
 
@@ -59,7 +59,7 @@ export const intro = (function () {
     return t;
   })();
   let camDist = 300, camWant = 300, camAz = 0, camAzSpeed = 0.08, camAzWant = null, camEl = 0.1, camElWant = 0.1;
-  let spinY = 0, drawSpinY = 0, fit = 1;
+  let spinY = 0, drawSpinY = 0, fit = 1, burst = 0;
   let root, lineEl, statEl, statN, statC, ruler, ticks = [];
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1135,7 +1135,7 @@ export const intro = (function () {
     scene = new THREE.Scene();
     const sz = gl.size;
     cam = new THREE.PerspectiveCamera(48, Math.max(0.2, sz.w / sz.h), 0.8, 1600);
-    fit = clamp(940 / Math.max(430, sz.h), 1, 1.5);
+    fit = clamp(1010 / Math.max(430, sz.h), 1, 1.7);
 
     try {
       spirit = createSpirit(THREE, gl.renderer, SIDE);
@@ -1158,7 +1158,7 @@ export const intro = (function () {
       cam.aspect = Math.max(0.2, s.w / s.h);
       cam.updateProjectionMatrix();
       if (spirit) spirit.draw.uPR.value = s.pr;
-      fit = clamp(940 / Math.max(430, s.h), 1, 1.5);
+      fit = clamp(1010 / Math.max(430, s.h), 1, 1.7);
     });
     ready = true;
     return true;
@@ -1226,6 +1226,7 @@ export const intro = (function () {
     fire.set(fire.y, cue.fire ? 1 : 0);
 
     mix = 0;
+    burst = 1;
     spirit.sim.uFlow.value = 0.22 + (cue.spread || 10) * 0.055;
     camWant = cue.dist * fit;
     camElWant = cue.el;
@@ -1255,6 +1256,7 @@ export const intro = (function () {
     camDist = 500;
     camAz = 0.4;
     camAzWant = null;
+    burst = 0;
     camEl = 0.05;
     gotoBeat(0);
   }
@@ -1303,15 +1305,17 @@ export const intro = (function () {
     spinY = cue && cue.turn ? spinY + cue.turn * dt : damp(spinY, 0, 2.2, dt);
     drawSpinY = cue && cue.turnDraw ? drawSpinY + cue.turnDraw * dt : damp(drawSpinY, 0, 2.2, dt);
 
-    mix = clamp(local / (b.dur * 0.62), 0, 1);
+    mix = clamp(local / (b.dur * 0.72), 0, 1);
+    burst = damp(burst, 0, 1.5, dt);
 
     const fadeIn = clamp(now / 1.6, 0, 1);
     const fadeOut = clamp((TOTAL - now) / 1.2, 0, 1);
     const fade = fadeIn * fadeOut;
 
     spirit.sim.uMorph.value = smoother(mix);
-    spirit.sim.uGrow.value = clamp(local / (b.dur * 0.86), 0, 1);
-    spirit.sim.uPull.value = lerp(0.055, 0.12, mix);
+    spirit.sim.uGrow.value = clamp(local / (b.dur * 0.9), 0, 1);
+    spirit.sim.uPull.value = lerp(0.045, 0.13, smoother(mix));
+    spirit.sim.uBurst.value = burst * burst;
     spirit.draw.uFade.value = fade;
     spirit.trail.uFade.value = fade;
     spirit.step(dt, elapsed);

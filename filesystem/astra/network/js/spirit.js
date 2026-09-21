@@ -164,6 +164,7 @@ uniform float uMorph;
 uniform float uGrow;
 uniform float uCurl;
 uniform float uFlow;
+uniform float uBurst;
 uniform float uPull;
 uniform vec4 uSigA;
 uniform vec4 uSigB;
@@ -194,7 +195,7 @@ void main() {
   float far = smoothstep(2.0, 190.0, length(delta));
   position += delta * clamp(uPull * (0.6 + far * 0.7) * uDt * 60.0, 0.0, 0.94);
   vec3 flow = curl(position * uCurl, uTime * 0.35, 0.22);
-  position += flow * (uFlow * far + 0.07);
+  position += flow * (uFlow * far * (1.0 + uBurst * 2.2) + 0.07 + uBurst * 0.12);
 
   gl_FragColor = vec4(position, 0.35 + t * 0.65);
 }
@@ -333,6 +334,7 @@ export function createSpirit(THREE, renderer, side) {
     uGrow: { value: 1 },
     uCurl: { value: 0.0042 },
     uFlow: { value: 1.6 },
+    uBurst: { value: 0 },
     uPull: { value: 0.09 },
     uSigA: { value: new THREE.Vector4(0, 0, 0, 0) },
     uSigB: { value: new THREE.Vector4(0, 0, 0, 0) }
