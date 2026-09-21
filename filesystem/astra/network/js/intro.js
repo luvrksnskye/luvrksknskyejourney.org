@@ -2,28 +2,32 @@ import { $, el, state, store, bus, clamp, damp, lerp, smoother, shortAngle, rng,
 import { data } from './vault.js?v=1';
 import { gl } from './gl.js?v=1';
 import { audio } from './audio.js?v=1';
+import { createSpirit } from './spirit.js?v=1';
 
 export const intro = (function () {
   'use strict';
 
   const SCRIPT = [
-    { cue: 'vortex',        dur: 2.5, line: '',                                                          stat: null },
-    { cue: 'beacon',        dur: 4.5, line: 'ASTRA is the lighthouse I built inside this site.',           stat: 'days' },
-    { cue: 'cube',          dur: 5.0, line: 'Everything I study turns into a note, and all of them live in here.', stat: null },
-    { cue: 'lattice',       dur: 5.5, line: 'Thousands of small records. Each one finished on its own, and all of them connected.', stat: null },
+    { cue: 'vortex',        dur: 2.5, line: '',                                                                   stat: null },
+    { cue: 'beacon',        dur: 4.5, line: 'ASTRA is the lighthouse I built inside this site.',                   stat: 'days' },
+    { cue: 'iris',          dur: 4.5, line: 'She watches what comes in, and what tries to leave.',                 stat: null },
+    { cue: 'cube',          dur: 4.5, line: 'Everything I study turns into a note, and all of them live in here.', stat: null },
+    { cue: 'lattice',       dur: 5.0, line: 'Thousands of small records. Each one finished on its own, and all of them connected.', stat: null },
     { cue: 'edges',         dur: 4.5, line: 'Two words in a note decide everything. Is it private, and is it finished.', stat: 'leaks' },
     { cue: 'gyro',          dur: 4.5, line: 'She is written in a strict language, one that catches my mistakes before they happen.', stat: null },
     { cue: 'gate',          dur: 4.5, line: 'She never goes online. She reads, she checks, she writes, and that is it.', stat: 'closed' },
     { cue: 'horizon',       dur: 4.5, line: 'Whatever she keeps, she keeps. Nothing slips out of here by accident.', stat: null },
-    { cue: 'tree',          dur: 5.0, line: 'She is new, and she has a long way to go.',                     stat: null },
-    { cue: 'forest',        dur: 4.5, line: 'So much left to find, and to write down.',                     stat: null },
-    { cue: 'vector',        dur: 5.0, line: 'Every note is also a long list of numbers that stands for what it means.', stat: 'dims' },
-    { cue: 'network',       dur: 4.5, line: 'So she can find a note by an idea instead of a word,',         stat: null },
-    { cue: 'networkLoose',  dur: 5.0, line: 'and she notices which ones belong together, even the ones I never linked.', stat: 'links' },
-    { cue: 'binary',        dur: 4.5, line: 'She is not alone. There is another station out there,',       stat: 'stations' },
-    { cue: 'mobius',        dur: 5.0, line: 'and a shape we both agreed on, so our sites can read each other.', stat: null },
-    { cue: 'binaryBridge',  dur: 3.0, line: 'ASTRA and APOLLO.',                                          stat: null },
-    { cue: 'constellation', dur: 3.5, line: 'Enjoy the journey.',                                         stat: null }
+    { cue: 'tree',          dur: 4.5, line: 'She is new, and she has a long way to go.',                           stat: null },
+    { cue: 'forest',        dur: 4.0, line: 'So much left to find, and to write down.',                            stat: null },
+    { cue: 'vector',        dur: 4.5, line: 'Every note is also a long list of numbers that stands for what it means.', stat: 'dims' },
+    { cue: 'cosine',        dur: 4.5, line: 'The numbers let her measure how close two ideas are.',                stat: null },
+    { cue: 'neuron',        dur: 4.5, line: 'She learns the way a brain does. Small pieces, and the paths between them.', stat: null },
+    { cue: 'network',       dur: 4.5, line: 'So she can find a note by an idea instead of a word,',                stat: null },
+    { cue: 'networkLoose',  dur: 4.5, line: 'and she notices which ones belong together, even the ones I never linked.', stat: 'links' },
+    { cue: 'binary',        dur: 4.5, line: 'She is not alone. There is another station out there,',               stat: 'stations' },
+    { cue: 'mobius',        dur: 4.5, line: 'and a shape we both agreed on, so our sites can read each other.',    stat: null },
+    { cue: 'binaryBridge',  dur: 3.0, line: 'ASTRA and APOLLO.',                                                   stat: null },
+    { cue: 'constellation', dur: 3.5, line: 'Enjoy the journey.',                                                  stat: null }
   ];
 
   const three = n => String(Math.max(0, n | 0)).padStart(3, '0');
@@ -37,12 +41,13 @@ export const intro = (function () {
     stations: () => data.stats.apollo ? ['02', 'stations mirrored'] : ['01', 'station online']
   };
 
-  const P = window.innerWidth < 760 ? 4200 : 11000;
+  const SIDE = window.innerWidth < 760 ? 112 : 200;
+  const P = SIDE * SIDE;
   const RS = rng(0x51AA);
 
   let THREE = null;
-  let scene = null, cam = null, pts = null, mat = null;
-  let posA = null, posB = null, growA = null;
+  let scene = null, cam = null, spirit = null;
+  let ready = false;
   let running = false, done = false;
   let beat = -1, mix = 1, elapsed = 0;
   let wallStart = 0, audioStart = null;
@@ -58,72 +63,6 @@ export const intro = (function () {
   let root, lineEl, statEl, statN, statC, ruler, ticks = [];
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const VS = `
-    attribute vec3 aB;
-    attribute float aSeed;
-    attribute float aSize;
-    attribute float aGrow;
-    uniform float uMix;
-    uniform float uGrow;
-    uniform float uTime;
-    uniform float uPR;
-    uniform float uSpread;
-    uniform float uDrift;
-    varying float vFog;
-    varying float vSeed;
-    varying float vFlight;
-
-    void main() {
-      float o = aSeed * 0.34;
-      float m = clamp((uMix - o) / 0.66, 0.0, 1.0);
-      float b = clamp((uGrow - aGrow) / 0.24, 0.0, 1.0);
-      float t = min(m, b);
-      t = t * t * (3.0 - 2.0 * t);
-
-      vec3 p = mix(position, aB, t);
-
-      vec3 w = vec3(
-        sin(aSeed * 57.31), cos(aSeed * 31.77), sin(aSeed * 91.13)
-      );
-
-      float bulge = sin(t * 3.14159265);
-      p += w * bulge * uSpread;
-      vFlight = bulge;
-
-      p += w * sin(uTime * 0.42 + aSeed * 19.7) * uDrift;
-
-      vec4 mv = modelViewMatrix * vec4(p, 1.0);
-      float d = -mv.z;
-      vFog = clamp(1.0 - (d - 130.0) / 560.0, 0.0, 1.0);
-      vFog = pow(vFog, 1.05);
-      vSeed = aSeed;
-
-      gl_PointSize = clamp(aSize * uPR * (360.0 / max(1.0, d)), 0.9, 26.0 * uPR);
-      gl_Position = projectionMatrix * mv;
-    }
-  `;
-
-  const FS = `
-    precision highp float;
-    uniform float uTime;
-    uniform float uFade;
-    varying float vFog;
-    varying float vSeed;
-    varying float vFlight;
-
-    void main() {
-      vec2 p = gl_PointCoord * 2.0 - 1.0;
-      float r = dot(p, p);
-      if (r > 1.0) discard;
-      float core = exp(-r * 7.2);
-      float halo = exp(-r * 1.9) * 0.13;
-      float tw = 0.72 + 0.28 * sin(uTime * 1.1 + vSeed * 44.0);
-      float a = (core + halo) * vFog * tw * uFade * (1.05 + vFlight * 0.55);
-      if (a < 0.003) discard;
-      gl_FragColor = vec4(vec3(1.0), a);
-    }
-  `;
 
   const growTmp = new Float32Array(P);
 
@@ -200,6 +139,14 @@ export const intro = (function () {
     }
   }
 
+  function ringXY(out, cx, cy, r, steps, kind) {
+    for (let i = 0; i < steps; i++) {
+      const t0 = (i / steps) * Math.PI * 2, t1 = ((i + 1) / steps) * Math.PI * 2;
+      line(out, [cx + Math.cos(t0) * r, cy + Math.sin(t0) * r, 0],
+                [cx + Math.cos(t1) * r, cy + Math.sin(t1) * r, 0], kind);
+    }
+  }
+
   function boxWire(out, cx, cy, cz, s, kind) {
     const h = s * 0.5;
     const c = [[-h,-h,-h],[h,-h,-h],[h,h,-h],[-h,h,-h],[-h,-h,h],[h,-h,h],[h,h,h],[-h,h,h]];
@@ -270,6 +217,38 @@ export const intro = (function () {
         prev = p;
       }
       bracket(o, 0, 0, 0, 290, 150, 0);
+      return o;
+    },
+    iris() {
+      const o = [];
+      ringXY(o, 0, 0, 120, 72, 1);
+      ringXY(o, 0, 0, 132, 72, 0);
+      ringXY(o, 0, 0, 32.4, 48, 1);
+      for (let i = 0; i < 24; i++) {
+        const a = (i / 24) * Math.PI * 2;
+        const r0 = 132, r1 = i % 6 === 0 ? 148 : 140;
+        line(o, [Math.cos(a) * r0, Math.sin(a) * r0, 0], [Math.cos(a) * r1, Math.sin(a) * r1, 0], 1);
+      }
+      dimension(o, [0, 0, 0], [32.4, 0, 0], 5);
+      return o;
+    },
+    neuron() {
+      const o = [];
+      bracket(o, 0, 0, 0, 320, 210, 0);
+      scaleBar(o, -150, 150, -124, 0, 30);
+      return o;
+    },
+    cosine() {
+      const o = [];
+      ringXY(o, 0, 0, 112, 72, 0);
+      ring(o, 0, 0, 0, 112, 72, 0);
+      const u = [0.82, 0.42, 0.38], v = [0.36, 0.74, -0.57];
+      const n1 = Math.hypot(u[0], u[1], u[2]), n2 = Math.hypot(v[0], v[1], v[2]);
+      const a = [u[0] / n1 * 112, u[1] / n1 * 112, u[2] / n1 * 112];
+      const b = [v[0] / n2 * 112, v[1] / n2 * 112, v[2] / n2 * 112];
+      line(o, [0, 0, 0], a, 1);
+      line(o, [0, 0, 0], b, 1);
+      bracket(o, 0, 0, 0, 280, 280, 0);
       return o;
     },
     gyro() {
@@ -622,6 +601,145 @@ export const intro = (function () {
       o[i * 3 + 1] = v * s;
       o[i * 3 + 2] = Math.sin(u) * rr;
       growTmp[i] = (u / (Math.PI * 2)) * 0.88;
+    }
+    return o;
+  }
+
+  function formIris(r) {
+    const o = alloc();
+    const pupil = r * 0.27;
+    const fibres = 260;
+    for (let i = 0; i < P; i++) {
+      const roll = RS();
+      let a, rr, wob = 0;
+      if (roll < 0.09) {
+        a = RS() * Math.PI * 2;
+        rr = r * (1 + (RS() - 0.5) * 0.012);
+        growTmp[i] = 0.9 + (a / (Math.PI * 2)) * 0.1;
+      } else if (roll < 0.20) {
+        a = RS() * Math.PI * 2;
+        rr = pupil * (1 + (RS() - 0.5) * 0.04);
+        growTmp[i] = 0.02 + RS() * 0.06;
+      } else {
+        const f = (RS() * fibres) | 0;
+        const jitter = hash2(f + 1, 7) - 0.5;
+        a = (f / fibres) * Math.PI * 2 + jitter * 0.02;
+        const t = Math.pow(RS(), 0.85);
+        rr = pupil + t * (r - pupil) * (0.72 + hash2(f + 3, 11) * 0.3);
+        wob = Math.sin(t * 8.5 + f) * r * 0.012;
+        growTmp[i] = 0.1 + t * 0.74;
+      }
+      const dome = -Math.sqrt(Math.max(0, r * r * 2.2 - rr * rr)) * 0.2;
+      o[i * 3] = Math.cos(a) * rr - Math.sin(a) * wob;
+      o[i * 3 + 1] = Math.sin(a) * rr + Math.cos(a) * wob;
+      o[i * 3 + 2] = dome + (RS() - 0.5) * r * 0.01;
+    }
+    return o;
+  }
+
+  function formNeuron(r) {
+    const o = alloc();
+    const segs = [];
+    const box = { span: 1 };
+
+    for (let d = 0; d < 7; d++) {
+      const th = (d / 7) * Math.PI * 2 + 0.4;
+      const ph = (RS() - 0.5) * 1.1;
+      branchOut(segs, box,
+        0, 0, 0,
+        Math.cos(th) * Math.cos(ph), Math.sin(ph), Math.sin(th) * Math.cos(ph),
+        r * 0.2, 1, 0, 4, r * 0.035);
+    }
+    const axon = [];
+    let ax = 0, ay = 0, az = 0, at = 0;
+    for (let k = 0; k < 9; k++) {
+      const nx = ax - r * 0.17, ny = ay + Math.sin(k * 0.8) * r * 0.035, nz = az + Math.cos(k * 0.6) * r * 0.02;
+      const len = Math.hypot(nx - ax, ny - ay, nz - az);
+      axon.push([ax, ay, az, nx, ny, nz, 0, at, at + len]);
+      at += len;
+      ax = nx; ay = ny; az = nz;
+    }
+    box.span = Math.max(box.span, at);
+    for (let k = 0; k < 5; k++) {
+      const th = (k / 5) * Math.PI * 2;
+      branchOut(axon, box, ax, ay, az, -0.5, Math.cos(th) * 0.7, Math.sin(th) * 0.7, r * 0.1, 3, at, 4, r * 0.03);
+    }
+    const all = segs.concat(axon);
+    const lens = all.map(s => Math.hypot(s[3] - s[0], s[4] - s[1], s[5] - s[2]));
+    let total = 0;
+    lens.forEach(l => { total += l; });
+
+    for (let i = 0; i < P; i++) {
+      if (RS() < 0.16) {
+        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
+        const rr = r * 0.1 * Math.pow(RS(), 0.4);
+        o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
+        o[i * 3 + 1] = Math.cos(ph) * rr;
+        o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
+        growTmp[i] = RS() * 0.1;
+        continue;
+      }
+      let pick = RS() * total;
+      let s = all[0];
+      for (let k = 0; k < all.length; k++) {
+        pick -= lens[k];
+        if (pick <= 0) { s = all[k]; break; }
+      }
+      const t = RS();
+      const j = r * 0.01;
+      o[i * 3] = lerp(s[0], s[3], t) + (RS() - 0.5) * j;
+      o[i * 3 + 1] = lerp(s[1], s[4], t) + (RS() - 0.5) * j;
+      o[i * 3 + 2] = lerp(s[2], s[5], t) + (RS() - 0.5) * j;
+      growTmp[i] = 0.1 + (lerp(s[7], s[8], t) / box.span) * 0.86;
+    }
+    return o;
+  }
+
+  function formCosine(r) {
+    const o = alloc();
+    const a1 = [0.82, 0.42, 0.38], a2 = [0.36, 0.74, -0.57];
+    const n1 = Math.hypot(a1[0], a1[1], a1[2]), n2 = Math.hypot(a2[0], a2[1], a2[2]);
+    const u = [a1[0] / n1, a1[1] / n1, a1[2] / n1];
+    const v = [a2[0] / n2, a2[1] / n2, a2[2] / n2];
+
+    for (let i = 0; i < P; i++) {
+      const roll = RS();
+      if (roll < 0.46) {
+        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
+        const rr = r * (0.99 + (RS() - 0.5) * 0.02);
+        o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
+        o[i * 3 + 1] = Math.cos(ph) * rr;
+        o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
+        growTmp[i] = RS() * 0.42;
+        continue;
+      }
+      if (roll < 0.62) {
+        const a = RS() * Math.PI * 2;
+        const rr = r * (1 + (RS() - 0.5) * 0.008);
+        o[i * 3] = Math.cos(a) * rr;
+        o[i * 3 + 1] = (RS() - 0.5) * r * 0.008;
+        o[i * 3 + 2] = Math.sin(a) * rr;
+        growTmp[i] = 0.2 + (a / (Math.PI * 2)) * 0.2;
+        continue;
+      }
+      if (roll < 0.88) {
+        const w = RS() < 0.5 ? u : v;
+        const t = RS();
+        const j = r * 0.006;
+        o[i * 3] = w[0] * r * t + (RS() - 0.5) * j;
+        o[i * 3 + 1] = w[1] * r * t + (RS() - 0.5) * j;
+        o[i * 3 + 2] = w[2] * r * t + (RS() - 0.5) * j;
+        growTmp[i] = 0.46 + t * 0.3;
+        continue;
+      }
+      const t = RS();
+      const ax = lerp(u[0], v[0], t), ay = lerp(u[1], v[1], t), az = lerp(u[2], v[2], t);
+      const m = Math.hypot(ax, ay, az) || 1;
+      const rr = r * 0.42;
+      o[i * 3] = (ax / m) * rr;
+      o[i * 3 + 1] = (ay / m) * rr;
+      o[i * 3 + 2] = (az / m) * rr;
+      growTmp[i] = 0.8 + t * 0.18;
     }
     return o;
   }
@@ -987,24 +1105,27 @@ export const intro = (function () {
   }
 
   const CUES = {
-    dust:          { make: () => formDust(150),              dist: 322, el: 0.04,  spin: 0.05, spread: 17 },
-    vortex:        { make: () => formVortex(160),            dist: 330, el: 0.40,  spin: 0.10, spread: 18 },
-    beacon:        { make: () => formBeacon(128),            dist: 292, el: 0.12,  spin: 0.04, spread: 12, az: 0.1, turn: 0.42 },
-    cube:          { make: () => formCubeVolume(126),        dist: 252, el: 0.20,  spin: 0.13, spread: 14 },
-    lattice:       { make: () => formCubeLattice(140, 3),    dist: 292, el: 0.28,  spin: 0.16, spread: 11, turn: 0.10, turnDraw: 0.10 },
-    edges:         { make: () => formCubeEdges(126),         dist: 232, el: 0.09,  spin: 0.21, spread: 9  },
-    gyro:          { make: () => formGyro(120),              dist: 268, el: 0.22,  spin: 0.28, spread: 10 },
-    gate:          { make: () => formGate(150),              dist: 286, el: 0.14,  spin: 0.04, spread: 9,  az: 0.42 },
-    horizon:       { make: () => formHorizon(150),           dist: 318, el: 0.30,  spin: 0.09, spread: 12, az: 0.2 },
-    tree:          { make: () => formTree(150, 0),           dist: 300, el: 0.08,  spin: 0.06, spread: 10, az: 0.55 },
-    forest:        { make: () => formForest(190, 5),         dist: 368, el: 0.06,  spin: 0.05, spread: 12, az: 0.8 },
-    vector:        { make: () => formVector(150, 26),        dist: 268, el: 0.06,  spin: 0.03, spread: 10, az: 0 },
-    network:       { make: () => formNetwork(140, 40, false), dist: 288, el: 0.17, spin: 0.11, spread: 16 },
-    networkLoose:  { make: () => formNetwork(140, 40, true), dist: 272, el: 0.24,  spin: 0.12, spread: 11 },
-    binary:        { make: () => formBinary(168),            dist: 330, el: 0.13,  spin: 0.05, spread: 15, az: 0 },
-    mobius:        { make: () => formMobius(96, 34),         dist: 292, el: 0.52,  spin: 0.16, spread: 10 },
-    binaryBridge:  { make: () => formBinary(168),            dist: 300, el: 0.04,  spin: 0.04, spread: 9,  az: 0 },
-    constellation: { make: () => formConstellation(135),     dist: 258, el: 0.20,  spin: 0.07, spread: 16 }
+    dust:          { make: () => formDust(150),              dist: 322, el: 0.04,  spin: 0.05, spread: 17, sig: [0, 0, 0, 0] },
+    vortex:        { make: () => formVortex(160),            dist: 330, el: 0.40,  spin: 0.10, spread: 18, sig: [1, 1, 1.0, 0] },
+    beacon:        { make: () => formBeacon(128),            dist: 292, el: 0.12,  spin: 0.04, spread: 12, az: 0.1, turn: 0.42, sig: [4, 1, 0.17, 160] },
+    iris:          { make: () => formIris(120),              dist: 256, el: 0.06,  spin: 0.02, spread: 9,  az: 0, sig: [6, 1, 1.25, 0] },
+    cube:          { make: () => formCubeVolume(126),        dist: 252, el: 0.20,  spin: 0.13, spread: 14, sig: [7, 0, 0.05, 0] },
+    lattice:       { make: () => formCubeLattice(140, 3),    dist: 292, el: 0.28,  spin: 0.16, spread: 11, turn: 0.10, turnDraw: 0.10, sig: [3, 0.8, 6, 0] },
+    edges:         { make: () => formCubeEdges(126),         dist: 232, el: 0.09,  spin: 0.21, spread: 9,  sig: [3, 1.3, 9, 0] },
+    gyro:          { make: () => formGyro(120),              dist: 268, el: 0.22,  spin: 0.28, spread: 10, sig: [7, 0, 0.32, 0] },
+    gate:          { make: () => formGate(150),              dist: 286, el: 0.14,  spin: 0.04, spread: 9,  az: 0.42, sig: [3, 0.7, 12, 0] },
+    horizon:       { make: () => formHorizon(150),           dist: 318, el: 0.30,  spin: 0.09, spread: 12, az: 0.2, sig: [1, 1, 1.9, 0] },
+    tree:          { make: () => formTree(150, 0),           dist: 300, el: 0.08,  spin: 0.06, spread: 10, az: 0.55, sig: [2, 1, 0.9, -63] },
+    forest:        { make: () => formForest(190, 5),         dist: 368, el: 0.06,  spin: 0.05, spread: 12, az: 0.8, sig: [2, 1.2, 0.8, -80] },
+    vector:        { make: () => formVector(150, 26),        dist: 268, el: 0.06,  spin: 0.03, spread: 10, az: 0, sig: [3, 0.5, 5, 0] },
+    cosine:        { make: () => formCosine(112),            dist: 266, el: 0.18,  spin: 0.10, spread: 10, sig: [7, 0, 0.1, 0] },
+    neuron:        { make: () => formNeuron(150),            dist: 296, el: 0.14,  spin: 0.08, spread: 11, az: 1.1, sig: [0, 0, 0, 0], fire: true },
+    network:       { make: () => formNetwork(140, 40, false), dist: 288, el: 0.17, spin: 0.11, spread: 16, sig: [0, 0, 0, 0], fire: true },
+    networkLoose:  { make: () => formNetwork(140, 40, true), dist: 272, el: 0.24,  spin: 0.12, spread: 11, sig: [0, 0, 0, 0], fire: true },
+    binary:        { make: () => formBinary(168),            dist: 330, el: 0.13,  spin: 0.05, spread: 15, az: 0, sig: [5, 7, 9, 22] },
+    mobius:        { make: () => formMobius(96, 34),         dist: 292, el: 0.52,  spin: 0.16, spread: 10, sig: [7, 0, 0.13, 0] },
+    binaryBridge:  { make: () => formBinary(168),            dist: 300, el: 0.04,  spin: 0.04, spread: 9,  az: 0, sig: [5, 5, 7, 20] },
+    constellation: { make: () => formConstellation(135),     dist: 258, el: 0.20,  spin: 0.07, spread: 16, sig: [0, 0, 0, 0], fire: true }
   };
 
   function build() {
@@ -1016,36 +1137,19 @@ export const intro = (function () {
     cam = new THREE.PerspectiveCamera(48, Math.max(0.2, sz.w / sz.h), 0.8, 1600);
     fit = clamp(940 / Math.max(430, sz.h), 1, 1.5);
 
-    posA = formDust(330);
-    posB = CUES.dust.make();
-
-    const seed = new Float32Array(P);
-    const size = new Float32Array(P);
-    growA = new Float32Array(P);
-    for (let i = 0; i < P; i++) {
-      seed[i] = RS();
-      size[i] = 1.15 + Math.pow(RS(), 2.0) * 3.0;
+    try {
+      spirit = createSpirit(THREE, gl.renderer, SIDE);
+    } catch (err) {
+      return false;
     }
 
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(posA, 3));
-    g.setAttribute('aB', new THREE.BufferAttribute(posB, 3));
-    g.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
-    g.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
-    g.setAttribute('aGrow', new THREE.BufferAttribute(growA, 1));
+    spirit.seed(formDust(360));
+    spirit.setA(formDust(360), growTmp);
+    spirit.setB(CUES.dust.make(), growTmp);
+    spirit.draw.uPR.value = sz.pr;
 
-    mat = new THREE.ShaderMaterial({
-      uniforms: {
-        uMix: { value: 0 }, uGrow: { value: 1 }, uTime: { value: 0 }, uPR: { value: sz.pr },
-        uSpread: { value: 30 }, uDrift: { value: 0.9 }, uFade: { value: 0 }
-      },
-      vertexShader: VS, fragmentShader: FS,
-      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
-    });
-
-    pts = new THREE.Points(g, mat);
-    pts.frustumCulled = false;
-    scene.add(pts);
+    scene.add(spirit.trails);
+    scene.add(spirit.points);
 
     buildDraw();
 
@@ -1053,9 +1157,10 @@ export const intro = (function () {
       if (!cam) return;
       cam.aspect = Math.max(0.2, s.w / s.h);
       cam.updateProjectionMatrix();
-      mat.uniforms.uPR.value = s.pr;
+      if (spirit) spirit.draw.uPR.value = s.pr;
       fit = clamp(940 / Math.max(430, s.h), 1, 1.5);
     });
+    ready = true;
     return true;
   }
 
@@ -1109,15 +1214,19 @@ export const intro = (function () {
     const b = SCRIPT[beat];
     const cue = CUES[b.cue] || CUES.dust;
 
-    posA.set(posB);
-    posB.set(cue.make());
-    growA.set(growTmp);
-    pts.geometry.attributes.position.needsUpdate = true;
-    pts.geometry.attributes.aB.needsUpdate = true;
-    pts.geometry.attributes.aGrow.needsUpdate = true;
+    spirit.carryOver();
+    spirit.setB(cue.make(), growTmp);
+
+    const sa = spirit.sim.uSigA.value, sb = spirit.sim.uSigB.value;
+    sa.copy(sb);
+    const s = cue.sig || [0, 0, 0, 0];
+    sb.set(s[0], s[1], s[2], s[3]);
+
+    const fire = spirit.draw.uFire.value;
+    fire.set(fire.y, cue.fire ? 1 : 0);
 
     mix = 0;
-    mat.uniforms.uSpread.value = cue.spread;
+    spirit.sim.uFlow.value = 0.22 + (cue.spread || 10) * 0.055;
     camWant = cue.dist * fit;
     camElWant = cue.el;
     camAzSpeed = cue.spin;
@@ -1167,18 +1276,18 @@ export const intro = (function () {
     bus.emit('intro-done');
 
     setTimeout(() => {
-      if (pts) {
-        pts.geometry.dispose();
-        mat.dispose();
-        if (draw) { draw.geometry.dispose(); drawMat.dispose(); draw = null; drawMat = null; }
-        scene = null; pts = null; mat = null;
-        posA = posB = null;
+      if (spirit) {
+        spirit.dispose();
+        spirit = null;
       }
+      if (draw) { draw.geometry.dispose(); drawMat.dispose(); draw = null; drawMat = null; }
+      scene = null;
+      ready = false;
     }, 1200);
   }
 
   function update(dt) {
-    if (!running || !mat) return false;
+    if (!running || !ready) return false;
 
     elapsed += dt;
     const now = clock();
@@ -1195,21 +1304,26 @@ export const intro = (function () {
     drawSpinY = cue && cue.turnDraw ? drawSpinY + cue.turnDraw * dt : damp(drawSpinY, 0, 2.2, dt);
 
     mix = clamp(local / (b.dur * 0.62), 0, 1);
-    mat.uniforms.uGrow.value = clamp(local / (b.dur * 0.86), 0, 1);
+
+    const fadeIn = clamp(now / 1.6, 0, 1);
+    const fadeOut = clamp((TOTAL - now) / 1.2, 0, 1);
+    const fade = fadeIn * fadeOut;
+
+    spirit.sim.uMorph.value = smoother(mix);
+    spirit.sim.uGrow.value = clamp(local / (b.dur * 0.86), 0, 1);
+    spirit.sim.uPull.value = lerp(0.055, 0.12, mix);
+    spirit.draw.uFade.value = fade;
+    spirit.trail.uFade.value = fade;
+    spirit.step(dt, elapsed);
+
     const drawT = clamp((local - b.dur * 0.34) / (b.dur * 0.42), 0, 1);
     if (drawMat) {
       drawMat.uniforms.uDraw.value = smoother(drawT);
-      drawMat.uniforms.uFade.value = mat.uniforms.uFade.value;
+      drawMat.uniforms.uFade.value = fade;
     }
-    mat.uniforms.uMix.value = smoother(mix);
-    mat.uniforms.uTime.value = elapsed;
-    mat.uniforms.uDrift.value = lerp(1.1, 0.35, mix);
 
-    const fadeIn = clamp(now / 1.3, 0, 1);
-    const fadeOut = clamp((TOTAL - now) / 1.1, 0, 1);
-    mat.uniforms.uFade.value = fadeIn * fadeOut;
-
-    if (pts) pts.rotation.y = spinY;
+    spirit.points.rotation.y = spinY;
+    spirit.trails.rotation.y = spinY;
     if (draw) draw.rotation.y = drawSpinY;
 
     camDist = damp(camDist, camWant, 1.5, dt);
