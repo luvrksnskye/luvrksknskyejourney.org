@@ -33,7 +33,8 @@
 
 <body>
 		 <div class="video-background">
-			<video autoplay muted loop playsinline>
+			<video autoplay muted loop playsinline poster="/assets/images/posters/intro-background.jpg" preload="auto">
+				<source src="/assets/video/intro-background.mp4" type="video/mp4">
 				<source src="/assets/video/intro-background.webm" type="video/webm">
 			</video>
 		</div>
@@ -217,3 +218,6 @@
 <script src="js/main.js"></script>
 <script type="text/javascript" src="/assets/js/nav-bar.js"></script>
 <script type="module" src="/assets/js/starfall.js"></script>
+<script src="/assets/js/background-video.js" defer></script>
+</body>
+</html>

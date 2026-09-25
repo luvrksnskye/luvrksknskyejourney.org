@@ -194,6 +194,9 @@ class MemoryArchive {
     this.phase = 'transition';
     this.dom.gate.classList.add('is-leaving');
     this.dom.transition.hidden = false;
+    const clip = this.dom.transitionVideo;
+    try { clip.currentTime = 0; } catch (_) {}
+    clip.play().catch(() => this.endTransition());
     this._transitionTimer = setTimeout(() => this.endTransition(), 3400);
     setTimeout(() => this.dom.gate.remove(), 700);
     this.music.start();

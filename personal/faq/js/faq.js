@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
       video.muted = true;
       video.playsInline = true;
       video.loop = true;
-      video.innerHTML = '<source src="assets/videos/background.mp4" type="video/mp4">';
+      video.innerHTML = '<source src="/assets/video/intro-background.mp4" type="video/mp4"><source src="/assets/video/intro-background.webm" type="video/webm">';
       videoBackground.appendChild(video);
       document.body.insertBefore(videoBackground, document.body.firstChild);
     }

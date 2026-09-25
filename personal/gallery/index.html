@@ -34,8 +34,8 @@
 <body>
 
   <div class="mg-video-bg" aria-hidden="true">
-    <video autoplay loop muted playsinline preload="auto">
-      <source src="/assets/video/hatsune-miku-night.3840x2160.mp4" type="video/mp4">
+    <video autoplay loop muted playsinline preload="auto" poster="/assets/images/posters/miku-night.jpg">
+      <source src="/personal/about-me/assets/video/miku-night-1080.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -159,8 +159,8 @@
   </div>
 
   <div class="mg-gate" id="gate">
-    <video autoplay loop muted playsinline class="mg-gate-video"
-      src="/assets/video/intro-background.webm"></video>
+    <video autoplay loop muted playsinline preload="auto" poster="/assets/images/posters/intro-background.jpg" class="mg-gate-video"
+      src="/assets/video/intro-background.mp4"></video>
 
     <div class="mg-gate-orb" aria-hidden="true">
       <span class="mg-gate-halo"></span>
@@ -191,11 +191,12 @@
   </div>
 
   <div class="mg-transition" id="transition" hidden>
-    <video autoplay muted playsinline id="transitionVideo"
+    <video muted playsinline preload="auto" id="transitionVideo"
       src="/assets/video/transitions/transition.webm"></video>
   </div>
 
   <script src="/assets/js/nav-bar.js" defer></script>
-  <script type="module" src="js/gallery.js?v=6"></script>
+  <script type="module" src="js/gallery.js?v=7"></script>
+  <script src="/assets/js/background-video.js" defer></script>
 </body>
 </html>

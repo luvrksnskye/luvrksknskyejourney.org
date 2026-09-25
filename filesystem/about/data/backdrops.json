@@ -4,9 +4,9 @@
     "miku-night": { "src": "/personal/about-me/assets/video/miku-night-1080.mp4", "mb": 13 },
     "jinhsi": { "src": "/personal/about-me/assets/video/jinhsi-dragon-1080.mp4", "mb": 2 },
     "aemeath": { "src": "/filesystem/blogs/posts/data-gate/assets/video/background-loop.mp4", "mb": 4 },
-    "clouds": { "src": "/assets/video/intro-background.webm", "mb": 3 },
-    "night-room": { "src": "/assets/video/night-scene-animated.mp4", "mb": 39 },
-    "astral-express": { "src": "/assets/video/background.mp4", "mb": 53 },
-    "xiao": { "src": "/assets/video/loopwallpapers/xiaos-azure-ascent.1920x1080.mp4", "mb": 76 }
+    "clouds": { "src": "/assets/video/intro-background.mp4", "mb": 2 },
+    "night-room": { "src": "/assets/video/night-scene-animated.mp4", "mb": 4 },
+    "astral-express": { "src": "/assets/video/background.mp4", "mb": 14 },
+    "xiao": { "src": "/assets/video/xiao-azure-ascent.mp4", "mb": 18 }
   }
 }

@@ -6,7 +6,7 @@ export async function startBackdrop(root) {
 
   let config;
   try {
-    config = await (await fetch(new URL('../../data/backdrops.json?v=3', import.meta.url))).json();
+    config = await (await fetch(new URL('../../data/backdrops.json?v=4', import.meta.url))).json();
   } catch {
     return;
   }

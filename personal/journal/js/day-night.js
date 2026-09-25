@@ -21,6 +21,21 @@ let messageTimer = 0;
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const playQuietly = (video) => video?.play?.().catch(() => {});
 
+function whenReady(video, ms) {
+  if (!video || video.readyState >= 3 || video.error) return Promise.resolve();
+  return new Promise((resolve) => {
+    const done = () => {
+      clearTimeout(timer);
+      video.removeEventListener('canplay', done);
+      video.removeEventListener('error', done);
+      resolve();
+    };
+    const timer = setTimeout(done, ms);
+    video.addEventListener('canplay', done);
+    video.addEventListener('error', done);
+  });
+}
+
 function showScene(theme) {
   for (const [name, scene] of Object.entries(scenes)) {
     const active = name === theme;
@@ -61,23 +76,32 @@ function splashDuration() {
 }
 
 function playSplash() {
-  return new Promise((resolve) => {
-    const video = splash.video;
-    let done = false;
+  const video = splash.video;
+  let started;
+  const start = new Promise((resolve) => { started = resolve; });
+  const done = new Promise((resolve) => {
+    let over = false;
+    const reveal = () => {
+      splash.layer.classList.add('is-playing');
+      started();
+    };
     const finish = () => {
-      if (done) return;
-      done = true;
+      if (over) return;
+      over = true;
       video.removeEventListener('ended', finish);
       video.removeEventListener('error', finish);
+      video.removeEventListener('playing', reveal);
+      started();
       resolve();
     };
     video.addEventListener('ended', finish);
     video.addEventListener('error', finish);
-    setTimeout(finish, Math.min(splashDuration() + 400 || 4000, 6000));
+    video.addEventListener('playing', reveal, { once: true });
+    setTimeout(finish, Math.min(splashDuration() + 1600 || 4000, 7000));
     try { video.currentTime = 0; } catch {}
-    splash.layer.classList.add('is-playing');
     video.play().catch(finish);
   });
+  return { start, done };
 }
 
 async function transitionTo(theme) {
@@ -85,12 +109,15 @@ async function transitionTo(theme) {
   const from = scenes[current];
   const to = scenes[theme];
 
-  announce(theme);
   playQuietly(to.video);
+  await whenReady(to.video, 1500);
+  announce(theme);
 
   let splashDone = Promise.resolve();
   if (splashIsUsable()) {
-    splashDone = playSplash();
+    const run = playSplash();
+    splashDone = run.done;
+    await run.start;
     const duration = splashDuration();
     await wait(duration ? Math.max(0, duration / 2 - SCENE_FADE_MS / 2) : 500);
   }

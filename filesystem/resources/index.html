@@ -26,7 +26,6 @@
     
     <link rel="stylesheet" href="css/resources.css">
     <link rel="stylesheet" href="/assets/css/nav-bar.css">
-    <link rel="stylesheet" href="/assets/css/music-player.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bookmark" />
 </head>
 <body>
@@ -150,7 +149,7 @@
     </div>
 
     <div class="video-background">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline poster="assets/images/posters/bg-resources.jpg" preload="auto">
             <source src="assets/video/bg-resources.mp4" type="video/mp4">
         </video>
     </div>
@@ -200,9 +199,9 @@
         Your browser does not support the audio element.
     </audio>
 
-    <script src="/assets/js/music-player.js"></script>
     <script src="/assets/js/nav-bar.js"></script>
     <script src="js/index.js"></script>
+    <script src="/assets/js/background-video.js" defer></script>
 
 </body>
 </html>
