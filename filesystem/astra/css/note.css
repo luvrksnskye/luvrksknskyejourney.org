@@ -10,6 +10,10 @@ html:has(.nt) {
   background: #03050a;
 }
 
+.nt [hidden] {
+  display: none !important;
+}
+
 .nt-bar-link {
   text-decoration: none;
   color: var(--line-soft);
@@ -492,13 +496,13 @@ html:has(.nt) {
 }
 
 .sa.nt[data-domain="science"] {
-  --temp: var(--science);
-  --temp-soft: color-mix(in oklab, var(--science) 30%, transparent);
+  --glow: var(--science);
+  --glow-soft: color-mix(in oklab, var(--science) 30%, transparent);
 }
 
 .sa.nt[data-domain="art"] {
-  --temp: #f2b07a;
-  --temp-soft: color-mix(in oklab, #f2b07a 30%, transparent);
+  --glow: #f2b07a;
+  --glow-soft: color-mix(in oklab, #f2b07a 30%, transparent);
 }
 
 .nt-page {
@@ -543,18 +547,18 @@ html:has(.nt) {
 }
 
 .nt-star-core {
-  fill: var(--temp);
-  filter: drop-shadow(0 0 10px var(--temp-soft));
+  fill: var(--glow);
+  filter: drop-shadow(0 0 10px var(--glow-soft));
 }
 
 .nt-star-halo {
   fill: none;
-  stroke: var(--temp-soft);
+  stroke: var(--glow-soft);
   stroke-width: 1;
 }
 
 .nt-star-cloud {
-  fill: var(--temp-soft);
+  fill: var(--glow-soft);
   opacity: 0.4;
 }
 
@@ -573,7 +577,7 @@ html:has(.nt) {
   font-size: 0.95rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--temp);
+  color: var(--glow);
 }
 
 .nt-readout {
@@ -620,12 +624,151 @@ html:has(.nt) {
   display: block;
   height: 100%;
   width: calc(var(--progress, 0) * 100%);
-  background: var(--temp);
+  background: var(--glow);
   transition: width 160ms linear;
 }
 
 .nt-deck-back {
   justify-self: start;
+}
+
+.nt-toc {
+  display: grid;
+  gap: 8px;
+  max-height: calc(40 * var(--vh, 1vh));
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.nt-toc ol {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.nt-toc li[data-depth="1"] {
+  padding-left: 12px;
+}
+
+.nt-toc li[data-depth="2"] {
+  padding-left: 24px;
+}
+
+.nt-toc a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.nt-toc a:hover,
+.nt-toc a:focus-visible {
+  color: var(--glow);
+}
+
+.nt-body [id^="sec-"] {
+  scroll-margin-top: calc(var(--bar-h) + 30px);
+}
+
+.nt-post {
+  margin: 0;
+  font-family: var(--hud);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nt-post a {
+  color: var(--glow);
+  text-decoration: none;
+}
+
+.nt-post a::before {
+  content: '← ';
+}
+
+.nt-post a:hover,
+.nt-post a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nt-body a.nt-cite {
+  font-size: 0.86em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nt-body a.nt-cite:hover,
+.nt-body a.nt-cite:focus-visible {
+  color: var(--glow);
+  text-decoration: underline;
+}
+
+.nt-biblio ol {
+  display: grid;
+  gap: 10px;
+  margin: 10px 0 0;
+  padding-left: 1.4em;
+  font-size: 0.94em;
+  line-height: 1.6;
+}
+
+.nt-biblio li {
+  scroll-margin-top: calc(var(--bar-h) + 30px);
+  transition: background 600ms ease;
+}
+
+.nt-biblio li:target {
+  background: var(--glow-soft);
+}
+
+.nt-ref-who {
+  color: var(--ink-cool);
+}
+
+.nt-ref-year {
+  color: var(--line-soft);
+}
+
+.nt-biblio cite {
+  color: var(--ink);
+}
+
+.nt-ref-pages {
+  font-family: var(--hud);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--line-soft);
+}
+
+.nt-body li:has(> .nt-task) {
+  list-style: none;
+  margin-left: -1.1em;
+}
+
+.nt-task {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  margin-right: 0.6em;
+  border: 1px solid var(--line-soft);
+  vertical-align: 0.04em;
+}
+
+.nt-task[data-state="done"] {
+  border-color: var(--glow);
+  background: var(--glow);
+  box-shadow: 0 0 8px var(--glow-soft);
+}
+
+.nt-body li:has(> .nt-task[data-state="done"]) {
+  color: var(--ink-soft);
 }
 
 @media (max-width: 1099px) {
@@ -645,7 +788,8 @@ html:has(.nt) {
   }
 
   .nt-deck-read,
-  .nt-deck-back {
+  .nt-deck-back,
+  .nt-toc {
     display: none;
   }
 }
@@ -656,7 +800,7 @@ html:has(.nt) {
 
 .nt-title,
 .nt-body a {
-  color: var(--temp);
+  color: var(--glow);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -709,8 +853,8 @@ html:has(.nt) {
 }
 
 .nt-music.is-on i {
-  background: var(--temp);
-  box-shadow: 0 0 10px var(--temp-soft);
+  background: var(--glow);
+  box-shadow: 0 0 10px var(--glow-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {
