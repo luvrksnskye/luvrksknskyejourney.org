@@ -1,7 +1,7 @@
-import { rng, state } from './core.js?v=1';
+import { rng, state } from './core.js?v=2';
 
 const GRAPH = '/filesystem/astra/data/graph.json';
-const PEERS = 'data/peers.json?v=1';
+const PEERS = 'data/peers.json?v=2';
 
 const DIRS = [[0.00, 0.58, -0.81], [0.82, 0.24, 0.52], [-0.78, 0.30, 0.55], [0.10, -0.74, -0.66]];
 const STAGES = { nebula: 0.7, protostar: 0.95, 'main-sequence': 1.25, giant: 1.7, remnant: 0.8 };

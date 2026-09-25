@@ -1,11 +1,11 @@
-import { $, bus, clamp, say } from './core.js?v=1';
+import { $, bus, clamp, say } from './core.js?v=2';
 
 export const audio = (function () {
   'use strict';
 
-
   let node = null, btn = null, ico = null, lab = null, vol = null, volN = null;
-  let ctx = null, analyser = null, bins = null;
+  let ctx = null, analyser = null, bins = null, gain = null;
+  let volume = 0.55;
   let status = 'unknown';
   let level = 0;
   let wanted = false;
@@ -38,17 +38,31 @@ export const audio = (function () {
       analyser.fftSize = 128;
       analyser.smoothingTimeConstant = 0.82;
       bins = new Uint8Array(analyser.frequencyBinCount);
+      gain = ctx.createGain();
       src.connect(analyser);
-      analyser.connect(ctx.destination);
+      analyser.connect(gain);
+      gain.connect(ctx.destination);
+      setLevel();
     } catch (_) {
-
       analyser = null;
+      gain = null;
+    }
+  }
+
+  function setLevel() {
+    if (!node) return;
+    if (gain) {
+      node.volume = 1;
+      gain.gain.value = volume;
+    } else {
+      node.volume = volume;
     }
   }
 
   function applyVolume(v) {
     const g = clamp(v, 0, 100) / 100;
-    if (node) node.volume = g * g;
+    volume = g * g;
+    setLevel();
     if (volN) volN.textContent = String(Math.round(v)).padStart(2, '0');
     try { localStorage.setItem('skye-astra:vol', String(Math.round(v))); } catch (_) {}
   }
@@ -67,6 +81,11 @@ export const audio = (function () {
       else setStatus('ready');
       return false;
     }
+  }
+
+  function seek(t) {
+    if (!node || !isFinite(t)) return;
+    try { node.currentTime = Math.max(0, t); } catch (_) {}
   }
 
   function pause() {
@@ -117,14 +136,13 @@ export const audio = (function () {
     applyVolume(saved);
 
     node.addEventListener('error', () => setStatus('absent'));
-    node.addEventListener('stalled', () => { if (!node.duration) setStatus('absent'); });
     node.addEventListener('canplay', () => { if (status !== 'playing') setStatus('ready'); });
     node.addEventListener('playing', () => setStatus('playing'));
     node.addEventListener('pause', () => { if (status === 'playing') setStatus('ready'); });
 
     setTimeout(() => {
       if (status === 'unknown') {
-        setStatus(node.networkState === 3  ? 'absent' : 'ready');
+        setStatus(node.networkState === 3 ? 'absent' : 'ready');
       }
     }, 2200);
 
@@ -140,9 +158,8 @@ export const audio = (function () {
   }
 
   return {
-    init, play, pause, toggle, mute, bump, energy,
+    init, play, pause, seek, toggle, mute, bump, energy,
     get status() { return status; },
-
     get time() {
       return node && status === 'playing' && !node.paused ? node.currentTime : null;
     }

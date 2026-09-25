@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap">
-<link rel="stylesheet" href="css/network.css?v=1">
+<link rel="stylesheet" href="css/network.css?v=2">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
 
   <video id="backdrop"  class="backdrop" hidden muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
 
-  <div id="fog" class="fog" hidden aria-hidden="true"></div>
+  <div id="fog" class="fog" aria-hidden="true"></div>
 
   <canvas id="gl" aria-label="Three-dimensional map of the ASTRA vault"></canvas>
   <div id="fallback2d" class="fallback" hidden>
@@ -284,11 +284,12 @@
       <span class="stat-n num" id="intro-stat-n"></span>
       <span class="stat-c" id="intro-stat-c"></span>
     </div>
-    <div class="intro-text">
+    <div class="intro-text" aria-live="polite">
       <p class="intro-line" id="intro-line"></p>
     </div>
     <div class="intro-foot">
-      <div class="intro-ruler" id="intro-ruler" aria-hidden="true"></div>
+      <div class="intro-ruler" id="intro-ruler"></div>
+      <p class="intro-keys" aria-hidden="true"><kbd>SPACE</kbd> <span id="intro-hold">hold</span> <kbd>&larr;</kbd><kbd>&rarr;</kbd> move</p>
       <button class="intro-skip" id="intro-skip" type="button">SKIP <kbd>ESC</kbd></button>
     </div>
   </div>
@@ -316,7 +317,7 @@
 
 </div>
 
-<script type="module" src="js/main.js?v=1"></script>
+<script type="module" src="js/main.js?v=2"></script>
 
 </body>
 </html>

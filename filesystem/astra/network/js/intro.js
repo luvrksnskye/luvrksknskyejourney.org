@@ -1,19 +1,22 @@
-import { $, el, state, store, bus, clamp, damp, lerp, smoother, shortAngle, rng, breathe } from './core.js?v=1';
-import { data } from './vault.js?v=1';
-import { gl } from './gl.js?v=1';
-import { audio } from './audio.js?v=1';
-import { createSpirit } from './spirit.js?v=1';
+import { $, el, state, store, bus, clamp, damp, lerp, smoother, shortAngle, breathe } from './core.js?v=2';
+import { data } from './vault.js?v=2';
+import { gl } from './gl.js?v=2';
+import { audio } from './audio.js?v=2';
+import { createSpirit } from './spirit.js?v=2';
+import { createForms } from './forms.js?v=2';
 
 export const intro = (function () {
   'use strict';
 
   const SCRIPT = [
+    { cue: 'genesis',       dur: 4.0, line: '',                                                              stat: null },
     { cue: 'vortex',        dur: 3.0, line: '',                                                              stat: null },
     { cue: 'beacon',        dur: 4.5, line: 'I built a lighthouse inside this website.',                     stat: 'days' },
     { cue: 'iris',          dur: 4.5, line: 'She is an eye. She watches what comes in, and what tries to leave.', stat: null },
     { cue: 'cube',          dur: 4.5, line: 'Behind the eye there is a box, and everything I study goes into it.', stat: null },
     { cue: 'lattice',       dur: 5.0, line: 'Really it is thousands of small boxes. One note each, finished on its own, all of them touching.', stat: null },
     { cue: 'edges',         dur: 4.5, line: 'Take the walls away and the rule is left. Two words decide everything. Private, or finished.', stat: 'leaks' },
+    { cue: 'storm',         dur: 3.5, line: '',                                                              stat: null },
     { cue: 'gyro',          dur: 4.5, line: 'Her core turns inside three cages, in a language that catches my mistakes before they happen.', stat: null },
     { cue: 'gate',          dur: 4.5, line: 'There is one door and it never opens outward. She reads, checks, writes, and stops.', stat: 'closed' },
     { cue: 'horizon',       dur: 4.5, line: 'What she keeps falls into a black hole. Nothing comes back out by accident.', stat: null },
@@ -21,13 +24,16 @@ export const intro = (function () {
     { cue: 'forest',        dur: 4.0, line: 'One tree turns into a forest. So much left to find, and to write down.', stat: null },
     { cue: 'vector',        dur: 4.5, line: 'Every note also becomes a row of numbers that stands for what it means.', stat: 'dims' },
     { cue: 'cosine',        dur: 4.5, line: 'Two ideas, and the angle between them. That is how she measures how close they are.', stat: null },
+    { cue: 'thought',       dur: 5.0, line: '',                                                              stat: null },
     { cue: 'neuron',        dur: 4.5, line: 'The rows fire like a neuron. Small pieces, and the paths between them.', stat: null },
     { cue: 'network',       dur: 4.5, line: 'So she finds a note by an idea instead of a word,',             stat: null },
     { cue: 'networkLoose',  dur: 4.5, line: 'and she sees which ones belong together, even the ones I never linked.', stat: 'links' },
     { cue: 'binary',        dur: 4.0, line: 'She is not alone. There is another station out there.',          stat: 'stations' },
     { cue: 'mobius',        dur: 4.5, line: 'One ribbon with a single side, and the two of us read the same shape.', stat: null },
     { cue: 'binaryBridge',  dur: 3.0, line: 'ASTRA and APOLLO.',                                              stat: null },
-    { cue: 'constellation', dur: 4.0, line: 'A constellation. Enjoy the journey.',                            stat: null }
+    { cue: 'orbit',         dur: 4.5, line: '',                                                              stat: null },
+    { cue: 'constellation', dur: 4.0, line: 'A constellation. Enjoy the journey.',                            stat: null },
+    { cue: 'coda',          dur: 5.5, line: '',                                                              stat: null, keep: true }
   ];
 
   const three = n => String(Math.max(0, n | 0)).padStart(3, '0');
@@ -42,15 +48,7 @@ export const intro = (function () {
   };
 
   const SIDE = window.innerWidth < 760 ? 128 : 256;
-  const P = SIDE * SIDE;
-  const RS = rng(0x51AA);
-
-  let THREE = null;
-  let scene = null, cam = null, spirit = null;
-  let ready = false;
-  let running = false, done = false;
-  let beat = -1, mix = 1, elapsed = 0;
-  let wallStart = 0, audioStart = null;
+  const reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const STARTS = [];
   const TOTAL = (function () {
@@ -58,47 +56,6 @@ export const intro = (function () {
     SCRIPT.forEach(b => { STARTS.push(t); t += b.dur; });
     return t;
   })();
-  let camDist = 300, camWant = 300, camAz = 0, camAzSpeed = 0.08, camAzWant = null, camEl = 0.1, camElWant = 0.1;
-  let spinY = 0, drawSpinY = 0, fit = 1, burst = 0;
-  let root, lineEl, statEl, statN, statC, ruler, ticks = [];
-
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const growTmp = new Float32Array(P);
-
-  function alloc() {
-    growTmp.fill(0);
-    return new Float32Array(P * 3);
-  }
-
-  function facePoint(out, i, s, jitter) {
-    const f = (RS() * 6) | 0;
-    const u = (RS() - 0.5) * s, v = (RS() - 0.5) * s, h = s * 0.5;
-    let x, y, z;
-    if (f === 0) { x = h; y = u; z = v; }
-    else if (f === 1) { x = -h; y = u; z = v; }
-    else if (f === 2) { x = u; y = h; z = v; }
-    else if (f === 3) { x = u; y = -h; z = v; }
-    else if (f === 4) { x = u; y = v; z = h; }
-    else { x = u; y = v; z = -h; }
-    const j = jitter || 0;
-    out[i * 3] = x + (RS() - 0.5) * j;
-    out[i * 3 + 1] = y + (RS() - 0.5) * j;
-    out[i * 3 + 2] = z + (RS() - 0.5) * j;
-  }
-
-  function formDust(r) {
-    const o = alloc();
-    for (let i = 0; i < P; i++) {
-      const rr = r * (0.35 + Math.pow(RS(), 0.4) * 0.9);
-      const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-      o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
-      o[i * 3 + 1] = Math.cos(ph) * rr * 0.62;
-      o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
-    }
-    return o;
-  }
-
 
   const SEGS = 1200;
   let draw = null, drawMat = null, drawPos = null, drawOrder = null, drawUsed = 0;
@@ -326,17 +283,6 @@ export const intro = (function () {
       dimension(o, [-152, floor, 0], [-152, 96, 0], 6);
       return o;
     },
-    treeFull() {
-      const o = [];
-      const half = 160, step = half * 2 / 12, floor = -75;
-      for (let i = 0; i <= 12; i++) {
-        line(o, [-half + i * step, floor, -half], [-half + i * step, floor, half], 0);
-        line(o, [-half, floor, -half + i * step], [half, floor, -half + i * step], 0);
-      }
-      ring(o, 0, floor, 0, 44, 48, 1);
-      dimension(o, [-180, floor, 0], [-180, 118, 0], 6);
-      return o;
-    },
     vector() {
       const o = [];
       const w = 124, h = 78;
@@ -413,753 +359,173 @@ export const intro = (function () {
     drawMat.uniforms.uDraw.value = 0;
   }
 
-  function hash2(a, b) {
-    const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
-    return s - Math.floor(s);
-  }
-
-  function formBeacon(r) {
-    const o = alloc();
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.20) {
-        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-        const rr = r * 0.055 * Math.pow(RS(), 0.4);
-        o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
-        o[i * 3 + 1] = Math.cos(ph) * rr;
-        o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
-      } else if (roll < 0.76) {
-        const t = Math.pow(RS(), 0.8);
-        const w = r * (0.008 + t * 0.16);
-        o[i * 3] = t * r * 1.25;
-        o[i * 3 + 1] = (RS() - 0.5) * w;
-        o[i * 3 + 2] = (RS() - 0.5) * w;
-        growTmp[i] = 0.12 + t * 0.7;
-      } else {
-        const rr = r * (0.5 + RS() * 2.0);
-        const th = RS() * Math.PI * 2;
-        o[i * 3] = Math.cos(th) * rr;
-        o[i * 3 + 1] = -r * 0.46 + (RS() - 0.5) * r * 0.06;
-        o[i * 3 + 2] = Math.sin(th) * rr;
-      }
-    }
-    return o;
-  }
-
-  function formCubeLattice(s, n) {
-    const o = alloc();
-    const cell = s / n, gap = cell * 0.34, inner = cell - gap;
-    const half = (n - 1) / 2;
-    const tmp = new Float32Array(3);
-    for (let i = 0; i < P; i++) {
-      const cx = (RS() * n) | 0, cy = (RS() * n) | 0, cz = (RS() * n) | 0;
-      if (RS() < 0.13) {
-        const axis = (RS() * 3) | 0;
-        const t = RS();
-        o[i * 3] = (cx - half) * cell + (axis === 0 ? (t - 0.5) * cell : 0);
-        o[i * 3 + 1] = (cy - half) * cell + (axis === 1 ? (t - 0.5) * cell : 0);
-        o[i * 3 + 2] = (cz - half) * cell + (axis === 2 ? (t - 0.5) * cell : 0);
-        growTmp[i] = 0.86;
-        continue;
-      }
-      facePoint(tmp, 0, inner, inner * 0.05);
-      o[i * 3] = tmp[0] + (cx - half) * cell;
-      o[i * 3 + 1] = tmp[1] + (cy - half) * cell;
-      o[i * 3 + 2] = tmp[2] + (cz - half) * cell;
-      growTmp[i] = (cx + cy + cz) / ((n - 1) * 3) * 0.78;
-    }
-    return o;
-  }
-
-  function formVector(s, rows) {
-    const o = alloc();
-    const cols = 30;
-    const step = s / rows;
-    for (let i = 0; i < P; i++) {
-      const r = (RS() * rows) | 0;
-      const c = (RS() * cols) | 0;
-      const v = hash2(r + 1, c + 1) - 0.5;
-      o[i * 3] = (c / (cols - 1) - 0.5) * s * 1.6 + (RS() - 0.5) * step * 0.3;
-      o[i * 3 + 1] = (r / (rows - 1) - 0.5) * s + v * step * 0.86;
-      o[i * 3 + 2] = (RS() - 0.5) * s * 0.03;
-      growTmp[i] = (c / cols) * 0.86;
-    }
-    return o;
-  }
-
-  function formVortex(r) {
-    const o = alloc();
-    const arms = 5;
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.10) {
-        const t = RS();
-        const rr = r * 0.06 * (1 - t);
-        const th = RS() * Math.PI * 2;
-        o[i * 3] = Math.cos(th) * rr;
-        o[i * 3 + 1] = -r * 0.5 + t * r * 1.0;
-        o[i * 3 + 2] = Math.sin(th) * rr;
-        growTmp[i] = 0.72 + t * 0.26;
-        continue;
-      }
-      const arm = (RS() * arms) | 0;
-      const t = Math.pow(RS(), 0.62);
-      const rr = r * (0.08 + t * 0.95);
-      const th = (arm / arms) * Math.PI * 2 + t * 4.1 + (RS() - 0.5) * 0.24;
-      const fall = (1 - t) * (1 - t);
-      o[i * 3] = Math.cos(th) * rr;
-      o[i * 3 + 1] = -fall * r * 0.42 + (RS() - 0.5) * r * 0.05;
-      o[i * 3 + 2] = Math.sin(th) * rr;
-      growTmp[i] = (1 - t) * 0.8;
-    }
-    return o;
-  }
-
-  function branchOut(segs, box, x, y, z, dx, dy, dz, len, depth, from, maxDepth, minLen) {
-    const ex = x + dx * len, ey = y + dy * len, ez = z + dz * len;
-    const at = from + len;
-    segs.push([x, y, z, ex, ey, ez, depth, from, at]);
-    if (at > box.span) box.span = at;
-    if (depth >= maxDepth || len < minLen) return;
-    const n = depth < 2 ? 2 + ((RS() * 2) | 0) : (RS() > 0.42 ? 2 : 1);
-    for (let b = 0; b < n; b++) {
-      let nx = dx + (RS() - 0.5) * 1.5;
-      let ny = dy + 0.18 + RS() * 0.2;
-      let nz = dz + (RS() - 0.5) * 1.5;
-      const m = Math.hypot(nx, ny, nz) || 1;
-      branchOut(segs, box, ex, ey, ez, nx / m, ny / m, nz / m, len * (0.6 + RS() * 0.22), depth + 1, at, maxDepth, minLen);
-    }
-  }
-
-  function scatterOn(o, i, half, floor, reach) {
-    const lineIdx = (RS() * 13) | 0;
-    const step = (half * 2) / 12;
-    if (RS() < 0.5) {
-      o[i * 3] = (RS() - 0.5) * half * 2;
-      o[i * 3 + 2] = -half + lineIdx * step;
-    } else {
-      o[i * 3] = -half + lineIdx * step;
-      o[i * 3 + 2] = (RS() - 0.5) * half * 2;
-    }
-    o[i * 3 + 1] = floor + (RS() - 0.5) * reach * 0.006;
-  }
-
-  function formForest(reach, count) {
-    const o = alloc();
-    const floor = -reach * 0.42;
-    const groves = [];
-    let widest = 1;
-
-    for (let k = 0; k < count; k++) {
-      const a = (k / count) * Math.PI * 2 + 0.6;
-      const d = k === 0 ? 0 : reach * (0.3 + RS() * 0.42);
-      const cx = Math.cos(a) * d, cz = Math.sin(a) * d;
-      const scale = k === 0 ? 1 : 0.5 + RS() * 0.42;
-      const box = { span: 1 };
-      const segs = [];
-      branchOut(segs, box, cx, floor, cz, 0, 1, 0, reach * 0.26 * scale, 0, 0, 5, reach * 0.04);
-      const lens = segs.map(s => Math.hypot(s[3] - s[0], s[4] - s[1], s[5] - s[2]));
-      let total = 0;
-      lens.forEach(l => { total += l; });
-      groves.push({ segs: segs, lens: lens, total: total, span: box.span, order: k / count });
-      widest = Math.max(widest, d);
-    }
-
-    const half = Math.max(reach * 0.9, widest + reach * 0.3);
-    for (let i = 0; i < P; i++) {
-      if (RS() < 0.22) {
-        scatterOn(o, i, half, floor, reach);
-        growTmp[i] = 0.03;
-        continue;
-      }
-      const g = groves[(RS() * groves.length) | 0];
-      let pick = RS() * g.total;
-      let s = g.segs[0];
-      for (let k = 0; k < g.segs.length; k++) {
-        pick -= g.lens[k];
-        if (pick <= 0) { s = g.segs[k]; break; }
-      }
-      const t = RS();
-      const j = reach * 0.012 * (1 - s[6] / 7);
-      o[i * 3] = lerp(s[0], s[3], t) + (RS() - 0.5) * j;
-      o[i * 3 + 1] = lerp(s[1], s[4], t) + (RS() - 0.5) * j;
-      o[i * 3 + 2] = lerp(s[2], s[5], t) + (RS() - 0.5) * j;
-      growTmp[i] = 0.06 + g.order * 0.5 + (lerp(s[7], s[8], t) / g.span) * 0.42;
-    }
-    return o;
-  }
-
-  function formMobius(R, w) {
-    const o = alloc();
-    for (let i = 0; i < P; i++) {
-      const u = RS() * Math.PI * 2;
-      const edge = RS() < 0.42;
-      const v = edge ? (RS() < 0.5 ? -w : w) * (0.94 + RS() * 0.06) : (RS() - 0.5) * 2 * w;
-      const c = Math.cos(u * 0.5), s = Math.sin(u * 0.5);
-      const rr = R + v * c;
-      o[i * 3] = Math.cos(u) * rr;
-      o[i * 3 + 1] = v * s;
-      o[i * 3 + 2] = Math.sin(u) * rr;
-      growTmp[i] = (u / (Math.PI * 2)) * 0.88;
-    }
-    return o;
-  }
-
-  function formIris(r) {
-    const o = alloc();
-    const pupil = r * 0.27;
-    const fibres = 260;
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      let a, rr, wob = 0;
-      if (roll < 0.09) {
-        a = RS() * Math.PI * 2;
-        rr = r * (1 + (RS() - 0.5) * 0.012);
-        growTmp[i] = 0.9 + (a / (Math.PI * 2)) * 0.1;
-      } else if (roll < 0.20) {
-        a = RS() * Math.PI * 2;
-        rr = pupil * (1 + (RS() - 0.5) * 0.04);
-        growTmp[i] = 0.02 + RS() * 0.06;
-      } else {
-        const f = (RS() * fibres) | 0;
-        const jitter = hash2(f + 1, 7) - 0.5;
-        a = (f / fibres) * Math.PI * 2 + jitter * 0.02;
-        const t = Math.pow(RS(), 0.85);
-        rr = pupil + t * (r - pupil) * (0.72 + hash2(f + 3, 11) * 0.3);
-        wob = Math.sin(t * 8.5 + f) * r * 0.012;
-        growTmp[i] = 0.1 + t * 0.74;
-      }
-      const dome = -Math.sqrt(Math.max(0, r * r * 2.2 - rr * rr)) * 0.2;
-      o[i * 3] = Math.cos(a) * rr - Math.sin(a) * wob;
-      o[i * 3 + 1] = Math.sin(a) * rr + Math.cos(a) * wob;
-      o[i * 3 + 2] = dome + (RS() - 0.5) * r * 0.01;
-    }
-    return o;
-  }
-
-  function formNeuron(r) {
-    const o = alloc();
-    const segs = [];
-    const box = { span: 1 };
-
-    for (let d = 0; d < 7; d++) {
-      const th = (d / 7) * Math.PI * 2 + 0.4;
-      const ph = (RS() - 0.5) * 1.1;
-      branchOut(segs, box,
-        0, 0, 0,
-        Math.cos(th) * Math.cos(ph), Math.sin(ph), Math.sin(th) * Math.cos(ph),
-        r * 0.2, 1, 0, 4, r * 0.035);
-    }
-    const axon = [];
-    let ax = 0, ay = 0, az = 0, at = 0;
-    for (let k = 0; k < 9; k++) {
-      const nx = ax - r * 0.17, ny = ay + Math.sin(k * 0.8) * r * 0.035, nz = az + Math.cos(k * 0.6) * r * 0.02;
-      const len = Math.hypot(nx - ax, ny - ay, nz - az);
-      axon.push([ax, ay, az, nx, ny, nz, 0, at, at + len]);
-      at += len;
-      ax = nx; ay = ny; az = nz;
-    }
-    box.span = Math.max(box.span, at);
-    for (let k = 0; k < 5; k++) {
-      const th = (k / 5) * Math.PI * 2;
-      branchOut(axon, box, ax, ay, az, -0.5, Math.cos(th) * 0.7, Math.sin(th) * 0.7, r * 0.1, 3, at, 4, r * 0.03);
-    }
-    const all = segs.concat(axon);
-    const lens = all.map(s => Math.hypot(s[3] - s[0], s[4] - s[1], s[5] - s[2]));
-    let total = 0;
-    lens.forEach(l => { total += l; });
-
-    for (let i = 0; i < P; i++) {
-      if (RS() < 0.16) {
-        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-        const rr = r * 0.1 * Math.pow(RS(), 0.4);
-        o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
-        o[i * 3 + 1] = Math.cos(ph) * rr;
-        o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
-        growTmp[i] = RS() * 0.1;
-        continue;
-      }
-      let pick = RS() * total;
-      let s = all[0];
-      for (let k = 0; k < all.length; k++) {
-        pick -= lens[k];
-        if (pick <= 0) { s = all[k]; break; }
-      }
-      const t = RS();
-      const j = r * 0.01;
-      o[i * 3] = lerp(s[0], s[3], t) + (RS() - 0.5) * j;
-      o[i * 3 + 1] = lerp(s[1], s[4], t) + (RS() - 0.5) * j;
-      o[i * 3 + 2] = lerp(s[2], s[5], t) + (RS() - 0.5) * j;
-      growTmp[i] = 0.1 + (lerp(s[7], s[8], t) / box.span) * 0.86;
-    }
-    return o;
-  }
-
-  function formCosine(r) {
-    const o = alloc();
-    const a1 = [0.82, 0.42, 0.38], a2 = [0.36, 0.74, -0.57];
-    const n1 = Math.hypot(a1[0], a1[1], a1[2]), n2 = Math.hypot(a2[0], a2[1], a2[2]);
-    const u = [a1[0] / n1, a1[1] / n1, a1[2] / n1];
-    const v = [a2[0] / n2, a2[1] / n2, a2[2] / n2];
-
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.46) {
-        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-        const rr = r * (0.99 + (RS() - 0.5) * 0.02);
-        o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
-        o[i * 3 + 1] = Math.cos(ph) * rr;
-        o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
-        growTmp[i] = RS() * 0.42;
-        continue;
-      }
-      if (roll < 0.62) {
-        const a = RS() * Math.PI * 2;
-        const rr = r * (1 + (RS() - 0.5) * 0.008);
-        o[i * 3] = Math.cos(a) * rr;
-        o[i * 3 + 1] = (RS() - 0.5) * r * 0.008;
-        o[i * 3 + 2] = Math.sin(a) * rr;
-        growTmp[i] = 0.2 + (a / (Math.PI * 2)) * 0.2;
-        continue;
-      }
-      if (roll < 0.88) {
-        const w = RS() < 0.5 ? u : v;
-        const t = RS();
-        const j = r * 0.006;
-        o[i * 3] = w[0] * r * t + (RS() - 0.5) * j;
-        o[i * 3 + 1] = w[1] * r * t + (RS() - 0.5) * j;
-        o[i * 3 + 2] = w[2] * r * t + (RS() - 0.5) * j;
-        growTmp[i] = 0.46 + t * 0.3;
-        continue;
-      }
-      const t = RS();
-      const ax = lerp(u[0], v[0], t), ay = lerp(u[1], v[1], t), az = lerp(u[2], v[2], t);
-      const m = Math.hypot(ax, ay, az) || 1;
-      const rr = r * 0.42;
-      o[i * 3] = (ax / m) * rr;
-      o[i * 3 + 1] = (ay / m) * rr;
-      o[i * 3 + 2] = (az / m) * rr;
-      growTmp[i] = 0.8 + t * 0.18;
-    }
-    return o;
-  }
-
-  function formGyro(r) {
-    const o = alloc();
-    const cages = [
-      [1, 0, 0, 0, 1, 0],
-      [0.5, 0.86, 0, 0, 0, 1],
-      [0.5, -0.5, 0.71, 0.71, 0.5, 0.5]
-    ];
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.26) {
-        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-        const rr = r * 0.2 * Math.pow(RS(), 0.45);
-        o[i * 3] = Math.sin(ph) * Math.cos(th) * rr;
-        o[i * 3 + 1] = Math.cos(ph) * rr;
-        o[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * rr;
-        growTmp[i] = RS() * 0.2;
-        continue;
-      }
-      const k = (RS() * cages.length) | 0;
-      const c = cages[k];
-      const a = RS() * Math.PI * 2;
-      const rad = r * (0.52 + k * 0.19);
-      const wob = (RS() - 0.5) * r * 0.012;
-      const ca = Math.cos(a), sa = Math.sin(a);
-      o[i * 3] = (c[0] * ca + c[3] * sa) * rad + wob;
-      o[i * 3 + 1] = (c[1] * ca + c[4] * sa) * rad + wob;
-      o[i * 3 + 2] = (c[2] * ca + c[5] * sa) * rad + wob;
-      growTmp[i] = 0.26 + k * 0.22 + (a / (Math.PI * 2)) * 0.2;
-    }
-    return o;
-  }
-
-  function formGate(s) {
-    const o = alloc();
-    const h = s * 0.5;
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.30) {
-        const edge = (RS() * 4) | 0;
-        const t = RS();
-        const j = s * 0.012;
-        if (edge < 2) {
-          o[i * 3] = lerp(-h, h, t) + (RS() - 0.5) * j;
-          o[i * 3 + 1] = (edge === 0 ? h : -h) + (RS() - 0.5) * j;
-        } else {
-          o[i * 3] = (edge === 2 ? h : -h) + (RS() - 0.5) * j;
-          o[i * 3 + 1] = lerp(-h, h, t) + (RS() - 0.5) * j;
-        }
-        o[i * 3 + 2] = (RS() - 0.5) * j;
-        growTmp[i] = (edge / 4) * 0.34 + t * 0.08;
-        continue;
-      }
-      if (roll < 0.88) {
-        const t = Math.pow(RS(), 0.6);
-        o[i * 3] = (RS() - 0.5) * s * 0.9;
-        o[i * 3 + 1] = (RS() - 0.5) * s * 0.9;
-        o[i * 3 + 2] = -s * 0.1 - t * s * 0.8;
-        growTmp[i] = 0.4 + t * 0.34;
-        continue;
-      }
-      const t = Math.pow(RS(), 0.8);
-      const a = RS() * Math.PI * 2;
-      const spread = s * (0.04 + t * 0.5);
-      o[i * 3] = Math.cos(a) * spread;
-      o[i * 3 + 1] = Math.sin(a) * spread;
-      o[i * 3 + 2] = t * s * 0.9;
-      growTmp[i] = 0.78 + t * 0.2;
-    }
-    return o;
-  }
-
-  function formHorizon(r) {
-    const o = alloc();
-    const rs = r * 0.34;
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.70) {
-        const t = Math.pow(RS(), 1.7);
-        const rad = rs * 1.25 + t * r * 1.05;
-        const a = RS() * Math.PI * 2 + t * 5.6;
-        const thin = rs * 0.03 + t * r * 0.05;
-        o[i * 3] = Math.cos(a) * rad;
-        o[i * 3 + 1] = (RS() - 0.5) * thin;
-        o[i * 3 + 2] = Math.sin(a) * rad;
-        growTmp[i] = 0.1 + (1 - t) * 0.6;
-        continue;
-      }
-      if (roll < 0.90) {
-        const a = RS() * Math.PI * 2;
-        const rad = rs * (1.02 + (RS() - 0.5) * 0.03);
-        const tilt = (RS() - 0.5) * 0.06;
-        o[i * 3] = Math.cos(a) * rad;
-        o[i * 3 + 1] = Math.sin(a) * rad * Math.cos(tilt);
-        o[i * 3 + 2] = Math.sin(a) * rad * Math.sin(tilt);
-        growTmp[i] = 0.72 + (a / (Math.PI * 2)) * 0.16;
-        continue;
-      }
-      const up = RS() < 0.5 ? 1 : -1;
-      const t = Math.pow(RS(), 0.8);
-      const w = rs * (0.05 + t * 0.42);
-      const a = RS() * Math.PI * 2;
-      o[i * 3] = Math.cos(a) * w;
-      o[i * 3 + 1] = up * (rs * 0.4 + t * r * 1.25);
-      o[i * 3 + 2] = Math.sin(a) * w;
-      growTmp[i] = 0.9 + t * 0.1;
-    }
-    return o;
-  }
-
-  function formCubeVolume(s) {
-    const o = alloc();
-    const h = s * 0.5;
-    for (let i = 0; i < P; i++) {
-      const x = (RS() - 0.5) * s, y = (RS() - 0.5) * s, z = (RS() - 0.5) * s;
-      const m = Math.max(Math.abs(x), Math.abs(y), Math.abs(z)) || 1;
-      const k = 1 + Math.pow(RS(), 0.5) * (h / m - 1);
-      o[i * 3] = x * k;
-      o[i * 3 + 1] = y * k;
-      o[i * 3 + 2] = z * k;
-      growTmp[i] = Math.min(0.82, (m * k) / h * 0.8);
-    }
-    return o;
-  }
-
-  function formCubeEdges(s) {
-    const o = alloc();
-    const h = s * 0.5;
-    const c = [[-h, -h, -h], [h, -h, -h], [h, h, -h], [-h, h, -h],
-               [-h, -h, h], [h, -h, h], [h, h, h], [-h, h, h]];
-    const pairs = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
-    for (let i = 0; i < P; i++) {
-      const corner = RS() < 0.18;
-      if (corner) {
-        const vi = (RS() * 8) | 0;
-        const v = c[vi];
-        const j = s * 0.055;
-        growTmp[i] = 0.86 + (vi / 8) * 0.12;
-        o[i * 3] = v[0] + (RS() - 0.5) * j;
-        o[i * 3 + 1] = v[1] + (RS() - 0.5) * j;
-        o[i * 3 + 2] = v[2] + (RS() - 0.5) * j;
-        continue;
-      }
-      const ei = (RS() * pairs.length) | 0;
-      const e = pairs[ei];
-      const a = c[e[0]], b = c[e[1]];
-      const t = RS();
-      const j = s * 0.006;
-      growTmp[i] = ((ei + t) / pairs.length) * 0.84;
-      o[i * 3] = lerp(a[0], b[0], t) + (RS() - 0.5) * j;
-      o[i * 3 + 1] = lerp(a[1], b[1], t) + (RS() - 0.5) * j;
-      o[i * 3 + 2] = lerp(a[2], b[2], t) + (RS() - 0.5) * j;
-    }
-    return o;
-  }
-
-  function formTree(reach, fullness) {
-    const o = alloc();
-    const segs = [];
-    let span = 0;
-
-    function grow(x, y, z, dx, dy, dz, len, depth, from) {
-      const ex = x + dx * len, ey = y + dy * len, ez = z + dz * len;
-      const at = from + len;
-      segs.push([x, y, z, ex, ey, ez, depth, from, at]);
-      span = Math.max(span, at);
-      if (depth >= (fullness > 0.5 ? 6 : 5) || len < reach * 0.045) return;
-      const branches = depth < 2 ? 2 + ((RS() * 2) | 0) : (RS() > 0.42 ? 2 : 1);
-      for (let b = 0; b < branches; b++) {
-        let nx = dx + (RS() - 0.5) * 1.5;
-        let ny = dy + 0.18 + RS() * 0.2;
-        let nz = dz + (RS() - 0.5) * 1.5;
-        const m = Math.hypot(nx, ny, nz) || 1;
-        grow(ex, ey, ez, nx / m, ny / m, nz / m, len * (0.6 + RS() * 0.22), depth + 1, at);
-      }
-    }
-
-    function root(x, y, z, dx, dy, dz, len, depth, from) {
-      const ex = x + dx * len, ey = y + dy * len, ez = z + dz * len;
-      const at = from + len;
-      segs.push([x, y, z, ex, ey, ez, depth + 9, from, at]);
-      span = Math.max(span, at);
-      if (depth >= 3 || len < reach * 0.05) return;
-      const branches = RS() > 0.5 ? 2 : 1;
-      for (let b = 0; b < branches; b++) {
-        let nx = dx + (RS() - 0.5) * 1.8;
-        let ny = dy - 0.2 - RS() * 0.2;
-        let nz = dz + (RS() - 0.5) * 1.8;
-        const m = Math.hypot(nx, ny, nz) || 1;
-        root(ex, ey, ez, nx / m, ny / m, nz / m, len * (0.58 + RS() * 0.2), depth + 1, at);
-      }
-    }
-
-    const floor = -reach * 0.42;
-    grow(0, floor, 0, 0, 1, 0, reach * 0.3, 0, 0);
-    root(0, floor, 0, 0, -1, 0, reach * 0.16, 0, 0);
-
-    const lens = segs.map(s => Math.hypot(s[3] - s[0], s[4] - s[1], s[5] - s[2]));
-    let total = 0;
-    lens.forEach(l => { total += l; });
-
-    const half = reach * 0.9, step = (half * 2) / 12;
-    for (let i = 0; i < P; i++) {
-      if (RS() < 0.2) {
-        const lineIdx = (RS() * 13) | 0;
-        if (RS() < 0.5) {
-          o[i * 3] = (RS() - 0.5) * half * 2;
-          o[i * 3 + 2] = -half + lineIdx * step;
-        } else {
-          o[i * 3] = -half + lineIdx * step;
-          o[i * 3 + 2] = (RS() - 0.5) * half * 2;
-        }
-        o[i * 3 + 1] = floor + (RS() - 0.5) * reach * 0.006;
-        growTmp[i] = 0.04;
-        continue;
-      }
-      let pick = RS() * total;
-      let s = segs[0], k = 0;
-      for (k = 0; k < segs.length; k++) {
-        pick -= lens[k];
-        if (pick <= 0) { s = segs[k]; break; }
-      }
-      const t = RS();
-      const depth = s[6] % 9;
-      const j = reach * 0.014 * (1 - depth / 7);
-      o[i * 3] = lerp(s[0], s[3], t) + (RS() - 0.5) * j;
-      o[i * 3 + 1] = lerp(s[1], s[4], t) + (RS() - 0.5) * j;
-      o[i * 3 + 2] = lerp(s[2], s[5], t) + (RS() - 0.5) * j;
-      growTmp[i] = 0.08 + (lerp(s[7], s[8], t) / span) * 0.9;
-    }
-    return o;
-  }
-
-  function formBinary(r) {
-    const o = alloc();
-    const sides = [-r * 0.62, r * 0.62];
-    const C = [];
-    for (let s = 0; s < 2; s++) {
-      for (let i = 0; i < 18; i++) {
-        const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-        const rr = r * 0.30 * Math.pow(RS(), 0.55);
-        C.push([sides[s] + Math.sin(ph) * Math.cos(th) * rr, Math.cos(ph) * rr * 0.78, Math.sin(ph) * Math.sin(th) * rr, s]);
-      }
-    }
-    const L = [];
-    for (let i = 0; i < C.length; i++) {
-      let best = -1, bd = Infinity;
-      for (let j = 0; j < C.length; j++) {
-        if (i === j || C[i][3] !== C[j][3]) continue;
-        const d = (C[i][0] - C[j][0]) * (C[i][0] - C[j][0]) +
-                  (C[i][1] - C[j][1]) * (C[i][1] - C[j][1]) +
-                  (C[i][2] - C[j][2]) * (C[i][2] - C[j][2]);
-        if (d < bd) { bd = d; best = j; }
-      }
-      if (best > -1) L.push([i, best]);
-    }
-    for (let i = 0; i < P; i++) {
-      const roll = RS();
-      if (roll < 0.09) {
-        const t = RS();
-        o[i * 3] = lerp(sides[0], sides[1], t);
-        o[i * 3 + 1] = Math.sin(t * Math.PI) * r * 0.34;
-        o[i * 3 + 2] = (RS() - 0.5) * r * 0.008;
-        growTmp[i] = 0.72 + t * 0.26;
-      } else if (roll < 0.40) {
-        const ci = (RS() * C.length) | 0;
-        const c = C[ci];
-        const j = r * 0.018;
-        o[i * 3] = c[0] + (RS() - 0.5) * j;
-        o[i * 3 + 1] = c[1] + (RS() - 0.5) * j;
-        o[i * 3 + 2] = c[2] + (RS() - 0.5) * j;
-        growTmp[i] = C[ci][3] * 0.34 + (ci % 18) / 18 * 0.2;
-      } else {
-        const li = (RS() * L.length) | 0;
-        const e = L[li];
-        const a = C[e[0]], b = C[e[1]];
-        const t = RS();
-        const j = r * 0.005;
-        growTmp[i] = C[e[0]][3] * 0.34 + 0.14 + (li / L.length) * 0.16;
-        o[i * 3] = lerp(a[0], b[0], t) + (RS() - 0.5) * j;
-        o[i * 3 + 1] = lerp(a[1], b[1], t) + (RS() - 0.5) * j;
-        o[i * 3 + 2] = lerp(a[2], b[2], t) + (RS() - 0.5) * j;
-      }
-    }
-    return o;
-  }
-
-  function formNetwork(r, hubs, loose) {
-    const o = alloc();
-    const C = [];
-    for (let i = 0; i < hubs; i++) {
-      const th = RS() * Math.PI * 2, ph = Math.acos(2 * RS() - 1);
-      const rr = r * (0.45 + Math.pow(RS(), 0.6) * 0.75);
-      C.push([Math.sin(ph) * Math.cos(th) * rr, Math.cos(ph) * rr * 0.72, Math.sin(ph) * Math.sin(th) * rr]);
-    }
-
-    const L = [];
-    for (let i = 0; i < hubs; i++) {
-      let best = -1, bd = Infinity;
-      for (let j = 0; j < hubs; j++) {
-        if (i === j) continue;
-        const d = (C[i][0] - C[j][0]) ** 2 + (C[i][1] - C[j][1]) ** 2 + (C[i][2] - C[j][2]) ** 2;
-        if (d < bd) { bd = d; best = j; }
-      }
-      L.push([i, best]);
-      if (RS() > 0.72) L.push([i, (RS() * hubs) | 0]);
-    }
-
-    for (let i = 0; i < P; i++) {
-      if (RS() < 0.30) {
-        const ci = (RS() * hubs) | 0;
-        const c = C[ci];
-        const j = r * 0.02;
-        o[i * 3] = c[0] + (RS() - 0.5) * j;
-        o[i * 3 + 1] = c[1] + (RS() - 0.5) * j;
-        o[i * 3 + 2] = c[2] + (RS() - 0.5) * j;
-        growTmp[i] = (ci / hubs) * 0.3;
-      } else {
-        const li = (RS() * L.length) | 0;
-        const e = L[li];
-        const a = C[e[0]], b = C[e[1]];
-        let t = RS();
-        growTmp[i] = 0.34 + (li / L.length) * (loose ? 0.62 : 0.5);
-
-        if (loose && (t % 0.16) > 0.08) t = (t + 0.08) % 1;
-        const j = r * 0.006;
-        o[i * 3] = lerp(a[0], b[0], t) + (RS() - 0.5) * j;
-        o[i * 3 + 1] = lerp(a[1], b[1], t) + (RS() - 0.5) * j;
-        o[i * 3 + 2] = lerp(a[2], b[2], t) + (RS() - 0.5) * j;
-      }
-    }
-    return o;
-  }
-
-  function formConstellation(scaleTo) {
-    const nodes = data.nodes, edges = data.edges;
-    if (!nodes.length || !edges.length) return formNetwork(scaleTo, 34, false);
-    const o = alloc();
-    let maxR = 1;
-    nodes.forEach(n => { maxR = Math.max(maxR, Math.hypot(n.x, n.y, n.z)); });
-    const k = scaleTo / maxR;
-
-    for (let i = 0; i < P; i++) {
-      if (RS() < 0.34) {
-        const n = nodes[(RS() * nodes.length) | 0];
-        const j = scaleTo * 0.012;
-        o[i * 3] = n.x * k + (RS() - 0.5) * j;
-        o[i * 3 + 1] = n.y * k + (RS() - 0.5) * j;
-        o[i * 3 + 2] = n.z * k + (RS() - 0.5) * j;
-      } else {
-        const e = edges[(RS() * edges.length) | 0];
-        const a = nodes[e.a], b = nodes[e.b];
-        const t = RS();
-        o[i * 3] = lerp(a.x, b.x, t) * k;
-        o[i * 3 + 1] = lerp(a.y, b.y, t) * k;
-        o[i * 3 + 2] = lerp(a.z, b.z, t) * k;
-      }
-    }
-    return o;
-  }
-
   const CUES = {
-    dust:          { make: () => formDust(150),              dist: 322, el: 0.04,  spin: 0.05, spread: 17, sig: [0, 0, 0, 0] },
-    vortex:        { make: () => formVortex(160),            dist: 330, el: 0.40,  spin: 0.10, spread: 18, sig: [1, 1, 1.0, 0] },
-    beacon:        { make: () => formBeacon(128),            dist: 292, el: 0.12,  spin: 0.04, spread: 12, az: 0.1, turn: 0.42, sig: [4, 1, 0.17, 160] },
-    iris:          { make: () => formIris(120),              dist: 256, el: 0.06,  spin: 0.02, spread: 9,  az: 0, sig: [6, 1, 1.25, 0] },
-    cube:          { make: () => formCubeVolume(126),        dist: 252, el: 0.20,  spin: 0.13, spread: 14, sig: [7, 0, 0.05, 0] },
-    lattice:       { make: () => formCubeLattice(140, 3),    dist: 292, el: 0.28,  spin: 0.16, spread: 11, turn: 0.10, turnDraw: 0.10, sig: [3, 0.8, 6, 0] },
-    edges:         { make: () => formCubeEdges(126),         dist: 232, el: 0.09,  spin: 0.21, spread: 9,  sig: [3, 1.3, 9, 0] },
-    gyro:          { make: () => formGyro(120),              dist: 268, el: 0.22,  spin: 0.28, spread: 10, sig: [7, 0, 0.32, 0] },
-    gate:          { make: () => formGate(150),              dist: 286, el: 0.14,  spin: 0.04, spread: 9,  az: 0.42, sig: [3, 0.7, 12, 0] },
-    horizon:       { make: () => formHorizon(150),           dist: 318, el: 0.30,  spin: 0.09, spread: 12, az: 0.2, sig: [1, 1, 1.9, 0] },
-    tree:          { make: () => formTree(150, 0),           dist: 300, el: 0.08,  spin: 0.06, spread: 10, az: 0.55, sig: [2, 1, 0.9, -63] },
-    forest:        { make: () => formForest(190, 5),         dist: 368, el: 0.06,  spin: 0.05, spread: 12, az: 0.8, sig: [2, 1.2, 0.8, -80] },
-    vector:        { make: () => formVector(150, 26),        dist: 268, el: 0.06,  spin: 0.03, spread: 10, az: 0, sig: [3, 0.5, 5, 0] },
-    cosine:        { make: () => formCosine(112),            dist: 266, el: 0.18,  spin: 0.10, spread: 10, sig: [7, 0, 0.1, 0] },
-    neuron:        { make: () => formNeuron(150),            dist: 296, el: 0.14,  spin: 0.08, spread: 11, az: 1.1, sig: [0, 0, 0, 0], fire: true },
-    network:       { make: () => formNetwork(140, 40, false), dist: 288, el: 0.17, spin: 0.11, spread: 16, sig: [0, 0, 0, 0], fire: true },
-    networkLoose:  { make: () => formNetwork(140, 40, true), dist: 272, el: 0.24,  spin: 0.12, spread: 11, sig: [0, 0, 0, 0], fire: true },
-    binary:        { make: () => formBinary(168),            dist: 330, el: 0.13,  spin: 0.05, spread: 15, az: 0, sig: [5, 7, 9, 22] },
-    mobius:        { make: () => formMobius(96, 34),         dist: 292, el: 0.52,  spin: 0.16, spread: 10, sig: [7, 0, 0.13, 0] },
-    binaryBridge:  { make: () => formBinary(168),            dist: 300, el: 0.04,  spin: 0.04, spread: 9,  az: 0, sig: [5, 5, 7, 20] },
-    constellation: { make: () => formConstellation(135),     dist: 258, el: 0.20,  spin: 0.07, spread: 16, sig: [0, 0, 0, 0], fire: true }
+    genesis:       { dist: 400, el: 0.22, spin: 0.10, spread: 6, flow: 0.28, release: [0.3, 0.42], field: [1, 70, 1, 0], stir: 0.5, sig: [0, 0, 0, 0] },
+    storm:         { dist: 300, el: 0.18, spin: 0.34, spread: 10, release: [0.0, 0.2], stir: 2.4, emit: 0.8, life: 0.62, sig: [0, 0, 0, 0] },
+    thought:       { dist: 330, el: 0.12, spin: 0.16, spread: 4, flow: 0.06, release: [0.5, 0.72], field: [3, 0.3, 4.6, 0], sig: [0, 0, 0, 0] },
+    orbit:         { dist: 318, el: 0.42, spin: 0.12, spread: 4, flow: 0.07, release: [0.42, 0.66], field: [4, 0.55, 88, 0], sig: [0, 0, 0, 0] },
+    coda:          { dist: 360, el: 0.28, spin: 0.07, spread: 4, flow: 0.1, release: [0.22, 0.5], field: [5, 1.1, 34, 0], sig: [0, 0, 0, 0] },
+    dust:          { dist: 322, el: 0.04, spin: 0.05, spread: 17, sig: [0, 0, 0, 0] },
+    vortex:        { dist: 330, el: 0.40, spin: 0.10, spread: 18, sig: [1, 1, 1.0, 0] },
+    beacon:        { dist: 292, el: 0.12, spin: 0.04, spread: 12, az: 0.1, turn: 0.42, sig: [4, 1, 0.17, 160] },
+    iris:          { dist: 256, el: 0.06, spin: 0.02, spread: 9,  az: 0, sig: [6, 1, 1.25, 0] },
+    cube:          { dist: 252, el: 0.20, spin: 0.13, spread: 14, sig: [7, 0, 0.05, 0] },
+    lattice:       { dist: 292, el: 0.28, spin: 0.16, spread: 11, turn: 0.10, turnDraw: 0.10, sig: [3, 0.8, 6, 0] },
+    edges:         { dist: 232, el: 0.09, spin: 0.21, spread: 9,  sig: [3, 1.3, 9, 0] },
+    gyro:          { dist: 268, el: 0.22, spin: 0.28, spread: 10, sig: [7, 0, 0.32, 0] },
+    gate:          { dist: 286, el: 0.14, spin: 0.04, spread: 9,  az: 0.42, sig: [3, 0.7, 12, 0] },
+    horizon:       { dist: 318, el: 0.30, spin: 0.09, spread: 12, az: 0.2, sig: [1, 1, 1.9, 0] },
+    tree:          { dist: 300, el: 0.08, spin: 0.06, spread: 10, az: 0.55, sig: [2, 1, 0.9, -63] },
+    forest:        { dist: 368, el: 0.06, spin: 0.05, spread: 12, az: 0.8, sig: [2, 1.2, 0.8, -80] },
+    vector:        { dist: 268, el: 0.06, spin: 0.03, spread: 10, az: 0, sig: [3, 0.5, 5, 0] },
+    cosine:        { dist: 266, el: 0.18, spin: 0.10, spread: 10, sig: [7, 0, 0.1, 0] },
+    neuron:        { dist: 296, el: 0.14, spin: 0.08, spread: 11, az: 1.1, sig: [0, 0, 0, 0], fire: true },
+    network:       { dist: 288, el: 0.17, spin: 0.11, spread: 16, sig: [0, 0, 0, 0], fire: true },
+    networkLoose:  { dist: 272, el: 0.24, spin: 0.12, spread: 11, sig: [0, 0, 0, 0], fire: true },
+    binary:        { dist: 330, el: 0.13, spin: 0.05, spread: 15, az: 0, sig: [5, 7, 9, 22] },
+    mobius:        { dist: 292, el: 0.52, spin: 0.16, spread: 10, sig: [7, 0, 0.13, 0] },
+    binaryBridge:  { dist: 300, el: 0.04, spin: 0.04, spread: 9,  az: 0, sig: [5, 5, 7, 20] },
+    constellation: { dist: 258, el: 0.20, spin: 0.07, spread: 16, sig: [0, 0, 0, 0], fire: true }
   };
 
-  function build() {
+  const PREP = ['cloud', 'cloud', 'dust'].concat(SCRIPT.map(b => b.cue));
+  const FIRST = 3;
+
+  let bank = [];
+  let worker = null, workerDead = false, run = 0, local = null;
+
+  function graphLite() {
+    return {
+      nodes: data.nodes.map(n => ({ x: n.x, y: n.y, z: n.z })),
+      edges: data.edges.map(e => ({ a: e.a, b: e.b }))
+    };
+  }
+
+  const complete = () => bank.length === PREP.length && bank.filter(Boolean).length === PREP.length;
+
+  function prepare() {
+    warm();
+    if (worker || workerDead || reducedQuery.matches || complete()) return;
+    if (bank.length !== PREP.length) bank = new Array(PREP.length);
+    const mine = ++run;
+    try {
+      worker = new Worker(new URL('./forms-worker.js?v=2', import.meta.url), { type: 'module' });
+    } catch (_) {
+      worker = null;
+      workerDead = true;
+      return;
+    }
+    worker.onmessage = e => {
+      const m = e.data;
+      if (!m || m.run !== mine) return;
+      if (m.type === 'form' && !bank[m.index]) bank[m.index] = m.data;
+      else if (m.type === 'done' && worker) { worker.terminate(); worker = null; }
+    };
+    worker.onerror = () => {
+      workerDead = true;
+      if (worker) worker.terminate();
+      worker = null;
+    };
+    worker.postMessage({ type: 'run', run: mine, side: SIDE, graph: graphLite(), names: PREP });
+  }
+
+  function form(k) {
+    if (bank[k]) return bank[k];
+    if (!local) local = createForms(SIDE, graphLite());
+    bank[k] = local.make(PREP[k]);
+    return bank[k];
+  }
+
+  let THREE = null;
+  let scene = null, cam = null, spirit = null;
+  let ready = false, running = false, closing = 0, waiting = false;
+  let still = false;
+  let beat = -1, mix = 1, elapsed = 0, fade = 0;
+
+  let tl = 0, held = false, audioBase = null, lastAt = -1, stuck = 0;
+
+  let camDist = 300, camWant = 300, camAz = 0, camAzSpeed = 0.08, camAzWant = null, camEl = 0.1, camElWant = 0.1;
+  let spinY = 0, drawSpinY = 0, fit = 1, burst = 0, slow = 0;
+  let freeNow = 0, emitNow = 0, stirNow = 0;
+  const fieldNow = [0, 0, 1, 0];
+  let root, lineEl, statEl, statN, statC, ruler, holdEl, ticks = [];
+  let statAnim = null, swapTimer = 0;
+
+  const OUTRO = 0.8;
+
+  bus.on('gl-resize', s => {
+    fit = clamp(1010 / Math.max(430, s.h), 1, 1.7);
+    if (!cam) return;
+    cam.aspect = Math.max(0.2, s.w / s.h);
+    cam.updateProjectionMatrix();
+    if (spirit) spirit.draw.uPR.value = s.pr;
+  });
+
+  bus.on('gl-lost', () => { if (running) teardown(); });
+
+  let assembled = false, warmed = false;
+
+  function assemble() {
+    if (assembled) return true;
     THREE = gl.three;
-    if (!THREE) return false;
+    if (!THREE || !gl.renderer) return false;
 
     scene = new THREE.Scene();
     const sz = gl.size;
     cam = new THREE.PerspectiveCamera(48, Math.max(0.2, sz.w / sz.h), 0.8, 1600);
     fit = clamp(1010 / Math.max(430, sz.h), 1, 1.7);
 
-    try {
-      spirit = createSpirit(THREE, gl.renderer, SIDE);
-    } catch (err) {
-      return false;
+    still = reducedQuery.matches;
+    spirit = null;
+    if (!still) {
+      try {
+        spirit = createSpirit(THREE, gl.renderer, SIDE);
+        spirit.draw.uPR.value = sz.pr;
+        scene.add(spirit.trails);
+        scene.add(spirit.points);
+      } catch (_) {
+        if (spirit) spirit.dispose();
+        spirit = null;
+      }
     }
 
-    spirit.seed(formDust(360));
-    spirit.setA(formDust(360), growTmp);
-    spirit.setB(CUES.dust.make(), growTmp);
-    spirit.draw.uPR.value = sz.pr;
-
-    scene.add(spirit.trails);
-    scene.add(spirit.points);
-
     buildDraw();
+    assembled = true;
+    return true;
+  }
 
-    bus.on('gl-resize', s => {
-      if (!cam) return;
-      cam.aspect = Math.max(0.2, s.w / s.h);
-      cam.updateProjectionMatrix();
-      if (spirit) spirit.draw.uPR.value = s.pr;
-      fit = clamp(1010 / Math.max(430, s.h), 1, 1.7);
-    });
+  function warm() {
+    if (warmed || !assemble()) return;
+    const r = gl.renderer;
+    if (typeof r.compileAsync !== 'function') { warmed = true; return; }
+    const jobs = [r.compileAsync(scene, cam)];
+    if (spirit) jobs.push(spirit.warm());
+    const prime = () => {
+      if (!assembled || running) { warmed = true; return; }
+      const tiny = new THREE.WebGLRenderTarget(2, 2);
+      r.setRenderTarget(tiny);
+      r.render(scene, cam);
+      r.setRenderTarget(null);
+      tiny.dispose();
+      warmed = true;
+    };
+    Promise.all(jobs).then(prime, prime);
+  }
+
+  function build() {
+    if (!assemble()) return false;
+    if (spirit) {
+      try {
+        spirit.seed(form(0));
+        spirit.setA(form(1));
+        spirit.setB(form(2));
+      } catch (_) {
+        scene.remove(spirit.trails);
+        scene.remove(spirit.points);
+        spirit.dispose();
+        spirit = null;
+      }
+    }
     ready = true;
     return true;
   }
@@ -1171,42 +537,84 @@ export const intro = (function () {
     statN = $('#intro-stat-n');
     statC = $('#intro-stat-c');
     ruler = $('#intro-ruler');
+    holdEl = $('#intro-hold');
 
-    ruler.innerHTML = '';
-    ticks = SCRIPT.map(() => {
-      const t = el('span', { class: 'itick' }, [el('i')]);
-      ruler.appendChild(t);
-      return t;
+    if (!ticks.length) {
+      ruler.textContent = '';
+      ticks = SCRIPT.map((b, k) => {
+        const t = el('button', { class: 'itick', type: 'button', 'aria-label': 'line ' + (k + 1) + ' of ' + SCRIPT.length }, [el('i')]);
+        t.addEventListener('click', () => jump(k));
+        ruler.appendChild(t);
+        return t;
+      });
+      $('#intro-skip').addEventListener('click', finish);
+    }
+  }
+
+  function setLine(text, dur) {
+    lineEl.textContent = '';
+    const words = text.split(/\s+/).filter(Boolean);
+    const step = Math.min(120, Math.max(46, (dur * 380) / Math.max(1, words.length)));
+    lineEl.style.setProperty('--step', step + 'ms');
+    words.forEach((w, k) => {
+      const span = el('span', { class: 'w', text: w });
+      span.style.setProperty('--k', String(k));
+      lineEl.appendChild(span);
+      if (k < words.length - 1) lineEl.appendChild(document.createTextNode(' '));
     });
+  }
 
-    $('#intro-skip').addEventListener('click', finish);
+  function setStat(reading) {
+    statEl.hidden = !reading;
+    statAnim = null;
+    if (!reading) return;
+    statC.textContent = reading[1];
+    statEl.classList.remove('in');
+    void statEl.offsetWidth;
+    statEl.classList.add('in');
+    const target = reading[0];
+    if (still || !/^\d+$/.test(target)) { statN.textContent = target; return; }
+    statAnim = { target: target, t: 0, dur: 1.1, count: Number(target) > 60 };
+    stepStat(0);
+  }
+
+  function stepStat(dt) {
+    if (!statAnim) return;
+    statAnim.t += dt;
+    const k = clamp(statAnim.t / statAnim.dur, 0, 1);
+    const s = statAnim.target;
+    let out = '';
+    if (statAnim.count) {
+      out = String(Math.round(Number(s) * (1 - Math.pow(1 - k, 3)))).padStart(s.length, '0');
+    } else {
+      for (let j = 0; j < s.length; j++) {
+        out += k >= (j + 1) / (s.length + 1) ? s[j] : String((Math.random() * 10) | 0);
+      }
+    }
+    statN.textContent = out;
+    if (k >= 1) statAnim = null;
   }
 
   function paintBeat(i) {
     const b = SCRIPT[i];
+    ticks.forEach((t, k) => {
+      t.classList.toggle('on', k <= i);
+      t.classList.toggle('now', k === i);
+    });
+    if (b.keep) return;
+    clearTimeout(swapTimer);
     root.classList.add('swap');
-    setTimeout(() => {
-      lineEl.textContent = b.line;
-      const reading = b.stat && STATS[b.stat] ? STATS[b.stat]() : null;
-      statEl.hidden = !reading;
-      if (reading) {
-        statN.textContent = reading[0];
-        statC.textContent = reading[1];
-      }
+    swapTimer = setTimeout(() => {
+      setLine(b.line, b.dur);
+      setStat(b.stat && STATS[b.stat] ? STATS[b.stat]() : null);
       root.classList.remove('swap');
-    }, reduced ? 0 : 240);
-    ticks.forEach((t, k) => t.classList.toggle('on', k <= i));
+    }, still ? 0 : 240);
   }
 
-  function clock() {
-    const at = audio.time;
-    if (at != null) {
-      if (audioStart == null) audioStart = at;
-      return Math.max(0, at - audioStart);
-    }
-
-    audioStart = null;
-    return (performance.now() - wallStart) / 1000;
+  function beatAt(t) {
+    let i = 0;
+    while (i < SCRIPT.length - 1 && t >= STARTS[i + 1]) i++;
+    return i;
   }
 
   function gotoBeat(i) {
@@ -1214,126 +622,280 @@ export const intro = (function () {
     const b = SCRIPT[beat];
     const cue = CUES[b.cue] || CUES.dust;
 
-    spirit.carryOver();
-    spirit.setB(cue.make(), growTmp);
+    if (spirit) {
+      spirit.carryOver();
+      spirit.setB(form(FIRST + i));
 
-    const sa = spirit.sim.uSigA.value, sb = spirit.sim.uSigB.value;
-    sa.copy(sb);
-    const s = cue.sig || [0, 0, 0, 0];
-    sb.set(s[0], s[1], s[2], s[3]);
+      const sa = spirit.sim.uSigA.value, sb = spirit.sim.uSigB.value;
+      sa.copy(sb);
+      const s = cue.sig || [0, 0, 0, 0];
+      sb.set(s[0], s[1], s[2], s[3]);
 
-    const fire = spirit.draw.uFire.value;
-    fire.set(fire.y, cue.fire ? 1 : 0);
+      const fire = spirit.draw.uFire.value;
+      fire.set(fire.y, cue.fire ? 1 : 0);
+      spirit.sim.uFlow.value = cue.flow != null ? cue.flow : 0.22 + (cue.spread || 10) * 0.055;
+      if (cue.field) {
+        for (let k = 0; k < 4; k++) fieldNow[k] = cue.field[k];
+        spirit.sim.uField.value.set(fieldNow[0], fieldNow[1], fieldNow[2], fieldNow[3]);
+      }
+      spirit.sim.uLife.value = cue.life || 0.35;
+    }
 
     mix = 0;
     burst = 1;
-    spirit.sim.uFlow.value = 0.22 + (cue.spread || 10) * 0.055;
     camWant = cue.dist * fit;
     camElWant = cue.el;
-    camAzSpeed = cue.spin;
-    camAzWant = cue.az == null ? null : cue.az;
+    camAzSpeed = still ? 0 : cue.spin;
+    camAzWant = cue.az == null ? (still ? 0.35 : null) : cue.az;
 
     setDrawing(b.cue);
     paintBeat(beat);
-    breathe(0.8);
+    if (!still) breathe(0.8);
+  }
+
+  function clock(dt) {
+    if (held || closing) return;
+    const at = audio.time;
+    if (at == null) {
+      audioBase = null;
+      tl += dt;
+      return;
+    }
+    if (at === lastAt) stuck += dt;
+    else { stuck = 0; lastAt = at; }
+    if (stuck > 2) {
+      audioBase = null;
+      tl += dt;
+      return;
+    }
+    if (audioBase == null) audioBase = at - tl;
+    const want = at - audioBase;
+    if (want < tl - 0.6) {
+      audioBase = at - tl;
+      tl += dt;
+      return;
+    }
+    tl = want;
+  }
+
+  function jump(i) {
+    if (!running || closing) return;
+    const k = clamp(i, 0, SCRIPT.length - 1);
+    const at = audio.time;
+    tl = STARTS[k] + 0.001;
+    if (at != null && audioBase != null) audio.seek(audioBase + tl);
+    else audioBase = null;
+    stuck = 0;
+    if (k !== beat) gotoBeat(k);
+  }
+
+  function hold(on) {
+    if (!running || closing) return;
+    held = on == null ? !held : !!on;
+    root.classList.toggle('held', held);
+    if (holdEl) holdEl.textContent = held ? 'resume' : 'hold';
+    if (held) audio.pause();
+    else { audioBase = null; audio.play(); }
+  }
+
+  function key(e) {
+    if (!running || waiting) return e.key === 'Escape' || e.key === ' ' || e.key === 'Enter';
+    const k = e.key;
+    if (k === 'Escape') { finish(); return true; }
+    if (k === ' ' || k === 'Spacebar') { hold(); return true; }
+    if (k === 'ArrowRight' || k === 'Enter') {
+      if (beat >= SCRIPT.length - 1) finish();
+      else jump(beat + 1);
+      return true;
+    }
+    if (k === 'ArrowLeft') {
+      const into = tl - STARTS[beat];
+      jump(into > 1.5 ? beat : beat - 1);
+      return true;
+    }
+    return false;
   }
 
   function start() {
-    if (running || done) return;
-    if (!build()) { finish(); return; }
+    if (running) return;
+    running = true;
+    waiting = true;
+    ready = false;
+    state.phase = 'intro';
+    prepare();
+    const t0 = performance.now();
+    const need = [0, 1, 2, FIRST, FIRST + 1];
+    (function wait() {
+      if (!running) return;
+      const have = (reducedQuery.matches || need.every(k => bank[k])) && warmed;
+      if (!have && performance.now() - t0 < 1500) { requestAnimationFrame(wait); return; }
+      waiting = false;
+      begin();
+    })();
+  }
+
+  function begin() {
+    if (!build()) {
+      running = false;
+      bus.emit('intro-done');
+      return;
+    }
     buildDom();
 
-    running = true;
+    closing = 0;
+    held = false;
+    root.classList.remove('held', 'gone');
+    if (holdEl) holdEl.textContent = 'hold';
     state.phase = 'intro';
     root.hidden = false;
     const fog = $('#fog');
-    if (fog) fog.hidden = false;
+    if (fog) fog.classList.add('on');
     bus.emit('phase', 'intro');
+
     elapsed = 0;
+    tl = 0;
+    audioBase = null;
+    lastAt = -1;
+    stuck = 0;
+    slow = 0;
     beat = -1;
-    wallStart = performance.now();
-    audioStart = null;
-    camDist = 500;
+    camDist = still ? CUES[SCRIPT[0].cue].dist * fit : 500;
     camAz = 0.4;
     camAzWant = null;
     burst = 0;
     camEl = 0.05;
+    spinY = 0;
+    drawSpinY = 0;
+    freeNow = 0;
+    emitNow = 0;
+    stirNow = 0;
+    fieldNow[0] = 0;
     gotoBeat(0);
   }
 
   function finish() {
-    if (!running && done) return;
-    done = true;
-    running = false;
+    if (!running || closing) return;
+    if (waiting || !ready) { teardown(); return; }
+    closing = OUTRO;
     store.set('intro', 1);
+    clearTimeout(swapTimer);
+    root.classList.add('gone');
+    if (held) { held = false; audio.play(); }
+  }
+
+  function teardown() {
+    running = false;
+    waiting = false;
+    closing = 0;
+    store.set('intro', 1);
+    clearTimeout(swapTimer);
+    statAnim = null;
     if (root) {
       root.classList.add('gone');
-      statEl.hidden = true;
-      setTimeout(() => { root.hidden = true; root.classList.remove('gone'); }, 900);
+      setTimeout(() => {
+        if (running) return;
+        root.hidden = true;
+        root.classList.remove('gone', 'held');
+        statEl.hidden = true;
+      }, 900);
     }
-    state.phase = 'station';
     const fog = $('#fog');
-    if (fog) fog.hidden = true;
+    if (fog) fog.classList.remove('on');
+    state.phase = 'station';
     bus.emit('phase', 'station');
     bus.emit('intro-done');
 
-    setTimeout(() => {
-      if (spirit) {
-        spirit.dispose();
-        spirit = null;
-      }
-      if (draw) { draw.geometry.dispose(); drawMat.dispose(); draw = null; drawMat = null; }
-      scene = null;
-      ready = false;
-    }, 1200);
+    if (spirit) { spirit.dispose(); spirit = null; }
+    if (draw) { draw.geometry.dispose(); drawMat.dispose(); draw = null; drawMat = null; }
+    scene = null;
+    cam = null;
+    ready = false;
+    assembled = false;
+    warmed = false;
+    bank = [];
+    local = null;
   }
 
   function update(dt) {
     if (!running || !ready) return false;
 
     elapsed += dt;
-    const now = clock();
+    clock(dt);
+    stepStat(dt);
 
-    let i = beat;
-    while (i < SCRIPT.length - 1 && now >= STARTS[i + 1]) i++;
+    if (closing) {
+      closing = Math.max(0, closing - dt);
+      if (!closing) { teardown(); return false; }
+    }
+
+    const i = beatAt(tl);
     if (i !== beat) gotoBeat(i);
 
     const b = SCRIPT[beat];
-    const cue = CUES[b.cue];
-    const local = now - STARTS[beat];
+    const cue = CUES[b.cue] || CUES.dust;
+    const into = Math.max(0, tl - STARTS[beat]);
 
-    spinY = cue && cue.turn ? spinY + cue.turn * dt : damp(spinY, 0, 2.2, dt);
-    drawSpinY = cue && cue.turnDraw ? drawSpinY + cue.turnDraw * dt : damp(drawSpinY, 0, 2.2, dt);
+    spinY = !still && cue.turn ? spinY + cue.turn * dt : damp(spinY, 0, 2.2, dt);
+    drawSpinY = !still && cue.turnDraw ? drawSpinY + cue.turnDraw * dt : damp(drawSpinY, 0, 2.2, dt);
 
-    mix = clamp(local / (b.dur * 0.72), 0, 1);
+    mix = clamp(into / (b.dur * 0.72), 0, 1);
     burst = damp(burst, 0, 1.5, dt);
 
-    const fadeIn = clamp(now / 1.6, 0, 1);
-    const fadeOut = clamp((TOTAL - now) / 1.2, 0, 1);
-    const fade = fadeIn * fadeOut;
+    const fadeIn = clamp(tl / 1.6, 0, 1);
+    const fadeOut = clamp((TOTAL - tl) / 1.2, 0, 1);
+    fade = fadeIn * fadeOut * (closing ? closing / OUTRO : 1);
 
-    spirit.sim.uMorph.value = smoother(mix);
-    spirit.sim.uGrow.value = clamp(local / (b.dur * 0.9), 0, 1);
-    spirit.sim.uPull.value = lerp(0.045, 0.13, smoother(mix));
-    spirit.sim.uBurst.value = burst * burst;
-    spirit.draw.uFade.value = fade;
-    spirit.trail.uFade.value = fade;
-    spirit.step(dt, elapsed);
+    if (spirit) {
+      const rel = cue.release;
+      const freeWant = rel ? smoother(clamp((into / b.dur - rel[0]) / Math.max(0.001, rel[1] - rel[0]), 0, 1)) : 0;
+      freeNow = damp(freeNow, freeWant, 5, dt);
+      emitNow = damp(emitNow, cue.emit || 0, 3, dt);
+      stirNow = damp(stirNow, cue.stir || 0, 3, dt);
+      if (freeNow < 0.02 && !cue.field && fieldNow[0] !== 0) {
+        fieldNow[0] = 0;
+        spirit.sim.uField.value.x = 0;
+      }
+      spirit.flow.uFree.value = freeNow;
+      spirit.flow.uEmit.value = emitNow;
+      spirit.sim.uStir.value = stirNow;
+      spirit.sim.uMorph.value = smoother(mix);
+      spirit.sim.uGrow.value = clamp(into / (b.dur * 0.9), 0, 1);
+      spirit.sim.uPull.value = lerp(0.045, 0.13, smoother(mix));
+      spirit.sim.uBurst.value = burst * burst;
+      spirit.draw.uFade.value = fade;
+      spirit.trail.uFade.value = fade;
+      spirit.step(dt, elapsed);
 
-    const drawT = clamp((local - b.dur * 0.34) / (b.dur * 0.42), 0, 1);
-    if (drawMat) {
-      drawMat.uniforms.uDraw.value = smoother(drawT);
-      drawMat.uniforms.uFade.value = fade;
+      if (dt > 1 / 28) slow += dt;
+      else slow = Math.max(0, slow - dt * 0.5);
+      if (slow > 2.5 && spirit.trails.visible) { spirit.trails.visible = false; slow = 0; }
+
+      spirit.points.rotation.y = spinY;
+      spirit.trails.rotation.y = spinY;
     }
 
-    spirit.points.rotation.y = spinY;
-    spirit.trails.rotation.y = spinY;
+    if (drawMat) {
+      if (still) {
+        drawMat.uniforms.uDraw.value = 1;
+        drawMat.uniforms.uFade.value = fade * clamp(into / 0.6, 0, 1);
+      } else {
+        const drawT = clamp((into - b.dur * 0.34) / (b.dur * 0.42), 0, 1);
+        drawMat.uniforms.uDraw.value = smoother(drawT);
+        drawMat.uniforms.uFade.value = fade;
+      }
+    }
     if (draw) draw.rotation.y = drawSpinY;
 
-    camDist = damp(camDist, camWant, 1.5, dt);
-    camEl = damp(camEl, camElWant, 1.4, dt);
-    if (camAzWant == null) camAz += camAzSpeed * dt * (1 + (1 - mix) * 1.6);
-    else camAz = damp(camAz, camAz + shortAngle(camAz, camAzWant), 1.2, dt);
+    if (still) {
+      camDist = camWant;
+      camEl = camElWant;
+      camAz = camAzWant == null ? camAz : camAzWant;
+    } else {
+      camDist = damp(camDist, camWant, 1.5, dt);
+      camEl = damp(camEl, camElWant, 1.4, dt);
+      if (camAzWant == null) camAz += camAzSpeed * dt * (1 + (1 - mix) * 1.6);
+      else camAz = damp(camAz, camAz + shortAngle(camAz, camAzWant), 1.2, dt);
+    }
 
     const ce = Math.cos(camEl), se = Math.sin(camEl);
     cam.position.set(Math.sin(camAz) * ce * camDist, se * camDist, Math.cos(camAz) * ce * camDist);
@@ -1344,14 +906,12 @@ export const intro = (function () {
 
     gl.renderThrough(scene, cam, dt);
 
-    if (now >= TOTAL) finish();
+    if (tl >= TOTAL && !closing) { teardown(); return false; }
     return true;
   }
 
   return {
-    start, update, finish,
-    get running() { return running; },
-
-    SCRIPT
+    prepare, start, update, finish, key,
+    get running() { return running; }
   };
 })();

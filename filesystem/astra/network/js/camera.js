@@ -1,4 +1,4 @@
-import { state, bus, clamp, damp, lerp, smooth, shortAngle, TAU } from './core.js?v=1';
+import { state, bus, clamp, damp, lerp, smooth, shortAngle, TAU } from './core.js?v=2';
 
 export const camera = (function () {
   'use strict';

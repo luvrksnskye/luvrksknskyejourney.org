@@ -572,7 +572,18 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
   color: var(--signal); text-wrap: balance;
   transition: opacity 260ms var(--ease), transform 260ms var(--ease);
 }
-.intro.swap .intro-line, .intro.swap .intro-stat { opacity: 0; transform: translateY(9px); }
+.intro-line .w {
+  display: inline-block;
+  animation: word-in 1100ms var(--ease) both;
+  animation-delay: calc(var(--k, 0) * var(--step, 80ms));
+}
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.34em); filter: blur(6px); }
+  60%  { filter: blur(0); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+.intro.held .intro-line .w { animation-play-state: paused; }
+.intro.swap .intro-line, .intro.swap .intro-stat { opacity: 0; transform: translateY(-7px); }
 
 .intro-stat {
   position: absolute;
@@ -581,10 +592,17 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
   display: grid; gap: 7px; justify-items: end;
   text-align: right;
   padding-top: 13px;
-  border-top: 1px solid var(--iron);
   min-width: 150px;
   transition: opacity 260ms var(--ease), transform 260ms var(--ease);
 }
+.intro-stat::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: var(--iron);
+  transform-origin: right center;
+}
+.intro-stat.in::before { animation: rule-in 900ms var(--ease) both; }
+.intro-stat.in .stat-c { animation: fade 700ms var(--ease) 280ms both; }
+@keyframes rule-in { from { transform: scaleX(0); background: var(--signal); } to { transform: scaleX(1); } }
 .stat-n {
   font-family: var(--display); font-weight: 400;
   font-size: clamp(30px, 4.4vw, 58px); line-height: 1;
@@ -599,13 +617,21 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
   position: absolute; inset: -12%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.72;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1400ms var(--ease), visibility 0s linear 1400ms;
   background:
     radial-gradient(48% 38% at 32% 42%, rgba(255,255,255,0.085), rgba(255,255,255,0) 68%),
     radial-gradient(42% 46% at 71% 58%, rgba(255,255,255,0.065), rgba(255,255,255,0) 66%),
     radial-gradient(70% 52% at 50% 88%, rgba(255,255,255,0.055), rgba(255,255,255,0) 72%);
   filter: blur(14px);
-  animation: drift 46s linear infinite;
+  animation: drift 46s linear infinite paused;
+}
+.fog.on {
+  opacity: 0.72;
+  visibility: visible;
+  transition: opacity 1400ms var(--ease), visibility 0s;
+  animation-play-state: running;
 }
 @keyframes drift {
   0%   { transform: translate3d(-2%, 1%, 0) scale(1.04); }
@@ -614,10 +640,25 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
 }
 
 .intro-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.intro-ruler { display: flex; gap: 5px; flex: 1; max-width: 340px; }
-.itick { flex: 1; height: 11px; display: flex; align-items: flex-end; }
+.intro-ruler { display: flex; gap: 5px; flex: 1; max-width: 340px; pointer-events: auto; }
+.itick {
+  flex: 1; height: 18px; display: flex; align-items: flex-end;
+  appearance: none; background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+}
 .itick i { display: block; width: 100%; height: 1px; background: var(--ash); transition: height 400ms var(--ease), background 400ms var(--ease); }
 .itick.on i { height: 4px; background: var(--fog); }
+.itick.now i { background: var(--bone); }
+.itick:hover i { background: var(--signal); }
+.itick:focus-visible { outline: 1px solid var(--signal); outline-offset: 2px; }
+.intro.held .itick.now i { animation: pulse 1.2s ease-in-out infinite; }
+
+.intro-keys {
+  margin: 0 0 0 auto;
+  font-family: var(--data); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--steel); white-space: nowrap;
+  opacity: 0.7;
+}
+.intro-keys kbd { margin-left: 2px; }
 
 .intro-skip {
   pointer-events: auto;
@@ -722,8 +763,13 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
   .stat-n { font-size: 28px; }
 }
 
+@media (hover: none), (max-width: 720px) {
+  .intro-keys { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fog { animation: none; }
+  .intro-line .w, .intro-stat.in::before, .intro-stat.in .stat-c { animation: none; }
   .reticle .spin, .reticle .spin-r { animation: none; }
   .engage { animation: none; }
   .cmd-line::after { animation: none; }
@@ -731,19 +777,16 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
   * { transition-duration: 1ms !important; }
 }
 
-/* backdrop */
-
 .backdrop {
   position: absolute; inset: 0; z-index: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   pointer-events: none;
-  opacity: 0.34;
+  opacity: 0;
   filter: grayscale(1) brightness(0.62) contrast(1.12);
   transform: translateZ(0);
+  transition: opacity 1600ms var(--ease);
 }
-
-/* exit */
 
 .meta-exit {
   align-self: end;
@@ -755,8 +798,6 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
 }
 .meta-exit:hover { color: var(--signal); }
 .meta-exit:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
-
-/* nothing published yet */
 
 .nothing {
   grid-area: mid;
@@ -770,8 +811,6 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
 }
 .nothing-body { color: var(--fog); font-size: 10.5px; line-height: 1.7; }
 
-/* read the note */
-
 .panel-open {
   display: inline-block; margin: 2px 0 10px;
   color: var(--bone);
@@ -780,8 +819,6 @@ input[type="range"]:focus-visible { outline: 1px solid var(--signal); outline-of
 }
 .panel-open:hover { color: var(--signal); }
 .panel-open:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
-
-/* boot log rows */
 
 .boot-log .bl {
   display: flex; align-items: baseline; gap: 7px;

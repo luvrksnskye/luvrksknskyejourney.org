@@ -1,13 +1,13 @@
-import { $, el, state, store, bus, clamp, deg, met, say, breathe, makeGrain } from './core.js?v=1';
-import { data } from './vault.js?v=1';
-import { gl } from './gl.js?v=1';
-import { hud } from './hud.js?v=1';
-import { camera } from './camera.js?v=1';
-import { audio } from './audio.js?v=1';
-import { ask } from './ask.js?v=1';
-import { intro } from './intro.js?v=1';
-import { ui } from './ui.js?v=1';
-import { backdrop } from './backdrop.js?v=1';
+import { $, el, state, store, bus, clamp, deg, met, say, breathe, makeGrain } from './core.js?v=2';
+import { data } from './vault.js?v=2';
+import { gl } from './gl.js?v=2';
+import { hud } from './hud.js?v=2';
+import { camera } from './camera.js?v=2';
+import { audio } from './audio.js?v=2';
+import { ask } from './ask.js?v=2';
+import { intro } from './intro.js?v=2';
+import { ui } from './ui.js?v=2';
+import { backdrop } from './backdrop.js?v=2';
 
 (function () {
   'use strict';
@@ -108,7 +108,7 @@ import { backdrop } from './backdrop.js?v=1';
     state.booted = true;
     audio.play();
 
-    if (!store.get('intro', 0) && gl.ready && !reduced) startIntro();
+    if (!store.get('intro', 0) && gl.ready) startIntro();
     else enterStation(true);
   }
 
@@ -136,7 +136,7 @@ import { backdrop } from './backdrop.js?v=1';
     $('#nothing').hidden = true;
     startIntro();
   });
-  bus.on('degraded', level => {
+  bus.on('degraded', () => {
     say('dropped a layer to keep the frame steady');
   });
 
@@ -219,6 +219,7 @@ import { backdrop } from './backdrop.js?v=1';
       say('no webgl context, the index and the controls still work');
     } else {
       glReady = true;
+      if (!store.get('intro', 0)) intro.prepare();
       await backdrop.init();
     }
 

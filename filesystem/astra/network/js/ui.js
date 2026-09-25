@@ -1,11 +1,11 @@
-import { $, $$, el, state, store, bus, MODES, say, breathe, clamp } from './core.js?v=1';
-import { data } from './vault.js?v=1';
-import { gl } from './gl.js?v=1';
-import { camera } from './camera.js?v=1';
-import { audio } from './audio.js?v=1';
-import { ask } from './ask.js?v=1';
-import { intro } from './intro.js?v=1';
-import { backdrop } from './backdrop.js?v=1';
+import { $, $$, el, state, store, bus, MODES, say, breathe, clamp } from './core.js?v=2';
+import { data } from './vault.js?v=2';
+import { gl } from './gl.js?v=2';
+import { camera } from './camera.js?v=2';
+import { audio } from './audio.js?v=2';
+import { ask } from './ask.js?v=2';
+import { intro } from './intro.js?v=2';
+import { backdrop } from './backdrop.js?v=2';
 
 export const ui = (function () {
   'use strict';
@@ -529,7 +529,7 @@ export const ui = (function () {
     root.appendChild(el('div', { class: 'opt' }, [
       el('div', null, [
         el('span', { class: 'lab', text: 'Arrival sequence' }),
-        el('span', { class: 'hint', text: 'what ASTRA is, in eight lines' })
+        el('span', { class: 'hint', text: 'what ASTRA is, from the first light' })
       ]),
       replay
     ]));
@@ -565,7 +565,7 @@ export const ui = (function () {
 
   function onKey(e) {
     if (state.phase === 'intro') {
-      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); intro.finish(); }
+      if (intro.key(e)) e.preventDefault();
       return;
     }
 

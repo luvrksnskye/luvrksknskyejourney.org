@@ -1,5 +1,5 @@
-import { $, el, state, bus, say } from './core.js?v=1';
-import { data } from './vault.js?v=1';
+import { $, el, state, bus, say } from './core.js?v=2';
+import { data } from './vault.js?v=2';
 
 export const ask = (function () {
   'use strict';

@@ -1,4 +1,4 @@
-import { svg, el, $, pad, signed, clamp, damp, TAU } from './core.js?v=1';
+import { svg, el, $, pad, signed, clamp, damp, TAU } from './core.js?v=2';
 
 export const hud = (function () {
   'use strict';

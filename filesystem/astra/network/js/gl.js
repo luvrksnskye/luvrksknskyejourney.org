@@ -1,5 +1,5 @@
-import { state, bus, clamp, damp, rng, breathValue } from './core.js?v=1';
-import { data } from './vault.js?v=1';
+import { state, bus, clamp, damp, rng, breathValue } from './core.js?v=2';
+import { data } from './vault.js?v=2';
 
 export const gl = (function () {
   'use strict';
@@ -946,6 +946,11 @@ export const gl = (function () {
         powerPreference: 'high-performance', stencil: false
       });
     } catch (err) { failed = true; bus.emit('gl-failed', err); return false; }
+
+    cv.addEventListener('webglcontextlost', e => {
+      e.preventDefault();
+      bus.emit('gl-lost');
+    });
 
     if (THREE.LinearSRGBColorSpace && 'outputColorSpace' in renderer) {
       renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
