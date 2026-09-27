@@ -838,6 +838,18 @@ html:has(.nt) {
     linear-gradient(180deg, rgba(3, 5, 10, 0.8), rgba(3, 5, 10, 0.94));
 }
 
+.sa.nt:has(.nt-loop.is-live) .nt-loop::after {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(3, 5, 10, 0.12), rgba(3, 5, 10, 0.5) 75%),
+    linear-gradient(180deg, rgba(3, 5, 10, 0.3), rgba(3, 5, 10, 0.55));
+}
+
+.sa.nt:has(.nt-loop.is-live) .st-frame {
+  background: rgba(5, 2, 16, 0.74);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
 .sa.nt:has(.nt-loop) .sa-backdrop {
   opacity: 0.35;
 }

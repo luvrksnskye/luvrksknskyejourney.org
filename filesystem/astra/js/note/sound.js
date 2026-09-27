@@ -25,7 +25,7 @@ export function mountMusic(button) {
     const from = audio.volume;
     const started = performance.now();
     const step = (now) => {
-      const t = Math.min(1, (now - started) / FADE);
+      const t = Math.min(1, Math.max(0, (now - started) / FADE));
       audio.volume = from + (to - from) * t;
       if (t < 1) fading = requestAnimationFrame(step);
       else if (to === 0) audio.pause();
