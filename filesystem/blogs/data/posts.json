@@ -2,6 +2,21 @@
   "format": "blog-posts/1",
   "posts": [
     {
+      "title": "TODO COLOR TIENE UNA DIRECCIÓN (ESP)",
+      "date": "2026-09-27",
+      "description": "El sistema de Munsell a fondo: un árbol de color hecho con datos de 1943, por qué las sombras se van hacia el azul y cómo nombran el color el español, el inglés, el japonés y el chino.",
+      "tags": [
+        "art",
+        "color",
+        "science"
+      ],
+      "category": "art",
+      "image": "/filesystem/blogs/posts/direccion-del-color/assets/images/cover.jpg",
+      "alt": "El árbol de color de Munsell, cortado para ver su tronco gris, sobre un cielo azul",
+      "url": "/filesystem/blogs/posts/direccion-del-color/index.html",
+      "label": "View Details →"
+    },
+    {
       "title": "¿CABE EL UNIVERSO EN UN CUBO? (ESP)",
       "date": "2026-09-15",
       "description": "DATA GATE de Ouchhh a fondo: la escultura LED que convirtió los datos de Kepler en arte con IA.",

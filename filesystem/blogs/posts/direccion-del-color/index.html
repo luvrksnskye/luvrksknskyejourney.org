@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<!--
+                  *              .                 *
+       .                  .            *                  .
+               ,o8888888o.                   .
+     *       ,8888888888888.        .                 *
+            ,888888888888888.
+     .  ===========================       *      .
+            '888888888888888'
+   *         '8888888888888'        .              .
+               '"8888888"'      *
+         .                  .                *          .
+
+     thank you for being here.
+     feel free to take code from my website if you need it.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5PHHOhQDqN/yjDMdk3eJ6ZsPnqpp2UPXbS0sPhr377s=' https://www.htmlcommentbox.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.htmlcommentbox.com; img-src 'self' data: https://www.htmlcommentbox.com https://www.gravatar.com https://secure.gravatar.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; media-src 'self'; connect-src 'self' https://www.htmlcommentbox.com; frame-src https://www.htmlcommentbox.com; form-action 'self' https://www.htmlcommentbox.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Todo color tiene una dirección</title>
+  <meta name="description" content="Teoría del color explicada con calma y en español: el sistema de Munsell, por qué las sombras se van hacia el azul y cómo nombran el color el español, el inglés, el japonés y el chino. Con datos reales y figuras que se pueden tocar.">
+  <link rel="icon" type="image/png" href="/assets/images/icons/buttons/favicon.png">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/scale.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/nav-bar.css">
+  <link rel="stylesheet" href="css/direccion.css?v=1">
+</head>
+<body class="dd">
+
+  <div class="video-background" aria-hidden="true">
+    <video id="ddVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/background-poster.jpg" disablepictureinpicture disableremoteplayback>
+      <source src="assets/video/background-loop.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="dd-boot" id="ddBoot" aria-hidden="true">
+    <span class="dd-boot-wheel"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <p class="dd-boot-line">buscando la dirección</p>
+  </div>
+
+  <header class="dd-hud" aria-label="Estado de lectura">
+    <a class="dd-hud-brand" href="/filesystem/blogs/index.html">
+      <span class="dd-hud-mark" aria-hidden="true"></span>
+      <span>skye journey / blog</span>
+    </a>
+    <span class="dd-hud-section" id="ddHudSection" aria-live="polite">inicio</span>
+    <span class="dd-hud-sky" id="ddSky" title="El color del cielo de fondo, ahora mismo, en notación de Munsell">
+      <i class="dd-hud-swatch" aria-hidden="true"></i>
+      <span>cielo</span>
+      <b id="ddSkyText">--</b>
+    </span>
+    <span class="dd-hud-ring" aria-hidden="true">
+      <svg viewBox="0 0 36 36"><circle class="dd-ring-track" cx="18" cy="18" r="15.5"/><circle class="dd-ring-fill" id="ddProgress" cx="18" cy="18" r="15.5"/></svg>
+      <b id="ddProgressText">000</b>
+    </span>
+  </header>
+
+  <nav class="dd-rail" id="ddRail" aria-label="Índice de la entrada">
+    <button type="button" class="dd-rail-toggle" id="ddRailToggle" aria-expanded="false" aria-controls="ddRailList">índice</button>
+    <ol id="ddRailList">
+      <li><a href="#inicio" data-accent="#e3e3e3"><i></i><b>N 9</b>Inicio</a></li>
+      <li><a href="#por-que" data-accent="#d04c50"><i></i><b>5R</b>Por qué escribo esto</a></li>
+      <li><a href="#rumbos" data-accent="#b6651a"><i></i><b>5YR</b>Colores con rumbo</a></li>
+      <li><a href="#munsell" data-accent="#927702"><i></i><b>5Y</b>Un pintor que quería medir</a></li>
+      <li><a href="#tres-preguntas" data-accent="#698318"><i></i><b>5GY</b>Tres preguntas</a></li>
+      <li><a href="#arbol" data-accent="#3b8767"><i></i><b>5G</b>El árbol torcido</a></li>
+      <li><a href="#pantalla" data-accent="#238781"><i></i><b>5BG</b>Lo que tu pantalla no alcanza</a></li>
+      <li><a href="#valor" data-accent="#2d849a"><i></i><b>5B</b>Primero el valor</a></li>
+      <li><a href="#sombra" data-accent="#267ccb"><i></i><b>5PB</b>¿De qué color es una sombra?</a></li>
+      <li><a href="#idiomas" data-accent="#9b62b6"><i></i><b>5P</b>Cuatro idiomas, un rojo</a></li>
+      <li><a href="#taller" data-accent="#c54f85"><i></i><b>5RP</b>El taller</a></li>
+      <li><a href="#no-se-sabe" data-accent="#797979"><i></i><b>N 5</b>Lo que no se sabe</a></li>
+      <li><a href="#creditos" data-accent="#606060"><i></i><b>N 4</b>Créditos y fuentes</a></li>
+      <li><a href="#comentarios" data-accent="#484848"><i></i><b>N 3</b>Comentarios</a></li>
+    </ol>
+  </nav>
+
+  <main class="dd-main">
+
+    <section class="dd-hero" id="inicio" data-section="inicio" data-accent="#267ccb" data-ink="#2062a3">
+      <div class="dd-hero-copy dd-vellum">
+        <p class="dd-kicker">una entrada sobre el sistema de Munsell, la luz y la pintura</p>
+        <h1 class="dd-title">Todo color tiene una dirección</h1>
+        <p class="dd-lede">Un pintor de Boston quiso escribir los colores como se escriben las notas de una partitura. Terminó dibujando un árbol torcido, y ese árbol todavía explica por qué, en un cielo de verano, las sombras se van hacia el azul.</p>
+        <ul class="dd-meta">
+          <li><span>publicado</span>27 de septiembre, 2026</li>
+          <li><span>lectura</span>unos 40 minutos</li>
+          <li><span>investigación</span><a href="/filesystem/blogs/notes/direccion-del-color/">mis notas en Astra</a></li>
+        </ul>
+      </div>
+
+      <figure class="dd-hero-stage">
+        <div class="dd-tree is-hero" data-module="tree" data-mode="hero" role="img" aria-label="El árbol de color de Munsell hecho con 2734 bloques, uno por cada color real medido en 1943, girando lentamente">
+          <div class="dd-tree-tip" data-role="tip" hidden></div>
+        </div>
+        <div class="dd-hero-hud" aria-hidden="true">
+          <span class="dd-tag is-tl">2&#8239;734 · colores reales</span>
+          <span class="dd-tag is-tr">renotación · 1943</span>
+          <span class="dd-tag is-bl">tono · valor · croma</span>
+          <span class="dd-tag is-br">arrástralo</span>
+        </div>
+        <figcaption>Este es el árbol de Munsell, construido con los datos que publicó la Optical Society of America en 1943: cada bloque es un color que existe de verdad, en su lugar exacto. Fíjate que no es una esfera. <a href="#arbol">Más abajo cuento por qué.</a></figcaption>
+      </figure>
+
+      <div class="dd-stats">
+        <div class="dd-stat"><b data-count="100">0</b><span>pasos de tono</span></div>
+        <div class="dd-stat"><b data-count="10">0</b><span>escalones de valor</span></div>
+        <div class="dd-stat"><b data-count="2734">0</b><span>colores reales medidos</span></div>
+        <div class="dd-stat"><b data-count="1527">0</b><span>caben en una pantalla común</span></div>
+      </div>
+      <p class="dd-hero-credit">El fondo es un wallpaper animado de Yumemizuki Mizuki, de Genshin Impact. La música es de la banda sonora del juego. Todo el crédito está al final.</p>
+    </section>
+
+    <div class="dd-sheet">
+
+    <section class="dd-section" id="por-que" data-section="por qué escribo esto" data-accent="#d04c50" data-ink="#b12f39" data-notation="5R 5/12">
+      <header class="dd-head">
+        <p class="dd-num"><span>01</span><i class="dd-chip" aria-hidden="true"></i><code>5R 5/12</code></p>
+        <h2>Por qué escribo esto</h2>
+      </header>
+      <div class="dd-body">
+        <p>Holi. Llevo años dibujando y pintando, en papel y en la tablet, y siempre me pasaba lo mismo: sabía que un color estaba mal, pero no sabía decir por qué. Lo movía un poquito, lo oscurecía, lo volvía a mover. A veces funcionaba. Casi nunca sabía qué había hecho.</p>
+        <p>Un día vi una publicación que decía, más o menos, que el sistema de Munsell es una gran referencia para elegir los colores de la sombra y de la luz: azul para las sombras, naranja o amarillo para el brillo. Guardé la imagen, como se guardan tantas cosas. Y esta vez sí me senté a entenderla.</p>
+        <p>Lo que encontré es mucho más bonito que una regla. Es la historia de un pintor que quiso darle a cada color una dirección, como la dirección de una casa, y de todo lo que pasó cuando alguien por fin la midió. Para escribirla leí libros de mi biblioteca y fuentes en inglés, español, chino y japonés, porque cada idioma guarda un pedacito distinto de esta historia.</p>
+        <p>Antes de nada, las palabras que vas a leer, en corto. Si alguna se te olvida, vuelve aquí.</p>
+
+        <div class="dd-paper">
+          <p class="dd-paper-head">las palabras, en simple</p>
+          <dl class="dd-leaders">
+            <div><dt>Tono</dt><dd>Qué color es: rojo, amarillo, verde, azul, morado. También se le dice matiz. En inglés es <em>hue</em>; en japonés y en chino se escribe igual, 色相.</dd></div>
+            <div><dt>Valor</dt><dd>Qué tan claro u oscuro es, del negro al blanco. En inglés <em>value</em>; en japonés y chino, 明度.</dd></div>
+            <div><dt>Croma</dt><dd>Qué tan lejos está del gris. Un color de croma alto es intenso; uno de croma bajo es apagado. En japonés y chino, 彩度.</dd></div>
+            <div><dt>Saturación</dt><dd>Casi lo mismo que el croma, pero los libros serios la reservan para la luz. Para la pintura se dice croma.</dd></div>
+            <div><dt>Notación</dt><dd>La forma de escribir un color con una letra y dos números, como 5R 4/14. Es su dirección.</dd></div>
+            <div><dt>Sólido de color</dt><dd>Todos los colores ordenados en tres dimensiones, como un objeto que se puede girar.</dd></div>
+            <div><dt>Color local</dt><dd>El color de un objeto bajo una luz blanca y neutra. El rojo de una manzana, sin sombra ni reflejos.</dd></div>
+            <div><dt>Cálido y frío</dt><dd>Una forma de hablar: los tonos cerca del rojo, el naranja y el amarillo se sienten cálidos; los cercanos al azul, fríos.</dd></div>
+            <div><dt>Gama</dt><dd>El conjunto de colores que algo puede mostrar o mezclar: una pantalla, una caja de pinturas, una paleta.</dd></div>
+            <div><dt>sRGB y P3</dt><dd>Los dos idiomas de color más comunes en las pantallas. P3 alcanza colores más intensos que sRGB.</dd></div>
+          </dl>
+        </div>
+
+        <p>Y una promesa, como siempre: cuando algo sea deducción mía, lo diré sin dudar, porque prefiero un "no sé" antes que inventar informacion falsa, ya no que no creo que sea un pecado mi ignorancia. Además, no miento cuando digo que tuve que utilizar traductores en línea para extraer información de algunas de mis fuentes y libros. Ojalá pudiera decir que hablo chino y japonés con fluidez, pero lo poco que sé de estos idiomas es lo que aprendí cuando estaba en el instituto, pasando el tiempo en la biblioteca y leyendo libros sobre lenguas extranjeras, o lo poco que logro entender de mis artistas favoritos en la plataforma de bilibili.</p>
+      </div>
+    </section>
+
+    <section class="dd-section" id="rumbos" data-section="colores con rumbo" data-accent="#b6651a" data-ink="#904f1b" data-notation="5YR 5/10">
+      <header class="dd-head">
+        <p class="dd-num"><span>02</span><i class="dd-chip" aria-hidden="true"></i><code>5YR 5/10</code></p>
+        <h2>Antes de Munsell, los colores ya tenían rumbo</h2>
+      </header>
+      <div class="dd-body">
+        <p>Cuando elegí el título de esta entrada pensé en las direcciones postales. Luego, leyendo, descubrí que la idea es muchísimo más vieja. Varias culturas le dieron a cada color un lugar en el mundo, literalmente un punto cardinal.</p>
+        <p>En China, el <em>Kǎogōngjì</em> (考工记), un texto antiguo sobre los oficios que se conserva dentro del <em>Zhōulǐ</em>, tiene una parte dedicada a la gente que pintaba y bordaba. Empieza así:</p>
+        <blockquote class="dd-quote is-cjk">
+          <p lang="zh">画缋之事，杂五色。东方谓之青，南方谓之赤，西方谓之白，北方谓之黑，天谓之玄，地谓之黄。</p>
+          <footer><span>En el oficio de pintar y bordar se mezclan los cinco colores. Al este se le llama qīng, al sur rojo, al oeste blanco, al norte negro; al cielo, xuán, y a la tierra, amarillo.</span> Kǎogōngjì, sección sobre pintura y bordado. Traducción mía.</footer>
+        </blockquote>
+        <p>Ese 青, <em>qīng</em>, merece un momento. Uno de los diccionarios más antiguos del chino, el <em>Shuōwén jiězì</em>, lo define como "el color del este", y según el contexto puede ser azul, verde o incluso negro, como en 青丝, el pelo negro. Hay un proverbio precioso que sale del filósofo Xunzi: 青取之于蓝，而青于蓝, el azul se saca de la planta del índigo, pero es más azul que el índigo. Se usa para decir que el alumno supera al maestro. Yo lo leo también como una verdad de taller: un pigmento refinado puede ser más intenso que la planta de la que salió.</p>
+        <p>En Japón, esa misma cosmología sigue a la vista en un lugar inesperado: el sumo. Encima del ring cuelgan cuatro borlas enormes. La azul (青房) mira al este, es la primavera y el dragón azul; la roja (赤房), al sur, el verano y el ave bermellón; la blanca (白房), al oeste, el otoño y el tigre blanco; y la negra (黒房), al norte, el invierno y la tortuga negra.</p>
+        <p>Y del otro lado del mundo, sin contacto con Asia, los mayas hicieron algo muy parecido. Según el <em>Chilam Balam de Chumayel</em>, el este es rojo (<em>chak</em>), el norte blanco (<em>sak</em>), el oeste negro (<em>ek'</em>) y el sur amarillo (<em>k'an</em>). En el centro está la ceiba, el árbol que sostiene el mundo, de color <em>yax</em>: una sola palabra para el azul y el verde, ligada a la lluvia y a la vida.</p>
+
+        <figure class="dd-figure is-wide" data-module="compass">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 02 · la rosa de los colores</p>
+            <div class="dd-compass" data-role="stage">
+              <svg class="dd-compass-svg" data-role="svg" viewBox="-200 -200 400 400" role="img" aria-labelledby="compassTitle">
+                <title id="compassTitle">Una rosa de los vientos donde cada punto cardinal tiene un color, según la cultura elegida</title>
+              </svg>
+              <div class="dd-compass-note" data-role="note" aria-live="polite"></div>
+            </div>
+            <div class="dd-controls" role="group" aria-label="Elige una tradición">
+              <button type="button" class="dd-btn" data-culture="china" aria-pressed="true">China · 考工记</button>
+              <button type="button" class="dd-btn" data-culture="japon" aria-pressed="false">Japón · 四神</button>
+              <button type="button" class="dd-btn" data-culture="maya" aria-pressed="false">Maya · Chilam Balam</button>
+              <button type="button" class="dd-btn" data-culture="mexica" aria-pressed="false">Mexica · Fejérváry-Mayer</button>
+              <button type="button" class="dd-btn" data-culture="munsell" aria-pressed="false">Munsell · 1905</button>
+            </div>
+          </div>
+          <figcaption>Toca cada tradición y mira cómo se reacomoda la rosa. El mismo este es rojo para los mayas y para el códice mexica, pero el norte cambia de blanco a amarillo. Los colores de los rumbos son cultura, no física.</figcaption>
+        </figure>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">un matiz con cariño</p>
+          <p>No todos los documentos antiguos coinciden, ni siquiera dentro de la misma cultura. Enrique Vela, en <em>Arqueología Mexicana</em>, explica que en la primera página del Códice Fejérváry-Mayer el oriente es rojo, el norte amarillo, el poniente azul y el sur verde, y que otros códices emparentados tienen variantes. Lo que se repite en casi todas partes es el gesto: poner el color en un lugar.</p>
+        </aside>
+
+        <p>Guarda esta imagen de la rosa. Munsell, a principios del siglo XX, va a hacer algo parecido, pero con una diferencia enorme: sus direcciones se pueden medir.</p>
+      </div>
+    </section>
+
+    <section class="dd-section" id="munsell" data-section="un pintor que quería medir" data-accent="#927702" data-ink="#735e15" data-notation="5Y 5/8">
+      <header class="dd-head">
+        <p class="dd-num"><span>03</span><i class="dd-chip" aria-hidden="true"></i><code>5Y 5/8</code></p>
+        <h2>Un pintor que quería medir</h2>
+      </header>
+      <div class="dd-body">
+        <p><strong>Albert Henry Munsell</strong> nació en Boston en 1858 y murió en 1918. Era pintor, y también profesor de composición del color y de anatomía artística en la Massachusetts Normal Art School. A los veintiún años leyó <em>Modern Chromatics</em>, de Ogden Rood, un libro de física del color que por entonces acababa de salir, y estudió arte en París y en Roma. Todo esto lo cuenta Rolf Kuehni en su historia del orden del color, que es la columna de esta sección.</p>
+        <p>Lo que lo movía era muy concreto: quería enseñarles color a niñas, niños y estudiantes de arte sin que todo dependiera del gusto de cada quien. Y le molestaba muchísimo cómo nombramos los colores.</p>
+        <p class="dd-voice">"Color needs a system."</p>
+        <p>Eso escribió en <em>A Color Notation</em>, su libro de 1905. El color necesita un sistema. Justo antes se burla, con mucha gracia, de nombres como azul bebé, azul pavo real o verde Nilo, y pregunta si nos imaginamos notas musicales que se llamaran alondra, canario, cacatúa, cuervo, gato, perro o ratón. La música, dice, define cada sonido por su altura, su intensidad y su duración. El color merece lo mismo.</p>
+
+        <h3>La naranja, la esfera y el árbol</h3>
+        <p>Para explicarlo a sus alumnos, Munsell usaba una fruta. Imagina una naranja pelada y abierta en cinco gajos. En uno guardas todos los rojos que has visto; en otro, los amarillos; luego los verdes, los azules y los morados. Dentro de cada gajo acomodas los colores de claro a oscuro, de arriba abajo. Y después, sin tocar lo claro u oscuro, empujas los más grises hacia el borde de adentro y dejas los más puros en la cáscara.</p>
+        <p>Así, con una fruta, aparecen las tres preguntas que necesita cualquier color: cuál es, qué tan claro es y qué tan puro es. Luego cambia la naranja por una esfera y usa, literalmente, palabras de geografía: el polo norte es blanco, el polo sur es negro, el ecuador es un anillo de colores medios. Cada color tiene su latitud y su longitud.</p>
+
+        <figure class="dd-figure" data-module="orange">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 03 · la naranja de munsell</p>
+            <div class="dd-orange" data-role="stage">
+              <svg class="dd-orange-svg" data-role="svg" viewBox="0 0 640 380" role="img" aria-labelledby="orangeTitle">
+                <title id="orangeTitle">La naranja de cinco gajos que Munsell usaba para enseñar, que se convierte en esfera y luego en árbol</title>
+              </svg>
+            </div>
+            <div class="dd-controls" role="group" aria-label="Pasos de la explicación">
+              <button type="button" class="dd-btn" data-step="0" aria-pressed="true">1 · la naranja</button>
+              <button type="button" class="dd-btn" data-step="1" aria-pressed="false">2 · la esfera</button>
+              <button type="button" class="dd-btn" data-step="2" aria-pressed="false">3 · el árbol</button>
+            </div>
+            <p class="dd-readout" data-role="readout">cinco gajos: rojo, amarillo, verde, azul y morado</p>
+          </div>
+          <figcaption>Su propia secuencia para enseñar, dibujada con los colores medidos en 1943. Él mismo escribió que el árbol es un modelo más completo que la esfera, pero que la esfera es mejor para que un niño la entienda.</figcaption>
+        </figure>
+
+        <h3>Una línea de tiempo corta</h3>
+        <ol class="dd-steps">
+          <li><strong>1898.</strong> Dibuja los colores de uno de sus cuadros como una doble espiral y eso le sugiere una esfera.</li>
+          <li><strong>1900.</strong> Patenta una esfera que, al girar, mezcla sus colores hasta volverse gris. Ese mismo año se da cuenta de que el sólido completo no puede ser una esfera.</li>
+          <li><strong>1902.</strong> En su diario dibuja, el 20 de marzo, un "árbol de color" irregular.</li>
+          <li><strong>1905.</strong> Publica <em>A Color Notation</em>. En 1907 sale el primer atlas, con ocho láminas de muestras pintadas, y en 1915 uno más grande, con quince láminas y 880 muestras.</li>
+          <li><strong>1918.</strong> Muere Munsell. Su hijo y unos amigos fundan la Munsell Color Company.</li>
+          <li><strong>1929.</strong> Sale el primer Munsell Book of Color, con fichas de pintura sobre papel.</li>
+          <li><strong>1943.</strong> Un comité de la Optical Society of America, con Sidney Newhall, Dorothy Nickerson y Deane Judd, mide y corrige todo el sistema. Esa "renotación" es la base de cada figura de esta página.</li>
+        </ol>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">una frase que me encanta</p>
+          <p>En el prólogo de la segunda edición, Munsell se queja del "daño" que hace enseñar que el rojo, el amarillo y el azul son los colores primarios. En 1907. Todavía hoy, en muchas escuelas, se enseña exactamente eso. Más adelante vas a ver por qué su círculo de diez tonos reparte los colores de forma más justa.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dd-section" id="tres-preguntas" data-section="tres preguntas" data-accent="#698318" data-ink="#536821" data-notation="5GY 5/8">
+      <header class="dd-head">
+        <p class="dd-num"><span>04</span><i class="dd-chip" aria-hidden="true"></i><code>5GY 5/8</code></p>
+        <h2>Tres preguntas para un color</h2>
+      </header>
+      <div class="dd-body">
+        <p class="dd-epigraph">"Each color was also written by a letter and two numerals, showing its place in the three scales of hue, value, and chroma." <span>Munsell, <em>A Color Notation</em>, 1907. Cada color se escribió con una letra y dos números, que muestran su lugar en las tres escalas.</span></p>
+        <p>Su lugar. Esa es la dirección del título. Vamos pregunta por pregunta.</p>
+
+        <h3>¿Cuál es? El tono</h3>
+        <p>Munsell eligió cinco tonos principales, rojo (R), amarillo (Y), verde (G), azul (B) y morado (P), y puso otros cinco entre ellos: amarillo rojo (YR), verde amarillo (GY), azul verde (BG), morado azul (PB) y rojo morado (RP). Diez calles alrededor de un círculo. Y cada calle tiene diez números, así que el círculo completo tiene cien pasos. 5R es el centro de los rojos; 10R ya está tocando a los naranjas.</p>
+        <p>Eligió cinco y no tres por una razón práctica, porque quería un sistema decimal, y por otra más profunda: los pasos están pensados para que se vean iguales. No es perfecto, pero es muy bueno.</p>
+
+        <h3>¿Qué tan claro es? El valor</h3>
+        <p>El valor va de 0, el negro ideal, a 10, el blanco ideal. Munsell lo medía con un fotómetro que diseñó él mismo. Y aquí hay algo que me voló la cabeza: un gris de valor 5, el que vemos justo a la mitad entre el negro y el blanco, refleja solo alrededor del 19% de la luz que le llega. Nuestros ojos no cuentan la luz de forma lineal. La mitad que sentimos no es la mitad que mide un aparato.</p>
+
+        <h3>¿Qué tan lejos del gris? El croma</h3>
+        <p>El croma empieza en 0, en el gris, y crece hacia afuera. No tiene un máximo fijo: llega hasta donde llegan los pigmentos, o la luz, de cada tono en cada valor. Por eso Munsell escribió que las ramas de su árbol "podrían alargarse" si alguien descubría colores más intensos. Esa frase va a volver.</p>
+
+        <h3>Cómo se escribe</h3>
+        <p>La dirección completa se escribe tono, valor, una barra y croma. <strong>5R 4/14</strong> se lee "cinco erre, cuatro sobre catorce": calle 5R, piso 4, a catorce puertas del tronco gris. Un gris se escribe con N y su valor, como N 5. Y así, en vez de discutir si algo es "beige" o "granate", se puede decir YR 7/2 o R 3/6, como pone Gurney en su libro.</p>
+
+        <figure class="dd-figure is-wide" data-module="address">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 04 · escribe una dirección</p>
+            <div class="dd-address" data-role="stage">
+              <div class="dd-address-swatch" data-role="swatch">
+                <span class="dd-address-code" data-role="code">5R 4/14</span>
+                <span class="dd-address-words" data-role="words">calle 5R · piso 4 · puerta 14</span>
+              </div>
+              <div class="dd-address-controls">
+                <label class="dd-range"><span>tono</span><input type="range" data-role="hue" min="0" max="39" step="1" value="1"><output data-role="hue-out">5R</output></label>
+                <label class="dd-range"><span>valor</span><input type="range" data-role="value" min="1" max="9" step="1" value="4"><output data-role="value-out">4</output></label>
+                <label class="dd-range"><span>croma</span><input type="range" data-role="chroma" min="0" max="19" step="1" value="7"><output data-role="chroma-out">14</output></label>
+                <label class="dd-type">
+                  <span>o escríbela</span>
+                  <input type="text" data-role="type" inputmode="text" autocomplete="off" spellcheck="false" placeholder="10YR 3/2" maxlength="14">
+                </label>
+                <p class="dd-address-state" data-role="state" aria-live="polite">existe, y tu pantalla puede mostrarlo</p>
+              </div>
+              <canvas class="dd-address-map" data-role="map" aria-label="Mapa de la página de este tono, con el color marcado"></canvas>
+            </div>
+          </div>
+          <figcaption>Mueve las tres escalas o escribe una dirección, por ejemplo 10YR 3/2, el color de muchas tierras de bosque. Si pides un color que no existe, te lo digo: el mapa de la derecha es la página de ese tono y marca hasta dónde llegan los colores reales.</figcaption>
+        </figure>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">la dirección de la tierra</p>
+          <p>La notación de Munsell es el idioma de la gente que estudia suelos. Dorothy Nickerson, que empezó como asistente de laboratorio en la Munsell Color Company en 1921 y pasó 37 años en el Departamento de Agricultura de Estados Unidos, trabajó en los estándares de color para el algodón y para los suelos. Hoy, en las guías de campo en español, un suelo se describe con su dirección, como 10YR 3/2. Un artículo de la <em>Revista Mexicana de Ciencias Agrícolas</em> lo resume sin rodeos: es una herramienta útil, económica y fácil de usar tanto en el campo como en el laboratorio.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dd-section" id="arbol" data-section="el árbol torcido" data-accent="#3b8767" data-ink="#186d4f" data-notation="5G 5/6">
+      <header class="dd-head">
+        <p class="dd-num"><span>05</span><i class="dd-chip" aria-hidden="true"></i><code>5G 5/6</code></p>
+        <h2>El árbol torcido</h2>
+      </header>
+      <div class="dd-body">
+        <p>Si cada tono tuviera el mismo croma máximo en el mismo valor, el sólido de color sería una esfera redonda y perfecta. Eso esperaba todo el mundo. Philipp Otto Runge, un pintor alemán, publicó en 1810 una esfera de color hermosa, con los colores puros en el ecuador. Munsell hizo la suya, la patentó en 1900, y ese mismo año se dio cuenta de que no funcionaba.</p>
+        <p>El problema es que cada tono alcanza su croma máximo en un valor distinto. James Gurney lo cuenta en <em>Luz y color</em>: Munsell se dio cuenta de que "cada tono alcanzaba su intensidad máxima en un valor de luminosidad en particular". El amarillo es intensísimo cuando es claro. El azul y el morado son intensos cuando son oscuros. El rojo, a media altura.</p>
+        <p>Por eso el árbol está torcido: la rama amarilla sale casi arriba, pegada al blanco; la azul morada, abajo, cerca del negro. Munsell lo describió en <em>A Color Notation</em>, rama por rama: el amarillo más cerca del blanco, después el verde, el rojo, el azul y el morado, cada vez más cerca del negro.</p>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">por qué no existe un amarillo oscuro</p>
+          <p>Aquí va la explicación que más me ayudó. El amarillo lo sentimos cuando una superficie devuelve casi toda la luz, menos la parte azul. Casi toda la luz significa mucho brillo, así que un amarillo intenso tiene que ser claro. Si lo oscureces, deja de verse amarillo y se vuelve oliva o café. Con el azul pasa lo contrario: nace de una parte pequeña de la luz, así que un azul muy intenso tiene que ser oscuro. El capítulo de Mark Fairchild en el <em>Handbook of Color Psychology</em> lo dice sin rodeos: no hay muestras de croma alto con tono amarillo y valor bajo, ni con tono morado y valor alto, porque no se pueden producir con la visión humana.</p>
+        </aside>
+
+        <figure class="dd-figure is-wide" data-module="morph">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 05a · la esfera que no fue</p>
+            <svg class="dd-morph" data-role="svg" viewBox="0 0 720 420" role="img" aria-labelledby="morphTitle">
+              <title id="morphTitle">Un corte vertical del sólido de color, con el amarillo a un lado y el azul morado al otro, que pasa de esfera a su forma real</title>
+            </svg>
+            <label class="dd-range is-wide"><span>esfera</span><input type="range" data-role="mix" min="0" max="1" step="0.001" value="0"><output data-role="mix-out">árbol</output></label>
+          </div>
+          <figcaption>Un corte del sólido por la mitad: a la izquierda, 5Y; a la derecha, 5PB, el tono opuesto. Arrastra el control y mira cómo la esfera ideal se deforma hasta la forma medida en 1943. La punta amarilla sube; la azul se hunde.</figcaption>
+        </figure>
+
+        <h3>El árbol crece</h3>
+        <p>¿Te acuerdas de la frase de las ramas que "podrían alargarse"? Aquí está, con datos. En 1929 el Munsell Book of Color tenía los colores que se podían pintar con los pigmentos de la época; según el archivo del laboratorio de color de RIT, 956 fichas, con un croma máximo de 14. En 1943 el comité de la Optical Society calculó todos los colores de superficie que pueden existir en principio, aunque nadie tuviera pintura para hacerlos: 2&#8239;734, con cromas de hasta 38.</p>
+        <p>Es el mismo árbol. Solo le crecieron las ramas.</p>
+
+        <figure class="dd-figure is-wide">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 05b · el árbol de 1929 y el de 1943 · arrastra para girar</p>
+            <div class="dd-tree is-explore" data-module="tree" data-mode="explore" role="img" aria-label="Árbol de color de Munsell que se puede girar y explorar, con los colores de 1929 y los de 1943">
+              <div class="dd-tree-tip" data-role="tip" hidden></div>
+            </div>
+            <div class="dd-controls" role="group" aria-label="Qué colores mostrar">
+              <button type="button" class="dd-btn" data-set="book" aria-pressed="false">libro de 1929</button>
+              <button type="button" class="dd-btn" data-set="real" aria-pressed="true">colores reales · 1943</button>
+              <button type="button" class="dd-btn" data-set="screen" aria-pressed="false">solo los de tu pantalla</button>
+              <button type="button" class="dd-btn" data-cut aria-pressed="false">abrir un corte</button>
+            </div>
+            <p class="dd-readout" data-role="readout">cargando el árbol…</p>
+          </div>
+          <figcaption>Pasa el cursor, o toca en el celular, para leer la dirección de cualquier bloque. "Abrir un corte" quita un cuarto del árbol, como en tu imagen de referencia, para que se vea el tronco gris por dentro.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="dd-section" id="pantalla" data-section="lo que tu pantalla no alcanza" data-accent="#238781" data-ink="#2f6966" data-notation="5BG 5/6">
+      <header class="dd-head">
+        <p class="dd-num"><span>06</span><i class="dd-chip" aria-hidden="true"></i><code>5BG 5/6</code></p>
+        <h2>Lo que tu pantalla no alcanza</h2>
+      </header>
+      <div class="dd-body">
+        <p>Tengo que confesarte algo sobre las figuras de esta página: no todos los colores del árbol caben en tu pantalla. La renotación de 1943 no describe colores con pintura, sino con números de colorimetría, llamados coordenadas CIE, bajo una luz de día estándar. Con esos números calculé qué color debe mostrar tu pantalla para cada bloque. Y a veces no puede.</p>
+        <p>Una pantalla común habla en sRGB. De los 2&#8239;734 colores reales, sRGB puede mostrar 1&#8239;527, un poco más de la mitad. Las pantallas más nuevas, como la de muchos celulares y laptops recientes, hablan en P3 y llegan a 1&#8239;869. Los demás son colores de superficie que existen en el mundo, pero que ninguna de las dos alcanza. Los que más se escapan son los verdes, los verdes azulados y los azules intensos: en esas tres calles, más de la mitad de los colores reales no caben en sRGB.</p>
+        <p>Cuando un color no cabe, lo acerco al gris sin cambiarle el tono ni el valor, hasta que entra. Es la opción más honesta que encontré, porque conserva su dirección y solo le baja el croma.</p>
+
+        <figure class="dd-figure is-wide" data-module="page">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 06 · una página del libro de color</p>
+            <div class="dd-page" data-role="stage">
+              <canvas class="dd-page-wheel" data-role="wheel" tabindex="0" aria-label="Círculo de tonos. Usa las flechas para cambiar de página"></canvas>
+              <canvas class="dd-page-chart" data-role="chart" aria-label="La página del tono elegido: valor hacia arriba y croma hacia la derecha"></canvas>
+            </div>
+            <div class="dd-controls" role="group" aria-label="Opciones de la página">
+              <button type="button" class="dd-btn" data-mark aria-pressed="true">marcar lo que no cabe</button>
+              <button type="button" class="dd-btn" data-p3 aria-pressed="false" hidden>usar los colores P3 de tu pantalla</button>
+              <button type="button" class="dd-btn" data-book aria-pressed="false">solo el libro de 1929</button>
+            </div>
+            <p class="dd-readout" data-role="readout">cargando…</p>
+          </div>
+          <figcaption>Así se ve una página del Munsell Book of Color: un tono, el valor hacia arriba y el croma hacia la derecha. Gira el círculo para cambiar de página y mira cómo cambia la silueta. Las fichas con rayitas son colores reales que tu pantalla no puede mostrar tal cual.</figcaption>
+        </figure>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">si te gustan los detalles</p>
+          <p>Los datos vienen del Munsell Color Science Laboratory del Rochester Institute of Technology, que publica la renotación como tablas de tono, valor, croma y coordenadas x, y, Y. Están calculadas para el iluminante C y el observador estándar de 2 grados. Para llevarlas a tu pantalla las adapto a la luz D65 con la transformación de Bradford, las paso a sRGB o a P3, y si no caben reduzco el croma en el espacio OKLab. El código está en la carpeta de investigación de esta entrada, por si quieres revisarlo.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dd-section" id="valor" data-section="primero el valor" data-accent="#2d849a" data-ink="#356776" data-notation="5B 5/6">
+      <header class="dd-head">
+        <p class="dd-num"><span>07</span><i class="dd-chip" aria-hidden="true"></i><code>5B 5/6</code></p>
+        <h2>Primero el valor</h2>
+      </header>
+      <div class="dd-body">
+        <p>De las tres preguntas, la que más pesa al pintar es la del valor. Si los claros y oscuros están bien, casi cualquier color funciona. Si están mal, ningún color lo salva. Kimberly Adams, en <em>Beginning Color Mixing</em>, lo compara con las palabras de un libro: los valores se leen como distancia, separan un objeto de otro y le dicen a quien mira por dónde moverse.</p>
+        <p>Gurney va todavía más lejos y defiende a los grises: dice que son el mejor amigo de quien pinta, y que fracasan más cuadros por exceso de color intenso que por exceso de gris. Yo lo aprendí a la mala, muchas veces.</p>
+        <p>Hay trucos viejísimos para ver solo el valor. Mirar a través de celofán rojo. Entrecerrar los ojos. Y el moderno: sacarle una foto al cuadro con el celular y quitarle el color. Aquí abajo lo hago con el fondo de esta página, en vivo, pero con la escala de Munsell.</p>
+
+        <figure class="dd-figure is-wide" data-module="value">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 07 · el fondo, solo en valores</p>
+            <canvas class="dd-canvas is-video" data-role="canvas" aria-label="El video de fondo reducido a escalones de valor de Munsell"></canvas>
+            <div class="dd-value-scale" data-role="scale" aria-hidden="true"></div>
+            <div class="dd-controls">
+              <label class="dd-range"><span>escalones</span><input type="range" data-role="steps" min="2" max="11" step="1" value="5"><output data-role="steps-out">5</output></label>
+              <button type="button" class="dd-btn" data-role="color" aria-pressed="false">devolverle el color</button>
+              <button type="button" class="dd-btn" data-role="squint" aria-pressed="false">entrecerrar los ojos</button>
+            </div>
+            <p class="dd-readout" data-role="readout">esperando al video…</p>
+          </div>
+          <figcaption>Cada píxel se convierte en su valor de Munsell y se redondea al escalón más cercano. Con tres o cuatro escalones ya se entiende toda la imagen. Fíjate en la barra de abajo: casi todo el fondo vive en los valores altos. Es una imagen en clave alta, luminosa.</figcaption>
+        </figure>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">un detalle que casi nadie cuenta</p>
+          <p>La escala de valor de Munsell quedó escondida dentro de casi todo el software de color que usamos. Cuando se definió el espacio CIELAB en 1976, su L*, la claridad, se diseñó para seguir la función de valor de Munsell con una raíz cúbica, como explica Kuehni. Cada vez que mueves el control de "luminosidad" en un programa moderno, hay un poquito de Munsell ahí.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dd-section" id="sombra" data-section="¿de qué color es una sombra?" data-accent="#267ccb" data-ink="#2062a3" data-notation="5PB 5/12">
+      <header class="dd-head">
+        <p class="dd-num"><span>08</span><i class="dd-chip" aria-hidden="true"></i><code>5PB 5/12</code></p>
+        <h2>¿De qué color es una sombra?</h2>
+      </header>
+      <div class="dd-body">
+        <p>Volvamos a la imagen que me hizo empezar todo esto: azul para las sombras, naranja o amarillo para la luz. ¿Es verdad? Sí, pero con condiciones, y las condiciones son lo más interesante.</p>
+        <p>Gurney tiene una imagen que no se me olvida: imagina que eres un ojito montado en la espalda de una hormiga. Cuando la hormiga camina por una sombra, mira hacia arriba y ve todas las manchas de luz que la rodean: el cielo azul, las nubes blancas, las paredes iluminadas. Esas manchas deciden de qué color es la sombra. En un día soleado, una sombra en el suelo mira hacia el cielo azul, así que se pone azul. En el espacio, sin atmósfera, las sombras son negras.</p>
+        <p>Y hay más matices. Las superficies en sombra que miran hacia abajo reciben la luz que rebota del suelo iluminado, que suele ser cálida, así que tiran al naranja. Al atardecer, la luz del sol se vuelve dorada y las sombras se ponen todavía más azules, porque el cielo es más azul y porque nuestros ojos exageran el contraste con el color complementario.</p>
+
+        <figure class="dd-figure is-wide" data-module="shadow">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 08a · una esfera bajo el sol</p>
+            <div class="dd-shadow" data-role="stage">
+              <canvas class="dd-canvas is-shadow" data-role="canvas" aria-label="Una esfera blanca sobre el suelo, iluminada por el sol y por el cielo"></canvas>
+              <div class="dd-shadow-read" data-role="read" aria-live="polite"></div>
+            </div>
+            <div class="dd-controls">
+              <label class="dd-range"><span>la luz</span><input type="range" data-role="warm" min="0" max="1" step="0.01" value="0.72"><output data-role="warm-out">cálida</output></label>
+              <label class="dd-range"><span>el cielo</span><input type="range" data-role="sky" min="0" max="1" step="0.01" value="0.8"><output data-role="sky-out">azul</output></label>
+              <button type="button" class="dd-btn" data-role="space" aria-pressed="false">quitar la atmósfera</button>
+              <button type="button" class="dd-btn" data-role="local" aria-pressed="false">esfera roja</button>
+            </div>
+          </div>
+          <figcaption>La esfera es blanca. Todo lo que ves en ella lo pone la luz: el sol desde arriba a la derecha y el cielo desde todas partes. Las etiquetas leen la dirección de Munsell de tres puntos: la luz, la sombra propia y la sombra en el suelo. Prueba a enfriar la luz del sol y mira cómo la regla se da vuelta.</figcaption>
+        </figure>
+
+        <p>Ese "se da vuelta" no es invento mío. En las escuelas de arte de China se enseña una regla que me encantó encontrar en un sitio educativo oficial de la provincia de Henan: con luz cálida, las partes iluminadas tiran al cálido y las sombras al frío; con luz fría, pasa lo contrario. Y remata con una advertencia que me hubiera gustado escuchar a los quince años: si solo sabes oscurecer la sombra agregándole negro, el cuadro se queda sin contraste de color.</p>
+        <p>En Japón, los libros de color para ilustración le ponen nombre a esta dirección. En su manual de combinaciones de color para ilustración y manga, 松岡伸治 llama «armonía natural», ナチュラルハーモニー, a aclarar los tonos cercanos al amarillo y oscurecer los cercanos al azul violeta, porque así se ven las cosas bajo el sol: lo iluminado, claro y amarillento; lo que está en sombra, oscuro y azulado. Y cuenta que la regla la propuso Ogden Rood, que la llamó la secuencia natural de los tonos. Sí, el mismo Rood del libro que Munsell leyó a los veintiún años. Munsell la describe en <em>A Color Notation</em> casi con ternura: flores amarillas, hojas verdes más oscuras, sombras debajo, y en otoño, el contraste entre el amarillo rojo y el morado azul. Al revés, cuando lo cercano al amarillo se oscurece y lo cercano al azul se aclara, el mismo libro habla de una «armonía compleja», para las escenas que quieres que se sientan fuera de lo cotidiano.</p>
+        <p>Tu cerebro, además, ya sabe todo esto. ¿Te acuerdas del vestido de 2015, el que unos veían blanco y dorado y otros azul y negro? Pascal Wallisch encuestó a unas 13&#8239;000 personas y encontró que la diferencia dependía de dónde creía cada quien que estaba el vestido. Quienes lo imaginaban en una sombra le restaban el azul, porque las sombras son azules, y lo veían blanco y dorado. Quienes lo imaginaban bajo una luz artificial amarillenta le restaban el amarillo y lo veían azul y negro.</p>
+
+        <figure class="dd-figure" data-module="contrast">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 08b · el mismo gris, dos grises</p>
+            <div class="dd-contrast" data-role="stage">
+              <div class="dd-contrast-field" data-role="field">
+                <span class="dd-contrast-chip" data-role="chip-a" tabindex="0" aria-label="Ficha gris sobre el lado cálido"></span>
+                <span class="dd-contrast-chip" data-role="chip-b" tabindex="0" aria-label="Ficha gris sobre el lado frío"></span>
+                <span class="dd-contrast-bridge" data-role="bridge" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="dd-controls">
+              <button type="button" class="dd-btn" data-role="join" aria-pressed="false">unirlas</button>
+              <span class="dd-readout" data-role="readout">las dos fichas son N 6</span>
+            </div>
+          </div>
+          <figcaption>Las dos fichas son exactamente el mismo gris. Arrástralas por el campo y mira cómo cambian. Es el contraste simultáneo que describió el químico francés Michel Eugène Chevreul a principios del siglo XIX: el fondo empuja al objeto hacia su color opuesto.</figcaption>
+        </figure>
+
+        <h3>Medí el fondo de esta página</h3>
+        <p>Quería ver si la regla se cumplía en una imagen que me gusta, así que le tomé la dirección a cada píxel del fondo. El resultado me sorprendió. Casi todo el wallpaper vive en solo tres calles del círculo: morado azul (PB), morado (P) y rojo morado (RP). No hay ni un solo píxel con color amarillo o verde. Es una paleta limitada, lo que Gurney llama una máscara de gama.</p>
+        <p>Y dentro de esas tres calles, la dirección se nota. En los valores altos, las luces, casi la mitad de los píxeles cae en P y casi una quinta parte en RP: la luz tira al rosa lila. Por debajo del valor 8, en los medios y las sombras, casi el 80% cae en PB: la sombra tira al azul. El cielo es más o menos 2.5PB 5.6/10; la parte iluminada del vestido, 7.5P 9.1/4; las cintas, 7.5RP 4.3/13. Aquí abajo lo puedes ver en vivo.</p>
+
+        <figure class="dd-figure is-wide" data-module="sky">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 08c · el fondo, leído en vivo</p>
+            <div class="dd-sky" data-role="stage">
+              <div class="dd-sky-frame">
+                <canvas class="dd-sky-video" data-role="video" aria-label="Copia pequeña del video de fondo. Pasa el cursor para leer la dirección de cada punto"></canvas>
+                <span class="dd-sky-cross" data-role="cross" hidden></span>
+              </div>
+              <canvas class="dd-sky-chart" data-role="chart" aria-label="Cada punto del fondo según su tono y su valor"></canvas>
+            </div>
+            <div class="dd-controls" role="group" aria-label="Qué puntos mostrar">
+              <button type="button" class="dd-btn" data-band="all" aria-pressed="true">todo</button>
+              <button type="button" class="dd-btn" data-band="light" aria-pressed="false">solo las luces</button>
+              <button type="button" class="dd-btn" data-band="dark" aria-pressed="false">solo las sombras</button>
+              <button type="button" class="dd-btn" data-role="wheel" aria-pressed="false">ver como rueda</button>
+            </div>
+            <p class="dd-readout" data-role="readout">leyendo el cielo…</p>
+          </div>
+          <figcaption>A la izquierda, una copia chiquita del fondo. A la derecha, cada uno de sus píxeles según su tono y su valor. Filtra las luces y las sombras y mira cómo se mueve la nube de puntos. En "ver como rueda" aparece la máscara de gama del fondo sobre el círculo de tonos.</figcaption>
+        </figure>
+
+        <aside class="dd-aside">
+          <p class="dd-aside-title">para ser honesta</p>
+          <p>Esto no prueba nada sobre la luz del mundo real: es una ilustración, y quien la hizo eligió esos colores. Lo que sí muestra es que su paleta sigue la misma dirección que describe Gurney para un día soleado. Y la lectura en vivo es aproximada: convierte los colores con una tabla que calculé con la renotación, e interpola entre sus puntos.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="dd-section" id="idiomas" data-section="cuatro idiomas, un rojo" data-accent="#9b62b6" data-ink="#82479b" data-notation="5P 5/12">
+      <header class="dd-head">
+        <p class="dd-num"><span>09</span><i class="dd-chip" aria-hidden="true"></i><code>5P 5/12</code></p>
+        <h2>Cuatro idiomas, un mismo rojo</h2>
+      </header>
+      <div class="dd-body">
+        <p>En 1969, el antropólogo Brent Berlin y el lingüista Paul Kay publicaron <em>Basic Color Terms</em>, uno de los libros más discutidos de su campo. Le mostraron a hablantes de veinte idiomas una tabla hecha con fichas de Munsell: 40 tonos, 8 valores, cada ficha con el croma más alto posible, más una columna de grises. Trescientas treinta fichas. A cada persona le pidieron dos cosas: marcar todas las fichas que llamaría con cada palabra de color, y señalar el mejor ejemplo de cada una, lo que se llama el foco.</p>
+        <p>Entre esos veinte idiomas están justo los cuatro de esta investigación: el español de México, el inglés de Estados Unidos, el japonés y el mandarín. Sus respuestas originales se conservan, digitalizadas, en el archivo del World Color Survey. Las pasé por el mismo sistema de esta página, y esto es lo que salió.</p>
+
+        <figure class="dd-figure is-bleed" data-module="names">
+          <p class="dd-bleed-tag">lámina 09 · las 330 fichas de berlin y kay</p>
+          <div class="dd-names" data-role="stage">
+            <div class="dd-names-grid" data-role="grid" role="grid" aria-label="Tabla de 330 fichas de Munsell coloreadas según las palabras de cada idioma"></div>
+            <div class="dd-names-tip" data-role="tip" hidden></div>
+          </div>
+          <div class="dd-controls dd-bleed-copy" role="group" aria-label="Elige un idioma">
+            <button type="button" class="dd-btn" data-lang="es" aria-pressed="true">español</button>
+            <button type="button" class="dd-btn" data-lang="en" aria-pressed="false">english</button>
+            <button type="button" class="dd-btn" data-lang="ja" aria-pressed="false" lang="ja">日本語</button>
+            <button type="button" class="dd-btn" data-lang="zh" aria-pressed="false" lang="zh">中文</button>
+            <button type="button" class="dd-btn" data-role="foci" aria-pressed="false">comparar los focos</button>
+          </div>
+          <div class="dd-names-legend dd-bleed-copy" data-role="legend" aria-live="polite"></div>
+          <figcaption class="dd-bleed-copy">Elige un idioma: las fichas que no nombró se apagan y las palabras aparecen sobre sus fichas. El anillo marca el foco, el mejor ejemplo. Con "comparar los focos" se ven los cuatro idiomas a la vez: el mejor rojo, el mejor verde y el mejor amarillo caen casi en las mismas fichas. Pasa el cursor para leer la dirección y las cuatro palabras.</figcaption>
+        </figure>
+
+        <p>Mira los focos. El mejor rojo del español, del inglés, del japonés y del mandarín cae en la misma zona de la tabla, y lo mismo pasa con el amarillo, el verde y el azul. Esa es la idea central de Berlin y Kay: aunque los idiomas corten el color en distinto número de palabras, los centros de esas palabras se parecen muchísimo.</p>
+        <p>El estudio recibió críticas serias, y con razón, como resume el <em>Handbook of Color Psychology</em>: a veces había una sola persona por idioma, todas hablaban inglés y vivían en la bahía de San Francisco. Por eso se hizo después el World Color Survey, con 110 idiomas sin escritura, estudiados donde se hablan. En 2005, Terry Regier, Paul Kay y Richard Cook analizaron esos datos en la revista de la Academia de Ciencias de Estados Unidos, y el título de su artículo lo dice todo: los focos de color son universales, después de todo.</p>
+
+        <h3>El azul que era verde</h3>
+        <p>En japonés, un semáforo en verde se dice <em>ao shingō</em>, semáforo azul. La policía de la prefectura de Oita lo explica así: cuando se instalaron los primeros semáforos, en 1930, la ley los llamaba "semáforo verde", pero la gente les decía azul, y en 1947 la ley cambió para decir azul. Y desde 1973, cuenta la misma página, los semáforos se fabrican de un color más cercano a su nombre; algunos de los más viejos todavía se ven verdes. En japonés se dice también 青葉, hojas azules, para las hojas frescas, y 青りんご, manzana azul, para la manzana verde.</p>
+        <p>Con el chino 青 pasa algo parecido, como vimos: el color del este podía ser azul, verde o negro. Y el <em>yax</em> maya une el azul y el verde en una sola idea de vida. El <em>Handbook</em> llama "grue" a estas palabras que juntan el verde y el azul, y cuenta que una hipótesis que las atribuía al envejecimiento del ojo por el sol no resistió las pruebas.</p>
+
+        <h3>Los mismos caracteres</h3>
+        <p>Algo que me hizo sonreír: el japonés y el chino usan exactamente los mismos caracteres para las tres preguntas de Munsell, 色相, 明度 y 彩度. Y los dos países convirtieron el sistema en norma. Japón tiene la JIS Z 8721, que describe el color de las superficies con tono, valor y croma y los escribe igual que Munsell. China tiene la GB/T 15608-2006, el Sistema Chino de Color, que según la Wikipedia en chino define una forma normalizada del sistema de Munsell.</p>
+        <p>En Japón existe además el PCCS, anunciado por el Instituto Japonés de Investigación del Color en 1966, que junta el valor y el croma en una sola idea, el "tono" en el sentido de <em>tone</em>: pálido, brillante, apagado, profundo. Es el que se estudia para los exámenes de certificación de color, y es una forma muy de diseñadora de ver lo mismo.</p>
+      </div>
+    </section>
+
+    <section class="dd-section" id="taller" data-section="el taller" data-accent="#c54f85" data-ink="#a7326f" data-notation="5RP 5/12">
+      <header class="dd-head">
+        <p class="dd-num"><span>10</span><i class="dd-chip" aria-hidden="true"></i><code>5RP 5/12</code></p>
+        <h2>El taller</h2>
+      </header>
+      <div class="dd-body">
+        <p>Esta es la parte que yo quería leer como artista. ¿Cómo se usa todo esto al pintar?</p>
+        <p>En el anime lo resolvieron hace mucho. La persona encargada del diseño de color, el 色彩設計, decide primero el <strong>color normal</strong> de cada personaje: su color local bajo la luz del día. Masako Sato, directora de animación que antes trabajó en Studio Ghibli, lo explica muy claro: el color normal es la base, la sombra es la versión oscura y la luz alta es la versión clara, en ese orden. Para una escena de atardecer o de noche no se oscurece todo y ya: se diseña una paleta nueva, partiendo siempre del color normal. Y en muchas producciones la piel lleva solo tres colores, normal, sombra y luz.</p>
+        <p>En la pintura digital, la receta más repetida en japonés es la que escribió 駒米トオル en los tips oficiales de Clip Studio: se suele decir que la sombra queda mejor si la acercas al azul. Pero en el mismo sitio, en un tutorial oficial, la ilustradora あずまあや hace lo contrario: sombrea un color lila con un lila más profundo, en capa de multiplicar, sin mover el tono. Las dos cosas funcionan. La dirección es una decisión, no una ley.</p>
+        <p>Chris Legaspi, que enseña pintura de retrato, da en <em>The Laws of Color</em> la razón práctica de la receta azul: los colores fríos tienden a retroceder en el espacio, así que un color frío suele ser ideal para la sombra. La sombra fría se aleja, la luz cálida se acerca, y la forma gira.</p>
+
+        <h3>Sombrear es moverse</h3>
+        <p>Con Munsell, sombrear se vuelve un viaje con tres controles: bajar el valor, girar el tono hacia el color de la luz ambiente y decidir qué pasa con el croma. Pruébalo.</p>
+
+        <figure class="dd-figure is-wide" data-module="shade">
+          <div class="dd-plate">
+            <p class="dd-plate-tag">lámina 10 · sombra gris o sombra con dirección</p>
+            <div class="dd-shade" data-role="stage">
+              <div class="dd-shade-pair">
+                <div class="dd-shade-card">
+                  <p class="dd-shade-label">agregando negro</p>
+                  <svg class="dd-shade-art" data-role="gray" viewBox="0 0 240 240" role="img" aria-label="Una cinta sombreada solo con negro"></svg>
+                </div>
+                <div class="dd-shade-card">
+                  <p class="dd-shade-label">con dirección</p>
+                  <svg class="dd-shade-art" data-role="shift" viewBox="0 0 240 240" role="img" aria-label="La misma cinta sombreada girando el tono hacia el azul"></svg>
+                </div>
+              </div>
+              <div class="dd-shade-side">
+                <div class="dd-shade-bases" data-role="bases" role="radiogroup" aria-label="Elige el color normal"></div>
+                <label class="dd-range"><span>bajar el valor</span><input type="range" data-role="drop" min="1" max="4" step="1" value="2"><output data-role="drop-out">2</output></label>
+                <label class="dd-range"><span>girar el tono</span><input type="range" data-role="turn" min="0" max="20" step="2.5" value="10"><output data-role="turn-out">10 pasos</output></label>
+                <label class="dd-range"><span>hacia</span><input type="range" data-role="toward" min="0" max="39" step="1" value="29"><output data-role="toward-out">5PB</output></label>
+                <ul class="dd-shade-notes" data-role="notes" aria-live="polite"></ul>
+              </div>
+            </div>
+          </div>
+          <figcaption>A la izquierda, la sombra que sale de mezclar con negro: el mismo tono, más oscuro y más sucio. A la derecha, una sombra que baja el valor y gira el tono hacia el azul del cielo. Los colores normales vienen del fondo de esta página. Las direcciones de abajo son fichas reales de la renotación.</figcaption>
+        </figure>
+
+        <h3>Consejos</h3>
+        <ul class="dd-list">
+          <li><strong>En Clip Studio Paint:</strong> en vez de una capa de multiplicar gris, usa una lila o azul grisácea. O haz lo de 駒米トオル: una curva de tonos que suba un poquito el canal azul sobre tus sombras.</li>
+          <li><strong>En Procreate o Photoshop:</strong> sombrea en una capa aparte y, al terminar, gírale el tono unos grados hacia el color de tu cielo. Mira el antes y el después con el valor solo, quitando la saturación, para no romper los claros y oscuros.</li>
+          <li><strong>En Blender:</strong> si iluminas con un color de mundo azul y un sol cálido, el render hace esto solito, porque es física. En un shader de dibujo, pon el extremo oscuro de la rampa de color en un azul lila en vez de negro.</li>
+          <li><strong>Para elegir una paleta:</strong> dibuja tu máscara de gama sobre el círculo de diez tonos, como en el fondo de esta página. Tres calles vecinas y un acento en la calle opuesta ya son una paleta con dirección.</li>
+          <li><strong>Para revisar:</strong> escribe la dirección de tus colores. Si la luz es 5Y 8/10 y la sombra 5Y 4/6, solo bajaste el valor. Si la sombra es 7.5PB 4/4, además la moviste.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="dd-section" id="no-se-sabe" data-section="lo que no se sabe" data-accent="#797979" data-ink="#484848" data-notation="N 5">
+      <header class="dd-head">
+        <p class="dd-num"><span>11</span><i class="dd-chip" aria-hidden="true"></i><code>N 5</code></p>
+        <h2>Lo que no se sabe</h2>
+      </header>
+      <div class="dd-body">
+        <p>Para que nadie tome esta entrada como la verdad absoluta, esto es lo que quedó abierto, o lo que es aproximado:</p>
+        <div class="dd-paper">
+          <p class="dd-paper-head">con cariño y sin adornos</p>
+          <dl class="dd-leaders">
+            <div><dt>Los pasos de tono</dt><dd>no son perfectamente iguales. En un experimento que cita Kuehni, lo que para Munsell eran cinco pasos se vio como algo entre tres y casi seis, según la persona.</dd></div>
+            <div><dt>Las tres escalas</dt><dd>no miden igual: un paso de valor no se ve del mismo tamaño que un paso de croma.</dd></div>
+            <div><dt>La armonía</dt><dd>Munsell, Ostwald y otros creyeron encontrar reglas universales de armonía. Kuehni dice que esas pretensiones fueron desacreditadas. Las paletas bonitas no salen de una fórmula.</dd></div>
+            <div><dt>Color y emoción</dt><dd>los estudios sobre si la cultura cambia lo que sentimos con cada color dan resultados distintos, según el <em>Handbook</em>. Desconfía de las listas de "el rojo significa pasión".</dd></div>
+            <div><dt>Berlin y Kay</dt><dd>sus datos de 1969 son de una o pocas personas por idioma. Los muestro porque son los originales, no porque sean la última palabra.</dd></div>
+            <div><dt>El libro de 1929</dt><dd>Kuehni cuenta una primera edición de 400 fichas y el archivo del laboratorio de RIT lista 956. Probablemente son ediciones distintas; no pude confirmarlo.</dd></div>
+            <div><dt>Mis conversiones</dt><dd>son aproximadas. Tu pantalla probablemente no está calibrada, así que los colores que ves no son exactamente los del libro.</dd></div>
+            <div><dt>El wallpaper</dt><dd>no encontré quién lo animó. Si es tuyo, dime y te doy el crédito, o lo quito.</dd></div>
+          </dl>
+        </div>
+        <p class="dd-voice">La ciencia del color pregunta dónde está un color. El arte pregunta hacia dónde quieres llevarlo.</p>
+      </div>
+    </section>
+
+    <section class="dd-section" id="creditos" data-section="créditos y fuentes" data-accent="#606060" data-ink="#313131" data-notation="N 4">
+      <header class="dd-head">
+        <p class="dd-num"><span>12</span><i class="dd-chip" aria-hidden="true"></i><code>N 4</code></p>
+        <h2>Créditos y fuentes</h2>
+      </header>
+      <div class="dd-body">
+        <div class="dd-paper">
+          <p class="dd-paper-head">lo que se ve y se escucha</p>
+          <dl class="dd-leaders">
+            <div><dt>Fondo</dt><dd>wallpaper animado de Yumemizuki Mizuki, personaje de Genshin Impact, de HoYoverse. Lo recodifiqué más liviano para la web.</dd></div>
+            <div><dt>Portada</dt><dd>una pintura de 停云画舍, de su cuenta pública de WeChat. Es la imagen de la tarjeta del blog y de la nota en Astra, con su firma tal cual.</dd></div>
+            <div><dt>Música</dt><dd>"The Space Lifeform Capture Station Theme 2" y "The Space Lifeform Capture Station, Nod-Krai Main Theme Motif", de la banda sonora de Genshin Impact 6.7, de HOYO-MiX.</dd></div>
+            <div><dt>Datos del árbol</dt><dd>la renotación de Munsell de Newhall, Nickerson y Judd (1943), publicada por el Munsell Color Science Laboratory del Rochester Institute of Technology.</dd></div>
+            <div><dt>Datos de los idiomas</dt><dd>Berlin y Kay (1969), del archivo del World Color Survey de Richard Cook, Paul Kay y Terry Regier.</dd></div>
+            <div><dt>Tipografía</dt><dd>Cinzel, ZHFont y Departure Mono, las mismas del resto del sitio.</dd></div>
+          </dl>
+        </div>
+
+        <p>Esta entrada no tiene fines comerciales. El fondo y la música pertenecen a sus dueños y los uso con todo el crédito, igual que en el resto de Skye Journey. Todo lo que se calcula en esta página ocurre en tu navegador, y la página no guarda ni envía nada de lo que haces en ella. La caja de comentarios es de htmlcommentbox.com: si escribes un comentario, ellos lo reciben.</p>
+        <p class="dd-take">La investigación completa, con mis notas, las páginas de cada libro y mis dudas, vive en <a href="/filesystem/blogs/notes/direccion-del-color/">Astra</a>. Y el código que preparó cada figura está en <a href="https://github.com/luvrksnskye/luvrksknskyejourney.org/tree/main/filesystem/blogs/posts/direccion-del-color/research" target="_blank" rel="noopener noreferrer">la carpeta de investigación de esta entrada</a>, libre para que te lo lleves.</p>
+
+        <h3>Libros de mi biblioteca</h3>
+        <ol class="dd-sources">
+          <li>Rolf G. Kuehni (2003), <em>Color Space and Its Divisions: Color Order from Antiquity to the Present</em>, Wiley · la historia de Munsell, pp. 84-86 y 272-278; Runge, p. 60; Newton, p. 50; Berlin y Kay, p. 109; la escala de valor en CIELAB, p. 182; los pasos de tono, p. 144; la armonía, p. 9</li>
+          <li>James Gurney (2010), <em>Color and Light: A Guide for the Realist Painter</em>, Andrews McMeel · la sombra y la hormiga, p. 50; planos que miran arriba y abajo, pp. 66-67; el círculo de Munsell y el croma, pp. 74-75; los grises, p. 80; luces de colores, p. 115; máscaras de gama, p. 126; constancia y contraste, pp. 144-148; la hora dorada, p. 180</li>
+          <li>James Gurney (2015), <em>Luz y color</em>, Anaya Multimedia, traducción de Natalia Caballero · croma, valor y pico de intensidad, p. 76</li>
+          <li>Andrew J. Elliot, Mark D. Fairchild y Anna Franklin, eds. (2015), <em>Handbook of Color Psychology</em>, Cambridge University Press · cap. 2, Fairchild, sobre Munsell; caps. 11 y 12, los nombres del color; cap. 19, color y emoción; cap. 33, contraste simultáneo</li>
+          <li>Kimberly Adams (2018), <em>Beginning Color Mixing</em>, Walter Foster · tono, valor y saturación; los trucos para ver el valor</li>
+          <li>松岡伸治, <em>イラスト、漫画のための配色教室</em> · el círculo de diez tonos de Munsell y el sólido de color, p. 15; la armonía natural de Rood, p. 73; por qué las sombras de mediodía se sienten azules, p. 125 (páginas de mi copia escaneada)</li>
+          <li>Chris Legaspi, <em>The Laws of Color, Vol. 1</em> · por qué un color frío funciona en la sombra, p. 9</li>
+        </ol>
+
+        <h3>Fuentes, en cuatro idiomas</h3>
+        <ol class="dd-sources">
+          <li><a href="https://www.gutenberg.org/ebooks/26054" target="_blank" rel="noopener noreferrer">A. H. Munsell (1907), A Color Notation, 2.ª edición, Project Gutenberg</a></li>
+          <li><a href="https://opg.optica.org/josa/abstract.cfm?uri=josa-33-7-385" target="_blank" rel="noopener noreferrer">Newhall, Nickerson y Judd (1943), Journal of the Optical Society of America</a> · la renotación</li>
+          <li><a href="https://www.rit.edu/science/munsell-color-science-lab-educational-resources" target="_blank" rel="noopener noreferrer">Munsell Color Science Laboratory, RIT, datos de la renotación</a></li>
+          <li><a href="https://linguistics.berkeley.edu/wcs/data.html" target="_blank" rel="noopener noreferrer">Cook, Kay y Regier, archivo de datos del World Color Survey</a> · incluye los datos de Berlin y Kay (1969)</li>
+          <li><a href="https://www.pnas.org/doi/10.1073/pnas.0503281102" target="_blank" rel="noopener noreferrer">Regier, Kay y Cook (2005), Focal colors are universal after all, PNAS</a></li>
+          <li><a href="https://jov.arvojournals.org/article.aspx?articleid=2617976" target="_blank" rel="noopener noreferrer">Wallisch (2017), el vestido y las sombras, Journal of Vision</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Dorothy_Nickerson" target="_blank" rel="noopener noreferrer">Dorothy Nickerson, Wikipedia</a></li>
+          <li><a href="https://arqueologiamexicana.mx/mexico-antiguo/colores-de-los-rumbos-del-universo" target="_blank" rel="noopener noreferrer">Enrique Vela, Colores de los rumbos del Universo, Arqueología Mexicana</a></li>
+          <li><a href="https://ciencia.unam.mx/leer/1440/la-cultura-maya-un-mundo-cromatico" target="_blank" rel="noopener noreferrer">La cultura maya, un mundo cromático, Ciencia UNAM</a> · con Laura Elena Sotelo Santos</li>
+          <li><a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&amp;pid=S2007-09342012000100010" target="_blank" rel="noopener noreferrer">Domínguez Soto y otros (2012), Munsell y CIELab en suelos, Revista Mexicana de Ciencias Agrícolas</a></li>
+          <li><a href="https://www.shidianguji.com/book/HY3271/chapter/1kump72prllpg" target="_blank" rel="noopener noreferrer">考工记，画缋之事</a> (en chino)</li>
+          <li><a href="https://zdic.net/hans/%E9%9D%92" target="_blank" rel="noopener noreferrer">汉典，青：《说文解字》与《荀子·劝学》</a> (en chino)</li>
+          <li><a href="https://zh.wikipedia.org/wiki/%E5%AD%9F%E5%A1%9E%E5%B0%94%E9%A2%9C%E8%89%B2%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener noreferrer">孟塞尔颜色系统，维基百科</a> (en chino) · sobre la GB/T 15608-2006</li>
+          <li><a href="https://gaokao.haedu.cn/152/594/600/2015/1112/108687.html" target="_blank" rel="noopener noreferrer">河南省阳光高考，怎样把握复杂的色彩变化</a> (en chino)</li>
+          <li><a href="https://kikakurui.com/z8/Z8721-1993-01.html" target="_blank" rel="noopener noreferrer">JIS Z 8721:1993 色の表示方法－三属性による表示</a> (en japonés)</li>
+          <li><a href="https://www.jcri.jp/achievement_1" target="_blank" rel="noopener noreferrer">日本色彩研究所，PCCS</a> (en japonés)</li>
+          <li><a href="https://www.pref.oita.jp/site/keisatu/nandemo-a12.html" target="_blank" rel="noopener noreferrer">大分県警察，青信号というのになぜ緑色の信号があるのですか</a> (en japonés)</li>
+          <li><a href="https://www.city.masuda.lg.jp/material/files/group/6/17419.pdf" target="_blank" rel="noopener noreferrer">益田市，土俵の四色の房</a> (en japonés)</li>
+          <li><a href="https://note.com/sa10ma/n/n9eed72859a92" target="_blank" rel="noopener noreferrer">佐藤雅子，ノーマル色、とは</a> (en japonés)</li>
+          <li><a href="https://tips.clip-studio.com/ja-jp/articles/7074" target="_blank" rel="noopener noreferrer">駒米トオル，トーンカーブを使って影色を作る方法，CLIP STUDIO TIPS</a> (en japonés)</li>
+          <li><a href="https://howto.clip-studio.com/library/page/view/clipstudiopaint_making_azuma_006" target="_blank" rel="noopener noreferrer">あずまあや，色選びと影付け，CLIP STUDIO</a> (en japonés)</li>
+          <li><a href="https://www.amg.ac.jp/animation-column/job/anime-colour/" target="_blank" rel="noopener noreferrer">大阪アミューズメントメディア専門学校，アニメの色彩設計</a> (en japonés)</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="dd-section" id="comentarios" data-section="comentarios" data-accent="#484848" data-ink="#1c1c1c" data-notation="N 3">
+      <header class="dd-head">
+        <p class="dd-num"><span>13</span><i class="dd-chip" aria-hidden="true"></i><code>N 3</code></p>
+        <h2>Comentarios</h2>
+      </header>
+      <div class="dd-body dd-comments">
+        <p>¿Pintas? ¿Tienes un truco para las sombras? ¿Encontraste algo que corregir, o conoces cómo se dice "grue" en tu idioma?</p>
+        <div id="HCB_comment_box"><a href="https://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+        <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%2476gBfZFjo3Ne22wg7kCrl1"+"&opts=16798&num=10&ts=1742846778569");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+      </div>
+    </section>
+
+    <footer class="dd-footer">
+      <span class="dd-footer-wheel" aria-hidden="true"></span>
+      <p>hecho con mucho cariño</p>
+      <a class="dd-btn" href="/filesystem/blogs/index.html">volver al blog</a>
+    </footer>
+
+    </div>
+  </main>
+
+  <aside class="dd-player" id="ddPlayer" hidden>
+    <button type="button" class="dd-player-btn" data-role="toggle" aria-pressed="false" aria-label="Reproducir música">
+      <svg class="dd-player-ring" viewBox="0 0 44 44" aria-hidden="true">
+        <circle class="dd-ring-track" cx="22" cy="22" r="20"/>
+        <circle class="dd-player-fill" data-role="progress" cx="22" cy="22" r="20"/>
+      </svg>
+      <span class="dd-player-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </aside>
+
+  <div id="nav2-wrapper">
+    <div id="nav2-custom-sidebar" class="hidden">
+      <h2>Filesystem</h2>
+      <ul>
+        <li><a href="/home/index.html"><img src="/assets/images/nav-bar/home.png" alt="Home Icon">Home</a></li>
+        <li><a href="/filesystem/about/index.html"><img src="/assets/images/nav-bar/about.png" alt="About Icon">About</a></li>
+        <li><a href="/filesystem/social/index.html"><img src="/assets/images/nav-bar/social.png" alt="Social Icon">Social</a></li>
+        <li><a href="/filesystem/support/index.html"><img src="/assets/images/nav-bar/support.png" alt="Support Icon">Support</a></li>
+        <li><a href="/filesystem/changelog/index.html"><img src="/assets/images/nav-bar/rules.png" alt="Changelog Icon">Changelog</a></li>
+        <li><a href="/filesystem/blogs/index.html"><img src="/assets/images/nav-bar/blog.png" alt="Blog Icon">Blogs <img src="/assets/images/icons/buttons/phone-app-navigation.png" alt="new symbol"></a></li>
+        <li><a href="/filesystem/resources/index.html"><img src="/assets/images/nav-bar/resources.png" alt="Resources Icon">Resources</a></li>
+        <li><a href="/filesystem/credits/index.html"><img src="/assets/images/nav-bar/credits.png" alt="Credits Icon">Credits</a></li>
+        <li><a href="/filesystem/workstation/index.html"><img src="/assets/images/nav-bar/workstation.png" alt="Workstation Icon">Workstation</a></li>
+        <li><a href="/filesystem/sitemap/index.html"><img src="/assets/images/nav-bar/sitemap.png" alt="Sitemap Icon">Sitemap</a></li>
+      </ul>
+    </div>
+    <div class="nav2-blur-overlay"></div>
+    <button id="nav2-sidebar-toggle" aria-label="Open navigation"></button>
+  </div>
+
+  <script src="/assets/js/nav-bar.js" defer></script>
+  <script type="module" src="js/direccion.js?v=1"></script>
+</body>
+</html>
