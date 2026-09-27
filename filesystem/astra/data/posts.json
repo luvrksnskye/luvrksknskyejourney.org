@@ -1,4 +1,33 @@
 {
   "format": "astra-posts/1",
-  "posts": []
+  "posts": [
+    {
+      "id": "direccion-del-color",
+      "title": "Todo color tiene una dirección: la investigación",
+      "summary": "Mis notas completas detrás de la entrada: el sistema de Munsell, la renotación de 1943, por qué las sombras se van hacia el azul y cómo nombran el color el español, el inglés, el japonés y el chino. Con las páginas de cada libro, fuentes en cuatro idiomas y mis dudas.",
+      "date": "2026-09",
+      "lang": "es",
+      "domain": "art",
+      "type": "research",
+      "tags": [
+        "color",
+        "munsell",
+        "pintura",
+        "luz",
+        "sombra",
+        "teoria-del-color",
+        "idiomas",
+        "datos"
+      ],
+      "url": "/filesystem/blogs/notes/direccion-del-color/",
+      "listed": false,
+      "comments": true,
+      "stage": "giant",
+      "banner": "/filesystem/blogs/notes/direccion-del-color/assets/banner.jpg",
+      "video": "/filesystem/blogs/notes/direccion-del-color/assets/loop.mp4",
+      "music": "/filesystem/blogs/notes/direccion-del-color/assets/song.mp3",
+      "featured": false,
+      "blog": "/filesystem/blogs/posts/direccion-del-color/"
+    }
+  ]
 }

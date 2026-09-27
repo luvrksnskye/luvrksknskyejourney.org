@@ -1,6 +1,6 @@
 {
   "format": "astra-manifest/1",
-  "nodes": 0,
+  "nodes": 1,
   "edges": 0,
   "files": {
     "feed.xml": {
@@ -8,12 +8,12 @@
       "bytes": 437
     },
     "graph.json": {
-      "sha256": "ea778bc8f22878d50af2ba23035f1dc876bc277cea8d28db00016ecbcbed4cc0",
-      "bytes": 62
+      "sha256": "a4c236679df7243a7cdb265be85213a4fd3a864578be2521ceaa758bfe8074cb",
+      "bytes": 20318
     },
     "posts.json": {
-      "sha256": "e90af6411f8af5bfc4d6da0adc6cc97eac4f73c05b039c3aefc285688acc3ced",
-      "bytes": 47
+      "sha256": "12054d50307cbcbc0028b0715bb55c69d9560c200073ff77ba8c833e1a20228a",
+      "bytes": 1188
     }
   }
 }
